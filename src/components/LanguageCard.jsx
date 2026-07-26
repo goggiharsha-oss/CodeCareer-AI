@@ -8,28 +8,52 @@ function LanguageCard({ search = "" }) {
 
   const searchText = search.toLowerCase().trim();
 
- const filteredLanguages = languages
-  .filter((lang) => {
+  const filteredLanguages = languages.filter((lang) => {
     if (!searchText) return true;
 
     const name = lang.name.toLowerCase();
 
-    const aliases = {
-      javascript: ["js", "javascript"],
-      "c++": ["cpp", "c++"],
-      "c#": ["cs", "csharp", "c#"],
-      python: ["py", "python"],
-      java: ["java"],
-      c: ["c"]
-    };
+    if (name === "javascript") {
+      return (
+        name.includes(searchText) ||
+        "js".includes(searchText)
+      );
+    }
 
-    const searchNames = aliases[name] || [name];
+    if (name === "c++") {
+      return (
+        name.includes(searchText) ||
+        "cpp".includes(searchText)
+      );
+    }
 
-    return searchNames.some((item) =>
-      item.includes(searchText) ||
-      searchText.includes(item)
-    );
+    if (name === "c#") {
+      return (
+        name.includes(searchText) ||
+        "cs".includes(searchText) ||
+        "csharp".includes(searchText)
+      );
+    }
+
+    if (name === "python") {
+      return (
+        name.includes(searchText) ||
+        "py".includes(searchText)
+      );
+    }
+
+    if (name === "java") {
+      return name.includes(searchText);
+    }
+
+    if (name === "c") {
+      return searchText === "c";
+    }
+
+    return name.includes(searchText);
   });
+
+
   return (
     <section
       id="languages"
@@ -37,6 +61,7 @@ function LanguageCard({ search = "" }) {
         darkMode ? "bg-slate-900" : "bg-gray-50"
       }`}
     >
+
       <div className="max-w-7xl mx-auto">
 
         <h2
@@ -49,6 +74,7 @@ function LanguageCard({ search = "" }) {
 
 
         {filteredLanguages.length === 0 ? (
+
           <div className="text-center py-20">
 
             <h3
@@ -64,10 +90,11 @@ function LanguageCard({ search = "" }) {
                 darkMode ? "text-gray-400" : "text-gray-600"
               }`}
             >
-              Try Python, Java, JavaScript, C, C++, C#
+              Try Python, Java, JavaScript, C++, C#
             </p>
 
           </div>
+
         ) : (
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -156,6 +183,7 @@ function LanguageCard({ search = "" }) {
         )}
 
       </div>
+
     </section>
   );
 }
