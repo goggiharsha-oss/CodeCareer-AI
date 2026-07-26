@@ -9,12 +9,18 @@ function Navbar() {
       <div className="max-w-7xl mx-auto flex items-center justify-between px-8 py-4">
 
         {/* Logo */}
-        <a
-          href="#top"
-          className="text-2xl font-bold text-cyan-400 hover:scale-105 transition"
-        >
-          CodeCareer AI
-        </a>
+      <a
+  href="#top"
+  className="flex items-center gap-3 text-2xl font-bold text-cyan-400"
+>
+  <img
+    src="/logo.png"
+    alt="CodeCareer AI Logo"
+    className="w-10 h-10 rounded-xl"
+  />
+
+  CodeCareer AI
+</a>
 
 
         {/* Menu */}
