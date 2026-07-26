@@ -6,9 +6,14 @@ function LanguageCard({ search = "" }) {
   const navigate = useNavigate();
   const { darkMode } = useTheme();
 
-  const filteredLanguages = languages.filter((lang) =>
-    lang.name.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredLanguages = languages.filter((lang) => {
+  const searchText = search.toLowerCase().trim();
+  const languageName = lang.name.toLowerCase();
+
+  if (!searchText) return true;
+
+  return languageName.startsWith(searchText);
+});
 
   return (
     <section
