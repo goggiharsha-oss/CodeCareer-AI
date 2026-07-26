@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Search } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 
+
 const pills = [
   {
     text: "🐍 Python",
@@ -25,8 +26,52 @@ const pills = [
   },
 ];
 
+
+const suggestions = [
+  {
+    name: "Python",
+    icon: "🐍",
+    path: "/python",
+  },
+  {
+    name: "Java",
+    icon: "☕",
+    path: "/java",
+  },
+  {
+    name: "JavaScript",
+    icon: "🟨",
+    path: "/javascript",
+  },
+  {
+    name: "Artificial Intelligence",
+    icon: "🤖",
+    path: "/artificial-intelligence",
+  },
+  {
+    name: "Web Development",
+    icon: "🌐",
+    path: "/web-development",
+  },
+  {
+    name: "Cyber Security",
+    icon: "🔐",
+    path: "/cyber-security",
+  },
+];
+
+
 export default function Hero({ search, setSearch }) {
+
   const { darkMode } = useTheme();
+
+
+  const filteredSuggestions = suggestions.filter((item) =>
+    item.name
+      .toLowerCase()
+      .includes(search.toLowerCase())
+  );
+
 
   return (
     <section
@@ -36,30 +81,36 @@ export default function Hero({ search, setSearch }) {
           : "bg-white text-slate-900"
       }`}
     >
-      {/* Background Glow */}
+
+
       <div
         className={`absolute -top-40 left-1/2 -translate-x-1/2 h-[500px] w-[500px] rounded-full blur-3xl ${
-          darkMode ? "bg-cyan-500/20" : "bg-cyan-300/30"
+          darkMode
+            ? "bg-cyan-500/20"
+            : "bg-cyan-300/30"
         }`}
       />
+
 
       <div
         className={`absolute bottom-0 right-0 h-80 w-80 rounded-full blur-3xl ${
-          darkMode ? "bg-purple-500/20" : "bg-purple-300/30"
+          darkMode
+            ? "bg-purple-500/20"
+            : "bg-purple-300/30"
         }`}
       />
 
-      {/* Floating Language Pills */}
-      {pills.map((pill, index) => (
+
+      {pills.map((pill,index)=>(
         <motion.div
           key={index}
           animate={{
-            y: [0, -12, 0],
+            y:[0,-12,0]
           }}
           transition={{
-            duration: 3 + index * 0.3,
-            repeat: Infinity,
-            ease: "easeInOut",
+            duration:3+index*0.3,
+            repeat:Infinity,
+            ease:"easeInOut"
           }}
           className={`absolute hidden md:block rounded-full px-4 py-2 backdrop-blur-lg shadow-lg ${
             darkMode
@@ -71,15 +122,28 @@ export default function Hero({ search, setSearch }) {
         </motion.div>
       ))}
 
+
+
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+        initial={{
+          opacity:0,
+          y:40
+        }}
+        animate={{
+          opacity:1,
+          y:0
+        }}
+        transition={{
+          duration:0.8
+        }}
         className="relative z-10 mx-auto max-w-5xl text-center"
       >
+
+
         <span className="rounded-full bg-cyan-500/20 px-4 py-2 text-sm text-cyan-400">
           🚀 Programming Career Guide
         </span>
+
 
         <h1 className="mt-8 text-5xl font-extrabold leading-tight md:text-7xl">
           Discover Your{" "}
@@ -87,6 +151,7 @@ export default function Hero({ search, setSearch }) {
             Dream Tech Career
           </span>
         </h1>
+
 
         <p
           className={`mx-auto mt-6 max-w-3xl text-lg md:text-xl ${
@@ -99,24 +164,44 @@ export default function Hero({ search, setSearch }) {
           salaries, interview preparation and choose the
           perfect technology career with CodeCareer AI.
         </p>
-                {/* Search Box */}
+
+
+
+        {/* Search Box */}
+
         <div className="mx-auto mt-10 max-w-2xl">
+
           <div
-            className={`flex items-center rounded-2xl px-5 py-4 shadow-xl transition ${
+            className={`flex items-center rounded-2xl px-5 py-4 shadow-xl ${
               darkMode
                 ? "bg-slate-800/80 border border-slate-700"
                 : "bg-white border border-gray-200"
             }`}
           >
+
             <Search
               size={22}
-              className={darkMode ? "text-gray-400" : "text-gray-500"}
+              className={
+                darkMode
+                  ? "text-gray-400"
+                  : "text-gray-500"
+              }
             />
+
 
            <input
   type="text"
   value={search}
-  onChange={(e) => setSearch(e.target.value)}
+  onChange={(e)=>setSearch(e.target.value)}
+  onKeyDown={(e) => {
+    if (e.key === "Enter") {
+      const result = filteredSuggestions[0];
+
+      if (result) {
+        window.location.href = result.path;
+      }
+    }
+  }}
   placeholder="Search Programming Language..."
   className={`ml-3 w-full bg-transparent outline-none ${
     darkMode
@@ -124,68 +209,72 @@ export default function Hero({ search, setSearch }) {
       : "text-slate-900 placeholder:text-gray-400"
   }`}
 />
+
           </div>
+
+
+          {search && filteredSuggestions.length > 0 && (
+
+            <div
+              className={`mt-2 rounded-xl shadow-lg overflow-hidden text-left ${
+                darkMode
+                  ? "bg-slate-800 text-white"
+                  : "bg-white text-slate-900"
+              }`}
+            >
+
+              {filteredSuggestions.map((item,index)=>(
+
+                <a
+                  key={index}
+                  href={item.path}
+                  className="block px-5 py-3 hover:bg-cyan-500/20"
+                >
+                  {item.icon} {item.name}
+                </a>
+
+              ))}
+
+            </div>
+
+          )}
+
         </div>
 
+
+
         {/* Buttons */}
+
         <div className="mt-10 flex flex-wrap justify-center gap-5">
+
           <motion.a
             href="#languages"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="rounded-xl bg-cyan-500 px-7 py-3 font-semibold text-white shadow-lg transition hover:bg-cyan-600"
+            whileHover={{scale:1.05}}
+            whileTap={{scale:0.95}}
+            className="rounded-xl bg-cyan-500 px-7 py-3 font-semibold text-white shadow-lg hover:bg-cyan-600"
           >
             Explore Languages
           </motion.a>
 
+
           <motion.a
             href="#salary"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className={`rounded-xl border px-7 py-3 font-semibold transition ${
+            whileHover={{scale:1.05}}
+            whileTap={{scale:0.95}}
+            className={`rounded-xl border px-7 py-3 font-semibold ${
               darkMode
-                ? "border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white"
-                : "border-cyan-500 text-cyan-600 hover:bg-cyan-500 hover:text-white"
+                ? "border-cyan-500 text-cyan-400"
+                : "border-cyan-500 text-cyan-600"
             }`}
           >
             Compare Salaries
           </motion.a>
+
         </div>
 
-        {/* Stats */}
-        <div className="mt-20 grid grid-cols-2 gap-8 md:grid-cols-4">
-          {[
-            ["50+", "Languages"],
-            ["100+", "Career Paths"],
-            ["500+", "Resources"],
-            ["24/7", "Guidance"],
-          ].map(([value, label], index) => (
-            <motion.div
-              key={index}
-              whileHover={{ scale: 1.05 }}
-              className={`rounded-2xl p-6 shadow-lg ${
-                darkMode
-                  ? "bg-slate-900/70 border border-slate-800"
-                  : "bg-white border border-gray-200"
-              }`}
-            >
-              <h2 className="text-3xl font-bold text-cyan-400">
-                {value}
-              </h2>
 
-              <p
-                className={`mt-2 ${
-                  darkMode
-                    ? "text-gray-400"
-                    : "text-gray-600"
-                }`}
-              >
-                {label}
-              </p>
-            </motion.div>
-          ))}
-        </div>
       </motion.div>
+
     </section>
   );
 }

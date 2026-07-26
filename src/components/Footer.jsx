@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useTheme } from "../context/ThemeContext";
 
 function Footer() {
@@ -11,41 +12,84 @@ function Footer() {
           : "bg-white border-gray-200 text-slate-900"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 text-center">
-        <h2 className="text-3xl font-bold text-cyan-500">
+
+      <motion.div
+        initial={{
+          opacity: 0,
+          y: 30
+        }}
+        whileInView={{
+          opacity: 1,
+          y: 0
+        }}
+        viewport={{
+          once: true
+        }}
+        transition={{
+          duration: 0.6
+        }}
+        className="max-w-7xl mx-auto px-6 text-center"
+      >
+
+        <h2 className="text-3xl font-bold text-cyan-500 hover:scale-105 transition">
           CodeCareer AI
         </h2>
 
+
         <p
           className={`mt-3 ${
-            darkMode ? "text-gray-400" : "text-slate-600"
+            darkMode
+              ? "text-gray-400"
+              : "text-slate-600"
           }`}
         >
           Explore programming languages, career paths, skills and salary
           insights.
         </p>
 
+
         <div
-          className={`flex justify-center gap-6 mt-6 ${
-            darkMode ? "text-gray-400" : "text-slate-600"
+          className={`flex flex-wrap justify-center gap-6 mt-6 ${
+            darkMode
+              ? "text-gray-400"
+              : "text-slate-600"
           }`}
         >
-          <span className="cursor-pointer hover:text-cyan-500 transition">
+
+          <a
+            href="#languages"
+            className="hover:text-cyan-500 transition"
+          >
             Languages
-          </span>
+          </a>
 
-          <span className="cursor-pointer hover:text-cyan-500 transition">
+
+          <a
+            href="#careers"
+            className="hover:text-cyan-500 transition"
+          >
             Roadmaps
-          </span>
+          </a>
 
-          <span className="cursor-pointer hover:text-cyan-500 transition">
+
+          <a
+            href="#careers"
+            className="hover:text-cyan-500 transition"
+          >
             Careers
-          </span>
+          </a>
 
-          <span className="cursor-pointer hover:text-cyan-500 transition">
+
+          <a
+            href="#salary"
+            className="hover:text-cyan-500 transition"
+          >
             Salary
-          </span>
+          </a>
+
         </div>
+
+
 
         <div
           className={`mt-8 pt-6 border-t ${
@@ -54,6 +98,7 @@ function Footer() {
               : "border-gray-200"
           }`}
         >
+
           <p
             className={
               darkMode
@@ -64,6 +109,7 @@ function Footer() {
             © 2026 CodeCareer AI. All Rights Reserved.
           </p>
 
+
           <p
             className={`mt-2 ${
               darkMode
@@ -73,8 +119,11 @@ function Footer() {
           >
             Built with React + Tailwind CSS 🚀
           </p>
+
         </div>
-      </div>
+
+      </motion.div>
+
     </footer>
   );
 }
