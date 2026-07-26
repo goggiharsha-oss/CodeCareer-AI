@@ -13,11 +13,6 @@ function Navbar() {
   href="#top"
   className="flex items-center gap-3 text-2xl font-bold text-cyan-400"
 >
-  <img
-    src="/logo.png"
-    alt="CodeCareer AI Logo"
-    className="w-10 h-10 rounded-xl"
-  />
 
   CodeCareer AI
 </a>
