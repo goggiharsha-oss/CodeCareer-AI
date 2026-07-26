@@ -1,4 +1,4 @@
-import { languages } from "../data/languages";
+import { languages } from "../data/Languages";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
 
