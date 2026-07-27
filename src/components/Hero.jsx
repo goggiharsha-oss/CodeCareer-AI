@@ -83,22 +83,47 @@ export default function Hero({ search, setSearch }) {
     >
 
 
+      <motion.div
+  animate={{
+    scale: [1, 1.15, 1],
+    opacity: [0.5, 0.8, 0.5],
+  }}
+  transition={{
+    duration: 6,
+    repeat: Infinity,
+    ease: "easeInOut",
+  }}
+  className={`absolute -top-40 left-1/2 -translate-x-1/2 h-[500px] w-[500px] rounded-full blur-3xl ${
+    darkMode
+      ? "bg-cyan-500/20"
+      : "bg-cyan-300/30"
+  }`}
+/>
       <div
-        className={`absolute -top-40 left-1/2 -translate-x-1/2 h-[500px] w-[500px] rounded-full blur-3xl ${
-          darkMode
-            ? "bg-cyan-500/20"
-            : "bg-cyan-300/30"
-        }`}
-      />
+  className={`absolute inset-0 opacity-30 ${
+    darkMode
+      ? "bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)]"
+      : "bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)]"
+  } bg-[size:40px_40px]`}
+/>
 
 
-      <div
-        className={`absolute bottom-0 right-0 h-80 w-80 rounded-full blur-3xl ${
-          darkMode
-            ? "bg-purple-500/20"
-            : "bg-purple-300/30"
-        }`}
-      />
+     <motion.div
+  animate={{
+    scale: [1, 1.2, 1],
+    opacity: [0.4, 0.7, 0.4],
+  }}
+  transition={{
+    duration: 7,
+    repeat: Infinity,
+    ease: "easeInOut",
+  }}
+  className={`absolute bottom-0 right-0 h-80 w-80 rounded-full blur-3xl ${
+    darkMode
+      ? "bg-purple-500/20"
+      : "bg-purple-300/30"
+  }`}
+/>
 
 
       {pills.map((pill,index)=>(
@@ -112,11 +137,11 @@ export default function Hero({ search, setSearch }) {
             repeat:Infinity,
             ease:"easeInOut"
           }}
-          className={`absolute hidden md:block rounded-full px-4 py-2 backdrop-blur-lg shadow-lg ${
-            darkMode
-              ? "bg-slate-800/80"
-              : "bg-white border border-gray-200"
-          } ${pill.className}`}
+          className={`absolute hidden md:block rounded-full px-5 py-2 backdrop-blur-xl shadow-xl transition-all duration-300 hover:scale-110 ${
+  darkMode
+    ? "bg-slate-800/70 border border-cyan-500/20 shadow-cyan-500/20"
+    : "bg-white/80 border border-cyan-100 shadow-cyan-200/40"
+} ${pill.className}`}
         >
           {pill.text}
         </motion.div>
@@ -140,17 +165,29 @@ export default function Hero({ search, setSearch }) {
       >
 
 
-        <span className="rounded-full bg-cyan-500/20 px-4 py-2 text-sm text-cyan-400">
-          🚀 Programming Career Guide
-        </span>
+        <span className="rounded-full bg-cyan-500/20 px-5 py-2 text-sm text-cyan-400 border border-cyan-400/30 shadow-lg shadow-cyan-500/20">
+  🤖 AI Powered Career Discovery Platform
+</span>
 
+       <h1 className="mt-8 text-5xl font-extrabold leading-tight md:text-7xl">
 
-        <h1 className="mt-8 text-5xl font-extrabold leading-tight md:text-7xl">
-          Discover Your{" "}
-          <span className="text-cyan-400">
-            Dream Tech Career
-          </span>
-        </h1>
+  Discover Your{" "}
+
+  <motion.span
+    animate={{
+      backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+    }}
+    transition={{
+      duration: 5,
+      repeat: Infinity,
+      ease: "linear",
+    }}
+    className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-[length:200%_200%] bg-clip-text text-transparent"
+  >
+    Dream Tech Career
+  </motion.span>
+
+</h1>
 
 
         <p
@@ -160,9 +197,9 @@ export default function Hero({ search, setSearch }) {
               : "text-gray-600"
           }`}
         >
-          Explore programming languages, career roadmaps,
-          salaries, interview preparation and choose the
-          perfect technology career with CodeCareer AI.
+          Discover the right programming path with AI-powered
+career insights, technology roadmaps, salary trends,
+and skills required for top software careers.
         </p>
 
 
@@ -171,13 +208,13 @@ export default function Hero({ search, setSearch }) {
 
         <div className="mx-auto mt-10 max-w-2xl">
 
-          <div
-            className={`flex items-center rounded-2xl px-5 py-4 shadow-xl ${
-              darkMode
-                ? "bg-slate-800/80 border border-slate-700"
-                : "bg-white border border-gray-200"
-            }`}
-          >
+         <div
+  className={`flex items-center rounded-2xl px-5 py-4 shadow-xl transition-all duration-300 hover:shadow-cyan-500/40 ${
+    darkMode
+      ? "bg-slate-800/80 border border-cyan-500/30"
+      : "bg-white border border-cyan-200"
+  }`}
+>
 
             <Search
               size={22}
@@ -251,7 +288,7 @@ export default function Hero({ search, setSearch }) {
             href="#languages"
             whileHover={{scale:1.05}}
             whileTap={{scale:0.95}}
-            className="rounded-xl bg-cyan-500 px-7 py-3 font-semibold text-white shadow-lg hover:bg-cyan-600"
+            className="rounded-xl bg-cyan-500 px-7 py-3 font-semibold text-white shadow-lg shadow-cyan-500/30 transition-all duration-300 hover:scale-105 hover:bg-cyan-600 hover:shadow-cyan-500/60"
           >
             Explore Languages
           </motion.a>
@@ -261,11 +298,11 @@ export default function Hero({ search, setSearch }) {
             href="#salary"
             whileHover={{scale:1.05}}
             whileTap={{scale:0.95}}
-            className={`rounded-xl border px-7 py-3 font-semibold ${
-              darkMode
-                ? "border-cyan-500 text-cyan-400"
-                : "border-cyan-500 text-cyan-600"
-            }`}
+           className={`rounded-xl border px-7 py-3 font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg ${
+  darkMode
+    ? "border-cyan-500 text-cyan-400 hover:shadow-cyan-500/40"
+    : "border-cyan-500 text-cyan-600 hover:shadow-cyan-300/50"
+}`}
           >
             Compare Salaries
           </motion.a>
