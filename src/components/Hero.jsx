@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Search } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
+import { playClick } from "../utils/playClick";
 
 
 const pills = [
@@ -285,7 +286,8 @@ and skills required for top software careers.
         <div className="mt-10 flex flex-wrap justify-center gap-5">
 
           <motion.a
-            href="#languages"
+  href="#languages"
+  onClick={playClick}
             whileHover={{scale:1.05}}
             whileTap={{scale:0.95}}
             className="rounded-xl bg-cyan-500 px-7 py-3 font-semibold text-white shadow-lg shadow-cyan-500/30 transition-all duration-300 hover:scale-105 hover:bg-cyan-600 hover:shadow-cyan-500/60"
@@ -295,7 +297,8 @@ and skills required for top software careers.
 
 
           <motion.a
-            href="#salary"
+  href="#salary"
+  onClick={playClick}
             whileHover={{scale:1.05}}
             whileTap={{scale:0.95}}
            className={`rounded-xl border px-7 py-3 font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg ${
