@@ -1,0 +1,64 @@
+.ai-button{
+  position:fixed;
+  bottom:25px;
+  right:25px;
+  width:65px;
+  height:65px;
+  border:none;
+  border-radius:50%;
+  background:#06b6d4;
+  color:white;
+  font-size:30px;
+  cursor:pointer;
+  box-shadow:0 8px 25px rgba(0,0,0,.25);
+  transition:.3s;
+  z-index:9999;
+}
+
+.ai-button:hover{
+  transform:scale(1.1);
+}
+
+.ai-popup{
+  position:fixed;
+  bottom:100px;
+  right:25px;
+  width:340px;
+  background:#fff;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 15px 35px rgba(0,0,0,.25);
+  z-index:9999;
+}
+
+.ai-header{
+  background:#06b6d4;
+  color:white;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px;
+  font-weight:bold;
+}
+
+.close-btn{
+  background:none;
+  border:none;
+  color:white;
+  font-size:20px;
+  cursor:pointer;
+}
+
+.ai-body{
+  padding:20px;
+  color:#1e293b;
+}
+
+.ai-body ul{
+  margin-top:12px;
+  padding-left:20px;
+}
+
+.ai-body li{
+  margin:8px 0;
+}

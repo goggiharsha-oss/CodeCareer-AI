@@ -7,6 +7,7 @@ import WhyChoose from "../components/WhyChoose";
 import Statistics from "../components/Statistics";
 import SalaryComparison from "../components/SalaryComparison";
 import CareerDomains from "../components/CareerDomains";
+import AIAssistant from "../components/AIAssistant";
 
 function Home() {
   const [search, setSearch] = useState("");
@@ -30,6 +31,8 @@ function Home() {
       <Statistics />
 
       <SalaryComparison />
+
+      <AIAssistant />
 
       <Footer />
     </>
