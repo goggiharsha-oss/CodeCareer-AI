@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import "./AIAssistant.css";
 import { aiKnowledge } from "../data/aiKnowledge";
 import { languages } from "../data/languages";
@@ -14,12 +14,7 @@ function AIAssistant() {
       text: "👋 Hi! I'm CodeCareer AI. Ask me about Programming Languages, Career Paths, Salaries or Learning Roadmaps.",
     },
   ]);
-  const messagesEndRef = useRef(null);
- useEffect(() => {
-  messagesEndRef.current?.scrollIntoView({
-    behavior: "smooth",
-  });
-}, [messages]);
+ 
   const handleSend = () => {
     if (!message.trim()) return;
 
@@ -200,7 +195,6 @@ else if (q.includes("interview")) {
     </div>
   ))}
 
-  <div ref={messagesEndRef}></div>
 </div>
 
         <div className="input-area">

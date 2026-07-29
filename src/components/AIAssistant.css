@@ -68,12 +68,12 @@
 .messages {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  padding-right: 5px;
 }
-
-
 .ai-msg {
   background: #f1f5f9;
   color: black;
