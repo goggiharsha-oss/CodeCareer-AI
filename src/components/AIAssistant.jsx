@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./AIAssistant.css";
+import { aiKnowledge } from "../data/aiKnowledge";
 
 function AIAssistant() {
   const [open, setOpen] = useState(false);
@@ -31,9 +32,41 @@ function AIAssistant() {
 
     setTimeout(() => {
       const q = userMessage.toLowerCase();
+      const topic = Object.keys(aiKnowledge).find((key) =>
+  q.includes(key)
+);
 
-     let reply =
-  "🤖 Sorry! I can help only with Programming Languages, Career Paths, Salaries, Skills, Learning Roadmaps, and Interview Preparation. Please ask a tech career related question.";
+if (topic) {
+  const data = aiKnowledge[topic];
+
+  let reply = `📘 ${data.title}
+
+💰 Salary: ${data.salary}
+
+📈 Difficulty: ${data.difficulty}
+
+⏳ Duration: ${data.duration}
+
+🛣️ Roadmap:
+${data.roadmap}
+
+💼 Careers:
+${data.careers.join(", ")}`;
+
+  setMessages((prev) => [
+    ...prev,
+    {
+      sender: "ai",
+      text: reply,
+    },
+  ]);
+
+  setTyping(false);
+  return;
+}
+
+    let reply =
+  "🤖 Sorry! I can help only with Programming Languages...";
       if (q.includes("python")) {
         reply =
           "🐍 Python is beginner-friendly and is widely used in AI, Data Science, Automation and Web Development.";
