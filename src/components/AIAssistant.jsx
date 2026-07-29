@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./AIAssistant.css";
 import { aiKnowledge } from "../data/aiKnowledge";
 import { languages } from "../data/languages";
@@ -14,6 +14,12 @@ function AIAssistant() {
       text: "👋 Hi! I'm CodeCareer AI. Ask me about Programming Languages, Career Paths, Salaries or Learning Roadmaps.",
     },
   ]);
+  const messagesEndRef = useRef(null);
+  useEffect(() => {
+  messagesEndRef.current?.scrollIntoView({
+    behavior: "smooth",
+  });
+}, [messages, typing]);
 
   const handleSend = () => {
     if (!message.trim()) return;
@@ -182,19 +188,21 @@ else if (q.includes("interview")) {
       <div className="ai-body">
 
         <div className="messages">
-          {messages.map((msg, index) => (
-            <div
-              key={index}
-              className={
-                msg.sender === "ai"
-                  ? "ai-msg"
-                  : "user-msg"
-              }
-            >
-              {msg.text}
-            </div>
-          ))}
-        </div>
+  {messages.map((msg, index) => (
+    <div
+      key={index}
+      className={
+        msg.sender === "ai"
+          ? "ai-msg"
+          : "user-msg"
+      }
+    >
+      {msg.text}
+    </div>
+  ))}
+
+  <div ref={messagesEndRef}></div>
+</div>
 
         <div className="input-area">
           <input
