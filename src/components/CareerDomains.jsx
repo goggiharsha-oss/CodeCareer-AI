@@ -46,6 +46,7 @@ function CareerDomains({ search = "" }) {
     },
   ];
 
+
   const filteredDomains = domains.filter(
     (domain) =>
       domain.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -54,92 +55,144 @@ function CareerDomains({ search = "" }) {
         domain.name === "Artificial Intelligence")
   );
 
+
   return (
     <section
       id="careers"
       className={`py-20 px-6 transition-colors duration-500 ${
         darkMode
-          ? "bg-slate-950"
-          : "bg-gradient-to-b from-white via-slate-50 to-cyan-50"
+          ? "bg-slate-900"
+          : "bg-gray-50"
       }`}
     >
+
       <div className="max-w-7xl mx-auto">
+
 
         <motion.h2
           initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
+
           className={`text-4xl font-bold text-center mb-12 ${
-            darkMode ? "text-white" : "text-slate-900"
+            darkMode
+              ? "text-white"
+              : "text-slate-900"
           }`}
         >
           🚀 Trending Career Paths
         </motion.h2>
 
+
+
         <div className="grid md:grid-cols-3 gap-8">
-      {filteredDomains.map((domain, index) => (
-  <motion.div
-    key={index}
-    initial={{ opacity: 0, y: 30 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5, delay: index * 0.1 }}
-    viewport={{ once: true }}
-    onClick={() => navigate(domain.route)}
-    className={`rounded-2xl p-6 cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${
-      darkMode
-        ? "bg-slate-900 border border-slate-800 hover:border-cyan-400"
-        : "bg-white border border-gray-200 hover:border-cyan-400"
-    }`}
-  >
-
-    {/* Icon */}
-    <div className="text-5xl mb-4">
-      {domain.icon}
-    </div>
-
-    {/* Title */}
-    <h3
-      className={`text-2xl font-bold mb-3 ${
-        darkMode ? "text-white" : "text-slate-900"
-      }`}
-    >
-      {domain.name}
-    </h3>
 
 
-    {/* Skills */}
-    <p
-      className={`text-sm leading-6 ${
-        darkMode ? "text-gray-400" : "text-gray-600"
-      }`}
-    >
-      {domain.skills}
-    </p>
+          {filteredDomains.map((domain, index) => (
+
+            <motion.div
+              key={index}
+
+              initial={{
+                opacity: 0,
+                y: 30
+              }}
+
+              whileInView={{
+                opacity: 1,
+                y: 0
+              }}
+
+              transition={{
+                duration: 0.5,
+                delay: index * 0.1
+              }}
+
+              viewport={{
+                once: true
+              }}
 
 
-    {/* Button */}
-    <button
-      onClick={(e) => {
-        e.stopPropagation();
-        playClick();
-        navigate(domain.route);
-      }}
-      className="mt-6 text-cyan-400 font-semibold flex items-center gap-2 transition-all duration-300 hover:gap-4"
-    >
-      Explore Career
-      <span>
-        →
-      </span>
-    </button>
+              className={`rounded-2xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-2xl ${
+                darkMode
+                  ? "bg-slate-800 hover:shadow-cyan-500/20"
+                  : "bg-white border border-gray-200 shadow-lg"
+              }`}
+            >
 
 
-  </motion.div>
-))}
+
+              {/* Icon */}
+
+              <div
+                className="w-14 h-14 rounded-xl bg-cyan-500 flex items-center justify-center text-3xl"
+              >
+                {domain.icon}
+              </div>
+
+
+
+
+              {/* Title */}
+
+              <h3
+                className={`text-2xl font-bold mt-5 ${
+                  darkMode
+                    ? "text-white"
+                    : "text-slate-900"
+                }`}
+              >
+                {domain.name}
+              </h3>
+
+
+
+
+              {/* Skills */}
+
+              <p
+                className={`mt-4 ${
+                  darkMode
+                    ? "text-gray-400"
+                    : "text-gray-600"
+                }`}
+              >
+                {domain.skills}
+              </p>
+
+
+
+
+              {/* Button */}
+
+              <button
+                onClick={() => {
+                  playClick();
+                  navigate(domain.route);
+                }}
+
+                className="mt-6 w-full rounded-xl bg-cyan-500 py-3 font-semibold text-white transition duration-300 hover:bg-cyan-600"
+              >
+                Explore Career →
+              </button>
+
+
+
+            </motion.div>
+
+          ))}
+
+
         </div>
+
+
       </div>
+
+
     </section>
   );
 }
+
 
 export default CareerDomains;
