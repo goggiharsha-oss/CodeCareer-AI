@@ -1,148 +1,153 @@
-.ai-button{
-  position:fixed;
-  bottom:25px;
-  right:25px;
-  width:65px;
-  height:65px;
-  border:none;
-  border-radius:50%;
-  background:linear-gradient(135deg,#06b6d4,#3b82f6);
-  color:#fff;
-  font-size:30px;
-  cursor:pointer;
-  box-shadow:0 10px 30px rgba(0,0,0,.25);
-  transition:.3s;
-  z-index:9999;
+.ai-button {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  background: #06b6d4;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  transition: 0.3s;
+  z-index: 1000;
 }
 
-.ai-button:hover{
-  transform:scale(1.1);
+.ai-button:hover {
+  transform: scale(1.1);
 }
 
-.ai-popup{
-  position:fixed;
-  bottom:100px;
-  right:25px;
-  width:360px;
-  height:520px;
-  background:#fff;
-  border-radius:20px;
-  overflow:hidden;
-  box-shadow:0 20px 45px rgba(0,0,0,.25);
-  display:flex;
-  flex-direction:column;
-  z-index:9999;
+
+.ai-popup {
+  position: fixed;
+  right: 25px;
+  bottom: 100px;
+  width: 360px;
+  height: 500px;
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
 }
 
-.ai-header{
-  background:linear-gradient(135deg,#06b6d4,#3b82f6);
-  color:#fff;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px 18px;
-  font-weight:700;
-  font-size:18px;
+
+.ai-header {
+  background: #06b6d4;
+  color: white;
+  padding: 15px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
 }
 
-.close-btn{
-  background:none;
-  border:none;
-  color:white;
-  font-size:22px;
-  cursor:pointer;
+
+.close-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
 }
 
-.ai-body{
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  padding:15px;
-  background:#f8fafc;
+
+.ai-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
 }
 
-.messages{
-  flex:1;
-  overflow-y:auto;
-  padding-right:5px;
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.ai-msg{
-  max-width:85%;
-  background:#e0f7fa;
-  color:#0f172a;
-  padding:12px;
-  border-radius:14px;
-  margin-bottom:12px;
-  line-height:1.5;
+
+.ai-msg {
+  background: #f1f5f9;
+  color: black;
+  padding: 12px;
+  border-radius: 12px;
+  max-width: 85%;
+  white-space: pre-line;
 }
 
-.user-msg{
-  max-width:85%;
-  margin-left:auto;
-  background:#06b6d4;
-  color:#fff;
-  padding:12px;
-  border-radius:14px;
-  margin-bottom:12px;
-  line-height:1.5;
+
+.user-msg {
+  background: #06b6d4;
+  color: white;
+  padding: 12px;
+  border-radius: 12px;
+  max-width: 85%;
+  align-self: flex-end;
+  white-space: pre-line;
 }
 
-.input-area{
-  display:flex;
-  gap:10px;
-  margin-top:15px;
+
+.input-area {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
 }
 
-.input-area input{
-  flex:1;
-  padding:12px;
-  border:1px solid #cbd5e1;
-  border-radius:12px;
-  outline:none;
-  font-size:15px;
+
+.input-area input {
+  flex: 1;
+  padding: 12px 15px;
+  border-radius: 12px;
+  border: 1px solid #cbd5e1;
+  outline: none;
+
+  /* typing text color */
+  color: black;
+
+  /* input background */
+  background: white;
+
+  font-size: 15px;
 }
 
-.input-area input:focus{
-  border-color:#06b6d4;
+
+.input-area input::placeholder {
+  color: #64748b;
 }
 
-.input-area button{
-  border:none;
-  border-radius:12px;
-  padding:0 18px;
-  background:#06b6d4;
-  color:#fff;
-  font-weight:600;
-  cursor:pointer;
-  transition:.3s;
+
+.input-area button {
+  padding: 12px 18px;
+  border-radius: 12px;
+  border: none;
+  background: #06b6d4;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.input-area button:hover{
-  background:#0891b2;
+
+.input-area button:hover {
+  background: #0891b2;
 }
 
-.messages::-webkit-scrollbar{
-  width:6px;
+
+/* Scroll bar */
+
+.messages::-webkit-scrollbar {
+  width: 6px;
 }
 
-.messages::-webkit-scrollbar-thumb{
-  background:#94a3b8;
-  border-radius:10px;
-}
-
-@media (max-width:480px){
-
-  .ai-popup{
-    width:92%;
-    right:4%;
-    bottom:90px;
-    height:480px;
-  }
-
-  .ai-button{
-    right:20px;
-    bottom:20px;
-  }
-
+.messages::-webkit-scrollbar-thumb {
+  background: #06b6d4;
+  border-radius: 10px;
 }
