@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
 import { motion } from "framer-motion";
+import { playClick } from "../utils/playClick";
 function CareerDomains({ search = "" }) {
   const navigate = useNavigate();
   const { darkMode } = useTheme();
@@ -94,15 +95,14 @@ const filteredDomains = domains.filter((domain) =>
                 {domain.skills}
               </p>
 
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  navigate(domain.route);
-                }}
-                className="mt-6 w-full rounded-xl bg-cyan-500 hover:bg-cyan-600 text-white py-3 font-semibold transition duration-300"
-              >
-                Explore Career →
-              </button>
+             <button
+  onClick={() => {
+    playClick();
+    navigate(domain.route);
+  }}
+>
+  Explore Career →
+</button>
             </div>
           ))}
         </div>
