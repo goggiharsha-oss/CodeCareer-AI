@@ -137,9 +137,17 @@ function LanguageCard({ search = "" }) {
     Average Fresher Salary
   </p>
 
-  <span className="inline-block mt-2 text-cyan-400 text-xl font-semibold transition-all duration-300 group-hover:text-cyan-300 group-hover:scale-110">
-  {lang.salary}
-</span>
+ <div className="mt-4 rounded-xl p-3 transition duration-300 hover:bg-cyan-600 hover:text-white cursor-default">
+
+  <p className={darkMode ? "text-gray-400" : "text-gray-600"}>
+    Average Fresher Salary
+  </p>
+
+  <p className="text-xl font-semibold mt-2">
+    {lang.salary}
+  </p>
+
+</div>
 </div>
 
 
