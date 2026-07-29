@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
 import "./BackToTop.css";
+import { playClick } from "../utils/playClick";
 
 function BackToTop() {
-
   const [showButton, setShowButton] = useState(false);
 
   useEffect(() => {
-
     const handleScroll = () => {
       if (window.scrollY > 400) {
         setShowButton(true);
@@ -20,22 +19,21 @@ function BackToTop() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-
   }, []);
 
-
   const scrollTop = () => {
+    playClick();
+
     window.scrollTo({
       top: 0,
-      behavior: "smooth"
+      behavior: "smooth",
     });
   };
-
 
   return (
     <>
       {showButton && (
-        <button 
+        <button
           className="back-top"
           onClick={scrollTop}
         >
