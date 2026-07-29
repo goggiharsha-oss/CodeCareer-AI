@@ -142,9 +142,6 @@ function LanguageCard({ search = "" }) {
   </p>
 
 </div>
-                <p className="text-cyan-400 text-xl font-semibold mt-2">
-                  {lang.salary}
-                </p>
 
 
                 <p
