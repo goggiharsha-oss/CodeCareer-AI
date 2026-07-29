@@ -4,6 +4,7 @@ import "./AIAssistant.css";
 function AIAssistant() {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
+  const [typing, setTyping] = useState(false);
 
   const [messages, setMessages] = useState([
     {
@@ -26,13 +27,13 @@ function AIAssistant() {
     ]);
 
     setMessage("");
+    setTyping(true);
 
     setTimeout(() => {
       const q = userMessage.toLowerCase();
 
-      let reply =
-        "❌ I can answer only Programming Languages and Career Paths.";
-
+     let reply =
+  "🤖 Sorry! I can help only with Programming Languages, Career Paths, Salaries, Skills, Learning Roadmaps, and Interview Preparation. Please ask a tech career related question.";
       if (q.includes("python")) {
         reply =
           "🐍 Python is beginner-friendly and is widely used in AI, Data Science, Automation and Web Development.";
@@ -79,7 +80,23 @@ function AIAssistant() {
       } else if (q.includes("cloud")) {
         reply =
           "☁️ Cloud Computing includes AWS, Azure and Google Cloud.";
-      } else if (q.includes("devops")) {
+      }
+      else if (q.includes("salary")) {
+  reply =
+    "💰 Salaries depend on skills, experience, location and company. Ask about a specific language or career.";
+}
+else if (q.includes("roadmap")) {
+  reply =
+    "🛣️ Tell me the programming language or career path you want, and I'll provide a learning roadmap.";
+}
+else if (q.includes("skills")) {
+  reply =
+    "📚 Every career requires technical skills, problem solving, projects and continuous learning.";
+}
+else if (q.includes("interview")) {
+  reply =
+    "🎯 Interview preparation includes DSA, projects, core concepts and mock interviews.";
+} else if (q.includes("devops")) {
         reply =
           "⚡ DevOps combines development and operations using Docker, Kubernetes and CI/CD.";
       } else if (q.includes("ui") || q.includes("ux")) {
@@ -97,6 +114,7 @@ function AIAssistant() {
           text: reply,
         },
       ]);
+      setTyping(false);
     }, 500);
   };
 
