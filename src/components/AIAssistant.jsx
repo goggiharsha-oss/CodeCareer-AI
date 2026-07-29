@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./AIAssistant.css";
 import { aiKnowledge } from "../data/aiKnowledge";
+import { languages } from "../data/languages";
 
 function AIAssistant() {
   const [open, setOpen] = useState(false);
@@ -32,14 +33,14 @@ function AIAssistant() {
 
     setTimeout(() => {
       const q = userMessage.toLowerCase();
-      const topic = Object.keys(aiKnowledge).find((key) =>
-  q.includes(key)
+     const language = languages.find((lang) =>
+  q.includes(lang.name.toLowerCase())
 );
 
-if (topic) {
-  const data = aiKnowledge[topic];
+if (language) {
+  const data = language;
 
-  let reply = `📘 ${data.title}
+  let reply = `📘 ${data.name}
 
 💰 Salary: ${data.salary}
 
@@ -47,11 +48,8 @@ if (topic) {
 
 ⏳ Duration: ${data.duration}
 
-🛣️ Roadmap:
-${data.roadmap}
-
-💼 Careers:
-${data.careers.join(", ")}`;
+💼 Jobs:
+${data.jobs.join(", ")}`;
 
   setMessages((prev) => [
     ...prev,
