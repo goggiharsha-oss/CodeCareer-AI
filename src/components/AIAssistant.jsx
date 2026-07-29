@@ -47,14 +47,14 @@ if (language) {
 
   let reply = `📘 ${data.name}
 
-💰 Average Fresher Salary: ${data.salary}
+💰 Salary: ${data.salary}
 
 📈 Difficulty: ${data.difficulty}
 
-⏳ Learning Duration: ${data.duration}
+⏳ Duration: ${data.duration}
 
 💼 Jobs:
-${data.jobs.join(", ")}`;
+${data.jobs}`;
 
   setMessages((prev) => [
     ...prev,
