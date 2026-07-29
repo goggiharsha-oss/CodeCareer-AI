@@ -15,12 +15,11 @@ function AIAssistant() {
     },
   ]);
   const messagesEndRef = useRef(null);
-  useEffect(() => {
+ useEffect(() => {
   messagesEndRef.current?.scrollIntoView({
     behavior: "smooth",
   });
-}, [messages, typing]);
-
+}, [messages]);
   const handleSend = () => {
     if (!message.trim()) return;
 
