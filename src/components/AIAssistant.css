@@ -6,11 +6,11 @@
   height:65px;
   border:none;
   border-radius:50%;
-  background:#06b6d4;
-  color:white;
+  background:linear-gradient(135deg,#06b6d4,#3b82f6);
+  color:#fff;
   font-size:30px;
   cursor:pointer;
-  box-shadow:0 8px 25px rgba(0,0,0,.25);
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
   transition:.3s;
   z-index:9999;
 }
@@ -23,42 +23,126 @@
   position:fixed;
   bottom:100px;
   right:25px;
-  width:340px;
+  width:360px;
+  height:520px;
   background:#fff;
-  border-radius:18px;
+  border-radius:20px;
   overflow:hidden;
-  box-shadow:0 15px 35px rgba(0,0,0,.25);
+  box-shadow:0 20px 45px rgba(0,0,0,.25);
+  display:flex;
+  flex-direction:column;
   z-index:9999;
 }
 
 .ai-header{
-  background:#06b6d4;
-  color:white;
+  background:linear-gradient(135deg,#06b6d4,#3b82f6);
+  color:#fff;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:15px;
-  font-weight:bold;
+  padding:15px 18px;
+  font-weight:700;
+  font-size:18px;
 }
 
 .close-btn{
   background:none;
   border:none;
   color:white;
-  font-size:20px;
+  font-size:22px;
   cursor:pointer;
 }
 
 .ai-body{
-  padding:20px;
-  color:#1e293b;
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  padding:15px;
+  background:#f8fafc;
 }
 
-.ai-body ul{
-  margin-top:12px;
-  padding-left:20px;
+.messages{
+  flex:1;
+  overflow-y:auto;
+  padding-right:5px;
 }
 
-.ai-body li{
-  margin:8px 0;
+.ai-msg{
+  max-width:85%;
+  background:#e0f7fa;
+  color:#0f172a;
+  padding:12px;
+  border-radius:14px;
+  margin-bottom:12px;
+  line-height:1.5;
+}
+
+.user-msg{
+  max-width:85%;
+  margin-left:auto;
+  background:#06b6d4;
+  color:#fff;
+  padding:12px;
+  border-radius:14px;
+  margin-bottom:12px;
+  line-height:1.5;
+}
+
+.input-area{
+  display:flex;
+  gap:10px;
+  margin-top:15px;
+}
+
+.input-area input{
+  flex:1;
+  padding:12px;
+  border:1px solid #cbd5e1;
+  border-radius:12px;
+  outline:none;
+  font-size:15px;
+}
+
+.input-area input:focus{
+  border-color:#06b6d4;
+}
+
+.input-area button{
+  border:none;
+  border-radius:12px;
+  padding:0 18px;
+  background:#06b6d4;
+  color:#fff;
+  font-weight:600;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.input-area button:hover{
+  background:#0891b2;
+}
+
+.messages::-webkit-scrollbar{
+  width:6px;
+}
+
+.messages::-webkit-scrollbar-thumb{
+  background:#94a3b8;
+  border-radius:10px;
+}
+
+@media (max-width:480px){
+
+  .ai-popup{
+    width:92%;
+    right:4%;
+    bottom:90px;
+    height:480px;
+  }
+
+  .ai-button{
+    right:20px;
+    bottom:20px;
+  }
+
 }
