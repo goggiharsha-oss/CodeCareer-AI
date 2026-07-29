@@ -95,6 +95,30 @@
   white-space: pre-line;
 }
 
+.quick-questions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.quick-questions button {
+  border: none;
+  background: #e0f7fa;
+  color: #0891b2;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.quick-questions button:hover {
+  background: #06b6d4;
+  color: white;
+  transform: translateY(-2px);
+}
 
 .input-area {
   display: flex;

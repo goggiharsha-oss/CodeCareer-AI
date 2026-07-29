@@ -196,7 +196,29 @@ else if (q.includes("interview")) {
   ))}
 
 </div>
+<div className="quick-questions">
 
+  <button onClick={() => setMessage("Python salary")}>
+    🐍 Python
+  </button>
+
+  <button onClick={() => setMessage("Java roadmap")}>
+    ☕ Java
+  </button>
+
+  <button onClick={() => setMessage("What is AI?")}>
+    🤖 AI
+  </button>
+
+  <button onClick={() => setMessage("Web Development")}>
+    🌐 Web Dev
+  </button>
+
+  <button onClick={() => setMessage("Highest salary")}>
+    💰 Salary
+  </button>
+
+</div>
         <div className="input-area">
           <input
             type="text"
