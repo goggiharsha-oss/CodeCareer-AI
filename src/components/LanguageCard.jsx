@@ -127,15 +127,21 @@ function LanguageCard({ search = "" }) {
                 </h3>
 
 
-                <p
-                  className={`mt-2 ${
-                    darkMode ? "text-gray-400" : "text-gray-600"
-                  }`}
-                >
-                  Average Fresher Salary
-                </p>
+               <div className="mt-4 inline-block group cursor-default">
 
+  <p
+    className={`transition-all duration-300 ${
+      darkMode ? "text-gray-400" : "text-gray-600"
+    } group-hover:text-cyan-400`}
+  >
+    Average Fresher Salary
+  </p>
 
+  <p className="mt-2 text-cyan-400 text-xl font-semibold transition-all duration-300 group-hover:text-cyan-300 group-hover:scale-110">
+    {lang.salary}
+  </p>
+
+</div>
                 <p className="text-cyan-400 text-xl font-semibold mt-2">
                   {lang.salary}
                 </p>
