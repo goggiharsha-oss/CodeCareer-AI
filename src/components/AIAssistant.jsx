@@ -33,20 +33,25 @@ function AIAssistant() {
 
     setTimeout(() => {
       const q = userMessage.toLowerCase();
-     const language = languages.find((lang) =>
-  q.includes(lang.name.toLowerCase())
-);
+    const language = languages.find((lang) => {
+  const name = lang.name.toLowerCase();
 
+  return (
+    q.includes(name) ||
+    q.includes(name + "s") ||
+    q.includes(name + "'s")
+  );
+});
 if (language) {
   const data = language;
 
   let reply = `📘 ${data.name}
 
-💰 Salary: ${data.salary}
+💰 Average Fresher Salary: ${data.salary}
 
 📈 Difficulty: ${data.difficulty}
 
-⏳ Duration: ${data.duration}
+⏳ Learning Duration: ${data.duration}
 
 💼 Jobs:
 ${data.jobs.join(", ")}`;
