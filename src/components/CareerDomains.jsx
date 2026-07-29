@@ -78,49 +78,62 @@ function CareerDomains({ search = "" }) {
         </motion.h2>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {filteredDomains.map((domain, index) => (
+      {filteredDomains.map((domain, index) => (
   <motion.div
     key={index}
-    initial={{ opacity: 0, y: 40 }}
+    initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5, delay: index * 0.1 }}
     viewport={{ once: true }}
     onClick={() => navigate(domain.route)}
-    className={`group rounded-2xl p-6 cursor-pointer transition-all duration-300 hover:scale-105 hover:-translate-y-2 ${
+    className={`rounded-2xl p-6 cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${
       darkMode
-        ? "bg-slate-900 border border-slate-800 hover:border-cyan-400 hover:shadow-[0_0_35px_rgba(34,211,238,0.25)]"
-        : "bg-white border border-cyan-100 shadow-lg hover:border-cyan-400 hover:shadow-[0_15px_35px_rgba(34,211,238,0.25)]"
+        ? "bg-slate-900 border border-slate-800 hover:border-cyan-400"
+        : "bg-white border border-gray-200 hover:border-cyan-400"
     }`}
   >
-    <div className="text-5xl transition-transform duration-300 group-hover:scale-110">
+
+    {/* Icon */}
+    <div className="text-5xl mb-4">
       {domain.icon}
     </div>
 
-    <h3 className="text-2xl font-bold text-cyan-400 mt-4">
+    {/* Title */}
+    <h3
+      className={`text-2xl font-bold mb-3 ${
+        darkMode ? "text-white" : "text-slate-900"
+      }`}
+    >
       {domain.name}
     </h3>
 
+
+    {/* Skills */}
     <p
-      className={`mt-3 leading-7 ${
-        darkMode ? "text-gray-400" : "text-slate-600"
+      className={`text-sm leading-6 ${
+        darkMode ? "text-gray-400" : "text-gray-600"
       }`}
     >
       {domain.skills}
     </p>
 
+
+    {/* Button */}
     <button
       onClick={(e) => {
         e.stopPropagation();
         playClick();
         navigate(domain.route);
       }}
-      className="mt-6 inline-flex items-center gap-2 text-cyan-400 font-semibold transition-all duration-300 hover:text-cyan-300 hover:translate-x-2"
+      className="mt-6 text-cyan-400 font-semibold flex items-center gap-2 transition-all duration-300 hover:gap-4"
     >
       Explore Career
-      <span className="transition-transform duration-300 group-hover:translate-x-1">
+      <span>
         →
       </span>
     </button>
+
+
   </motion.div>
 ))}
         </div>
