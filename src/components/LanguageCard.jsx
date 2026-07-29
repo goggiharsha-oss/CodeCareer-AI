@@ -1,6 +1,7 @@
 import { languages } from "../data/Languages";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
+import { playClick } from "../utils/playClick";
 
 function LanguageCard({ search = "" }) {
   const navigate = useNavigate();
@@ -166,13 +167,15 @@ function LanguageCard({ search = "" }) {
                   ⏳ {lang.duration}
                 </p>
 
-
-                <button
-                  onClick={() => navigate(lang.route)}
-                  className="mt-6 w-full rounded-xl bg-cyan-500 py-3 font-semibold text-white transition duration-300 hover:bg-cyan-600"
-                >
-                  Explore Career →
-                </button>
+<button
+  onClick={() => {
+    playClick();
+    navigate(lang.route);
+  }}
+  className="mt-6 w-full rounded-xl bg-cyan-500 py-3 font-semibold text-white transition duration-300 hover:bg-cyan-600"
+>
+  Explore Career →
+</button>
 
               </div>
 
