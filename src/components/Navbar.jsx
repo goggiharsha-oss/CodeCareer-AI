@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Menu, X, Code2, Sun, Moon } from "lucide-react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
 
 function Navbar() {
@@ -9,10 +8,10 @@ function Navbar() {
   const { darkMode, toggleTheme } = useTheme();
 
   const navItems = [
-    { name: "Home", path: "/" },
-    { name: "Languages", path: "/languages" },
-    { name: "Careers", path: "/careers" },
-    { name: "Roadmaps", path: "/roadmaps" },
+    { name: "Home", path: "#home" },
+    { name: "Languages", path: "#languages" },
+    { name: "Careers", path: "#careers" },
+    { name: "Roadmaps", path: "#roadmaps" },
   ];
 
   return (
@@ -28,10 +27,13 @@ function Navbar() {
       shadow-lg
       "
     >
+
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
+
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-3">
+        <a href="#home" className="flex items-center gap-3">
+
           <motion.div
             whileHover={{ rotate: 10, scale: 1.1 }}
             className="
@@ -43,23 +45,29 @@ function Navbar() {
             <Code2 className="text-white" size={28} />
           </motion.div>
 
-          <h1 className="
-          text-2xl font-bold
-          bg-gradient-to-r from-cyan-400 to-blue-600
-          bg-clip-text text-transparent
-          ">
+
+          <h1
+            className="
+            text-2xl font-bold
+            bg-gradient-to-r from-cyan-400 to-blue-600
+            bg-clip-text text-transparent
+            "
+          >
             CodeCareer AI
           </h1>
-        </Link>
+
+        </a>
+
 
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8">
 
+
           {navItems.map((item) => (
-            <Link
+            <a
               key={item.name}
-              to={item.path}
+              href={item.path}
               className="
               relative
               text-gray-700 dark:text-gray-200
@@ -67,6 +75,7 @@ function Navbar() {
               group
               "
             >
+
               {item.name}
 
               <span
@@ -79,8 +88,10 @@ function Navbar() {
                 group-hover:w-full
                 "
               />
-            </Link>
+
+            </a>
           ))}
+
 
 
           {/* Theme Button */}
@@ -93,14 +104,19 @@ function Navbar() {
             transition
             "
           >
+
             {darkMode ? (
-              <Sun size={20} className="text-yellow-400"/>
+              <Sun size={20} className="text-yellow-400" />
             ) : (
-              <Moon size={20}/>
+              <Moon size={20} />
             )}
+
           </button>
 
+
         </div>
+
+
 
 
         {/* Mobile Button */}
@@ -108,21 +124,28 @@ function Navbar() {
           className="md:hidden"
           onClick={() => setOpen(!open)}
         >
+
           {open ? (
-            <X size={28}/>
+            <X size={28} />
           ) : (
-            <Menu size={28}/>
+            <Menu size={28} />
           )}
+
         </button>
+
 
       </div>
 
 
+
+
       {/* Mobile Menu */}
+
       {open && (
+
         <motion.div
-          initial={{opacity:0, y:-20}}
-          animate={{opacity:1, y:0}}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
           className="
           md:hidden
           px-6 pb-5
@@ -133,20 +156,26 @@ function Navbar() {
           "
         >
 
-          {navItems.map((item)=>(
-            <Link
+
+          {navItems.map((item) => (
+
+            <a
               key={item.name}
-              to={item.path}
-              onClick={()=>setOpen(false)}
+              href={item.path}
+              onClick={() => setOpen(false)}
               className="
               text-lg
               text-gray-800
               dark:text-gray-200
               "
             >
+
               {item.name}
-            </Link>
+
+            </a>
+
           ))}
+
 
 
           <button
@@ -155,15 +184,21 @@ function Navbar() {
             flex items-center gap-2
             "
           >
-            {darkMode ? <Sun/> : <Moon/>}
+
+            {darkMode ? <Sun /> : <Moon />}
             Theme
+
           </button>
 
+
         </motion.div>
+
       )}
+
 
     </motion.nav>
   );
 }
+
 
 export default Navbar;
