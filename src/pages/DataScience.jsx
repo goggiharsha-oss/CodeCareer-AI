@@ -1,36 +1,60 @@
-
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import PremiumCard from "../components/PremiumCard";
-
 
 function DataScience() {
-
 
   const skills = [
     "Python",
     "SQL",
-    "Pandas",
-    "NumPy",
     "Statistics",
     "Machine Learning",
-    "Power BI",
-    "Excel",
+    "Pandas",
+    "NumPy",
     "Data Visualization",
+    "Excel",
+    "Power BI",
     "Problem Solving",
   ];
 
 
   const roadmap = [
-    "Learn Python",
-    "Learn SQL",
+    "Learn Python Fundamentals",
+    "Learn SQL and Databases",
     "Master Statistics",
-    "Learn Pandas & NumPy",
-    "Learn Data Visualization",
-    "Study Machine Learning",
-    "Build Data Science Projects",
-    "Create Portfolio",
-    "Apply for Jobs",
+    "Learn Pandas and NumPy",
+    "Understand Data Visualization",
+    "Learn Machine Learning Algorithms",
+    "Work on Real Data Projects",
+    "Create Data Science Portfolio",
+    "Deploy Data Models",
+    "Apply for Data Science Jobs",
+  ];
+
+
+  const certifications = [
+    "IBM Data Science Professional Certificate",
+    "Google Data Analytics Certificate",
+    "Microsoft Power BI Certification",
+    "AWS Machine Learning Certification",
+  ];
+
+
+  const tools = [
+    "Python",
+    "Jupyter Notebook",
+    "Pandas",
+    "NumPy",
+    "Power BI",
+    "Tableau",
+  ];
+
+
+  const projects = [
+    "Customer Prediction System",
+    "Sales Analysis Dashboard",
+    "Recommendation System",
+    "Stock Price Prediction",
+    "Sentiment Analysis",
   ];
 
 
@@ -39,585 +63,706 @@ function DataScience() {
     "Microsoft",
     "Amazon",
     "IBM",
+    "Meta",
     "Infosys",
     "TCS",
     "Accenture",
-    "Zoho",
   ];
 
 
   const jobRoles = [
-    "Data Scientist",
-    "Data Analyst",
-    "Business Analyst",
-    "ML Engineer",
-    "BI Developer",
-    "Data Engineer",
+    {
+      role:"Data Scientist",
+      salary:"₹6–18 LPA",
+      desc:"Analyze data and build machine learning models."
+    },
+    {
+      role:"Data Analyst",
+      salary:"₹4–10 LPA",
+      desc:"Convert data into meaningful business insights."
+    },
+    {
+      role:"Machine Learning Engineer",
+      salary:"₹8–20 LPA",
+      desc:"Develop and deploy machine learning solutions."
+    },
+    {
+      role:"Business Analyst",
+      salary:"₹5–12 LPA",
+      desc:"Use data to improve business decisions."
+    }
   ];
-
 
 
   return (
 
-    <motion.div
+    <div className="min-h-screen bg-slate-950 text-white">
 
 
-      initial={{
-        opacity:0
-      }}
+      {/* HERO SECTION */}
 
 
-      animate={{
-        opacity:1
-      }}
+      <div
+        className="
+        bg-gradient-to-br
+        from-slate-900
+        via-blue-950
+        to-slate-950
+        border-b
+        border-slate-800
+        "
+      >
 
 
-      transition={{
-        duration:0.8
-      }}
-
-
-      className="min-h-screen bg-slate-950 text-white"
-
-    >
-
-
-
-
-      {/* Header */}
-
-
-
-      <div className="bg-slate-900 border-b border-slate-800">
-
-
-        <div className="max-w-7xl mx-auto px-6 py-8">
+        <div className="max-w-7xl mx-auto px-6 py-16">
 
 
           <Link
-
             to="/"
-
             className="text-cyan-400 hover:text-cyan-300"
-
           >
-
             ← Back to Home
-
           </Link>
 
 
 
+          <div className="grid md:grid-cols-2 gap-10 items-center mt-10">
 
 
-          <motion.h1
+            <div>
 
 
-            initial={{
-              opacity:0,
-              y:50
-            }}
-
-
-            animate={{
-              opacity:1,
-              y:0
-            }}
-
-
-            transition={{
-              duration:0.8
-            }}
-
-
-            className="text-5xl font-bold mt-6"
-
-          >
-
-            📊 Data Science
-
-          </motion.h1>
-
-
-
-
-
-          <p className="text-gray-400 mt-4 text-lg">
-
-            Analyze data and build intelligent solutions using statistics,
-            programming and machine learning.
-
-          </p>
-
-
-
-        </div>
-
-
-      </div>
-
-
-
-
-
-
-      <div className="max-w-7xl mx-auto px-6 py-12">
-
-
-
-
-
-        {/* Salary */}
-
-
-
-        <section className="bg-slate-900 rounded-3xl p-8 mb-8">
-
-
-          <h2 className="text-3xl font-bold text-cyan-400">
-
-            💰 Salary
-
-          </h2>
-
-
-
-
-
-          <div className="grid md:grid-cols-3 gap-6 mt-8">
-
-
-
-            <PremiumCard className="p-6 text-center">
-
-
-              <h3 className="font-bold">
-
-                Fresher
-
-              </h3>
-
-
-              <motion.p
-
-                whileHover={{
-                  scale:1.15
-                }}
-
-                className="text-3xl text-green-400 mt-3"
-
-              >
-
-                ₹5–8 LPA
-
-              </motion.p>
-
-
-            </PremiumCard>
-
-
-
-
-
-            <PremiumCard className="p-6 text-center">
-
-
-              <h3 className="font-bold">
-
-                Experienced
-
-              </h3>
-
-
-              <motion.p
-
-                whileHover={{
-                  scale:1.15
-                }}
-
-                className="text-3xl text-yellow-400 mt-3"
-
-              >
-
-                ₹12–20 LPA
-
-              </motion.p>
-
-
-            </PremiumCard>
-
-
-
-
-
-            <PremiumCard className="p-6 text-center">
-
-
-              <h3 className="font-bold">
-
-                Senior
-
-              </h3>
-
-
-              <motion.p
-
-                whileHover={{
-                  scale:1.15
-                }}
-
-                className="text-3xl text-cyan-400 mt-3"
-
-              >
-
-                ₹30+ LPA
-
-              </motion.p>
-
-
-            </PremiumCard>
-
-
-
-          </div>
-
-
-
-        </section>
-        
-
-        {/* Skills */}
-
-
-        <section className="bg-slate-900 rounded-3xl p-8 mb-8">
-
-
-          <h2 className="text-3xl font-bold text-cyan-400 mb-6">
-
-            🛠 Skills Required
-
-          </h2>
-
-
-
-
-          <div className="grid md:grid-cols-2 gap-5">
-
-
-            {skills.map((skill,index)=>(
-
-
-              <motion.div
-
-
-                key={index}
-
-
-                initial={{
-                  opacity:0,
-                  y:40
-                }}
-
-
-                whileInView={{
-                  opacity:1,
-                  y:0
-                }}
-
-
-                viewport={{
-                  once:true
-                }}
-
-
-                transition={{
-                  delay:index*0.1
-                }}
-
-
-                whileHover={{
-                  scale:1.06,
-                  rotateX:5,
-                  rotateY:5
-                }}
-
-
-              >
-
-
-
-                <PremiumCard className="p-5">
-
-
-                  <motion.div
-
-
-                    whileHover={{
-                      x:12
-                    }}
-
-
-                    className="font-semibold"
-
-                  >
-
-                    ✅ {skill}
-
-                  </motion.div>
-
-
-
-                </PremiumCard>
-
-
-
-              </motion.div>
-
-
-            ))}
-
-
-
-          </div>
-
-
-        </section>
-
-
-
-
-
-
-
-
-        {/* Roadmap */}
-
-
-
-
-        <section className="bg-slate-900 rounded-3xl p-8 mb-8">
-
-
-          <h2 className="text-3xl font-bold text-cyan-400 mb-6">
-
-            🗺 Learning Roadmap
-
-          </h2>
-
-
-
-
-
-          <div className="space-y-5">
-
-
-            {roadmap.map((step,index)=>(
-
-
-              <motion.div
-
-
-                key={index}
-
+              <motion.h1
 
                 initial={{
                   opacity:0,
                   x:-50
                 }}
 
-
-                whileInView={{
+                animate={{
                   opacity:1,
                   x:0
                 }}
 
-
-                viewport={{
-                  once:true
-                }}
-
-
                 transition={{
-                  delay:index*0.12
+                  duration:0.7
                 }}
 
-
-                whileHover={{
-                  scale:1.03,
-                  x:15
-                }}
-
+                className="text-5xl font-bold"
 
               >
 
+                📊 Data Science
 
-
-                <PremiumCard className="p-5 flex items-center gap-5">
-
-
-
-
-
-                  <motion.div
-
-
-                    animate={{
-
-                      rotate:[0,360]
-
-                    }}
-
-
-                    transition={{
-
-                      duration:4,
-
-                      repeat:Infinity,
-
-                      ease:"linear"
-
-                    }}
+              </motion.h1>
 
 
 
-                    className="w-10 h-10 rounded-full bg-cyan-500 flex items-center justify-center font-bold"
+              <motion.p
 
-                  >
+                initial={{
+                  opacity:0
+                }}
 
-                    {index+1}
+                animate={{
+                  opacity:1
+                }}
+
+                transition={{
+                  delay:0.4
+                }}
+
+                className="text-gray-400 text-lg mt-6"
+
+              >
+
+                Analyze data, discover insights and build intelligent
+                solutions using statistics, programming and machine learning.
+
+              </motion.p>
 
 
-                  </motion.div>
+            </div>
 
 
 
 
-
-                  <p className="font-semibold">
-
-                    {step}
-
-                  </p>
+            {/* DATA SCIENCE CARD */}
 
 
+            <motion.div
 
-                </PremiumCard>
+              animate={{
+                y:[0,-20,0],
+                rotate:[0,8,-8,0]
+              }}
 
+              transition={{
+                duration:4,
+                repeat:Infinity
+              }}
 
+              className="
+              h-72
+              rounded-3xl
+              bg-gradient-to-br
+              from-blue-500
+              to-cyan-600
+              flex
+              items-center
+              justify-center
+              text-8xl
+              shadow-2xl
+              shadow-blue-500/30
+              "
 
-              </motion.div>
+            >
 
+              📊
 
-
-            ))}
-
+            </motion.div>
 
 
           </div>
 
 
-
-        </section>
-        
-
-        {/* Job Roles */}
+        </div>
 
 
+      </div>
+      
+      <div className="max-w-7xl mx-auto px-6 py-12">
 
-        <section className="bg-slate-900 rounded-3xl p-8 mb-8">
+
+        {/* SALARY SECTION */}
 
 
-          <h2 className="text-3xl font-bold text-cyan-400 mb-6">
+        <motion.div
 
-            💼 Job Roles
+          initial={{
+            opacity:0,
+            y:50
+          }}
 
+          whileInView={{
+            opacity:1,
+            y:0
+          }}
+
+          className="
+          bg-slate-900
+          rounded-3xl
+          p-8
+          "
+
+        >
+
+
+          <h2 className="text-3xl font-bold text-cyan-400">
+            💰 Data Science Salary
           </h2>
 
 
+
+          <div className="grid md:grid-cols-3 gap-6 mt-8">
+
+
+            {
+              [
+                ["Fresher","₹5–10 LPA"],
+                ["Experienced","₹12–25 LPA"],
+                ["Senior","₹30+ LPA"]
+              ].map((item,index)=>(
+
+
+                <motion.div
+
+                  key={index}
+
+                  whileHover={{
+                    scale:1.08,
+                    rotateX:10,
+                    rotateY:10
+                  }}
+
+                  className="
+                  bg-slate-800
+                  rounded-2xl
+                  p-8
+                  text-center
+                  border
+                  border-slate-700
+                  "
+
+                >
+
+                  <h3 className="font-bold text-xl">
+                    {item[0]}
+                  </h3>
+
+
+                  <p className="text-4xl text-cyan-400 mt-4">
+                    {item[1]}
+                  </p>
+
+
+                </motion.div>
+
+
+              ))
+            }
+
+
+          </div>
+
+
+        </motion.div>
+
+
+
+
+
+
+
+
+        {/* SKILLS SECTION */}
+
+
+
+        <motion.div
+
+          initial={{
+            opacity:0,
+            y:50
+          }}
+
+          whileInView={{
+            opacity:1,
+            y:0
+          }}
+
+          className="
+          bg-slate-900
+          rounded-3xl
+          p-8
+          mt-8
+          "
+
+        >
+
+
+          <h2 className="text-3xl font-bold text-cyan-400 mb-8">
+            🛠 Data Science Skills Required
+          </h2>
+
+
+
+          <div className="grid md:grid-cols-3 gap-6">
+
+
+            {
+              skills.map((skill,index)=>(
+
+
+                <motion.div
+
+                  key={index}
+
+                  whileHover={{
+                    scale:1.08,
+                    y:-10
+                  }}
+
+                  className="
+                  bg-slate-800
+                  rounded-2xl
+                  p-6
+                  border
+                  border-slate-700
+                  hover:border-cyan-400
+                  transition
+                  "
+
+                >
+
+                  <div className="text-3xl">
+                    📈
+                  </div>
+
+
+                  <h3 className="font-semibold text-lg mt-4">
+                    {skill}
+                  </h3>
+
+
+                </motion.div>
+
+
+              ))
+            }
+
+
+          </div>
+
+
+        </motion.div>
+
+
+
+
+
+
+
+
+        {/* TOOLS SECTION */}
+
+
+
+        <motion.div
+
+          initial={{
+            opacity:0,
+            y:50
+          }}
+
+          whileInView={{
+            opacity:1,
+            y:0
+          }}
+
+          className="
+          bg-slate-900
+          rounded-3xl
+          p-8
+          mt-8
+          "
+
+        >
+
+
+          <h2 className="text-3xl font-bold text-cyan-400 mb-8">
+            ⚙️ Data Science Tools & Technologies
+          </h2>
+
+
+
+          <div className="grid md:grid-cols-3 gap-5">
+
+
+            {
+              tools.map((tool,index)=>(
+
+
+                <motion.div
+
+                  key={index}
+
+                  whileHover={{
+                    scale:1.1,
+                    rotateY:10
+                  }}
+
+                  className="
+                  bg-gradient-to-br
+                  from-slate-800
+                  to-slate-700
+                  rounded-xl
+                  p-6
+                  text-center
+                  font-semibold
+                  border
+                  border-slate-700
+                  "
+
+                >
+
+                  🚀 {tool}
+
+
+                </motion.div>
+
+
+              ))
+            }
+
+
+          </div>
+
+
+        </motion.div>
+        
+        {/* PROJECTS SECTION */}
+
+
+        <motion.div
+
+          initial={{
+            opacity:0,
+            y:50
+          }}
+
+          whileInView={{
+            opacity:1,
+            y:0
+          }}
+
+          className="
+          bg-slate-900
+          rounded-3xl
+          p-8
+          mt-8
+          "
+
+        >
+
+
+          <h2 className="text-3xl font-bold text-cyan-400 mb-8">
+            🚀 Data Science Projects To Build
+          </h2>
+
+
+
+          <div className="grid md:grid-cols-3 gap-6">
+
+
+            {
+              projects.map((project,index)=>(
+
+
+                <motion.div
+
+                  key={index}
+
+                  whileHover={{
+                    scale:1.08,
+                    y:-8
+                  }}
+
+                  className="
+                  bg-slate-800
+                  rounded-2xl
+                  p-6
+                  border
+                  border-slate-700
+                  "
+
+                >
+
+                  <h3 className="font-bold text-lg">
+                    📊 {project}
+                  </h3>
+
+
+                  <p className="text-gray-400 mt-3">
+                    Build this project to improve practical data science skills.
+                  </p>
+
+
+                </motion.div>
+
+
+              ))
+            }
+
+
+          </div>
+
+
+        </motion.div>
+
+
+
+
+
+
+
+
+        {/* ROADMAP SECTION */}
+
+
+
+        <motion.div
+
+          initial={{
+            opacity:0,
+            y:50
+          }}
+
+          whileInView={{
+            opacity:1,
+            y:0
+          }}
+
+          className="
+          bg-slate-900
+          rounded-3xl
+          p-8
+          mt-8
+          "
+
+        >
+
+
+          <h2 className="text-3xl font-bold text-cyan-400 mb-8">
+            🗺 Data Science Learning Roadmap
+          </h2>
+
+
+
+          <div className="space-y-5">
+
+
+            {
+              roadmap.map((step,index)=>(
+
+
+                <motion.div
+
+                  key={index}
+
+                  initial={{
+                    opacity:0,
+                    x:-40
+                  }}
+
+                  whileInView={{
+                    opacity:1,
+                    x:0
+                  }}
+
+                  transition={{
+                    delay:index*0.1
+                  }}
+
+                  className="
+                  flex
+                  items-center
+                  gap-5
+                  bg-slate-800
+                  rounded-2xl
+                  p-5
+                  border
+                  border-slate-700
+                  "
+
+                >
+
+
+                  <div
+                    className="
+                    w-12
+                    h-12
+                    rounded-full
+                    bg-cyan-500
+                    flex
+                    items-center
+                    justify-center
+                    font-bold
+                    text-black
+                    "
+                  >
+
+                    {index+1}
+
+                  </div>
+
+
+                  <p className="text-lg">
+                    {step}
+                  </p>
+
+
+                </motion.div>
+
+
+              ))
+            }
+
+
+          </div>
+
+
+        </motion.div>
+
+
+
+
+
+
+
+
+        {/* CERTIFICATIONS */}
+
+
+
+        <motion.div
+
+          initial={{
+            opacity:0,
+            y:50
+          }}
+
+          whileInView={{
+            opacity:1,
+            y:0
+          }}
+
+          className="
+          bg-slate-900
+          rounded-3xl
+          p-8
+          mt-8
+          "
+
+        >
+
+
+          <h2 className="text-3xl font-bold text-cyan-400 mb-8">
+            🎓 Data Science Certifications
+          </h2>
 
 
 
           <div className="grid md:grid-cols-2 gap-6">
 
 
-
-            {jobRoles.map((role,index)=>(
-
-
-              <motion.div
+            {
+              certifications.map((cert,index)=>(
 
 
-                key={index}
+                <motion.div
+
+                  key={index}
+
+                  whileHover={{
+                    scale:1.05,
+                    y:-8
+                  }}
+
+                  className="
+                  bg-slate-800
+                  rounded-2xl
+                  p-6
+                  border
+                  border-slate-700
+                  "
+
+                >
+
+                  🏆 {cert}
 
 
-                initial={{
-                  opacity:0,
-                  scale:0.8
-                }}
+                </motion.div>
 
 
-                whileInView={{
-                  opacity:1,
-                  scale:1
-                }}
-
-
-                viewport={{
-                  once:true
-                }}
-
-
-                transition={{
-                  delay:index*0.12
-                }}
-
-
-                whileHover={{
-                  y:-10,
-                  scale:1.05
-                }}
-
-
-              >
-
-
-
-                <PremiumCard className="p-6">
-
-
-                  <motion.h3
-
-
-                    whileHover={{
-                      x:10
-                    }}
-
-
-                    className="text-xl font-bold"
-
-                  >
-
-                    🚀 {role}
-
-                  </motion.h3>
-
-
-
-                </PremiumCard>
-
-
-
-              </motion.div>
-
-
-            ))}
-
+              ))
+            }
 
 
           </div>
 
 
-        </section>
+        </motion.div>
 
 
 
@@ -625,134 +770,183 @@ function DataScience() {
 
 
 
-        {/* Top Companies */}
+
+        {/* CAREER OPPORTUNITIES */}
 
 
 
-        <section className="bg-slate-900 rounded-3xl p-8">
+        <motion.div
+
+          initial={{
+            opacity:0,
+            y:50
+          }}
+
+          whileInView={{
+            opacity:1,
+            y:0
+          }}
+
+          className="
+          bg-slate-900
+          rounded-3xl
+          p-8
+          mt-8
+          "
+
+        >
 
 
-          <h2 className="text-3xl font-bold text-cyan-400 mb-6">
-
-            🏢 Top Companies
-
+          <h2 className="text-3xl font-bold text-cyan-400 mb-8">
+            💼 Data Science Career Opportunities
           </h2>
 
 
 
+          <div className="grid md:grid-cols-2 gap-6">
 
 
-          <div className="grid md:grid-cols-4 gap-6">
+            {
+              jobRoles.map((job,index)=>(
 
 
-            {companies.map((company,index)=>(
+                <motion.div
+
+                  key={index}
+
+                  whileHover={{
+                    scale:1.05
+                  }}
+
+                  className="
+                  bg-slate-800
+                  rounded-2xl
+                  p-6
+                  border
+                  border-slate-700
+                  "
+
+                >
 
 
-              <motion.div
+                  <h3 className="text-xl font-bold">
+                    🚀 {job.role}
+                  </h3>
 
 
-                key={index}
+                  <p className="text-gray-400 mt-3">
+                    {job.desc}
+                  </p>
 
 
-                initial={{
-                  opacity:0,
-                  rotateY:90
-                }}
+                  <p className="text-green-400 font-bold mt-4">
+                    {job.salary}
+                  </p>
 
 
-                whileInView={{
-                  opacity:1,
-                  rotateY:0
-                }}
+                </motion.div>
 
 
-                viewport={{
-                  once:true
-                }}
-
-
-                transition={{
-                  delay:index*0.1,
-                  duration:0.5
-                }}
-
-
-                whileHover={{
-                  scale:1.1,
-                  y:-10
-                }}
-
-
-
-              >
-
-
-
-                <PremiumCard className="p-6 text-center">
-
-
-                  <motion.div
-
-
-                    animate={{
-
-                      y:[0,-6,0]
-
-                    }}
-
-
-                    transition={{
-
-                      duration:2,
-
-                      repeat:Infinity,
-
-                      delay:index*0.2
-
-                    }}
-
-
-                    className="font-bold text-lg"
-
-                  >
-
-                    {company}
-
-                  </motion.div>
-
-
-
-                </PremiumCard>
-
-
-
-              </motion.div>
-
-
-
-            ))}
-
+              ))
+            }
 
 
           </div>
 
 
-
-        </section>
-
+        </motion.div>
 
 
+
+
+
+
+
+
+        {/* TOP COMPANIES */}
+
+
+
+        <motion.div
+
+          initial={{
+            opacity:0,
+            y:50
+          }}
+
+          whileInView={{
+            opacity:1,
+            y:0
+          }}
+
+          className="
+          bg-slate-900
+          rounded-3xl
+          p-8
+          mt-8
+          "
+
+        >
+
+
+          <h2 className="text-3xl font-bold text-cyan-400 mb-8">
+            🏢 Top Data Science Companies
+          </h2>
+
+
+
+          <div className="grid md:grid-cols-4 gap-5">
+
+
+            {
+              companies.map((company,index)=>(
+
+
+                <motion.div
+
+                  key={index}
+
+                  whileHover={{
+                    scale:1.1,
+                    rotateY:10
+                  }}
+
+                  className="
+                  bg-slate-800
+                  rounded-xl
+                  p-6
+                  text-center
+                  font-semibold
+                  border
+                  border-slate-700
+                  hover:bg-cyan-600
+                  hover:border-cyan-400
+                  transition
+                  "
+
+                >
+
+                  {company}
+
+
+                </motion.div>
+
+
+              ))
+            }
+
+
+          </div>
+
+
+        </motion.div>
 
 
       </div>
 
-
-
-    </motion.div>
-
+    </div>
 
   );
-
 }
 
 
