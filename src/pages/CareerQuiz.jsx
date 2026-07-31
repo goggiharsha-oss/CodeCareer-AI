@@ -128,57 +128,89 @@ function CareerQuiz() {
             }`}
           >
 
-            <div className="text-7xl mb-5">
-              🏆
-            </div>
+            <motion.div
+  animate={{
+    y:[0,-15,0]
+  }}
+  transition={{
+    duration:2,
+    repeat:Infinity
+  }}
+  className="text-7xl mb-5"
+>
+  🏆
+</motion.div>
 
             <h1 className="text-4xl font-bold text-cyan-400">
               Your Best Career Path
             </h1>
 
-            <h2 className="text-3xl font-bold mt-6">
-              {resultCareer}
-            </h2>
+            <h2 className="text-4xl font-extrabold mt-6 bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
+  {resultCareer}
+</h2>
             <div className="grid md:grid-cols-2 gap-5 mt-8">
 
-  <div className="rounded-2xl p-5 bg-cyan-500/10 border">
-    <h3 className="font-semibold">
-      📊 Match Score
-    </h3>
-    <p className="text-2xl font-bold text-cyan-400">
-      {careerDetails[resultCareer].percentage}
-    </p>
-  </div>
+  {[
+    {
+      icon: "📊",
+      title: "Match Score",
+      value: careerDetails[resultCareer].percentage,
+    },
+    {
+      icon: "💻",
+      title: "Recommended Language",
+      value: careerDetails[resultCareer].language,
+    },
+    {
+      icon: "💰",
+      title: "Expected Salary",
+      value: careerDetails[resultCareer].salary,
+    },
+    {
+      icon: "🚀",
+      title: "Job Roles",
+      value: careerDetails[resultCareer].roles,
+    },
+  ].map((card, index) => (
 
+    <motion.div
+      key={index}
+      initial={{
+        opacity: 0,
+        y: 30
+      }}
+      animate={{
+        opacity: 1,
+        y: 0
+      }}
+      transition={{
+        delay: index * 0.15
+      }}
+      whileHover={{
+        scale: 1.05
+      }}
+      className={`rounded-2xl p-6 border backdrop-blur-xl transition ${
+        darkMode
+          ? "bg-slate-800/70 border-slate-700"
+          : "bg-white/80 border-gray-200"
+      }`}
+    >
 
-  <div className="rounded-2xl p-5 bg-cyan-500/10 border">
-    <h3 className="font-semibold">
-      💻 Recommended Language
-    </h3>
-    <p className="text-xl font-bold">
-      {careerDetails[resultCareer].language}
-    </p>
-  </div>
+      <div className="text-4xl mb-3">
+        {card.icon}
+      </div>
 
+      <h3 className="font-semibold text-cyan-400">
+        {card.title}
+      </h3>
 
-  <div className="rounded-2xl p-5 bg-cyan-500/10 border">
-    <h3 className="font-semibold">
-      💰 Expected Salary
-    </h3>
-    <p className="text-xl font-bold">
-      {careerDetails[resultCareer].salary}
-    </p>
-  </div>
+      <p className="mt-3 text-xl font-bold">
+        {card.value}
+      </p>
 
+    </motion.div>
 
-  <div className="rounded-2xl p-5 bg-cyan-500/10 border">
-    <h3 className="font-semibold">
-      🚀 Job Roles
-    </h3>
-    <p>
-      {careerDetails[resultCareer].roles}
-    </p>
-  </div>
+  ))}
 
 </div>
 
@@ -194,20 +226,34 @@ function CareerQuiz() {
             </p>
 
 
-            <button
-              onClick={() => window.location.reload()}
-              className="mt-8 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-8 py-4 text-white font-semibold hover:scale-105 transition"
-            >
-              Retake Quiz 🔄
-            </button>
-            <button
+            <motion.button
+  onClick={() => window.location.reload()}
+  whileHover={{
+    scale:1.05
+  }}
+  className="mt-8 rounded-xl border border-cyan-500 px-8 py-4 font-semibold text-cyan-400"
+>
+  🔄 Retake Quiz
+</motion.button>
+            <motion.button
   onClick={() =>
     navigate(`/roadmap/${resultCareer}`)
   }
-  className="mt-5 ml-4 rounded-xl bg-gradient-to-r from-purple-500 to-pink-600 px-8 py-4 text-white font-semibold hover:scale-105 transition"
+  whileHover={{
+    scale: 1.08
+  }}
+  whileTap={{
+    scale: 0.95
+  }}
+  className="mt-5 ml-4 relative overflow-hidden rounded-xl bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500 px-8 py-4 text-white font-bold shadow-lg"
 >
-  View Roadmap 🚀
-</button>
+
+  <span className="flex items-center gap-2">
+    🚀
+    View Roadmap
+  </span>
+
+</motion.button>
 
           </motion.div>
 
@@ -218,11 +264,11 @@ function CareerQuiz() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className={`rounded-3xl p-10 text-center border shadow-2xl ${
-              darkMode
-                ? "bg-slate-900/80 border-cyan-500/20"
-                : "bg-white/90 border-cyan-200"
-            }`}
+           className={`rounded-3xl p-10 text-center border shadow-2xl backdrop-blur-xl transition-all duration-500 ${
+  darkMode
+    ? "bg-slate-900/70 border-cyan-500/30"
+    : "bg-white/80 border-cyan-200"
+}`}
           >
 
             <div className="text-7xl mb-6">
