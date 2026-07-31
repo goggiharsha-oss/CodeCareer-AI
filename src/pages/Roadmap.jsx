@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { CheckCircle } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
+import { useState } from "react";
 
 const roadmapData = {
   "Web Development": {
@@ -58,8 +59,32 @@ function Roadmap() {
 
   const { darkMode } = useTheme();
   const { career } = useParams();
-
+const [completedSteps, setCompletedSteps] = useState([]);
   const roadmap = roadmapData[career];
+  const toggleStep = (index) => {
+
+  if (completedSteps.includes(index)) {
+
+    setCompletedSteps(
+      completedSteps.filter(
+        (step) => step !== index
+      )
+    );
+
+  } else {
+
+    setCompletedSteps([
+      ...completedSteps,
+      index
+    ]);
+
+  }
+
+};
+const progress =
+  Math.round(
+    (completedSteps.length / roadmap.steps.length) * 100
+  );
 
 
   return (
@@ -106,7 +131,7 @@ function Roadmap() {
       </span>
 
       <span className="text-cyan-400 font-bold">
-        0%
+        {progress}%
       </span>
     </div>
 
@@ -116,8 +141,8 @@ function Roadmap() {
       <div
         className="h-3 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600"
         style={{
-          width: "0%"
-        }}
+ width:`${progress}%`
+}}
       ></div>
 
     </div>
@@ -131,6 +156,7 @@ function Roadmap() {
 
       <motion.div
         key={index}
+        onClick={() => toggleStep(index)}
         initial={{
           opacity:0,
           x:-30
