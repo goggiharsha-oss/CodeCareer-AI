@@ -14,29 +14,49 @@ function Home() {
 
   return (
     <>
-      <div id="top">
+      <div id="home">
         <Navbar />
+
         <Hero
           search={search}
           setSearch={setSearch}
         />
       </div>
 
-      <LanguageCard search={search} />
 
-      <WhyChoose />
+      <section id="languages">
+        <LanguageCard search={search} />
+      </section>
 
-      <CareerDomains search={search} />
 
-      <Statistics />
+      <section id="whychoose">
+        <WhyChoose />
+      </section>
 
-      <SalaryComparison />
 
-      <AIAssistant />
+      <section id="careers">
+        <CareerDomains search={search} />
+      </section>
+
+
+      <section id="statistics">
+        <Statistics />
+      </section>
+
+
+      <section id="salary">
+        <SalaryComparison />
+      </section>
+
+
+      <section id="ai">
+        <AIAssistant />
+      </section>
+
 
       <Footer />
+
     </>
-    
   );
 }
 
