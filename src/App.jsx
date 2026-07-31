@@ -3,7 +3,7 @@ import CareerQuiz from "./pages/CareerQuiz";
 import ScrollToTop from "./components/ScrollToTop";
 import BackToTop from "./components/BackToTop";
 import LoadingScreen from "./components/LoadingScreen";
-
+import Roadmap from "./pages/Roadmap";
 import { useTheme } from "./context/ThemeContext";
 import { useState, useEffect } from "react";
 
@@ -86,6 +86,10 @@ function App() {
             element={<Home />}
           />
 
+<Route 
+  path="/roadmap/:career" 
+  element={<Roadmap />} 
+/>
 
           <Route
             path="/python"
