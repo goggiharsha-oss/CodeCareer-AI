@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { Search } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 import { playClick } from "../utils/playClick";
