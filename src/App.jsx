@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import CareerQuiz from "./pages/CareerQuiz";
 import ScrollToTop from "./components/ScrollToTop";
 import BackToTop from "./components/BackToTop";
 import LoadingScreen from "./components/LoadingScreen";
@@ -164,7 +164,10 @@ function App() {
             element={<MobileDevelopment />}
           />
 
-
+<Route
+  path="/career-quiz"
+  element={<CareerQuiz />}
+/>
 
           <Route
             path="*"

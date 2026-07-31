@@ -377,7 +377,15 @@ and skills required for top software careers.
           >
             Compare Salaries
           </motion.a>
-
+<motion.a
+  href="/career-quiz"
+  onClick={playClick}
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+  className="rounded-xl bg-gradient-to-r from-violet-500 to-fuchsia-600 px-7 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105"
+>
+  🤖 Find My Career
+</motion.a>
         </div>
 
 
