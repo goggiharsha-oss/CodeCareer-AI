@@ -1,5 +1,13 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import ScrollToTop from "./components/ScrollToTop";
+import BackToTop from "./components/BackToTop";
+import LoadingScreen from "./components/LoadingScreen";
+
+import { useTheme } from "./context/ThemeContext";
+import { useState, useEffect } from "react";
+
+
 import Home from "./pages/Home";
 import Python from "./pages/Python";
 import Java from "./pages/Java";
@@ -7,7 +15,7 @@ import C from "./pages/C";
 import Cpp from "./pages/Cpp";
 import CSharp from "./pages/CSharp";
 import Javascript from "./pages/Javascript";
-import NotFound from "./pages/NotFound";
+
 import WebDevelopment from "./pages/WebDevelopment";
 import CyberSecurity from "./pages/CyberSecurity";
 import ArtificialIntelligence from "./pages/ArtificialIntelligence";
@@ -15,18 +23,16 @@ import DataScience from "./pages/DataScience";
 import CloudComputing from "./pages/CloudComputing";
 import MobileDevelopment from "./pages/MobileDevelopment";
 
-import { useTheme } from "./context/ThemeContext";
-import { useState, useEffect } from "react";
-
-import LoadingScreen from "./components/LoadingScreen";
-import BackToTop from "./components/BackToTop";
+import NotFound from "./pages/NotFound";
 
 
 function App() {
 
+
   const [loading, setLoading] = useState(true);
 
   const { darkMode } = useTheme();
+
 
 
   useEffect(() => {
@@ -38,41 +44,84 @@ function App() {
   }, []);
 
 
+
+
   if (loading) {
+
     return <LoadingScreen />;
+
   }
+
+
 
 
   return (
 
     <div
-      className={`min-h-screen transition-colors duration-500 ${
-        darkMode
-          ? "bg-slate-950 text-white"
-          : "bg-white text-slate-900"
-      }`}
+      className={`
+        min-h-screen
+        transition-colors
+        duration-500
+        ${
+          darkMode
+            ? "bg-slate-950 text-white"
+            : "bg-white text-slate-900"
+        }
+      `}
     >
+
 
       <BrowserRouter>
 
+
+        <ScrollToTop />
+
+
+
         <Routes>
 
-          <Route path="/" element={<Home />} />
 
-          <Route path="/python" element={<Python />} />
+          <Route
+            path="/"
+            element={<Home />}
+          />
 
-          <Route path="/java" element={<Java />} />
 
-          <Route path="/c" element={<C />} />
+          <Route
+            path="/python"
+            element={<Python />}
+          />
 
-          <Route path="/cpp" element={<Cpp />} />
 
-          <Route path="/csharp" element={<CSharp />} />
+          <Route
+            path="/java"
+            element={<Java />}
+          />
+
+
+          <Route
+            path="/c"
+            element={<C />}
+          />
+
+
+          <Route
+            path="/cpp"
+            element={<Cpp />}
+          />
+
+
+          <Route
+            path="/csharp"
+            element={<CSharp />}
+          />
+
 
           <Route
             path="/javascript"
             element={<Javascript />}
           />
+
 
 
           <Route
@@ -81,10 +130,12 @@ function App() {
           />
 
 
+
           <Route
             path="/cyber-security"
             element={<CyberSecurity />}
           />
+
 
 
           <Route
@@ -93,10 +144,12 @@ function App() {
           />
 
 
+
           <Route
             path="/data-science"
             element={<DataScience />}
           />
+
 
 
           <Route
@@ -105,28 +158,38 @@ function App() {
           />
 
 
-         <Route
-  path="/mobile-development"
-  element={<MobileDevelopment />}
-/>
 
-<Route
-  path="*"
-  element={<NotFound />}
-/>
+          <Route
+            path="/mobile-development"
+            element={<MobileDevelopment />}
+          />
+
+
+
+          <Route
+            path="*"
+            element={<NotFound />}
+          />
+
 
         </Routes>
+
+
 
 
         <BackToTop />
 
 
+
       </BrowserRouter>
+
 
     </div>
 
   );
+
 }
+
 
 
 export default App;
