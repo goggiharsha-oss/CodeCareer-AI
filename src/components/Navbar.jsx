@@ -23,9 +23,35 @@ function Navbar() {
       backdrop-blur-xl
       bg-white/20 dark:bg-black/30
       border-b border-white/20
-      shadow-lg
-      "
+     shadow-lg
+overflow-hidden
+"
     >
+      {/* Animated Background Glow */}
+
+<motion.div
+
+  animate={{
+    x:[-100,100,-100],
+    opacity:[0.2,0.5,0.2]
+  }}
+
+  transition={{
+    duration:8,
+    repeat:Infinity
+  }}
+
+  className="
+  absolute
+  -top-20
+  left-1/2
+  w-72
+  h-72
+  bg-cyan-400
+  blur-3xl
+  rounded-full
+  "
+/>
 
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
@@ -158,20 +184,30 @@ function Navbar() {
 
           {navItems.map((item) => (
 
-            <a
-              key={item.name}
-              href={item.path}
-              onClick={() => setOpen(false)}
-              className="
-              text-lg
-              text-gray-800
-              dark:text-gray-200
-              "
-            >
+           <motion.a
+  key={item.name}
+  href={item.path}
+
+  whileHover={{
+    y:-3,
+    scale:1.05
+  }}
+
+  transition={{
+    duration:0.2
+  }}
+
+  className="
+  relative
+  text-gray-700 dark:text-gray-200
+  font-medium
+  group
+  "
+>
 
               {item.name}
 
-            </a>
+            </motion.a>
 
           ))}
 
