@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import PremiumCard from "../components/PremiumCard";
-
 
 function ArtificialIntelligence() {
 
@@ -15,22 +13,54 @@ function ArtificialIntelligence() {
     "NumPy",
     "Pandas",
     "Data Visualization",
+    "Statistics",
     "Mathematics",
-    "Problem Solving",
   ];
 
 
   const roadmap = [
-    "Learn Python",
+    "Learn Python Fundamentals",
     "Master Mathematics & Statistics",
-    "Learn Machine Learning",
+    "Learn Machine Learning Algorithms",
     "Study Deep Learning",
     "Practice TensorFlow & PyTorch",
-    "Build AI Projects",
     "Learn NLP & Computer Vision",
+    "Build AI Projects",
     "Create AI Portfolio",
+    "Deploy AI Models",
     "Apply for AI Jobs",
   ];
+
+
+
+  const certifications = [
+    "TensorFlow Developer Certificate",
+    "AWS Machine Learning Certification",
+    "Microsoft Azure AI Engineer",
+    "Google Cloud AI Engineer",
+  ];
+
+
+
+  const tools = [
+    "TensorFlow",
+    "PyTorch",
+    "Jupyter Notebook",
+    "OpenCV",
+    "Keras",
+    "Scikit Learn",
+  ];
+
+
+
+  const projects = [
+    "AI Chatbot",
+    "Image Recognition System",
+    "Recommendation System",
+    "Voice Assistant",
+    "AI Prediction Model",
+  ];
+
 
 
   const companies = [
@@ -39,105 +69,178 @@ function ArtificialIntelligence() {
     "OpenAI",
     "Amazon",
     "NVIDIA",
+    "IBM",
     "Infosys",
-    "TCS",
     "Accenture",
   ];
 
 
+
   const jobRoles = [
-    "AI Engineer",
-    "Machine Learning Engineer",
-    "Deep Learning Engineer",
-    "NLP Engineer",
-    "Computer Vision Engineer",
-    "Research Engineer",
+    {
+      role:"AI Engineer",
+      salary:"₹6–15 LPA",
+      desc:"Build intelligent applications using AI technologies."
+    },
+    {
+      role:"Machine Learning Engineer",
+      salary:"₹8–20 LPA",
+      desc:"Develop and deploy machine learning models."
+    },
+    {
+      role:"Deep Learning Engineer",
+      salary:"₹10–25 LPA",
+      desc:"Create neural network based solutions."
+    },
+    {
+      role:"NLP Engineer",
+      salary:"₹8–18 LPA",
+      desc:"Build language processing AI systems."
+    }
   ];
+
 
 
 
   return (
 
-    <motion.div
-
-      initial={{
-        opacity:0
-      }}
-
-      animate={{
-        opacity:1
-      }}
-
-      transition={{
-        duration:0.8
-      }}
-
-      className="min-h-screen bg-slate-950 text-white"
-
-    >
+    <div className="min-h-screen bg-slate-950 text-white">
 
 
 
-      {/* Header */}
+      {/* HERO SECTION */}
 
 
-      <div className="bg-slate-900 border-b border-slate-800">
+      <div
+        className="
+        bg-gradient-to-br
+        from-slate-900
+        via-purple-950
+        to-slate-950
+        border-b
+        border-slate-800
+        "
+      >
 
 
-        <div className="max-w-7xl mx-auto px-6 py-8">
+        <div className="max-w-7xl mx-auto px-6 py-16">
 
 
           <Link
-
             to="/"
-
             className="text-cyan-400 hover:text-cyan-300"
-
           >
-
             ← Back to Home
-
           </Link>
 
 
 
 
-          <motion.h1
-
-
-            initial={{
-              opacity:0,
-              y:50
-            }}
-
-
-            animate={{
-              opacity:1,
-              y:0
-            }}
-
-
-            transition={{
-              duration:0.8
-            }}
-
-
-            className="text-5xl font-bold mt-6"
-
-          >
-
-            🤖 Artificial Intelligence
-
-          </motion.h1>
+          <div className="grid md:grid-cols-2 gap-10 items-center mt-10">
 
 
 
+            <div>
 
-          <p className="text-gray-400 mt-4 text-lg">
 
-            Build intelligent systems using Machine Learning and Deep Learning.
+              <motion.h1
 
-          </p>
+                initial={{
+                  opacity:0,
+                  x:-50
+                }}
+
+                animate={{
+                  opacity:1,
+                  x:0
+                }}
+
+                transition={{
+                  duration:0.7
+                }}
+
+                className="text-5xl font-bold"
+
+              >
+
+                🤖 Artificial Intelligence
+
+              </motion.h1>
+
+
+
+
+              <motion.p
+
+                initial={{
+                  opacity:0
+                }}
+
+                animate={{
+                  opacity:1
+                }}
+
+                transition={{
+                  delay:0.4
+                }}
+
+                className="text-gray-400 text-lg mt-6"
+
+              >
+
+                Build intelligent systems using Machine Learning,
+                Deep Learning and modern AI technologies used by
+                top companies worldwide.
+
+              </motion.p>
+
+
+
+            </div>
+
+
+
+
+
+            {/* 3D AI CARD */}
+
+
+            <motion.div
+
+              animate={{
+                y:[0,-20,0],
+                rotate:[0,8,-8,0]
+              }}
+
+              transition={{
+                duration:4,
+                repeat:Infinity
+              }}
+
+
+              className="
+              h-72
+              rounded-3xl
+              bg-gradient-to-br
+              from-purple-500
+              to-cyan-600
+              flex
+              items-center
+              justify-center
+              text-8xl
+              shadow-2xl
+              shadow-purple-500/30
+              "
+
+            >
+
+              🧠
+
+            </motion.div>
+
+
+
+          </div>
 
 
 
@@ -150,23 +253,40 @@ function ArtificialIntelligence() {
 
 
 
+
+
+      {/* SALARY SECTION */}
+
+
+
       <div className="max-w-7xl mx-auto px-6 py-12">
 
 
+        <motion.div
+
+          initial={{
+            opacity:0,
+            y:50
+          }}
+
+          whileInView={{
+            opacity:1,
+            y:0
+          }}
 
 
+          className="
+          bg-slate-900
+          rounded-3xl
+          p-8
+          "
 
-        {/* Salary */}
+        >
 
-
-
-        <section className="bg-slate-900 rounded-3xl p-8 mb-8">
 
 
           <h2 className="text-3xl font-bold text-cyan-400">
-
-            💰 Salary
-
+            💰 AI Engineer Salary
           </h2>
 
 
@@ -175,401 +295,491 @@ function ArtificialIntelligence() {
           <div className="grid md:grid-cols-3 gap-6 mt-8">
 
 
-
-            <PremiumCard className="p-6 text-center">
-
-
-              <h3 className="font-bold">
-
-                Fresher
-
-              </h3>
-
-
-              <p className="text-3xl text-green-400 mt-3">
-
-                ₹6–10 LPA
-
-              </p>
-
-
-            </PremiumCard>
-
-
-
-
-
-            <PremiumCard className="p-6 text-center">
-
-
-              <h3 className="font-bold">
-
-                Experienced
-
-              </h3>
-
-
-              <p className="text-3xl text-yellow-400 mt-3">
-
-                ₹15–25 LPA
-
-              </p>
-
-
-            </PremiumCard>
-
-
-
-
-
-            <PremiumCard className="p-6 text-center">
-
-
-              <h3 className="font-bold">
-
-                Senior
-
-              </h3>
-
-
-              <p className="text-3xl text-cyan-400 mt-3">
-
-                ₹35+ LPA
-
-              </p>
-
-
-            </PremiumCard>
-
-
-
-          </div>
-
-
-        </section>
-        
-        {/* Skills */}
-
-
-        <section className="bg-slate-900 rounded-3xl p-8 mb-8">
-
-
-          <h2 className="text-3xl font-bold text-cyan-400 mb-6">
-
-            🛠 Skills Required
-
-          </h2>
-
-
-
-
-          <div className="grid md:grid-cols-2 gap-5">
-
-
-            {skills.map((skill,index)=>(
+          {
+            [
+              ["Fresher","₹6–10 LPA"],
+              ["Experienced","₹15–25 LPA"],
+              ["Senior","₹35+ LPA"]
+            ].map((item,index)=>(
 
 
               <motion.div
 
-
                 key={index}
 
-
-                initial={{
-                  opacity:0,
-                  x:-40
-                }}
-
-
-                whileInView={{
-                  opacity:1,
-                  x:0
-                }}
-
-
-                viewport={{
-                  once:true
-                }}
-
-
-                transition={{
-                  delay:index*0.1
-                }}
-
-
                 whileHover={{
-                  scale:1.05,
-                  rotateX:5,
-                  rotateY:5
+                  scale:1.08,
+                  rotateX:10,
+                  rotateY:10
                 }}
 
+                className="
+                bg-slate-800
+                rounded-2xl
+                p-8
+                text-center
+                border
+                border-slate-700
+                "
 
               >
 
 
-
-                <PremiumCard className="p-5">
-
-
-                  <motion.p
+                <h3 className="font-bold text-xl">
+                  {item[0]}
+                </h3>
 
 
-                    whileHover={{
-                      x:10
-                    }}
-
-
-                    className="font-semibold"
-
-                  >
-
-                    ✅ {skill}
-
-                  </motion.p>
-
-
-
-                </PremiumCard>
-
+                <p className="
+                text-4xl
+                text-cyan-400
+                mt-4
+                ">
+                  {item[1]}
+                </p>
 
 
               </motion.div>
 
 
-            ))}
-
+            ))
+          }
 
 
           </div>
 
 
-        </section>
 
+        </motion.div>
+                {/* SKILLS SECTION */}
 
+        <motion.div
 
+          initial={{
+            opacity:0,
+            y:50
+          }}
 
+          whileInView={{
+            opacity:1,
+            y:0
+          }}
 
+          className="
+          bg-slate-900
+          rounded-3xl
+          p-8
+          mt-8
+          "
 
+        >
 
-        {/* Roadmap */}
-
-
-
-        <section className="bg-slate-900 rounded-3xl p-8 mb-8">
-
-
-          <h2 className="text-3xl font-bold text-cyan-400 mb-6">
-
-            🗺 Learning Roadmap
-
+          <h2 className="text-3xl font-bold text-cyan-400 mb-8">
+            🛠 AI Skills Required
           </h2>
 
+
+          <div className="grid md:grid-cols-3 gap-6">
+
+
+            {
+              skills.map((skill,index)=>(
+
+
+                <motion.div
+
+                  key={index}
+
+                  whileHover={{
+                    scale:1.08,
+                    y:-10
+                  }}
+
+                  className="
+                  bg-slate-800
+                  rounded-2xl
+                  p-6
+                  border
+                  border-slate-700
+                  hover:border-cyan-400
+                  transition
+                  "
+
+                >
+
+                  <div className="text-3xl">
+                    🧠
+                  </div>
+
+
+                  <h3 className="font-semibold text-lg mt-4">
+                    {skill}
+                  </h3>
+
+
+                </motion.div>
+
+
+              ))
+            }
+
+
+          </div>
+
+
+        </motion.div>
+
+
+
+
+
+
+
+        {/* AI TOOLS */}
+
+
+        <motion.div
+
+          initial={{
+            opacity:0,
+            y:50
+          }}
+
+          whileInView={{
+            opacity:1,
+            y:0
+          }}
+
+          className="
+          bg-slate-900
+          rounded-3xl
+          p-8
+          mt-8
+          "
+
+        >
+
+
+          <h2 className="text-3xl font-bold text-cyan-400 mb-8">
+            ⚙️ AI Tools & Technologies
+          </h2>
+
+
+
+          <div className="grid md:grid-cols-3 gap-5">
+
+
+            {
+              tools.map((tool,index)=>(
+
+
+                <motion.div
+
+                  key={index}
+
+                  whileHover={{
+                    scale:1.1,
+                    rotateY:10
+                  }}
+
+                  className="
+                  bg-gradient-to-br
+                  from-slate-800
+                  to-slate-700
+                  rounded-xl
+                  p-6
+                  text-center
+                  font-semibold
+                  border
+                  border-slate-700
+                  "
+
+                >
+
+                  🚀 {tool}
+
+
+                </motion.div>
+
+
+              ))
+            }
+
+
+          </div>
+
+
+        </motion.div>
+
+
+
+
+
+
+
+
+        {/* AI PROJECTS */}
+
+
+
+        <motion.div
+
+          initial={{
+            opacity:0,
+            y:50
+          }}
+
+          whileInView={{
+            opacity:1,
+            y:0
+          }}
+
+          className="
+          bg-slate-900
+          rounded-3xl
+          p-8
+          mt-8
+          "
+
+        >
+
+
+          <h2 className="text-3xl font-bold text-cyan-400 mb-8">
+            🚀 AI Projects To Build
+          </h2>
+
+
+
+
+          <div className="grid md:grid-cols-3 gap-6">
+
+
+            {
+              projects.map((project,index)=>(
+
+
+                <motion.div
+
+                  key={index}
+
+                  whileHover={{
+                    scale:1.08,
+                    y:-8
+                  }}
+
+                  className="
+                  bg-slate-800
+                  rounded-2xl
+                  p-6
+                  border
+                  border-slate-700
+                  "
+
+                >
+
+                  <h3 className="font-bold text-lg">
+                    🤖 {project}
+                  </h3>
+
+
+                  <p className="text-gray-400 mt-3">
+                    Build this project to improve practical AI skills.
+                  </p>
+
+
+                </motion.div>
+
+
+              ))
+            }
+
+
+          </div>
+
+
+        </motion.div>
+                {/* AI ROADMAP */}
+
+        <motion.div
+
+          initial={{
+            opacity:0,
+            y:50
+          }}
+
+          whileInView={{
+            opacity:1,
+            y:0
+          }}
+
+          className="
+          bg-slate-900
+          rounded-3xl
+          p-8
+          mt-8
+          "
+
+        >
+
+          <h2 className="text-3xl font-bold text-cyan-400 mb-8">
+            🗺 AI Learning Roadmap
+          </h2>
 
 
 
           <div className="space-y-5">
 
 
-            {roadmap.map((step,index)=>(
+            {
+              roadmap.map((step,index)=>(
 
 
-              <motion.div
+                <motion.div
+
+                  key={index}
+
+                  initial={{
+                    opacity:0,
+                    x:-40
+                  }}
+
+                  whileInView={{
+                    opacity:1,
+                    x:0
+                  }}
+
+                  transition={{
+                    delay:index*0.1
+                  }}
+
+                  className="
+                  flex
+                  items-center
+                  gap-5
+                  bg-slate-800
+                  rounded-2xl
+                  p-5
+                  border
+                  border-slate-700
+                  "
+
+                >
 
 
-                key={index}
-
-
-                initial={{
-                  opacity:0,
-                  y:40
-                }}
-
-
-                whileInView={{
-                  opacity:1,
-                  y:0
-                }}
-
-
-                viewport={{
-                  once:true
-                }}
-
-
-                transition={{
-                  delay:index*0.12
-                }}
-
-
-                whileHover={{
-                  scale:1.03,
-                  x:10
-                }}
-
-
-              >
-
-
-
-                <PremiumCard className="p-5 flex items-center gap-4">
-
-
-
-                  <motion.div
-
-
-                    animate={{
-
-                      y:[0,-8,0]
-
-                    }}
-
-
-                    transition={{
-
-                      duration:2,
-
-                      repeat:Infinity,
-
-                      delay:index*0.2
-
-                    }}
-
-
-                    className="w-10 h-10 rounded-full bg-cyan-500 flex items-center justify-center font-bold"
-
+                  <div
+                    className="
+                    w-12
+                    h-12
+                    rounded-full
+                    bg-cyan-500
+                    flex
+                    items-center
+                    justify-center
+                    font-bold
+                    text-black
+                    "
                   >
 
                     {index+1}
 
-                  </motion.div>
+                  </div>
 
 
-
-
-                  <p className="font-semibold">
-
+                  <p className="text-lg">
                     {step}
-
                   </p>
 
 
+                </motion.div>
 
 
-                </PremiumCard>
-
-
-
-              </motion.div>
-
-
-
-            ))}
-
+              ))
+            }
 
 
           </div>
 
 
-
-        </section>
-        
-
-        {/* Job Roles */}
+        </motion.div>
 
 
-        <section className="bg-slate-900 rounded-3xl p-8 mb-8">
 
 
-          <h2 className="text-3xl font-bold text-cyan-400 mb-6">
 
-            💼 Job Roles
 
+
+        {/* CERTIFICATIONS */}
+
+
+
+        <motion.div
+
+          initial={{
+            opacity:0,
+            y:50
+          }}
+
+          whileInView={{
+            opacity:1,
+            y:0
+          }}
+
+          className="
+          bg-slate-900
+          rounded-3xl
+          p-8
+          mt-8
+          "
+
+        >
+
+
+          <h2 className="text-3xl font-bold text-cyan-400 mb-8">
+            🎓 AI Certifications
           </h2>
-
 
 
 
           <div className="grid md:grid-cols-2 gap-6">
 
 
-            {jobRoles.map((role,index)=>(
+            {
+              certifications.map((cert,index)=>(
 
 
-              <motion.div
+                <motion.div
+
+                  key={index}
+
+                  whileHover={{
+                    scale:1.05,
+                    y:-8
+                  }}
+
+                  className="
+                  bg-slate-800
+                  rounded-2xl
+                  p-6
+                  border
+                  border-slate-700
+                  "
+
+                >
+
+                  🏆 {cert}
 
 
-                key={index}
+                </motion.div>
 
 
-                initial={{
-                  opacity:0,
-                  scale:0.8
-                }}
-
-
-                whileInView={{
-                  opacity:1,
-                  scale:1
-                }}
-
-
-                viewport={{
-                  once:true
-                }}
-
-
-                transition={{
-                  delay:index*0.15
-                }}
-
-
-                whileHover={{
-                  y:-10,
-                  scale:1.05
-                }}
-
-
-              >
-
-
-
-                <PremiumCard className="p-6">
-
-
-                  <motion.h3
-
-
-                    whileHover={{
-                      x:10
-                    }}
-
-
-                    className="text-xl font-bold"
-
-                  >
-
-                    🚀 {role}
-
-                  </motion.h3>
-
-
-
-                </PremiumCard>
-
-
-
-              </motion.div>
-
-
-            ))}
-
+              ))
+            }
 
 
           </div>
 
 
-        </section>
+        </motion.div>
 
 
 
@@ -577,134 +787,185 @@ function ArtificialIntelligence() {
 
 
 
-        {/* Companies */}
+
+        {/* JOB ROLES */}
 
 
 
-        <section className="bg-slate-900 rounded-3xl p-8">
+        <motion.div
+
+          initial={{
+            opacity:0,
+            y:50
+          }}
+
+          whileInView={{
+            opacity:1,
+            y:0
+          }}
+
+          className="
+          bg-slate-900
+          rounded-3xl
+          p-8
+          mt-8
+          "
+
+        >
 
 
-          <h2 className="text-3xl font-bold text-cyan-400 mb-6">
+          <h2 className="text-3xl font-bold text-cyan-400 mb-8">
+            💼 AI Career Opportunities
+          </h2>
 
-            🏢 Top Companies
 
+
+          <div className="grid md:grid-cols-2 gap-6">
+
+
+            {
+              jobRoles.map((job,index)=>(
+
+
+                <motion.div
+
+                  key={index}
+
+                  whileHover={{
+                    scale:1.05
+                  }}
+
+                  className="
+                  bg-slate-800
+                  rounded-2xl
+                  p-6
+                  border
+                  border-slate-700
+                  "
+
+                >
+
+
+                  <h3 className="text-xl font-bold">
+                    🚀 {job.role}
+                  </h3>
+
+
+                  <p className="text-gray-400 mt-3">
+                    {job.desc}
+                  </p>
+
+
+                  <p className="text-green-400 font-bold mt-4">
+                    {job.salary}
+                  </p>
+
+
+                </motion.div>
+
+
+              ))
+            }
+
+
+          </div>
+
+
+        </motion.div>
+
+
+
+
+
+
+
+        {/* TOP COMPANIES */}
+
+
+
+        <motion.div
+
+          initial={{
+            opacity:0,
+            y:50
+          }}
+
+          whileInView={{
+            opacity:1,
+            y:0
+          }}
+
+          className="
+          bg-slate-900
+          rounded-3xl
+          p-8
+          mt-8
+          "
+
+        >
+
+
+          <h2 className="text-3xl font-bold text-cyan-400 mb-8">
+            🏢 Top AI Companies
           </h2>
 
 
 
 
-
-          <div className="grid md:grid-cols-4 gap-6">
-
-
-            {companies.map((company,index)=>(
+          <div className="grid md:grid-cols-4 gap-5">
 
 
-              <motion.div
+            {
+              companies.map((company,index)=>(
 
 
-                key={index}
+                <motion.div
+
+                  key={index}
+
+                  whileHover={{
+                    scale:1.1,
+                    rotateY:10
+                  }}
+
+                  className="
+                  bg-slate-800
+                  rounded-xl
+                  p-6
+                  text-center
+                  font-semibold
+                  border
+                  border-slate-700
+                  hover:bg-cyan-600
+                  hover:border-cyan-400
+                  transition
+                  "
+
+                >
+
+                  {company}
 
 
-                initial={{
-                  opacity:0,
-                  rotateY:90
-                }}
+                </motion.div>
 
 
-                whileInView={{
-                  opacity:1,
-                  rotateY:0
-                }}
-
-
-                viewport={{
-                  once:true
-                }}
-
-
-                transition={{
-                  delay:index*0.1,
-                  duration:0.5
-                }}
-
-
-                whileHover={{
-                  scale:1.1,
-                  y:-8
-                }}
-
-
-              >
-
-
-
-                <PremiumCard className="p-6 text-center">
-
-
-                  <motion.div
-
-
-                    animate={{
-
-                      y:[0,-5,0]
-
-                    }}
-
-
-                    transition={{
-
-                      duration:2,
-
-                      repeat:Infinity,
-
-                      delay:index*0.2
-
-                    }}
-
-
-
-                    className="font-bold text-lg"
-
-                  >
-
-                    {company}
-
-                  </motion.div>
-
-
-
-                </PremiumCard>
-
-
-
-              </motion.div>
-
-
-
-            ))}
-
+              ))
+            }
 
 
           </div>
 
 
-
-        </section>
-
+        </motion.div>
 
 
 
 
       </div>
 
-
-
-    </motion.div>
-
+    </div>
 
   );
-
 }
 
 
