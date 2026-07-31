@@ -1,174 +1,234 @@
 import { motion } from "framer-motion";
 import { useTheme } from "../context/ThemeContext";
+import { TrendingUp } from "lucide-react";
 
 function SalaryComparison() {
   const { darkMode } = useTheme();
 
   const salaries = [
     {
-      name: "Python",
-      icon: "🐍",
-      salary: "₹3–6 LPA",
-      width: "75%",
-    },
-    {
-      name: "Java",
-      icon: "☕",
-      salary: "₹4–7 LPA",
-      width: "85%",
+      name: "JavaScript",
+      icon: "🟨",
+      salary: "₹4–9 LPA",
+      width: "95%",
+      rank: "1",
     },
     {
       name: "C++",
       icon: "⚙️",
       salary: "₹4–8 LPA",
       width: "90%",
+      rank: "2",
     },
     {
-      name: "JavaScript",
-      icon: "🟨",
-      salary: "₹4–9 LPA",
-      width: "95%",
+      name: "Java",
+      icon: "☕",
+      salary: "₹4–7 LPA",
+      width: "85%",
+      rank: "3",
+    },
+    {
+      name: "Python",
+      icon: "🐍",
+      salary: "₹3–6 LPA",
+      width: "75%",
+      rank: "4",
     },
   ];
+
 
   return (
     <section
       id="salary"
-      className={`py-20 px-6 transition-colors duration-500 ${
+      className={`py-24 px-6 transition-all duration-500 ${
         darkMode
           ? "bg-slate-950"
-          : "bg-gradient-to-b from-white via-slate-50 to-cyan-50"
+          : "bg-gradient-to-b from-cyan-50 via-white to-slate-100"
       }`}
     >
 
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-6xl mx-auto">
 
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className={`text-4xl font-bold text-center ${
-            darkMode ? "text-white" : "text-slate-900"
-          }`}
+
+        <motion.div
+          initial={{opacity:0,y:30}}
+          whileInView={{opacity:1,y:0}}
+          viewport={{once:true}}
+          className="text-center mb-14"
         >
-          Salary Comparison
-        </motion.h2>
+
+          <div className="flex justify-center mb-4">
+            <TrendingUp
+              size={45}
+              className="text-cyan-500"
+            />
+          </div>
 
 
-        <p
-          className={`text-center mt-3 mb-12 ${
-            darkMode
+          <h2
+            className={`text-4xl font-bold ${
+              darkMode
+              ? "text-white"
+              : "text-slate-900"
+            }`}
+          >
+            Salary Comparison
+          </h2>
+
+
+          <p
+            className={`mt-3 ${
+              darkMode
               ? "text-gray-400"
               : "text-slate-600"
-          }`}
-        >
-          Compare average fresher salaries across popular technologies
-        </p>
+            }`}
+          >
+            Average fresher salary comparison across programming languages
+          </p>
+
+        </motion.div>
 
 
 
-        <div className="space-y-8">
 
-          {salaries.map((item, index) => (
+        <div className="grid md:grid-cols-2 gap-8">
 
-            <motion.div
-              key={item.name}
-              initial={{
-                opacity: 0,
-                y: 30
-              }}
-              whileInView={{
-                opacity: 1,
-                y: 0
-              }}
-              viewport={{
-                once: true
-              }}
-              transition={{
-                duration: 0.5,
-                delay: index * 0.1
-              }}
-              whileHover={{
-                scale: 1.03
-              }}
-              className={`p-6 rounded-2xl transition-all duration-300 ${
+
+        {salaries.map((item,index)=>(
+
+
+          <motion.div
+            key={item.name}
+            initial={{
+              opacity:0,
+              y:40
+            }}
+            whileInView={{
+              opacity:1,
+              y:0
+            }}
+            viewport={{
+              once:true
+            }}
+            transition={{
+              delay:index*0.15
+            }}
+            whileHover={{
+              y:-8,
+              scale:1.03
+            }}
+
+            className={`
+            relative overflow-hidden
+            rounded-3xl p-7
+            backdrop-blur-xl
+            border
+            transition-all
+
+            ${
+              darkMode
+              ?
+              "bg-white/5 border-white/10 hover:shadow-cyan-500/20"
+              :
+              "bg-white/70 border-cyan-100 shadow-xl hover:shadow-cyan-200"
+            }
+            `}
+          >
+
+
+            {/* Rank */}
+            <div
+              className="
+              absolute top-4 right-5
+              w-9 h-9 rounded-full
+              bg-gradient-to-r from-cyan-400 to-blue-600
+              text-white
+              flex items-center justify-center
+              font-bold
+              "
+            >
+              {item.rank}
+            </div>
+
+
+
+            <div className="flex items-center gap-4 mb-6">
+
+              <span className="text-5xl">
+                {item.icon}
+              </span>
+
+
+              <div>
+
+                <h3
+                  className={`text-2xl font-bold ${
+                    darkMode
+                    ?"text-white"
+                    :"text-slate-900"
+                  }`}
+                >
+                  {item.name}
+                </h3>
+
+
+                <p className="text-cyan-500 font-bold text-lg">
+                  {item.salary}
+                </p>
+
+              </div>
+
+            </div>
+
+
+
+            <div
+              className={`h-4 rounded-full ${
                 darkMode
-                  ? "bg-slate-900 border border-slate-800"
-                  : "bg-white border border-cyan-100 shadow-lg hover:shadow-2xl"
+                ?"bg-slate-700"
+                :"bg-gray-200"
               }`}
             >
 
-              <div
-                className={`flex justify-between items-center mb-3 ${
-                  darkMode
-                    ? "text-white"
-                    : "text-slate-900"
-                }`}
-              >
+              <motion.div
+                initial={{
+                  width:0
+                }}
+                whileInView={{
+                  width:item.width
+                }}
+                viewport={{
+                  once:true
+                }}
+                transition={{
+                  duration:1
+                }}
+                className="
+                h-full rounded-full
+                bg-gradient-to-r
+                from-cyan-400
+                via-blue-500
+                to-purple-600
+                "
+              />
 
-                <div className="flex items-center gap-3">
-
-                  <motion.span
-                    whileHover={{
-                      scale: 1.2
-                    }}
-                    className="text-3xl"
-                  >
-                    {item.icon}
-                  </motion.span>
-
-
-                  <span className="text-xl font-semibold">
-                    {item.name}
-                  </span>
-
-                </div>
+            </div>
 
 
-                <span className="text-cyan-500 font-bold">
-                  {item.salary}
-                </span>
-
-              </div>
+          </motion.div>
 
 
-              <div
-                className={`w-full h-4 rounded-full ${
-                  darkMode
-                    ? "bg-slate-700"
-                    : "bg-gray-200"
-                }`}
-              >
+        ))}
 
-                <motion.div
-                  initial={{
-                    width: 0
-                  }}
-                  whileInView={{
-                    width: item.width
-                  }}
-                  viewport={{
-                    once: true
-                  }}
-                  transition={{
-                    duration: 1
-                  }}
-                  className="h-4 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600"
-                />
-
-              </div>
-
-            </motion.div>
-
-          ))}
 
         </div>
 
       </div>
 
+
     </section>
   );
 }
+
 
 export default SalaryComparison;
