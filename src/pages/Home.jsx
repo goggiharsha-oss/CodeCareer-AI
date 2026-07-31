@@ -43,9 +43,6 @@ function Home() {
 </section>
 
 
-<section id="salary" className="scroll-mt-24">
-  <SalaryComparison />
-</section>
 
 
       <section id="whychoose">
