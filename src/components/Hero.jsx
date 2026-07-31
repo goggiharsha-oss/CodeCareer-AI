@@ -47,6 +47,15 @@ const floatingShapes = [
   },
 ];
 
+const floatingIcons = [
+  { icon: "</>", top: "12%", left: "8%", delay: 0 },
+  { icon: "{ }", top: "20%", right: "10%", delay: 1 },
+  { icon: "⚛", bottom: "20%", left: "10%", delay: 2 },
+  { icon: "🐍", bottom: "12%", right: "15%", delay: 3 },
+  { icon: "☕", top: "55%", right: "6%", delay: 4 },
+  { icon: "💻", top: "40%", left: "4%", delay: 5 },
+];
+
 const suggestions = [
   {
     name: "Python",
@@ -161,7 +170,30 @@ export default function Hero({ search, setSearch }) {
   }`}
 />
 
-
+{floatingIcons.map((item, index) => (
+  <motion.div
+    key={index}
+    animate={{
+      y: [0, -20, 0],
+      rotate: [0, 10, -10, 0],
+      opacity: [0.08, 0.18, 0.08],
+    }}
+    transition={{
+      duration: 6,
+      repeat: Infinity,
+      delay: item.delay,
+    }}
+    style={{
+      top: item.top,
+      bottom: item.bottom,
+      left: item.left,
+      right: item.right,
+    }}
+    className="absolute hidden lg:block text-7xl pointer-events-none select-none"
+  >
+    {item.icon}
+  </motion.div>
+))}
       {pills.map((pill,index)=>(
         <motion.div
           key={index}
