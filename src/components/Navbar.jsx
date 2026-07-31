@@ -8,12 +8,11 @@ function Navbar() {
   const { darkMode, toggleTheme } = useTheme();
 
   const navItems = [
-    { name: "Home", path: "#home" },
-    { name: "Languages", path: "#languages" },
-    { name: "Careers", path: "#careers" },
-    { name: "Roadmaps", path: "#roadmaps" },
-  ];
-
+  { name: "Home", path: "#home" },
+  { name: "Languages", path: "#languages" },
+  { name: "Careers", path: "#careers" },
+  { name: "Salary", path: "#salary" },
+];
   return (
     <motion.nav
       initial={{ y: -80 }}
