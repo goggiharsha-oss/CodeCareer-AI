@@ -134,7 +134,35 @@ function SalaryComparison() {
             }
             `}
           >
+{/* Floating Background Icon */}
 
+<motion.div
+
+  animate={{
+    y:[0,-20,0],
+    rotate:[0,15,-15,0],
+    opacity:[0.08,0.16,0.08]
+  }}
+
+  transition={{
+    duration:6,
+    repeat:Infinity,
+    delay:index*0.4
+  }}
+
+  className="
+  absolute
+  -right-6
+  top-8
+  text-8xl
+  pointer-events-none
+  "
+
+>
+
+  {item.icon}
+
+</motion.div>
 
             {/* Rank */}
             <div
@@ -154,9 +182,20 @@ function SalaryComparison() {
 
             <div className="flex items-center gap-4 mb-6">
 
-              <span className="text-5xl">
-                {item.icon}
-              </span>
+             <motion.span
+
+  whileHover={{
+    scale:1.2,
+    rotate:12
+  }}
+
+  className="text-5xl"
+
+>
+
+  {item.icon}
+
+</motion.span>
 
 
               <div>
@@ -172,7 +211,7 @@ function SalaryComparison() {
                 </h3>
 
 
-                <p className="text-cyan-500 font-bold text-lg">
+                <p className="text-cyan-500 font-bold text-lg drop-shadow-[0_0_12px_rgba(34,211,238,0.6)]">
                   {item.salary}
                 </p>
 
