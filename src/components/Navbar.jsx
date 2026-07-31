@@ -1,100 +1,168 @@
-import { Moon, Sun } from "lucide-react";
+import { useState } from "react";
+import { Menu, X, Code2, Sun, Moon } from "lucide-react";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
 
 function Navbar() {
+  const [open, setOpen] = useState(false);
   const { darkMode, toggleTheme } = useTheme();
 
+  const navItems = [
+    { name: "Home", path: "/" },
+    { name: "Languages", path: "/languages" },
+    { name: "Careers", path: "/careers" },
+    { name: "Roadmaps", path: "/roadmaps" },
+  ];
+
   return (
-    <nav className="w-full bg-slate-900 text-white shadow-md sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-8 py-4">
+    <motion.nav
+      initial={{ y: -80 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="
+      fixed top-0 left-0 w-full z-50
+      backdrop-blur-xl
+      bg-white/20 dark:bg-black/30
+      border-b border-white/20
+      shadow-lg
+      "
+    >
+      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
         {/* Logo */}
-      <a
-  href="#top"
-  className="flex items-center gap-3 text-2xl font-bold text-cyan-400"
->
+        <Link to="/" className="flex items-center gap-3">
+          <motion.div
+            whileHover={{ rotate: 10, scale: 1.1 }}
+            className="
+            p-2 rounded-xl
+            bg-gradient-to-r from-cyan-400 to-blue-600
+            shadow-lg shadow-cyan-400/40
+            "
+          >
+            <Code2 className="text-white" size={28} />
+          </motion.div>
 
-  CodeCareer AI
-</a>
+          <h1 className="
+          text-2xl font-bold
+          bg-gradient-to-r from-cyan-400 to-blue-600
+          bg-clip-text text-transparent
+          ">
+            CodeCareer AI
+          </h1>
+        </Link>
 
 
-        {/* Menu */}
-        <ul className="flex items-center gap-8 text-lg">
+        {/* Desktop Menu */}
+        <div className="hidden md:flex items-center gap-8">
 
-          <li>
-            <a
-              href="#top"
-              className="relative hover:text-cyan-400 transition after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-cyan-400 hover:after:w-full after:transition-all"
+          {navItems.map((item) => (
+            <Link
+              key={item.name}
+              to={item.path}
+              className="
+              relative
+              text-gray-700 dark:text-gray-200
+              font-medium
+              group
+              "
             >
-              Home
-            </a>
-          </li>
+              {item.name}
 
-
-          <li>
-            <a
-              href="#languages"
-              className="relative hover:text-cyan-400 transition after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-cyan-400 hover:after:w-full after:transition-all"
-            >
-              Languages
-            </a>
-          </li>
-
-
-          <li>
-            <a
-              href="#careers"
-              className="relative hover:text-cyan-400 transition after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-cyan-400 hover:after:w-full after:transition-all"
-            >
-              Career Paths
-            </a>
-          </li>
-
-
-          <li>
-            <a
-              href="#salary"
-              className="relative hover:text-cyan-400 transition after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-cyan-400 hover:after:w-full after:transition-all"
-            >
-              Salary
-            </a>
-          </li>
-
-
-          <li>
-            <a
-              href="#salary"
-              className="relative hover:text-cyan-400 transition after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-cyan-400 hover:after:w-full after:transition-all"
-            >
-              Compare
-            </a>
-          </li>
+              <span
+                className="
+                absolute left-0 -bottom-1
+                w-0 h-[2px]
+                bg-cyan-400
+                transition-all
+                duration-300
+                group-hover:w-full
+                "
+              />
+            </Link>
+          ))}
 
 
           {/* Theme Button */}
-          <li>
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-full bg-slate-800 hover:bg-slate-700 transition hover:scale-110"
-            >
-              {darkMode ? (
-                <Sun
-                  size={22}
-                  className="text-yellow-400"
-                />
-              ) : (
-                <Moon
-                  size={22}
-                  className="text-cyan-400"
-                />
-              )}
-            </button>
-          </li>
+          <button
+            onClick={toggleTheme}
+            className="
+            p-2 rounded-full
+            bg-white/30 dark:bg-white/10
+            hover:scale-110
+            transition
+            "
+          >
+            {darkMode ? (
+              <Sun size={20} className="text-yellow-400"/>
+            ) : (
+              <Moon size={20}/>
+            )}
+          </button>
 
-        </ul>
+        </div>
+
+
+        {/* Mobile Button */}
+        <button
+          className="md:hidden"
+          onClick={() => setOpen(!open)}
+        >
+          {open ? (
+            <X size={28}/>
+          ) : (
+            <Menu size={28}/>
+          )}
+        </button>
 
       </div>
-    </nav>
+
+
+      {/* Mobile Menu */}
+      {open && (
+        <motion.div
+          initial={{opacity:0, y:-20}}
+          animate={{opacity:1, y:0}}
+          className="
+          md:hidden
+          px-6 pb-5
+          flex flex-col gap-5
+          bg-white/80
+          dark:bg-black/80
+          backdrop-blur-xl
+          "
+        >
+
+          {navItems.map((item)=>(
+            <Link
+              key={item.name}
+              to={item.path}
+              onClick={()=>setOpen(false)}
+              className="
+              text-lg
+              text-gray-800
+              dark:text-gray-200
+              "
+            >
+              {item.name}
+            </Link>
+          ))}
+
+
+          <button
+            onClick={toggleTheme}
+            className="
+            flex items-center gap-2
+            "
+          >
+            {darkMode ? <Sun/> : <Moon/>}
+            Theme
+          </button>
+
+        </motion.div>
+      )}
+
+    </motion.nav>
   );
 }
 
