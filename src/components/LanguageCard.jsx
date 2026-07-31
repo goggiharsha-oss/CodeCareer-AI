@@ -110,7 +110,34 @@ function LanguageCard({ search = "" }) {
 
                 {/* Hover Glow */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-cyan-500/10 via-blue-500/5 to-purple-500/10"></div>
+{/* Floating Background Logo */}
 
+<motion.div
+
+  animate={{
+    y:[0,-25,0],
+    rotate:[0,15,-15,0]
+  }}
+
+  transition={{
+    duration:6,
+    repeat:Infinity,
+    ease:"easeInOut"
+  }}
+
+  className="
+  absolute
+  -right-5
+  -top-5
+  text-[120px]
+  opacity-10
+  pointer-events-none
+  "
+>
+
+  {lang.icon}
+
+</motion.div>
                 {/* Icon */}
                 <div
                   className={`relative z-10 w-14 h-14 rounded-xl ${lang.color} flex items-center justify-center text-white font-bold text-xl transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6`}
