@@ -7,6 +7,7 @@ import { useState } from "react";
 const roadmapData = {
   "Web Development": {
     language: "JavaScript",
+    link: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
     steps: [
       "HTML & CSS Basics",
       "JavaScript Fundamentals",
@@ -19,6 +20,7 @@ const roadmapData = {
 
   "Artificial Intelligence": {
     language: "Python",
+    link: "https://www.python.org/about/gettingstarted/",
     steps: [
       "Python Basics",
       "Data Structures",
@@ -31,6 +33,7 @@ const roadmapData = {
 
   "Cyber Security": {
     language: "Python",
+    link: "https://www.kali.org/docs/",
     steps: [
       "Computer Networks",
       "Linux Basics",
@@ -43,6 +46,7 @@ const roadmapData = {
 
   "Data Science": {
     language: "Python",
+    link: "https://pandas.pydata.org/docs/",
     steps: [
       "Python Basics",
       "Statistics",
@@ -148,7 +152,46 @@ const progress =
     </div>
 
   </div>
+{progress === 100 && (
 
+  <motion.div
+    initial={{
+      opacity:0,
+      scale:0.8
+    }}
+    animate={{
+      opacity:1,
+      scale:1
+    }}
+    className="mt-8 rounded-3xl p-6 text-center border bg-cyan-500/10"
+  >
+
+    <div className="text-6xl">
+      🏆
+    </div>
+
+
+    <h2 className="text-3xl font-bold mt-4 text-cyan-400">
+      Roadmap Completed!
+    </h2>
+
+
+    <p className="mt-3">
+      Congratulations! You completed your {career} roadmap.
+    </p>
+
+
+    <button
+    onClick={() => window.open(roadmap.link, "_blank")}
+      className="mt-6 px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold hover:scale-105 transition"
+    >
+      🚀 Start Learning
+    </button>
+
+
+  </motion.div>
+
+)}
 
   <div className="space-y-5">
 
