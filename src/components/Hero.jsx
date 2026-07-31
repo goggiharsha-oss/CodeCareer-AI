@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Search } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 import { playClick } from "../utils/playClick";
+import { motion } from "framer-motion";
 
 
 const pills = [
@@ -26,7 +27,26 @@ const pills = [
     className: "bottom-8 right-20 text-orange-400",
   },
 ];
-
+const floatingShapes = [
+  {
+    size: "w-44 h-44",
+    color: "bg-cyan-500/20",
+    position: "-top-16 -left-10",
+    duration: 8,
+  },
+  {
+    size: "w-32 h-32",
+    color: "bg-purple-500/20",
+    position: "top-40 right-10",
+    duration: 6,
+  },
+  {
+    size: "w-56 h-56",
+    color: "bg-blue-500/10",
+    position: "bottom-0 left-1/3",
+    duration: 10,
+  },
+];
 
 const suggestions = [
   {
@@ -82,7 +102,22 @@ export default function Hero({ search, setSearch }) {
           : "bg-white text-slate-900"
       }`}
     >
-
+{floatingShapes.map((shape, index) => (
+  <motion.div
+    key={index}
+    animate={{
+      y: [0, -25, 0],
+      x: [0, 15, 0],
+      rotate: [0, 10, 0],
+    }}
+    transition={{
+      duration: shape.duration,
+      repeat: Infinity,
+      ease: "easeInOut",
+    }}
+    className={`absolute ${shape.position} ${shape.size} ${shape.color} rounded-full blur-3xl`}
+  />
+))}
 
       <motion.div
   animate={{
