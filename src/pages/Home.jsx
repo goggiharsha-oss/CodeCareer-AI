@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import LanguageCard from "../components/LanguageCard";
@@ -9,71 +10,64 @@ import SalaryComparison from "../components/SalaryComparison";
 import CareerDomains from "../components/CareerDomains";
 import AIAssistant from "../components/AIAssistant";
 
+
 function Home() {
+
   const [search, setSearch] = useState("");
 
+
   return (
+
     <>
-      <div id="home">
+
+      <div id="top">
+
         <Navbar />
 
         <Hero
           search={search}
           setSearch={setSearch}
         />
+
       </div>
 
 
-      <div id="home" className="scroll-mt-24">
-  <Navbar />
-  <Hero
-    search={search}
-    setSearch={setSearch}
-  />
-</div>
 
-
-<section id="languages" className="scroll-mt-24">
-  <LanguageCard search={search} />
-</section>
-
-
-<section id="careers" className="scroll-mt-24">
-  <CareerDomains search={search} />
-</section>
-
-
-
-
-      <section id="whychoose">
-        <WhyChoose />
+      <section id="languages">
+        <LanguageCard search={search} />
       </section>
 
 
-      <section id="careers">
-        <CareerDomains search={search} />
-      </section>
+
+      <WhyChoose />
 
 
-      <section id="statistics">
-        <Statistics />
-      </section>
+
+      <CareerDomains
+        search={search}
+      />
 
 
-      <section id="salary">
-        <SalaryComparison />
-      </section>
+
+      <Statistics />
 
 
-      <section id="ai">
-        <AIAssistant />
-      </section>
+
+      <SalaryComparison />
+
+
+
+      <AIAssistant />
+
 
 
       <Footer />
 
     </>
+
   );
+
 }
+
 
 export default Home;
