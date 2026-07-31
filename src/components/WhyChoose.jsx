@@ -144,7 +144,8 @@ function WhyChoose() {
 
 
               className={`
-              rounded-3xl
+                relative overflow-hidden
+                rounded-3xl
               p-8
               border
               backdrop-blur-xl
@@ -163,7 +164,37 @@ function WhyChoose() {
             >
 
 
+{/* Floating Background Icon */}
 
+<motion.div
+
+  animate={{
+    y:[0,-18,0],
+    rotate:[0,15,-15,0],
+    opacity:[0.06,0.15,0.06]
+  }}
+
+  transition={{
+    duration:6,
+    repeat:Infinity,
+    delay:index*0.4
+  }}
+
+  className="
+  absolute
+  -right-6
+  top-8
+  w-28
+  h-28
+  rounded-full
+  bg-gradient-to-br
+  from-cyan-500/20
+  to-blue-500/10
+  blur-2xl
+  pointer-events-none
+  "
+
+/>
 
 
               <motion.div
@@ -175,6 +206,7 @@ function WhyChoose() {
 
                 className="
                 w-16 h-16
+                shadow-[0_0_25px_rgba(34,211,238,0.35)]
                 rounded-2xl
                 flex items-center justify-center
 
