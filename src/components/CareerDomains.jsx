@@ -184,7 +184,34 @@ function CareerDomains({ search = "" }) {
               `}
             >
 
+{/* Floating Background Icon */}
 
+<motion.div
+
+  animate={{
+    y:[0,-25,0],
+    rotate:[0,15,-15,0]
+  }}
+
+  transition={{
+    duration:6,
+    repeat:Infinity,
+    ease:"easeInOut"
+  }}
+
+  className="
+  absolute
+  -right-6
+  -top-8
+  text-[140px]
+  opacity-10
+  pointer-events-none
+  "
+>
+
+  {domain.icon}
+
+</motion.div>
 
               {/* Icon */}
 
