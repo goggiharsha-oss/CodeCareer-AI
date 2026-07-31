@@ -121,7 +121,7 @@ function CareerQuiz() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className={`rounded-3xl p-10 text-center border shadow-2xl ${
+            className={`rounded-3xl p-12 text-center border shadow-2xl backdrop-blur-xl transition-all duration-500 ${
               darkMode
                 ? "bg-slate-900 border-cyan-500/20"
                 : "bg-white border-cyan-200"
@@ -271,9 +271,18 @@ function CareerQuiz() {
 }`}
           >
 
-            <div className="text-7xl mb-6">
-              🤖
-            </div>
+            <motion.div
+  animate={{
+    y:[0,-15,0]
+  }}
+  transition={{
+    duration:2,
+    repeat:Infinity
+  }}
+  className="text-7xl mb-6"
+>
+  🤖
+</motion.div>
 
 
             <h1 className="text-4xl font-bold text-cyan-400">
@@ -305,16 +314,16 @@ function CareerQuiz() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className={`rounded-3xl p-10 border shadow-2xl ${
+            className={`rounded-3xl p-10 border shadow-2xl backdrop-blur-xl ${
               darkMode
                 ? "bg-slate-900/80 border-cyan-500/20"
                 : "bg-white/90 border-cyan-200"
             }`}
           >
 
-            <p className="text-cyan-400 font-semibold mb-4">
-              Question {currentQuestion + 1} of {questions.length}
-            </p>
+            <div className="inline-flex rounded-full bg-cyan-500/10 px-5 py-2 mb-6 text-cyan-400 font-semibold">
+  Question {currentQuestion + 1} / {questions.length}
+</div>
 
 
             <h2 className="text-3xl font-bold mb-8">
@@ -327,8 +336,15 @@ function CareerQuiz() {
               {questions[currentQuestion].options.map(
                 (option, index) => (
 
-                <button
+                <motion.button
                   key={index}
+                  whileHover={{
+  scale:1.03
+}}
+
+whileTap={{
+  scale:0.97
+}}
                   onClick={() =>
                     setSelectedAnswer(option.career)
                   }
@@ -341,14 +357,14 @@ function CareerQuiz() {
                   }`}
                 >
                   {option.text}
-                </button>
+                </motion.button>
 
               ))}
 
             </div>
 
 
-            <button
+            <motion.button
               onClick={handleNext}
               className="mt-8 w-full rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 py-4 text-white font-semibold hover:scale-105 transition"
             >
@@ -357,7 +373,7 @@ function CareerQuiz() {
                 ? "Finish Quiz 🎉"
                 : "Next →"}
 
-            </button>
+            </motion.button>
 
 
           </motion.div>
