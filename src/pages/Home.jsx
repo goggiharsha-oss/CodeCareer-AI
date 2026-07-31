@@ -24,9 +24,28 @@ function Home() {
       </div>
 
 
-      <section id="languages">
-        <LanguageCard search={search} />
-      </section>
+      <div id="home" className="scroll-mt-24">
+  <Navbar />
+  <Hero
+    search={search}
+    setSearch={setSearch}
+  />
+</div>
+
+
+<section id="languages" className="scroll-mt-24">
+  <LanguageCard search={search} />
+</section>
+
+
+<section id="careers" className="scroll-mt-24">
+  <CareerDomains search={search} />
+</section>
+
+
+<section id="salary" className="scroll-mt-24">
+  <SalaryComparison />
+</section>
 
 
       <section id="whychoose">
