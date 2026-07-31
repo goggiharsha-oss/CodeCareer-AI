@@ -8,7 +8,7 @@ function Navbar() {
   const { darkMode, toggleTheme } = useTheme();
 
   const navItems = [
-  { name: "Home", path: "#home" },
+ { name: "Home", path: "#top" },
   { name: "Languages", path: "#languages" },
   { name: "Careers", path: "#careers" },
   { name: "Salary", path: "#salary" },
@@ -178,11 +178,13 @@ function Navbar() {
 
 
           <button
-            onClick={toggleTheme}
-            className="
-            flex items-center gap-2
-            "
-          >
+  onClick={toggleTheme}
+  className="
+  flex items-center gap-2
+  text-gray-800
+  dark:text-gray-200
+  "
+>
 
             {darkMode ? <Sun /> : <Moon />}
             Theme
