@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { CheckCircle } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const roadmapData = {
   "Web Development": {
@@ -63,7 +63,18 @@ function Roadmap() {
 
   const { darkMode } = useTheme();
   const { career } = useParams();
-const [completedSteps, setCompletedSteps] = useState([]);
+const [completedSteps, setCompletedSteps] = useState(() => {
+
+  const saved =
+    localStorage.getItem(
+      `${career}-progress`
+    );
+
+  return saved
+    ? JSON.parse(saved)
+    : [];
+
+});
   const roadmap = roadmapData[career];
   const toggleStep = (index) => {
 
@@ -85,6 +96,14 @@ const [completedSteps, setCompletedSteps] = useState([]);
   }
 
 };
+useEffect(() => {
+
+  localStorage.setItem(
+    `${career}-progress`,
+    JSON.stringify(completedSteps)
+  );
+
+}, [completedSteps, career]);
 const progress =
   Math.round(
     (completedSteps.length / roadmap.steps.length) * 100
@@ -112,17 +131,68 @@ const progress =
           }`}
         >
 
-          <h1 className="text-4xl font-bold text-cyan-400">
-            🚀 {career} Roadmap
-          </h1>
+         <motion.div
+  initial={{
+    opacity:0,
+    y:-30
+  }}
+  animate={{
+    opacity:1,
+    y:0
+  }}
+  className="mb-10"
+>
+
+  <h1 className="text-5xl font-extrabold bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
+    🚀 {career}
+  </h1>
+
+  <p className="mt-3 text-2xl font-semibold">
+    Career Roadmap
+  </p>
 
 
-          <p className="mt-4 text-xl">
-            Recommended Language:
-            <span className="font-bold">
-              {" "}{roadmap.language}
-            </span>
-          </p>
+  <div className="mt-6 grid md:grid-cols-2 gap-5">
+
+
+    <div className={`rounded-2xl p-6 border ${
+      darkMode
+      ? "bg-slate-800 border-slate-700"
+      : "bg-white border-gray-200"
+    }`}>
+
+      <p className="text-cyan-400 font-semibold">
+        💻 Recommended Language
+      </p>
+
+      <h2 className="text-3xl font-bold mt-2">
+        {roadmap.language}
+      </h2>
+
+    </div>
+
+
+    <div className={`rounded-2xl p-6 border ${
+      darkMode
+      ? "bg-slate-800 border-slate-700"
+      : "bg-white border-gray-200"
+    }`}>
+
+      <p className="text-cyan-400 font-semibold">
+        🎯 Total Steps
+      </p>
+
+      <h2 className="text-3xl font-bold mt-2">
+        {roadmap.steps.length}
+      </h2>
+
+    </div>
+
+
+  </div>
+
+
+</motion.div>
 
 
           <div className="mt-10">
@@ -163,29 +233,62 @@ const progress =
       opacity:1,
       scale:1
     }}
-    className="mt-8 rounded-3xl p-6 text-center border bg-cyan-500/10"
+    transition={{
+      duration:0.5
+    }}
+    className={`mt-10 rounded-3xl p-8 text-center border shadow-xl ${
+      darkMode
+        ? "bg-slate-800 border-cyan-500/30"
+        : "bg-white border-cyan-200"
+    }`}
   >
 
-    <div className="text-6xl">
+    <motion.div
+      animate={{
+        rotate:[0,10,-10,0]
+      }}
+      transition={{
+        duration:2,
+        repeat:Infinity
+      }}
+      className="text-7xl"
+    >
       🏆
-    </div>
+    </motion.div>
 
 
-    <h2 className="text-3xl font-bold mt-4 text-cyan-400">
-      Roadmap Completed!
+    <h2 className="mt-5 text-4xl font-extrabold text-cyan-400">
+      Achievement Unlocked!
     </h2>
 
 
-    <p className="mt-3">
-      Congratulations! You completed your {career} roadmap.
+    <p className="mt-3 text-xl font-semibold">
+      {career} Roadmap Completed 🎉
     </p>
 
 
+    <div className="mt-6 rounded-2xl bg-cyan-500/10 p-5">
+
+      <p className="text-sm text-cyan-400">
+        Certificate
+      </p>
+
+      <h3 className="text-2xl font-bold mt-2">
+        CodeCareer AI Certified
+      </h3>
+
+      <p className="mt-2">
+        Successfully completed the learning roadmap.
+      </p>
+
+    </div>
+
+
     <button
-    onClick={() => window.open(roadmap.link, "_blank")}
-      className="mt-6 px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold hover:scale-105 transition"
+      onClick={() => window.print()}
+      className="mt-8 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-8 py-4 text-white font-bold hover:scale-105 transition"
     >
-      🚀 Start Learning
+      🖨️ Print Certificate
     </button>
 
 
@@ -193,7 +296,13 @@ const progress =
 
 )}
 
-  <div className="space-y-5">
+  <div className="relative mt-10">
+
+  <div className="absolute left-5 top-0 h-full w-1 bg-cyan-500/30">
+  </div>
+
+
+  <div className="space-y-8">
 
     {roadmap.steps.map((step,index)=>(
 
@@ -202,7 +311,7 @@ const progress =
         onClick={() => toggleStep(index)}
         initial={{
           opacity:0,
-          x:-30
+          x:-40
         }}
         animate={{
           opacity:1,
@@ -211,27 +320,44 @@ const progress =
         transition={{
           delay:index * 0.15
         }}
-        className={`flex items-center gap-5 rounded-2xl border p-5 transition hover:scale-[1.02] ${
+        whileHover={{
+          scale:1.03
+        }}
+        className={`relative flex items-center gap-6 cursor-pointer rounded-3xl p-6 border backdrop-blur-xl ${
           darkMode
-          ? "bg-slate-800 border-slate-700 hover:border-cyan-500"
-          : "bg-white border-gray-200 hover:border-cyan-500"
+          ? "bg-slate-800/80 border-slate-700"
+          : "bg-white/80 border-gray-200"
         }`}
       >
 
-        <CheckCircle
-          className="text-cyan-500"
-          size={32}
-        />
+
+        <div
+          className={`z-10 flex h-12 w-12 items-center justify-center rounded-full font-bold text-white ${
+            completedSteps.includes(index)
+            ? "bg-green-500"
+            : "bg-cyan-500"
+          }`}
+        >
+          {completedSteps.includes(index)
+            ? "✓"
+            : index + 1}
+        </div>
 
 
         <div>
 
           <p className="text-sm text-cyan-400">
-            Step {index+1}
+            Level {index + 1}
           </p>
 
-          <p className="text-lg font-bold">
+
+          <h3 className="text-xl font-bold">
             {step}
+          </h3>
+
+
+          <p className="text-sm mt-1 opacity-70">
+            Click to mark as completed
           </p>
 
         </div>
@@ -243,6 +369,7 @@ const progress =
 
   </div>
 
+</div>
 </div>
 
 
