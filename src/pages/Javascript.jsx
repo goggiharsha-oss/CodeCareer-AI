@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import PremiumCard from "../components/PremiumCard";
+
 
 function Javascript() {
+
   const skills = [
     "JavaScript Basics",
     "Variables & Functions",
@@ -13,6 +17,7 @@ function Javascript() {
     "Express.js",
     "Git & GitHub",
   ];
+
 
   const roadmap = [
     "Learn JavaScript Fundamentals",
@@ -27,6 +32,7 @@ function Javascript() {
     "Prepare for Interviews",
   ];
 
+
   const companies = [
     "Google",
     "Microsoft",
@@ -38,213 +44,627 @@ function Javascript() {
     "Accenture",
   ];
 
+
   const careers = [
     {
-      role: "Frontend Developer",
-      salary: "₹4–10 LPA",
-      desc: "Create interactive websites and user interfaces using JavaScript and React.",
+      role:"Frontend Developer",
+      salary:"₹4–10 LPA",
+      desc:"Create interactive websites and user interfaces using JavaScript and React.",
     },
+
     {
-      role: "Full Stack Developer",
-      salary: "₹6–15 LPA",
-      desc: "Develop complete web applications using frontend and backend technologies.",
+      role:"Full Stack Developer",
+      salary:"₹6–15 LPA",
+      desc:"Develop complete web applications using frontend and backend technologies.",
     },
+
     {
-      role: "Node.js Developer",
-      salary: "₹5–12 LPA",
-      desc: "Build scalable backend applications using Node.js and Express.",
+      role:"Node.js Developer",
+      salary:"₹5–12 LPA",
+      desc:"Build scalable backend applications using Node.js and Express.",
     },
+
     {
-      role: "Web Application Developer",
-      salary: "₹4–10 LPA",
-      desc: "Develop modern web applications and digital solutions.",
+      role:"Web Application Developer",
+      salary:"₹4–10 LPA",
+      desc:"Develop modern web applications and digital solutions.",
     },
   ];
 
+
+
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
+
+    <motion.div
+
+      initial={{
+        opacity:0
+      }}
+
+      animate={{
+        opacity:1
+      }}
+
+      transition={{
+        duration:0.8
+      }}
+
+      className="min-h-screen bg-slate-950 text-white"
+
+    >
+
+
 
       {/* Header */}
+
       <div className="bg-slate-900 border-b border-slate-800">
+
+
         <div className="max-w-7xl mx-auto px-6 py-8">
+
 
           <Link
             to="/"
             className="text-cyan-400 hover:text-cyan-300"
           >
+
             ← Back to Home
+
           </Link>
 
-          <h1 className="text-5xl font-bold mt-6">
+
+
+
+          <motion.h1
+
+            initial={{
+              opacity:0,
+              y:50
+            }}
+
+            animate={{
+              opacity:1,
+              y:0
+            }}
+
+            transition={{
+              duration:0.8
+            }}
+
+            className="text-5xl font-bold mt-6"
+
+          >
+
             🟨 JavaScript Programming
-          </h1>
+
+          </motion.h1>
+
+
+
 
           <p className="text-gray-400 mt-4 text-lg">
+
             JavaScript is a popular programming language used for web
             development, frontend applications, backend development,
             mobile apps and modern software solutions.
+
           </p>
 
+
+
         </div>
+
       </div>
+
+
+
 
 
       <div className="max-w-7xl mx-auto px-6 py-12">
 
+
+
         {/* Salary */}
-        <div className="bg-slate-900 rounded-2xl p-8 mb-8">
+
+
+        <section className="bg-slate-900 rounded-3xl p-8 mb-8">
+
 
           <h2 className="text-3xl font-bold text-cyan-400">
+
             💰 Salary
+
           </h2>
+
+
 
           <div className="grid md:grid-cols-3 gap-6 mt-8">
 
-            <div className="bg-slate-800 p-6 rounded-xl">
-              <h3 className="font-bold">Fresher</h3>
+
+
+            <PremiumCard className="p-6">
+
+              <h3 className="font-bold">
+                Fresher
+              </h3>
+
               <p className="text-3xl text-green-400 mt-3">
                 ₹4–9 LPA
               </p>
-            </div>
 
-            <div className="bg-slate-800 p-6 rounded-xl">
-              <h3 className="font-bold">Experienced</h3>
+            </PremiumCard>
+
+
+
+
+            <PremiumCard className="p-6">
+
+              <h3 className="font-bold">
+                Experienced
+              </h3>
+
               <p className="text-3xl text-yellow-400 mt-3">
                 ₹10–20 LPA
               </p>
-            </div>
 
-            <div className="bg-slate-800 p-6 rounded-xl">
-              <h3 className="font-bold">Senior</h3>
+            </PremiumCard>
+
+
+
+
+            <PremiumCard className="p-6">
+
+              <h3 className="font-bold">
+                Senior
+              </h3>
+
               <p className="text-3xl text-cyan-400 mt-3">
                 ₹25+ LPA
               </p>
-            </div>
+
+            </PremiumCard>
+
+
 
           </div>
-        </div>
 
 
-        {/* Skills */}
-        <div className="bg-slate-900 rounded-2xl p-8 mb-8">
+        </section>
+                {/* Skills */}
+
+
+        <section className="bg-slate-900 rounded-3xl p-8 mb-8">
+
 
           <h2 className="text-3xl font-bold text-cyan-400">
+
             🛠 Skills Required
+
           </h2>
 
-          <div className="flex flex-wrap gap-3 mt-6">
 
-            {skills.map((skill) => (
-              <span
+
+
+          <div className="flex flex-wrap gap-4 mt-8">
+
+
+            {skills.map((skill,index)=>(
+
+
+              <motion.div
+
                 key={skill}
-                className="bg-cyan-500/20 text-cyan-300 px-4 py-2 rounded-full"
+
+
+                initial={{
+                  opacity:0,
+                  scale:0.5
+                }}
+
+
+                whileInView={{
+                  opacity:1,
+                  scale:1
+                }}
+
+
+                viewport={{
+                  once:true
+                }}
+
+
+                transition={{
+                  delay:index*0.05
+                }}
+
+
+                whileHover={{
+                  scale:1.15,
+                  rotateZ:3
+                }}
+
+
+                className="
+                bg-cyan-500/20
+                border
+                border-cyan-400/30
+                text-cyan-300
+                px-5
+                py-3
+                rounded-full
+                cursor-pointer
+                shadow-lg
+                hover:shadow-cyan-500/40
+                "
+
               >
+
                 {skill}
-              </span>
+
+
+              </motion.div>
+
+
             ))}
+
 
           </div>
 
-        </div>
+
+        </section>
+
+
+
+
+
 
 
         {/* Roadmap */}
-        <div className="bg-slate-900 rounded-2xl p-8 mb-8">
+
+
+
+        <section className="bg-slate-900 rounded-3xl p-8 mb-8">
+
 
           <h2 className="text-3xl font-bold text-cyan-400">
+
             🗺 Learning Roadmap
+
           </h2>
 
-          <div className="space-y-4 mt-8">
 
-            {roadmap.map((step, index) => (
 
-              <div
+
+          <div className="mt-10 space-y-6">
+
+
+
+            {roadmap.map((step,index)=>(
+
+
+              <motion.div
+
                 key={index}
-                className="bg-slate-800 p-5 rounded-xl flex items-center gap-4"
+
+
+                initial={{
+                  opacity:0,
+                  x:-80
+                }}
+
+
+                whileInView={{
+                  opacity:1,
+                  x:0
+                }}
+
+
+                viewport={{
+                  once:true
+                }}
+
+
+                transition={{
+                  duration:0.5,
+                  delay:index*0.1
+                }}
+
+
               >
 
-                <div className="w-10 h-10 rounded-full bg-cyan-500 flex items-center justify-center font-bold">
-                  {index + 1}
-                </div>
 
-                <p>{step}</p>
 
-              </div>
+                <PremiumCard className="p-5 flex items-center gap-5">
+
+
+                  <motion.div
+
+
+                    whileHover={{
+                      rotate:360
+                    }}
+
+
+                    transition={{
+                      duration:0.5
+                    }}
+
+
+                    className="
+                    w-12
+                    h-12
+                    rounded-full
+                    bg-cyan-500
+                    flex
+                    items-center
+                    justify-center
+                    font-bold
+                    text-black
+                    "
+
+                  >
+
+                    {index+1}
+
+
+                  </motion.div>
+
+
+
+
+                  <p className="text-lg">
+
+                    {step}
+
+                  </p>
+
+
+
+                </PremiumCard>
+
+
+
+              </motion.div>
+
 
             ))}
 
+
           </div>
 
-        </div>
+
+        </section>
+                {/* Career Opportunities */}
 
 
-        {/* Career Opportunities */}
-        <div className="bg-slate-900 rounded-2xl p-8 mb-8">
+        <section className="bg-slate-900 rounded-3xl p-8 mb-8">
+
 
           <h2 className="text-3xl font-bold text-cyan-400">
+
             💼 Career Opportunities
+
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-6 mt-8">
 
-            {careers.map((career) => (
 
-              <div
+
+          <div className="grid md:grid-cols-2 gap-8 mt-8">
+
+
+            {careers.map((career,index)=>(
+
+
+              <motion.div
+
+
                 key={career.role}
-                className="bg-slate-800 rounded-xl p-6"
+
+
+                initial={{
+                  opacity:0,
+                  y:50
+                }}
+
+
+                whileInView={{
+                  opacity:1,
+                  y:0
+                }}
+
+
+                viewport={{
+                  once:true
+                }}
+
+
+                transition={{
+                  delay:index*0.15
+                }}
+
+
               >
 
-                <h3 className="text-xl font-bold">
-                  {career.role}
-                </h3>
 
-                <p className="text-gray-400 mt-3">
-                  {career.desc}
-                </p>
 
-                <p className="text-green-400 font-semibold mt-4">
-                  {career.salary}
-                </p>
+                <PremiumCard className="p-7 h-full">
 
-              </div>
+
+                  <motion.h3
+
+                    whileHover={{
+                      x:8
+                    }}
+
+                    className="text-2xl font-bold"
+
+                  >
+
+                    {career.role}
+
+
+                  </motion.h3>
+
+
+
+
+                  <p className="text-gray-400 mt-4">
+
+                    {career.desc}
+
+                  </p>
+
+
+
+
+                  <motion.p
+
+                    whileHover={{
+                      scale:1.1
+                    }}
+
+                    className="text-green-400 font-bold text-xl mt-5"
+
+                  >
+
+                    {career.salary}
+
+
+                  </motion.p>
+
+
+
+                </PremiumCard>
+
+
+
+              </motion.div>
+
 
             ))}
 
+
           </div>
 
-        </div>
+
+        </section>
+
+
+
+
+
 
 
         {/* Companies */}
-        <div className="bg-slate-900 rounded-2xl p-8">
+
+
+
+        <section className="bg-slate-900 rounded-3xl p-8">
+
 
           <h2 className="text-3xl font-bold text-cyan-400">
+
             🏢 Top Companies
+
           </h2>
 
-          <div className="grid md:grid-cols-4 gap-5 mt-8">
 
-            {companies.map((company) => (
 
-              <div
+
+          <div className="grid md:grid-cols-4 gap-6 mt-8">
+
+
+            {companies.map((company,index)=>(
+
+
+
+              <motion.div
+
+
                 key={company}
-                className="bg-slate-800 rounded-xl p-6 text-center font-semibold hover:bg-cyan-600 transition"
+
+
+                initial={{
+                  opacity:0,
+                  scale:0.7
+                }}
+
+
+                whileInView={{
+                  opacity:1,
+                  scale:1
+                }}
+
+
+                viewport={{
+                  once:true
+                }}
+
+
+                transition={{
+                  delay:index*0.1
+                }}
+
+
               >
-                {company}
-              </div>
+
+
+
+                <PremiumCard className="p-6 text-center">
+
+
+                  <motion.div
+
+                    animate={{
+                      y:[0,-6,0]
+                    }}
+
+
+                    transition={{
+                      duration:2,
+                      repeat:Infinity,
+                      delay:index*0.2
+                    }}
+
+
+                    className="font-bold text-lg"
+
+                  >
+
+                    {company}
+
+
+                  </motion.div>
+
+
+
+                </PremiumCard>
+
+
+
+              </motion.div>
+
 
             ))}
 
+
+
           </div>
 
-        </div>
+
+        </section>
+
 
 
       </div>
 
-    </div>
+
+    </motion.div>
+
+
   );
+
 }
+
 
 export default Javascript;
