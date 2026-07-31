@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Search } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 import { playClick } from "../utils/playClick";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useTransform } from "framer-motion";
 
 
 const pills = [
@@ -85,7 +85,11 @@ const suggestions = [
 export default function Hero({ search, setSearch }) {
 
   const { darkMode } = useTheme();
+const mouseX = useMotionValue(0);
+const mouseY = useMotionValue(0);
 
+const rotateX = useTransform(mouseY, [-300, 300], [10, -10]);
+const rotateY = useTransform(mouseX, [-300, 300], [-10, 10]);
 
   const filteredSuggestions = suggestions.filter((item) =>
     item.name
@@ -95,7 +99,12 @@ export default function Hero({ search, setSearch }) {
 
 
   return (
-    <section
+   <section
+  onMouseMove={(e) => {
+    const { innerWidth, innerHeight } = window;
+    mouseX.set(e.clientX - innerWidth / 2);
+    mouseY.set(e.clientY - innerHeight / 2);
+  }}
       className={`relative overflow-hidden py-24 px-6 transition-all duration-500 ${
         darkMode
           ? "bg-slate-950 text-white"
@@ -186,6 +195,11 @@ export default function Hero({ search, setSearch }) {
 
 
       <motion.div
+      style={{
+  rotateX,
+  rotateY,
+  transformPerspective: 1200,
+}}
         initial={{
           opacity:0,
           y:40
