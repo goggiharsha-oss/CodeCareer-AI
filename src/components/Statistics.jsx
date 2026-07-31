@@ -246,6 +246,7 @@ function Statistics(){
 
 
               className={`
+                relative overflow-hidden
               rounded-3xl
               p-8
               text-center
@@ -271,7 +272,30 @@ function Statistics(){
 
 
 
+{/* Floating Background Icon */}
 
+<motion.div
+  animate={{
+    y: [0, -20, 0],
+    rotate: [0, 15, -15, 0],
+    opacity: [0.08, 0.15, 0.08],
+  }}
+  transition={{
+    duration: 6,
+    repeat: Infinity,
+    delay: index * 0.5,
+  }}
+  
+  className="
+absolute
+-right-6
+top-8
+text-8xl
+pointer-events-none
+"
+>
+  {item.icon}
+</motion.div>
 
               <motion.div
 
@@ -297,8 +321,9 @@ function Statistics(){
               <h3
 
                 className="
-                text-5xl
-                font-extrabold
+text-5xl
+font-extrabold
+drop-shadow-[0_0_15px_rgba(34,211,238,0.5)]
 
                 bg-gradient-to-r
                 from-cyan-400
