@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useTheme } from "../context/ThemeContext";
 import { useNavigate } from "react-router-dom";
+import { CheckCircle } from "lucide-react";
 const careerDetails = {
   "Web Development": {
     percentage: "92%",
@@ -324,11 +325,47 @@ function CareerQuiz() {
             <div className="inline-flex rounded-full bg-cyan-500/10 px-5 py-2 mb-6 text-cyan-400 font-semibold">
   Question {currentQuestion + 1} / {questions.length}
 </div>
+<div className="mb-8">
+  <div className="flex justify-between text-sm mb-2">
+    <span>Progress</span>
+
+    <span>
+      {Math.round(
+        ((currentQuestion + 1) / questions.length) * 100
+      )}%
+    </span>
+  </div>
+
+  <div className="w-full h-3 rounded-full bg-gray-300 overflow-hidden">
+    <motion.div
+      animate={{
+        width: `${((currentQuestion + 1) / questions.length) * 100}%`,
+      }}
+      transition={{ duration: 0.5 }}
+      className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-blue-600"
+    />
+  </div>
+</div>
 
 
-            <h2 className="text-3xl font-bold mb-8">
-              {questions[currentQuestion].question}
-            </h2>
+            
+              <motion.h2
+  key={currentQuestion}
+  initial={{
+    opacity: 0,
+    x: 40,
+  }}
+  animate={{
+    opacity: 1,
+    x: 0,
+  }}
+  transition={{
+    duration: 0.4,
+  }}
+  className="text-3xl font-bold mb-8"
+>
+  {questions[currentQuestion].question}
+</motion.h2>
 
 
             <div className="space-y-4">
@@ -336,28 +373,43 @@ function CareerQuiz() {
               {questions[currentQuestion].options.map(
                 (option, index) => (
 
-                <motion.button
-                  key={index}
-                  whileHover={{
-  scale:1.03
+<motion.button
+  key={`${currentQuestion}-${index}`}
+  initial={{
+  opacity: 0,
+  x: 30,
 }}
 
-whileTap={{
-  scale:0.97
+animate={{
+  opacity: 1,
+  x: 0,
 }}
-                  onClick={() =>
-                    setSelectedAnswer(option.career)
-                  }
-                  className={`w-full rounded-2xl border p-5 text-left transition ${
-                    selectedAnswer === option.career
-                      ? "bg-cyan-500 text-white border-cyan-500"
-                      : darkMode
-                      ? "bg-slate-800 border-slate-700 hover:border-cyan-500"
-                      : "bg-white border-gray-200 hover:border-cyan-500"
-                  }`}
-                >
-                  {option.text}
-                </motion.button>
+
+transition={{
+  delay: index * 0.1,
+  duration: 0.35,
+}}
+  whileHover={{ scale: 1.03 }}
+  whileTap={{ scale: 0.97 }}
+  onClick={() => setSelectedAnswer(option.career)}
+  className={`w-full rounded-2xl border p-5 text-left transition ${
+    selectedAnswer === option.career
+      ? "bg-cyan-500 text-white border-cyan-500 shadow-lg shadow-cyan-500/40"
+      : darkMode
+      ? "bg-slate-800 border-slate-700 hover:border-cyan-500"
+      : "bg-white border-gray-200 hover:border-cyan-500"
+  }`}
+>
+  <div className="flex items-center justify-between">
+    <span className="font-medium">
+      {option.text}
+    </span>
+
+    {selectedAnswer === option.career && (
+      <CheckCircle size={24} />
+    )}
+  </div>
+</motion.button>
 
               ))}
 
@@ -366,6 +418,8 @@ whileTap={{
 
             <motion.button
               onClick={handleNext}
+              whileHover={{ scale: 1.03 }}
+whileTap={{ scale: 0.96 }}
               className="mt-8 w-full rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 py-4 text-white font-semibold hover:scale-105 transition"
             >
 
