@@ -137,33 +137,74 @@ const handleBack = () => {
       <div className="w-full max-w-3xl">
       {showWarning && (
   <motion.div
-    initial={{ opacity: 0, y: -30, scale: 0.8 }}
-    animate={{ opacity: 1, y: 0, scale: 1 }}
-    className="mb-6 rounded-2xl border border-yellow-400/50 bg-yellow-100/90 p-5 shadow-2xl backdrop-blur-xl dark:bg-yellow-900/40"
+    initial={{ opacity: 0, scale: 0.7, y: -20 }}
+    animate={{ opacity: 1, scale: 1, y: 0 }}
+    exit={{ opacity: 0 }}
+    className="mb-6 flex items-center justify-center gap-4"
   >
-    <div className="flex items-center gap-4">
-      <motion.div
-       animate={{
-  rotate: [-5, 5, -5],
-  y: [0, -5, 0],
-}}
-        transition={{
-  duration: 0.6,
-  repeat: Infinity,
-}}
-        className="text-5xl"
-      >
-        🤖
-      </motion.div>
 
-      <div>
-        <h3 className="font-bold text-lg text-yellow-700 dark:text-yellow-300">
-          Oops!
-        </h3>
+    {/* Robot */}
+    <motion.div
+      animate={{
+        y: [0, -8, 0],
+      }}
+      transition={{
+        duration: 0.8,
+        repeat: Infinity,
+      }}
+      className="text-6xl"
+    >
+      🤖
+    </motion.div>
 
-        <p>Please select an option before continuing.</p>
-      </div>
-    </div>
+
+    {/* Speech Bubble */}
+    <motion.div
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      transition={{ duration: 0.3 }}
+      className="
+      relative
+      rounded-3xl
+      bg-white
+      dark:bg-gray-800
+      px-6
+      py-4
+      shadow-2xl
+      border
+      border-yellow-400
+      "
+    >
+
+      {/* Bubble Arrow */}
+      <div
+        className="
+        absolute
+        left-[-10px]
+        top-1/2
+        -translate-y-1/2
+        w-5
+        h-5
+        bg-white
+        dark:bg-gray-800
+        rotate-45
+        border-l
+        border-b
+        border-yellow-400
+        "
+      ></div>
+
+
+      <h3 className="font-bold text-yellow-600 dark:text-yellow-300">
+        Hey! 👋
+      </h3>
+
+      <p className="text-sm">
+        Select an option first, then I can guide your career path 🚀
+      </p>
+
+    </motion.div>
+
   </motion.div>
 )}
         <div className="mb-6">
