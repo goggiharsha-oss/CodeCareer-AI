@@ -9,6 +9,7 @@ const careerDetails = {
     language: "JavaScript",
     salary: "₹4 - 8 LPA",
     roles: "Frontend Developer, Full Stack Developer",
+    icon: "🌐",
   },
 
   "Artificial Intelligence": {
@@ -16,6 +17,7 @@ const careerDetails = {
     language: "Python",
     salary: "₹6 - 15 LPA",
     roles: "AI Engineer, Machine Learning Engineer",
+     icon: "🤖",
   },
 
   "Cyber Security": {
@@ -23,6 +25,7 @@ const careerDetails = {
     language: "Python",
     salary: "₹5 - 12 LPA",
     roles: "Security Analyst, Ethical Hacker",
+    icon: "🛡️",
   },
 
   "Data Science": {
@@ -30,6 +33,7 @@ const careerDetails = {
     language: "Python",
     salary: "₹6 - 14 LPA",
     roles: "Data Scientist, Data Analyst",
+      icon: "📊",
   },
 };
 const questions = [
@@ -142,13 +146,59 @@ function CareerQuiz() {
   🏆
 </motion.div>
 
-            <h1 className="text-4xl font-bold text-cyan-400">
-              Your Best Career Path
-            </h1>
-
+            <motion.h1
+  initial={{
+    opacity:0,
+    y:-20
+  }}
+  animate={{
+    opacity:1,
+    y:0
+  }}
+  transition={{
+    duration:0.5
+  }}
+  className="text-4xl font-bold text-cyan-400"
+>
+  🎯 Your Best Career Path
+</motion.h1>
+<motion.div
+  animate={{
+    y: [0, -10, 0],
+  }}
+  transition={{
+    duration: 2,
+    repeat: Infinity,
+  }}
+  className="text-7xl mb-4"
+>
+  {careerDetails[resultCareer].icon}
+</motion.div>
             <h2 className="text-4xl font-extrabold mt-6 bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
   {resultCareer}
 </h2>
+<div className="mt-8 flex justify-center">
+
+  <motion.div
+    initial={{ scale: 0 }}
+    animate={{ scale: 1 }}
+    transition={{ duration: 0.6 }}
+    className="relative flex h-40 w-40 items-center justify-center rounded-full border-8 border-cyan-500 shadow-lg shadow-cyan-500/30"
+  >
+
+    <div className="text-center">
+      <p className="text-5xl font-extrabold text-cyan-400">
+        {careerDetails[resultCareer].percentage}
+      </p>
+
+      <p className="text-sm mt-2">
+        Match Score
+      </p>
+    </div>
+
+  </motion.div>
+
+</div>
             <div className="grid md:grid-cols-2 gap-5 mt-8">
 
   {[
@@ -222,8 +272,7 @@ function CareerQuiz() {
                   : "text-gray-600"
               }`}
             >
-              Based on your answers, this career is the
-              best match for you.
+              Based on your interests and answers, our AI recommends this career path as the best fit for your future.
             </p>
 
 
