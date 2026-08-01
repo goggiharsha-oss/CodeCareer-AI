@@ -1,7 +1,13 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
+
 function Python() {
+
+
+  const [selectedProject, setSelectedProject] = useState(null);
+
 
 
   const skills = [
@@ -17,28 +23,32 @@ function Python() {
     "Problem Solving",
   ];
 
-const skillProgress = [
-  {
-    name: "Python Basics",
-    level: 95,
-  },
-  {
-    name: "Object-Oriented Programming",
-    level: 85,
-  },
-  {
-    name: "Data Structures",
-    level: 75,
-  },
-  {
-    name: "Django / Flask",
-    level: 60,
-  },
-  {
-    name: "Machine Learning",
-    level: 40,
-  },
-];
+
+
+  const skillProgress = [
+    {
+      name: "Python Basics",
+      level: 95,
+    },
+    {
+      name: "Object-Oriented Programming",
+      level: 85,
+    },
+    {
+      name: "Data Structures",
+      level: 75,
+    },
+    {
+      name: "Django / Flask",
+      level: 60,
+    },
+    {
+      name: "Machine Learning",
+      level: 40,
+    },
+  ];
+
+
 
   const roadmap = [
     "Learn Python Fundamentals",
@@ -53,28 +63,32 @@ const skillProgress = [
     "Apply for Python Jobs",
   ];
 
-const interviewQuestions = [
-  {
-    question: "What is Python and why is it popular?",
-    level: "Beginner",
-  },
-  {
-    question: "Difference between list and tuple?",
-    level: "Intermediate",
-  },
-  {
-    question: "Explain Object-Oriented Programming in Python.",
-    level: "Intermediate",
-  },
-  {
-    question: "What are Python decorators?",
-    level: "Advanced",
-  },
-  {
-    question: "How does memory management work in Python?",
-    level: "Advanced",
-  },
-];
+
+
+  const interviewQuestions = [
+    {
+      question: "What is Python and why is it popular?",
+      level: "Beginner",
+    },
+    {
+      question: "Difference between list and tuple?",
+      level: "Intermediate",
+    },
+    {
+      question: "Explain Object-Oriented Programming in Python.",
+      level: "Intermediate",
+    },
+    {
+      question: "What are Python decorators?",
+      level: "Advanced",
+    },
+    {
+      question: "How does memory management work in Python?",
+      level: "Advanced",
+    },
+  ];
+
+
 
   const certifications = [
     "Python Institute PCAP Certification",
@@ -97,59 +111,54 @@ const interviewQuestions = [
 
 
   const projects = [
-    "AI Chatbot",
-    "Web Application",
-    "Automation Scripts",
-    "Data Analysis Project",
-    "API Development",
-  ];
-
-
-
-  const companies = [
-    "Google",
-    "Microsoft",
-    "Amazon",
-    "Meta",
-    "Netflix",
-    "Infosys",
-    "TCS",
-    "Accenture",
-  ];
-
-
-
-  const jobRoles = [
     {
-      role:"Python Developer",
-      salary:"₹4–12 LPA",
-      desc:"Develop applications and backend systems using Python."
+      name: "AI Chatbot",
+      category: "Artificial Intelligence",
+      difficulty: "Advanced",
+      skills: ["Python", "AI", "NLP"],
+      desc: "Build an intelligent chatbot using Python and AI concepts.",
+      icon: "🤖",
     },
+
     {
-      role:"Backend Developer",
-      salary:"₹6–15 LPA",
-      desc:"Build APIs and server-side applications."
+      name: "Web Application",
+      category: "Web Development",
+      difficulty: "Intermediate",
+      skills: ["Python", "Django", "Database"],
+      desc: "Create a complete backend web application.",
+      icon: "🌐",
     },
+
     {
-      role:"Data Analyst",
-      salary:"₹5–12 LPA",
-      desc:"Analyze data using Python libraries."
+      name: "Automation Scripts",
+      category: "Automation",
+      difficulty: "Beginner",
+      skills: ["Python", "Scripts", "APIs"],
+      desc: "Automate daily tasks using Python scripts.",
+      icon: "⚡",
     },
+
     {
-      role:"Machine Learning Engineer",
-      salary:"₹8–20 LPA",
-      desc:"Create machine learning solutions using Python."
-    }
+      name: "Data Analysis Project",
+      category: "Data Science",
+      difficulty: "Intermediate",
+      skills: ["Python", "Pandas", "NumPy"],
+      desc: "Analyze and visualize real-world datasets.",
+      icon: "📊",
+    },
+
+    {
+      name: "API Development",
+      category: "Backend",
+      difficulty: "Advanced",
+      skills: ["Python", "Flask", "REST API"],
+      desc: "Develop professional backend APIs.",
+      icon: "🚀",
+    },
   ];
-
-
-
-
-
-  return (
+    return (
 
     <div className="min-h-screen bg-slate-950 text-white">
-
 
 
       {/* HERO SECTION */}
@@ -166,7 +175,6 @@ const interviewQuestions = [
         "
       >
 
-
         <div className="max-w-7xl mx-auto px-6 py-16">
 
 
@@ -179,9 +187,7 @@ const interviewQuestions = [
 
 
 
-
           <div className="grid md:grid-cols-2 gap-10 items-center mt-10">
-
 
 
             <div>
@@ -213,7 +219,6 @@ const interviewQuestions = [
 
 
 
-
               <motion.p
 
                 initial={{
@@ -238,16 +243,9 @@ const interviewQuestions = [
               </motion.p>
 
 
-
             </div>
 
 
-
-
-
-
-
-            {/* PYTHON CARD */}
 
 
             <motion.div
@@ -288,13 +286,17 @@ const interviewQuestions = [
           </div>
 
 
-
         </div>
 
-
       </div>
-      
+
+
+
+
+
+
       <div className="max-w-7xl mx-auto px-6 py-12">
+
 
 
         {/* SALARY SECTION */}
@@ -331,59 +333,57 @@ const interviewQuestions = [
           <div className="grid md:grid-cols-3 gap-6 mt-8">
 
 
-            {
-              [
-                ["Fresher","₹4–8 LPA"],
-                ["Experienced","₹10–18 LPA"],
-                ["Senior","₹25+ LPA"]
-              ].map((item,index)=>(
+          {
+            [
+              ["Fresher","₹4–8 LPA"],
+              ["Experienced","₹10–18 LPA"],
+              ["Senior","₹25+ LPA"]
+            ].map((item,index)=>(
 
 
-                <motion.div
+              <motion.div
 
-                  key={index}
+                key={index}
 
-                  whileHover={{
-                    scale:1.08,
-                    rotateX:10,
-                    rotateY:10
-                  }}
+                whileHover={{
+                  scale:1.08,
+                  rotateX:10,
+                  rotateY:10
+                }}
 
-                  className="
-                  bg-slate-800
-                  rounded-2xl
-                  p-8
-                  text-center
-                  border
-                  border-slate-700
-                  "
+                className="
+                bg-slate-800
+                rounded-2xl
+                p-8
+                text-center
+                border
+                border-slate-700
+                "
 
-                >
-
-
-                  <h3 className="font-bold text-xl">
-                    {item[0]}
-                  </h3>
+              >
 
 
-                  <p className="text-4xl text-cyan-400 mt-4">
-                    {item[1]}
-                  </p>
+                <h3 className="font-bold text-xl">
+                  {item[0]}
+                </h3>
 
 
-                </motion.div>
+                <p className="text-4xl text-cyan-400 mt-4">
+                  {item[1]}
+                </p>
 
 
-              ))
-            }
+              </motion.div>
+
+
+            ))
+          }
 
 
           </div>
 
 
         </motion.div>
-
-
 
 
 
@@ -426,49 +426,159 @@ const interviewQuestions = [
           <div className="grid md:grid-cols-3 gap-6">
 
 
-            {
-              skills.map((skill,index)=>(
+          {
+            skills.map((skill,index)=>(
 
 
-                <motion.div
+              <motion.div
 
-                  key={index}
+                key={index}
 
-                  whileHover={{
-                    scale:1.08,
-                    y:-10
-                  }}
+                whileHover={{
+                  scale:1.08,
+                  y:-10
+                }}
 
-                  className="
-                  bg-slate-800
-                  rounded-2xl
-                  p-6
-                  border
-                  border-slate-700
-                  hover:border-cyan-400
-                  transition
-                  "
+                className="
+                bg-slate-800
+                rounded-2xl
+                p-6
+                border
+                border-slate-700
+                hover:border-cyan-400
+                transition
+                "
 
-                >
-
-
-                  <div className="text-3xl">
-                    🐍
-                  </div>
+              >
 
 
+                <div className="text-3xl">
+                  🐍
+                </div>
 
-                  <h3 className="font-semibold text-lg mt-4">
-                    {skill}
+
+
+                <h3 className="font-semibold text-lg mt-4">
+                  {skill}
+                </h3>
+
+
+              </motion.div>
+
+
+            ))
+          }
+
+
+          </div>
+
+
+        </motion.div>
+        
+        {/* SKILL PROGRESS TRACKER */}
+
+
+        <motion.div
+
+          initial={{
+            opacity:0,
+            y:50
+          }}
+
+          whileInView={{
+            opacity:1,
+            y:0
+          }}
+
+          className="
+          bg-slate-900
+          rounded-3xl
+          p-8
+          mt-8
+          "
+
+        >
+
+
+          <h2 className="text-3xl font-bold text-cyan-400 mb-8">
+            🎯 Python Skill Progress
+          </h2>
+
+
+
+          <div className="space-y-6">
+
+
+          {
+            skillProgress.map((skill,index)=>(
+
+
+              <div key={index}>
+
+
+                <div className="flex justify-between mb-2">
+
+                  <h3 className="font-semibold">
+                    {skill.name}
                   </h3>
 
 
+                  <span className="text-cyan-400">
+                    {skill.level}%
+                  </span>
 
-                </motion.div>
+
+                </div>
 
 
-              ))
-            }
+
+                <div
+                  className="
+                  w-full
+                  h-4
+                  bg-slate-700
+                  rounded-full
+                  overflow-hidden
+                  "
+                >
+
+
+                  <motion.div
+
+                    initial={{
+                      width:0
+                    }}
+
+                    whileInView={{
+                      width:`${skill.level}%`
+                    }}
+
+                    transition={{
+                      duration:1,
+                      delay:index*0.2
+                    }}
+
+                    className="
+                    h-full
+                    bg-gradient-to-r
+                    from-cyan-400
+                    to-green-400
+                    rounded-full
+                    "
+
+                  >
+
+                  </motion.div>
+
+
+                </div>
+
+
+              </div>
+
+
+            ))
+          }
 
 
           </div>
@@ -480,110 +590,6 @@ const interviewQuestions = [
 
 
 
-{/* SKILL PROGRESS TRACKER */}
-
-<motion.div
-
-initial={{
- opacity:0,
- y:50
-}}
-
-whileInView={{
- opacity:1,
- y:0
-}}
-
-className="
-bg-slate-900
-rounded-3xl
-p-8
-mt-8
-"
-
->
-
-
-<h2 className="text-3xl font-bold text-cyan-400 mb-8">
-🎯 Python Skill Progress
-</h2>
-
-
-<div className="space-y-6">
-
-
-{
-skillProgress.map((skill,index)=>(
-
-
-<div key={index}>
-
-
-<div className="flex justify-between mb-2">
-
-<h3 className="font-semibold">
-{skill.name}
-</h3>
-
-<span className="text-cyan-400">
-{skill.level}%
-</span>
-
-</div>
-
-
-
-<div className="
-w-full
-h-4
-bg-slate-700
-rounded-full
-overflow-hidden
-">
-
-
-<motion.div
-
-initial={{
-width:0
-}}
-
-whileInView={{
-width:`${skill.level}%`
-}}
-
-transition={{
-duration:1,
-delay:index*0.2
-}}
-
-className="
-h-full
-bg-gradient-to-r
-from-cyan-400
-to-green-400
-rounded-full
-"
-
->
-
-</motion.div>
-
-
-</div>
-
-
-</div>
-
-
-))
-}
-
-
-</div>
-
-
-</motion.div>
 
 
         {/* TOOLS SECTION */}
@@ -621,50 +627,57 @@ rounded-full
           <div className="grid md:grid-cols-3 gap-5">
 
 
-            {
-              tools.map((tool,index)=>(
+          {
+            tools.map((tool,index)=>(
 
 
-                <motion.div
+              <motion.div
 
-                  key={index}
+                key={index}
 
-                  whileHover={{
-                    scale:1.1,
-                    rotateY:10
-                  }}
+                whileHover={{
+                  scale:1.1,
+                  rotateY:10
+                }}
 
-                  className="
-                  bg-gradient-to-br
-                  from-slate-800
-                  to-slate-700
-                  rounded-xl
-                  p-6
-                  text-center
-                  font-semibold
-                  border
-                  border-slate-700
-                  "
+                className="
+                bg-gradient-to-br
+                from-slate-800
+                to-slate-700
+                rounded-xl
+                p-6
+                text-center
+                font-semibold
+                border
+                border-slate-700
+                "
 
-                >
+              >
 
-
-                  🚀 {tool}
-
-
-                </motion.div>
+                🚀 {tool}
 
 
-              ))
-            }
+              </motion.div>
+
+
+            ))
+          }
 
 
           </div>
 
 
         </motion.div>
-        
+
+
+
+
+
+
+
+
         {/* PROJECTS SECTION */}
+
 
 
         <motion.div
@@ -690,52 +703,378 @@ rounded-full
 
 
           <h2 className="text-3xl font-bold text-cyan-400 mb-8">
-            🚀 Python Projects To Build
+            🚀 Python Projects Portfolio
           </h2>
+
 
 
 
           <div className="grid md:grid-cols-3 gap-6">
 
 
-            {
-              projects.map((project,index)=>(
+          {
+            projects.map((project,index)=>(
 
 
-                <motion.div
+              <motion.div
 
-                  key={index}
+                key={index}
 
-                  whileHover={{
-                    scale:1.08,
-                    y:-8
-                  }}
+                whileHover={{
+                  scale:1.05,
+                  y:-10
+                }}
+
+                className="
+                bg-slate-800
+                rounded-2xl
+                p-6
+                border
+                border-slate-700
+                hover:border-cyan-400
+                transition
+                "
+
+              >
+
+
+
+                <h3 className="text-xl font-bold">
+                  {project.icon} {project.name}
+                </h3>
+
+
+
+                <p className="text-cyan-400 mt-2">
+                  {project.category}
+                </p>
+
+
+
+                <span
+                  className="
+                  inline-block
+                  mt-4
+                  px-3
+                  py-1
+                  rounded-full
+                  bg-cyan-500
+                  text-black
+                  text-sm
+                  font-semibold
+                  "
+                >
+
+                  {project.difficulty}
+
+                </span>
+
+
+
+                <p className="text-gray-300 mt-4">
+                  {project.desc}
+                </p>
+
+
+
+                <div className="flex flex-wrap gap-2 mt-4">
+
+
+                {
+                  project.skills.map((skill,index)=>(
+
+
+                    <span
+
+                      key={index}
+
+                      className="
+                      px-3
+                      py-1
+                      rounded-full
+                      bg-cyan-500/20
+                      text-cyan-300
+                      text-sm
+                      "
+
+                    >
+
+                      {skill}
+
+                    </span>
+
+
+                  ))
+                }
+
+
+                </div>
+
+
+
+                <button
+
+                  onClick={() => setSelectedProject(project)}
 
                   className="
-                  bg-slate-800
-                  rounded-2xl
-                  p-6
-                  border
-                  border-slate-700
+                  mt-5
+                  px-5
+                  py-2
+                  rounded-xl
+                  bg-cyan-500
+                  text-black
+                  font-bold
                   "
 
                 >
 
-                  <h3 className="font-bold text-lg">
-                    🐍 {project}
-                  </h3>
+                  View Details →
+
+                </button>
 
 
-                  <p className="text-gray-400 mt-3">
-                    Build this project to improve practical Python skills.
-                  </p>
+
+              </motion.div>
 
 
-                </motion.div>
+            ))
+          }
 
 
-              ))
-            }
+          </div>
+
+
+        </motion.div>
+        
+
+
+
+
+        {/* PROJECT POPUP */}
+
+
+        {
+          selectedProject && (
+
+
+            <motion.div
+
+              initial={{
+                opacity:0
+              }}
+
+              animate={{
+                opacity:1
+              }}
+
+              className="
+              fixed
+              inset-0
+              bg-black/70
+              flex
+              items-center
+              justify-center
+              z-50
+              "
+
+            >
+
+
+              <motion.div
+
+                initial={{
+                  scale:0.7
+                }}
+
+                animate={{
+                  scale:1
+                }}
+
+                className="
+                bg-slate-900
+                rounded-3xl
+                p-8
+                max-w-lg
+                w-full
+                border
+                border-cyan-400
+                "
+
+              >
+
+
+                <h2 className="text-3xl font-bold text-cyan-400">
+                  {selectedProject.icon} {selectedProject.name}
+                </h2>
+
+
+                <p className="text-cyan-400 mt-3">
+                  {selectedProject.category}
+                </p>
+
+
+                <p className="text-gray-300 mt-4">
+                  {selectedProject.desc}
+                </p>
+
+
+                <div className="flex flex-wrap gap-2 mt-4">
+
+                {
+                  selectedProject.skills.map((skill,index)=>(
+
+                    <span
+                      key={index}
+                      className="
+                      px-3
+                      py-1
+                      bg-cyan-500/20
+                      rounded-full
+                      text-cyan-300
+                      "
+                    >
+                      {skill}
+                    </span>
+
+                  ))
+                }
+
+                </div>
+
+
+
+                <button
+
+                  onClick={() => setSelectedProject(null)}
+
+                  className="
+                  mt-6
+                  px-5
+                  py-2
+                  bg-cyan-500
+                  text-black
+                  rounded-xl
+                  font-bold
+                  "
+
+                >
+
+                  Close
+
+                </button>
+
+
+
+              </motion.div>
+
+
+            </motion.div>
+
+
+          )
+        }
+
+
+
+
+
+
+
+
+        {/* CAREER CTA */}
+
+
+
+        <motion.div
+
+          initial={{
+            opacity:0,
+            y:50
+          }}
+
+          whileInView={{
+            opacity:1,
+            y:0
+          }}
+
+          className="
+          bg-gradient-to-r
+          from-cyan-900
+          to-green-900
+          rounded-3xl
+          p-10
+          mt-8
+          text-center
+          "
+
+        >
+
+
+          <h2 className="text-3xl font-bold">
+            🚀 Ready to Become a Python Developer?
+          </h2>
+
+
+          <p className="text-gray-300 mt-4">
+            Follow the roadmap, build projects and prepare for your dream job.
+          </p>
+
+
+
+          <div className="flex justify-center gap-5 mt-8 flex-wrap">
+
+
+            <button
+
+              onClick={() =>
+                document.getElementById("roadmap")
+                .scrollIntoView({
+                  behavior:"smooth"
+                })
+              }
+
+              className="
+              px-6
+              py-3
+              rounded-xl
+              bg-cyan-500
+              text-black
+              font-bold
+              "
+
+            >
+
+              🛣 Start Roadmap
+
+            </button>
+
+
+
+
+            <button
+
+              onClick={() =>
+                document.getElementById("interview")
+                .scrollIntoView({
+                  behavior:"smooth"
+                })
+              }
+
+              className="
+              px-6
+              py-3
+              rounded-xl
+              bg-white
+              text-black
+              font-bold
+              "
+
+            >
+
+              🎤 Practice Interview
+
+            </button>
+
 
 
           </div>
@@ -750,258 +1089,258 @@ rounded-full
 
 
 
-       {/* ROADMAP SECTION */}
 
-<motion.div
+        {/* ROADMAP SECTION */}
 
-  initial={{
-    opacity:0,
-    y:50
-  }}
 
-  whileInView={{
-    opacity:1,
-    y:0
-  }}
 
-  className="
-  bg-slate-900
-  rounded-3xl
-  p-8
-  mt-8
-  "
+        <motion.div
 
->
+          id="roadmap"
 
-<h2 className="text-3xl font-bold text-cyan-400 mb-10">
-  🛣️ Python Learning Journey
-</h2>
+          initial={{
+            opacity:0,
+            y:50
+          }}
 
+          whileInView={{
+            opacity:1,
+            y:0
+          }}
 
-<div className="relative border-l-4 border-cyan-500 ml-5">
+          className="
+          bg-slate-900
+          rounded-3xl
+          p-8
+          mt-8
+          "
 
+        >
 
-{
-roadmap.map((step,index)=>(
 
+          <h2 className="text-3xl font-bold text-cyan-400 mb-10">
+            🛣️ Python Learning Journey
+          </h2>
 
-<motion.div
 
-key={index}
 
-initial={{
- opacity:0,
- x:-40
-}}
+          <div className="relative border-l-4 border-cyan-500 ml-5">
 
-whileInView={{
- opacity:1,
- x:0
-}}
 
-transition={{
- delay:index*0.15
-}}
+          {
+            roadmap.map((step,index)=>(
 
-className="
-relative
-mb-10
-ml-8
-"
 
+              <motion.div
 
->
+                key={index}
 
+                initial={{
+                  opacity:0,
+                  x:-40
+                }}
 
-{/* Timeline Circle */}
+                whileInView={{
+                  opacity:1,
+                  x:0
+                }}
 
-<div
-className="
-absolute
--left-[45px]
-top-2
-w-10
-h-10
-rounded-full
-bg-cyan-500
-text-black
-font-bold
-flex
-items-center
-justify-center
-shadow-lg
-shadow-cyan-500/50
-"
->
+                transition={{
+                  delay:index*0.15
+                }}
 
-{index+1}
+                className="
+                relative
+                mb-10
+                ml-8
+                "
 
-</div>
+              >
 
 
+                <div
+                  className="
+                  absolute
+                  -left-[45px]
+                  top-2
+                  w-10
+                  h-10
+                  rounded-full
+                  bg-cyan-500
+                  text-black
+                  font-bold
+                  flex
+                  items-center
+                  justify-center
+                  "
+                >
 
-{/* Step Card */}
+                  {index+1}
 
-<div
-className="
-bg-slate-800
-rounded-2xl
-p-6
-border
-border-slate-700
-hover:border-cyan-400
-transition
-"
+                </div>
 
->
 
-<h3 className="text-xl font-bold">
-Step {index+1}
-</h3>
 
+                <div
+                  className="
+                  bg-slate-800
+                  rounded-2xl
+                  p-6
+                  border
+                  border-slate-700
+                  "
 
-<p className="text-gray-300 mt-2">
-{step}
-</p>
+                >
 
+                  {step}
 
-</div>
+                </div>
 
 
-</motion.div>
+              </motion.div>
 
 
-))
-}
+            ))
+          }
 
 
-</div>
+          </div>
 
 
-</motion.div>
+        </motion.div>
+        
 
+        {/* INTERVIEW PREPARATION */}
 
 
-{/* INTERVIEW PREPARATION */}
+        <motion.div
 
+          id="interview"
 
-<motion.div
+          initial={{
+            opacity:0,
+            y:50
+          }}
 
-initial={{
- opacity:0,
- y:50
-}}
+          whileInView={{
+            opacity:1,
+            y:0
+          }}
 
-whileInView={{
- opacity:1,
- y:0
-}}
+          className="
+          bg-slate-900
+          rounded-3xl
+          p-8
+          mt-8
+          "
 
-className="
-bg-slate-900
-rounded-3xl
-p-8
-mt-8
-"
+        >
 
->
 
+          <h2 className="text-3xl font-bold text-cyan-400 mb-8">
+            🎤 Python Interview Preparation
+          </h2>
 
-<h2 className="text-3xl font-bold text-cyan-400 mb-8">
-🎤 Python Interview Preparation
-</h2>
 
 
+          <div className="grid md:grid-cols-2 gap-6">
 
-<div className="grid md:grid-cols-2 gap-6">
 
+          {
+            interviewQuestions.map((item,index)=>(
 
-{
-interviewQuestions.map((item,index)=>(
 
+              <motion.div
 
-<motion.div
+                key={index}
 
-key={index}
+                whileHover={{
+                  scale:1.05,
+                  y:-8
+                }}
 
-whileHover={{
-scale:1.05,
-y:-8
-}}
+                className="
+                bg-slate-800
+                rounded-2xl
+                p-6
+                border
+                border-slate-700
+                hover:border-cyan-400
+                "
 
-className="
-bg-slate-800
-rounded-2xl
-p-6
-border
-border-slate-700
-hover:border-cyan-400
-transition
-"
+              >
 
->
 
+                <div className="flex justify-between items-center">
 
-<div className="flex justify-between items-center">
 
+                  <h3 className="font-bold">
+                    Question {index+1}
+                  </h3>
 
-<h3 className="font-bold text-lg">
-Question {index+1}
-</h3>
 
+                  <span
+                    className="
+                    bg-cyan-500
+                    text-black
+                    px-3
+                    py-1
+                    rounded-full
+                    text-sm
+                    "
+                  >
 
-<span
-className="
-text-sm
-bg-cyan-500
-text-black
-px-3
-py-1
-rounded-full
-"
->
-{item.level}
-</span>
+                    {item.level}
 
+                  </span>
 
-</div>
 
+                </div>
 
 
-<p className="text-gray-300 mt-4">
-{item.question}
-</p>
 
+                <p className="text-gray-300 mt-4">
+                  {item.question}
+                </p>
 
 
-<button
-className="
-mt-5
-px-4
-py-2
-rounded-xl
-bg-cyan-500
-text-black
-font-semibold
-hover:bg-cyan-400
-transition
-"
->
-Practice →
-</button>
 
+                <button
 
-</motion.div>
+                  className="
+                  mt-5
+                  px-4
+                  py-2
+                  rounded-xl
+                  bg-cyan-500
+                  text-black
+                  font-bold
+                  "
 
+                >
 
-))
-}
+                  Practice →
 
+                </button>
 
-</div>
 
 
-</motion.div>
+              </motion.div>
+
+
+            ))
+          }
+
+
+          </div>
+
+
+        </motion.div>
+
+
+
+
+
 
 
 
@@ -1041,37 +1380,37 @@ Practice →
           <div className="grid md:grid-cols-2 gap-6">
 
 
-            {
-              certifications.map((cert,index)=>(
+          {
+            certifications.map((cert,index)=>(
 
 
-                <motion.div
+              <motion.div
 
-                  key={index}
+                key={index}
 
-                  whileHover={{
-                    scale:1.05,
-                    y:-8
-                  }}
+                whileHover={{
+                  scale:1.05,
+                  y:-8
+                }}
 
-                  className="
-                  bg-slate-800
-                  rounded-2xl
-                  p-6
-                  border
-                  border-slate-700
-                  "
+                className="
+                bg-slate-800
+                rounded-2xl
+                p-6
+                border
+                border-slate-700
+                "
 
-                >
+              >
 
-                  🏆 {cert}
-
-
-                </motion.div>
+                🏆 {cert}
 
 
-              ))
-            }
+              </motion.div>
+
+
+            ))
+          }
 
 
           </div>
@@ -1121,62 +1460,77 @@ Practice →
           <div className="grid md:grid-cols-2 gap-6">
 
 
-            {
-              jobRoles.map((job,index)=>(
+          {
+            [
+              {
+                role:"Python Developer",
+                salary:"₹4–12 LPA",
+                desc:"Develop applications and backend systems using Python."
+              },
+              {
+                role:"Backend Developer",
+                salary:"₹6–15 LPA",
+                desc:"Build APIs and server-side applications."
+              },
+              {
+                role:"Data Analyst",
+                salary:"₹5–12 LPA",
+                desc:"Analyze data using Python libraries."
+              },
+              {
+                role:"Machine Learning Engineer",
+                salary:"₹8–20 LPA",
+                desc:"Create machine learning solutions using Python."
+              }
+            ].map((job,index)=>(
 
 
-                <motion.div
+              <motion.div
 
-                  key={index}
+                key={index}
 
-                  whileHover={{
-                    scale:1.05
-                  }}
+                whileHover={{
+                  scale:1.05
+                }}
 
-                  className="
-                  bg-slate-800
-                  rounded-2xl
-                  p-6
-                  border
-                  border-slate-700
-                  "
+                className="
+                bg-slate-800
+                rounded-2xl
+                p-6
+                border
+                border-slate-700
+                "
 
-                >
-
-
-                  <h3 className="text-xl font-bold">
-                    🚀 {job.role}
-                  </h3>
+              >
 
 
-                  <p className="text-gray-400 mt-3">
-                    {job.desc}
-                  </p>
+                <h3 className="text-xl font-bold">
+                  🚀 {job.role}
+                </h3>
 
 
-                  <p className="text-green-400 font-bold mt-4">
-                    {job.salary}
-                  </p>
+                <p className="text-gray-400 mt-3">
+                  {job.desc}
+                </p>
 
 
-                </motion.div>
+                <p className="text-green-400 font-bold mt-4">
+                  {job.salary}
+                </p>
 
 
-              ))
-            }
+              </motion.div>
+
+
+            ))
+          }
 
 
           </div>
 
 
         </motion.div>
-
-
-
-
-
-
-
+        
 
         {/* TOP COMPANIES */}
 
@@ -1210,46 +1564,54 @@ Practice →
 
 
 
-
           <div className="grid md:grid-cols-4 gap-5">
 
 
-            {
-              companies.map((company,index)=>(
+          {
+            [
+              "Google",
+              "Microsoft",
+              "Amazon",
+              "Meta",
+              "Netflix",
+              "Infosys",
+              "TCS",
+              "Accenture",
+            ].map((company,index)=>(
 
 
-                <motion.div
+              <motion.div
 
-                  key={index}
+                key={index}
 
-                  whileHover={{
-                    scale:1.1,
-                    rotateY:10
-                  }}
+                whileHover={{
+                  scale:1.1,
+                  rotateY:10
+                }}
 
-                  className="
-                  bg-slate-800
-                  rounded-xl
-                  p-6
-                  text-center
-                  font-semibold
-                  border
-                  border-slate-700
-                  hover:bg-cyan-600
-                  hover:border-cyan-400
-                  transition
-                  "
+                className="
+                bg-slate-800
+                rounded-xl
+                p-6
+                text-center
+                font-semibold
+                border
+                border-slate-700
+                hover:bg-cyan-600
+                hover:border-cyan-400
+                transition
+                "
 
-                >
+              >
 
-                  {company}
-
-
-                </motion.div>
+                {company}
 
 
-              ))
-            }
+              </motion.div>
+
+
+            ))
+          }
 
 
           </div>
@@ -1258,11 +1620,15 @@ Practice →
         </motion.div>
 
 
+
       </div>
+
 
     </div>
 
+
   );
+
 }
 
 
