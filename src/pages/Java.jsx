@@ -1,8 +1,35 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 function Java() {
+  const [selectedProject, setSelectedProject] = useState(null);
+const [activeQuestion,setActiveQuestion] = useState(null);
+const interviewQuestions = [
+  {
+    question:"What are the main features of Java?",
+    answer:"Java is object-oriented, platform independent, secure and supports multithreading.",
+    level:"Beginner"
+  },
 
+  {
+    question:"Difference between JDK, JRE and JVM?",
+    answer:"JVM runs Java programs, JRE provides runtime environment, JDK contains tools for development.",
+    level:"Beginner"
+  },
+
+  {
+    question:"What is OOP in Java?",
+    answer:"OOP is a programming approach based on classes and objects. Main concepts are inheritance, encapsulation, polymorphism and abstraction.",
+    level:"Intermediate"
+  },
+
+  {
+    question:"What is Spring Boot?",
+    answer:"Spring Boot is a Java framework used to create production-ready backend applications and APIs.",
+    level:"Advanced"
+  }
+];
 
   const skills = [
     "Java Basics",
@@ -54,14 +81,49 @@ function Java() {
 
 
 
-  const projects = [
-    "Bank Management System",
-    "E-Commerce Application",
-    "Chat Application",
-    "Employee Management System",
-    "REST API Development",
-  ];
+ const projects = [
 
+{
+  name:"Bank Management System",
+  icon:"🏦",
+  difficulty:"Intermediate",
+  tech:["Java","JDBC","MySQL"],
+  desc:"A banking application to manage accounts, transactions and customer details."
+},
+
+{
+  name:"E-Commerce Application",
+  icon:"🛒",
+  difficulty:"Advanced",
+  tech:["Java","Spring Boot","SQL"],
+  desc:"Online shopping backend application with APIs and database."
+},
+
+{
+  name:"Chat Application",
+  icon:"💬",
+  difficulty:"Advanced",
+  tech:["Java","Socket Programming"],
+  desc:"Real-time messaging application using Java networking."
+},
+
+{
+  name:"Employee Management System",
+  icon:"👨‍💼",
+  difficulty:"Beginner",
+  tech:["Java","JDBC"],
+  desc:"Application to manage employee records and information."
+},
+
+{
+  name:"REST API Development",
+  icon:"🚀",
+  difficulty:"Advanced",
+  tech:["Java","Spring Boot","REST"],
+  desc:"Build scalable backend APIs using Java frameworks."
+}
+
+];
 
 
   const companies = [
@@ -436,7 +498,113 @@ function Java() {
         </motion.div>
 
 
+{/* SKILL TRACKER */}
 
+<motion.div
+
+  initial={{
+    opacity:0,
+    y:50
+  }}
+
+  whileInView={{
+    opacity:1,
+    y:0
+  }}
+
+  className="
+  bg-slate-900
+  rounded-3xl
+  p-8
+  mt-8
+  "
+
+>
+
+
+<h2 className="text-3xl font-bold text-cyan-400 mb-8">
+  🎯 Java Skill Tracker
+</h2>
+
+
+<div className="space-y-6">
+
+
+{
+[
+  ["Java Basics",95],
+  ["OOP Concepts",90],
+  ["Collections",80],
+  ["Spring Boot",70],
+  ["Microservices",50]
+
+].map((skill,index)=>(
+
+
+<div key={index}>
+
+
+<div className="flex justify-between mb-2">
+
+<span>
+{skill[0]}
+</span>
+
+<span className="text-cyan-400">
+{skill[1]}%
+</span>
+
+</div>
+
+
+<div className="
+w-full
+h-3
+bg-slate-700
+rounded-full
+overflow-hidden
+">
+
+
+<motion.div
+
+initial={{
+width:0
+}}
+
+whileInView={{
+width:`${skill[1]}%`
+}}
+
+transition={{
+duration:1,
+delay:index*0.2
+}}
+
+className="
+h-full
+bg-cyan-500
+rounded-full
+"
+
+/>
+
+
+</div>
+
+
+</div>
+
+
+))
+
+}
+
+
+</div>
+
+
+</motion.div>
 
 
 
@@ -554,46 +722,133 @@ function Java() {
 
           <div className="grid md:grid-cols-3 gap-6">
 
-
-            {
-              projects.map((project,index)=>(
-
-
-                <motion.div
-
-                  key={index}
-
-                  whileHover={{
-                    scale:1.08,
-                    y:-8
-                  }}
-
-                  className="
-                  bg-slate-800
-                  rounded-2xl
-                  p-6
-                  border
-                  border-slate-700
-                  "
-
-                >
+{
+projects.map((project,index)=>(
 
 
-                  <h3 className="font-bold text-lg">
-                    ☕ {project}
-                  </h3>
+<motion.div
+
+key={index}
+
+whileHover={{
+  scale:1.05,
+  y:-10
+}}
+
+className="
+bg-slate-800
+rounded-2xl
+p-6
+border
+border-slate-700
+hover:border-cyan-400
+transition
+"
+
+>
 
 
-                  <p className="text-gray-400 mt-3">
-                    Build this project to improve practical Java skills.
-                  </p>
+<h3 className="text-xl font-bold">
+
+{project.icon} {project.name}
+
+</h3>
 
 
-                </motion.div>
+
+<span
+className="
+inline-block
+mt-4
+px-3
+py-1
+rounded-full
+bg-cyan-500
+text-black
+text-sm
+font-bold
+"
+>
+
+{project.difficulty}
+
+</span>
 
 
-              ))
-            }
+
+<p className="text-gray-400 mt-4">
+
+{project.desc}
+
+</p>
+
+
+
+
+<div className="flex flex-wrap gap-2 mt-4">
+
+
+{
+project.tech.map((item,index)=>(
+
+
+<span
+
+key={index}
+
+className="
+px-3
+py-1
+rounded-full
+bg-slate-700
+text-cyan-300
+text-sm
+"
+
+>
+
+{item}
+
+</span>
+
+
+))
+}
+
+
+</div>
+
+
+
+
+
+<button
+
+onClick={()=>setSelectedProject(project)}
+
+className="
+mt-5
+px-5
+py-2
+rounded-xl
+bg-cyan-500
+text-black
+font-bold
+"
+
+>
+
+View Details →
+
+</button>
+
+
+
+</motion.div>
+
+
+))
+}
 
 
           </div>
@@ -718,7 +973,177 @@ function Java() {
 
 
 
+{/* INTERVIEW SECTION */}
 
+
+<motion.div
+
+initial={{
+  opacity:0,
+  y:50
+}}
+
+whileInView={{
+  opacity:1,
+  y:0
+}}
+
+className="
+bg-slate-900
+rounded-3xl
+p-8
+mt-8
+"
+
+>
+
+
+<h2 className="text-3xl font-bold text-cyan-400 mb-8">
+🎤 Java Interview Preparation
+</h2>
+
+
+
+<div className="grid md:grid-cols-2 gap-6">
+
+
+{
+interviewQuestions.map((item,index)=>(
+
+
+<motion.div
+
+key={index}
+
+whileHover={{
+scale:1.05
+}}
+
+className="
+bg-slate-800
+rounded-2xl
+p-6
+border
+border-slate-700
+"
+
+>
+
+
+<div className="flex justify-between">
+
+
+<h3 className="font-bold">
+Question {index+1}
+</h3>
+
+
+<span className="
+bg-cyan-500
+text-black
+px-3
+py-1
+rounded-full
+text-sm
+">
+
+{item.level}
+
+</span>
+
+
+</div>
+
+
+
+<p className="mt-4 text-gray-300">
+
+{item.question}
+
+</p>
+
+
+
+
+<button
+
+onClick={()=>setActiveQuestion(
+activeQuestion===index ? null : index
+)}
+
+className="
+mt-5
+px-5
+py-2
+bg-cyan-500
+text-black
+rounded-xl
+font-bold
+"
+
+>
+
+{
+activeQuestion===index
+?
+"Hide Answer"
+:
+"Show Answer"
+}
+
+</button>
+
+
+
+
+{
+activeQuestion===index && (
+
+<motion.p
+
+initial={{
+opacity:0,
+y:-10
+}}
+
+animate={{
+opacity:1,
+y:0
+}}
+
+className="
+mt-5
+text-green-400
+bg-slate-950
+p-4
+rounded-xl
+"
+
+>
+
+💡 {item.answer}
+
+</motion.p>
+
+)
+
+}
+
+
+
+</motion.div>
+
+
+))
+
+}
+
+
+</div>
+
+
+
+</motion.div>
 
 
 
@@ -889,7 +1314,146 @@ function Java() {
 
 
 
+{/* PROJECT DETAILS POPUP */}
 
+
+{
+selectedProject && (
+
+
+<motion.div
+
+initial={{
+opacity:0
+}}
+
+animate={{
+opacity:1
+}}
+
+className="
+fixed
+inset-0
+bg-black/70
+flex
+items-center
+justify-center
+z-50
+"
+
+>
+
+
+<motion.div
+
+initial={{
+scale:0.7
+}}
+
+animate={{
+scale:1
+}}
+
+className="
+bg-slate-900
+rounded-3xl
+p-8
+max-w-lg
+w-full
+border
+border-cyan-400
+"
+
+>
+
+
+<h2 className="text-3xl font-bold text-cyan-400">
+
+{selectedProject.icon} {selectedProject.name}
+
+</h2>
+
+
+
+<p className="text-gray-300 mt-5">
+
+{selectedProject.desc}
+
+</p>
+
+
+
+<h3 className="mt-5 font-bold">
+Technologies:
+</h3>
+
+
+
+<div className="flex flex-wrap gap-3 mt-3">
+
+
+{
+selectedProject.tech.map((item,index)=>(
+
+
+<span
+
+key={index}
+
+className="
+px-3
+py-1
+bg-cyan-500/20
+text-cyan-300
+rounded-full
+"
+
+>
+
+{item}
+
+</span>
+
+
+))
+}
+
+
+</div>
+
+
+
+
+<button
+
+onClick={()=>setSelectedProject(null)}
+
+className="
+mt-6
+px-6
+py-2
+rounded-xl
+bg-cyan-500
+text-black
+font-bold
+"
+
+>
+
+Close
+
+</button>
+
+
+
+</motion.div>
+
+
+</motion.div>
+
+
+)
+}
 
 
 
