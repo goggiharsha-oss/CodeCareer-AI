@@ -859,16 +859,115 @@ View Details →
 
 
 
+{/* CAREER CTA */}
+
+<motion.div
+
+initial={{
+  opacity:0,
+  y:50
+}}
+
+whileInView={{
+  opacity:1,
+  y:0
+}}
+
+className="
+bg-gradient-to-r
+from-red-900
+to-orange-900
+rounded-3xl
+p-10
+mt-8
+text-center
+"
+
+>
+
+<h2 className="text-3xl font-bold">
+🚀 Ready to Become a Java Developer?
+</h2>
+
+
+<p className="text-gray-300 mt-4">
+Follow the roadmap, build projects and prepare for your dream Java job.
+</p>
 
 
 
+<div className="
+flex
+justify-center
+gap-5
+mt-8
+flex-wrap
+">
+
+
+<button
+
+onClick={() =>
+document.getElementById("roadmap")
+.scrollIntoView({
+behavior:"smooth"
+})
+}
+
+className="
+px-6
+py-3
+rounded-xl
+bg-cyan-500
+text-black
+font-bold
+"
+
+>
+
+🛣 Start Roadmap
+
+</button>
+
+
+
+
+<button
+
+onClick={() =>
+document.getElementById("interview")
+.scrollIntoView({
+behavior:"smooth"
+})
+}
+
+className="
+px-6
+py-3
+rounded-xl
+bg-white
+text-black
+font-bold
+"
+
+>
+
+🎤 Practice Interview
+
+</button>
+
+
+</div>
+
+
+</motion.div>
 
         {/* ROADMAP SECTION */}
 
 
 
         <motion.div
-
+id="roadmap"
           initial={{
             opacity:0,
             y:50
@@ -977,7 +1076,7 @@ View Details →
 
 
 <motion.div
-
+id="interview"
 initial={{
   opacity:0,
   y:50
