@@ -1,8 +1,9 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { CheckCircle } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 import { useEffect, useState } from "react";
+import { ArrowLeft } from "lucide-react";
+
 
 const roadmapData = {
   "Web Development": {
@@ -60,7 +61,7 @@ const roadmapData = {
 
 
 function Roadmap() {
-
+const navigate = useNavigate();
   const { darkMode } = useTheme();
   const { career } = useParams();
 const [completedSteps, setCompletedSteps] = useState(() => {
@@ -120,6 +121,20 @@ const progress =
     >
 
       <div className="max-w-4xl mx-auto">
+  <div className="mb-6">
+    <button
+      onClick={() => navigate("/")}
+      className="group flex items-center gap-2 rounded-xl border border-cyan-500 bg-cyan-500/10 px-5 py-3 text-cyan-400 font-semibold transition-all duration-300 hover:bg-cyan-500 hover:text-white hover:shadow-lg hover:shadow-cyan-500/30"
+    >
+      <ArrowLeft
+        size={20}
+        className="transition-transform duration-300 group-hover:-translate-x-1"
+      />
+      Back to Home
+    </button>
+  </div>
+
+  
 
         <motion.div
           initial={{opacity:0,y:40}}

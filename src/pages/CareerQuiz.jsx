@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useTheme } from "../context/ThemeContext";
 import { useNavigate } from "react-router-dom";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, ArrowLeft } from "lucide-react";
 const careerDetails = {
   "Web Development": {
     percentage: "92%",
@@ -76,15 +76,22 @@ function CareerQuiz() {
   const [started, setStarted] = useState(false);
 
   const [showResult, setShowResult] = useState(false);
+  const [showWarning, setShowWarning] = useState(false);
   const [resultCareer, setResultCareer] = useState("");
 
   const handleNext = () => {
     if (!selectedAnswer) {
-      alert("Please select an option!");
-      return;
+      setShowWarning(true);
+
+setTimeout(() => {
+  setShowWarning(false);
+}, 2500);
+
+return;
     }
 
-    const updatedAnswers = [...answers, selectedAnswer];
+    const updatedAnswers = [...answers];
+updatedAnswers[currentQuestion] = selectedAnswer;
     setAnswers(updatedAnswers);
 
     if (currentQuestion < questions.length - 1) {
@@ -107,7 +114,16 @@ function CareerQuiz() {
       setShowResult(true);
     }
   };
+const handleBack = () => {
+  if (currentQuestion > 0) {
+    const previousQuestion = currentQuestion - 1;
 
+    setCurrentQuestion(previousQuestion);
+    setSelectedAnswer(
+      answers[previousQuestion] || ""
+    );
+  }
+};
 
   return (
     <div
@@ -119,6 +135,50 @@ function CareerQuiz() {
     >
 
       <div className="w-full max-w-3xl">
+      {showWarning && (
+  <motion.div
+    initial={{ opacity: 0, y: -30, scale: 0.8 }}
+    animate={{ opacity: 1, y: 0, scale: 1 }}
+    className="mb-6 rounded-2xl border border-yellow-400/50 bg-yellow-100/90 p-5 shadow-2xl backdrop-blur-xl dark:bg-yellow-900/40"
+  >
+    <div className="flex items-center gap-4">
+      <motion.div
+       animate={{
+  rotate: [-5, 5, -5],
+  y: [0, -5, 0],
+}}
+        transition={{
+  duration: 0.6,
+  repeat: Infinity,
+}}
+        className="text-5xl"
+      >
+        🤖
+      </motion.div>
+
+      <div>
+        <h3 className="font-bold text-lg text-yellow-700 dark:text-yellow-300">
+          Oops!
+        </h3>
+
+        <p>Please select an option before continuing.</p>
+      </div>
+    </div>
+  </motion.div>
+)}
+        <div className="mb-6">
+
+  <button
+    onClick={() => navigate("/")}
+    className="group flex items-center gap-2 rounded-xl border border-cyan-500 bg-cyan-500/10 px-5 py-3 text-cyan-400 font-semibold transition-all duration-300 hover:bg-cyan-500 hover:text-white hover:shadow-lg hover:shadow-cyan-500/30"
+  >
+    <ArrowLeft
+      size={20}
+      className="transition-transform duration-300 group-hover:-translate-x-1"
+    />
+    Back to Home
+  </button>
+</div>
 
         {showResult ? (
 
@@ -132,7 +192,14 @@ function CareerQuiz() {
                 : "bg-white border-cyan-200"
             }`}
           >
-
+<div className="mb-6 text-left">
+  <button
+    onClick={() => navigate("/")}
+    className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-semibold transition"
+  >
+    ← Back to Home
+  </button>
+</div>
             <motion.div
   animate={{
     y:[0,-15,0]
@@ -465,18 +532,34 @@ transition={{
             </div>
 
 
-            <motion.button
-              onClick={handleNext}
-              whileHover={{ scale: 1.03 }}
-whileTap={{ scale: 0.96 }}
-              className="mt-8 w-full rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 py-4 text-white font-semibold hover:scale-105 transition"
-            >
+           <div className="mt-8 flex gap-4">
 
-              {currentQuestion === questions.length - 1
-                ? "Finish Quiz 🎉"
-                : "Next →"}
+  <motion.button
+    onClick={handleBack}
+    whileHover={{ scale: 1.03 }}
+    whileTap={{ scale: 0.96 }}
+    disabled={currentQuestion === 0}
+    className={`flex-1 rounded-xl py-4 font-semibold transition ${
+      currentQuestion === 0
+        ? "bg-gray-400 cursor-not-allowed text-white"
+        : "bg-slate-700 text-white hover:bg-slate-600"
+    }`}
+  >
+    ← Back
+  </motion.button>
 
-            </motion.button>
+  <motion.button
+    onClick={handleNext}
+    whileHover={{ scale: 1.03 }}
+    whileTap={{ scale: 0.96 }}
+    className="flex-1 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 py-4 font-semibold text-white"
+  >
+    {currentQuestion === questions.length - 1
+      ? "Finish Quiz 🎉"
+      : "Next →"}
+  </motion.button>
+
+</div>
 
 
           </motion.div>
