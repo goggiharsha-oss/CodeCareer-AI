@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-
+import { useState } from "react";
 function CSharp() {
+const [selectedProject, setSelectedProject] = useState(null);
+const [activeQuestion, setActiveQuestion] = useState(null);
+const [completedTopics, setCompletedTopics] = useState([]);
 
 
   const skills = [
@@ -17,7 +20,28 @@ function CSharp() {
     "Problem Solving",
   ];
 
-
+const skillProgress = [
+  {
+    name: "C# Basics",
+    level: 95,
+  },
+  {
+    name: "Object-Oriented Programming",
+    level: 90,
+  },
+  {
+    name: ".NET Framework",
+    level: 80,
+  },
+  {
+    name: "ASP.NET",
+    level: 70,
+  },
+  {
+    name: "Database Connectivity",
+    level: 65,
+  },
+];
 
   const roadmap = [
     "Learn C# Fundamentals",
@@ -54,13 +78,48 @@ function CSharp() {
 
 
 
-  const projects = [
-    "Bank Management System",
-    "Desktop Application",
-    "E-Commerce Application",
-    "Student Management System",
-    "Web API Project",
-  ];
+ const projects = [
+  {
+    name: "Bank Management System",
+    category: "Desktop Application",
+    difficulty: "Intermediate",
+    skills: [".NET", "SQL Server", "Classes"],
+    desc: "Build a banking system with account management and transactions using C#.",
+    icon: "🏦",
+  },
+  {
+    name: "Desktop Application",
+    category: "Windows Forms",
+    difficulty: "Beginner",
+    skills: ["C#", ".NET", "Visual Studio"],
+    desc: "Create a desktop application using Windows Forms and C#.",
+    icon: "💻",
+  },
+  {
+    name: "E-Commerce Application",
+    category: "Web Application",
+    difficulty: "Advanced",
+    skills: ["ASP.NET", "SQL Server", "Authentication"],
+    desc: "Develop a complete online shopping application with login and payment modules.",
+    icon: "🛒",
+  },
+  {
+    name: "Student Management System",
+    category: "Management System",
+    difficulty: "Intermediate",
+    skills: ["C#", "SQL", "CRUD"],
+    desc: "Manage student records, attendance and marks using C#.",
+    icon: "🎓",
+  },
+  {
+    name: "Web API Project",
+    category: "REST API",
+    difficulty: "Advanced",
+    skills: ["ASP.NET Core", "API", "JSON"],
+    desc: "Build REST APIs using ASP.NET Core for frontend applications.",
+    icon: "🌐",
+  },
+];
 
 
 
@@ -100,7 +159,32 @@ function CSharp() {
     }
   ];
 
-
+const interviewQuestions = [
+  {
+    question: "What is C#?",
+    answer:
+      "C# is an object-oriented programming language developed by Microsoft for the .NET platform.",
+    level: "Beginner",
+  },
+  {
+    question: "What is the difference between class and object?",
+    answer:
+      "A class is a blueprint, while an object is an instance of that class.",
+    level: "Beginner",
+  },
+  {
+    question: "What is LINQ?",
+    answer:
+      "LINQ allows querying collections, databases and XML using C# syntax.",
+    level: "Intermediate",
+  },
+  {
+    question: "What is ASP.NET?",
+    answer:
+      "ASP.NET is Microsoft's framework used to build web applications and APIs.",
+    level: "Advanced",
+  },
+];
 
 
 
@@ -440,7 +524,74 @@ function CSharp() {
 
 
 
+{/* SKILL PROGRESS TRACKER */}
 
+<motion.div
+  initial={{
+    opacity: 0,
+    y: 50,
+  }}
+  whileInView={{
+    opacity: 1,
+    y: 0,
+  }}
+  className="
+  bg-slate-900
+  rounded-3xl
+  p-8
+  mt-8
+  "
+>
+  <h2 className="text-3xl font-bold text-cyan-400 mb-8">
+    🎯 C# Skill Progress
+  </h2>
+
+  <div className="space-y-6">
+    {skillProgress.map((skill, index) => (
+      <div key={index}>
+        <div className="flex justify-between mb-2">
+          <h3 className="font-semibold">
+            {skill.name}
+          </h3>
+
+          <span className="text-cyan-400">
+            {skill.level}%
+          </span>
+        </div>
+
+        <div
+          className="
+          w-full
+          h-4
+          bg-slate-700
+          rounded-full
+          overflow-hidden
+          "
+        >
+          <motion.div
+            initial={{
+              width: 0,
+            }}
+            whileInView={{
+              width: `${skill.level}%`,
+            }}
+            transition={{
+              duration: 1,
+              delay: index * 0.2,
+            }}
+            className="
+            h-full
+            bg-gradient-to-r
+            from-cyan-400
+            to-purple-500
+            rounded-full
+            "
+          />
+        </div>
+      </div>
+    ))}
+  </div>
+</motion.div>
 
 
 
@@ -571,25 +722,44 @@ function CSharp() {
                   }}
 
                   className="
-                  bg-slate-800
-                  rounded-2xl
-                  p-6
-                  border
-                  border-slate-700
-                  "
+bg-slate-800
+rounded-2xl
+p-6
+border
+border-slate-700
+hover:border-cyan-400
+hover:shadow-xl
+hover:shadow-cyan-500/30
+transition
+duration-300
+cursor-pointer
+"
 
                 >
 
 
                   <h3 className="font-bold text-lg">
-                    💜 {project}
+                  {project.icon} {project.name}
                   </h3>
 
 
                   <p className="text-gray-400 mt-3">
-                    Build this project to improve practical C# skills.
+                   {project.desc}
                   </p>
-
+<button
+  onClick={() => setSelectedProject(project)}
+  className="
+  mt-5
+  px-5
+  py-2
+  rounded-xl
+  bg-cyan-500
+  text-black
+  font-bold
+  "
+>
+  View Details →
+</button>
 
                 </motion.div>
 
@@ -606,16 +776,209 @@ function CSharp() {
 
 
 
+{/* CAREER CTA */}
 
+<motion.div
+  initial={{
+    opacity: 0,
+    y: 50,
+  }}
+  whileInView={{
+    opacity: 1,
+    y: 0,
+  }}
+  className="
+  bg-gradient-to-r
+  from-purple-900
+  to-cyan-900
+  rounded-3xl
+  p-10
+  mt-8
+  text-center
+  "
+>
+  <h2 className="text-3xl font-bold">
+    🚀 Ready to Become a C# Developer?
+  </h2>
 
+  <p className="text-gray-300 mt-4">
+    Follow the roadmap, build projects and prepare for interviews.
+  </p>
 
+  <div className="flex justify-center gap-5 mt-8 flex-wrap">
+    <button
+      onClick={() =>
+        document
+          .getElementById("roadmap")
+          ?.scrollIntoView({ behavior: "smooth" })
+      }
+      className="
+      px-6
+      py-3
+      rounded-xl
+      bg-cyan-500
+      text-black
+      font-bold
+      "
+    >
+      🛣 Start Roadmap
+    </button>
+
+    <button
+      onClick={() =>
+        document
+          .getElementById("interview")
+          ?.scrollIntoView({ behavior: "smooth" })
+      }
+      className="
+      px-6
+      py-3
+      rounded-xl
+      bg-white
+      text-black
+      font-bold
+      "
+    >
+      🎤 Practice Interview
+    </button>
+  </div>
+</motion.div>
+
+{
+selectedProject && (
+
+<motion.div
+
+initial={{
+opacity:0
+}}
+
+animate={{
+opacity:1
+}}
+
+className="
+fixed
+inset-0
+bg-black/70
+flex
+items-center
+justify-center
+z-50
+"
+
+>
+
+<motion.div
+
+initial={{
+scale:0.7
+}}
+
+animate={{
+scale:1
+}}
+
+className="
+bg-slate-900
+rounded-3xl
+p-8
+max-w-lg
+w-full
+border
+border-cyan-400
+"
+
+>
+
+<h2 className="text-3xl font-bold text-cyan-400">
+
+{selectedProject.icon} {selectedProject.name}
+
+</h2>
+
+<p className="text-cyan-400 mt-3">
+
+{selectedProject.category}
+
+</p>
+
+<p className="text-gray-300 mt-4">
+
+{selectedProject.desc}
+
+</p>
+
+<p className="mt-4">
+
+🔥 Difficulty:
+<span className="text-green-400">
+{" "}{selectedProject.difficulty}
+</span>
+
+</p>
+
+<div className="flex flex-wrap gap-2 mt-5">
+
+{
+selectedProject.skills.map((skill,index)=>(
+
+<span
+
+key={index}
+
+className="
+px-3
+py-1
+rounded-full
+bg-cyan-500/20
+text-cyan-300
+"
+
+>
+
+{skill}
+
+</span>
+
+))
+}
+
+</div>
+
+<button
+
+onClick={() => setSelectedProject(null)}
+
+className="
+mt-6
+px-5
+py-2
+bg-cyan-500
+text-black
+rounded-xl
+font-bold
+"
+
+>
+
+Close
+
+</button>
+
+</motion.div>
+
+</motion.div>
+
+)
+}
 
         {/* ROADMAP SECTION */}
 
 
 
         <motion.div
-
+id="roadmap"
           initial={{
             opacity:0,
             y:50
@@ -719,7 +1082,99 @@ function CSharp() {
 
 
 
+{/* INTERVIEW PREPARATION */}
 
+<motion.div
+  id="interview"
+  initial={{ opacity: 0, y: 50 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  className="
+  bg-slate-900
+  rounded-3xl
+  p-8
+  mt-8
+  "
+>
+  <h2 className="text-3xl font-bold text-cyan-400 mb-8">
+    🎤 C# Interview Preparation
+  </h2>
+
+  <div className="grid md:grid-cols-2 gap-6">
+    {interviewQuestions.map((item, index) => (
+      <motion.div
+        key={index}
+        whileHover={{
+          scale: 1.05,
+          y: -8,
+        }}
+        className="
+        bg-slate-800
+        rounded-2xl
+        p-6
+        border
+        border-slate-700
+        "
+      >
+        <div className="flex justify-between items-center">
+          <h3 className="font-bold">
+            Question {index + 1}
+          </h3>
+
+          <span
+            className="
+            bg-cyan-500
+            text-black
+            px-3
+            py-1
+            rounded-full
+            text-sm
+            "
+          >
+            {item.level}
+          </span>
+        </div>
+
+        <p className="text-gray-300 mt-4">
+          {item.question}
+        </p>
+
+        <button
+          onClick={() =>
+            setActiveQuestion(
+              activeQuestion === index ? null : index
+            )
+          }
+          className="
+          mt-5
+          px-4
+          py-2
+          rounded-xl
+          bg-cyan-500
+          text-black
+          font-bold
+          "
+        >
+          {activeQuestion === index
+            ? "Hide Answer"
+            : "Show Answer"}
+        </button>
+
+        {activeQuestion === index && (
+          <motion.p
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="
+            mt-5
+            text-green-400
+            "
+          >
+            💡 {item.answer}
+          </motion.p>
+        )}
+      </motion.div>
+    ))}
+  </div>
+</motion.div>
 
 
 
