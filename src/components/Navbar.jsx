@@ -10,10 +10,11 @@ function Navbar() {
 
   const navItems = [
  { name: "Home", path: "#top" },
+ { name: "Portfolio", path: "/portfolio-builder", isRoute: true },
   { name: "Languages", path: "#languages" },
   { name: "Careers", path: "#careers" },
   { name: "Salary", path: "#salary" },
-  { name: "Portfolio", path: "/portfolio-builder", isRoute: true },
+  
 ];
   return (
     <motion.nav
