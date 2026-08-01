@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Menu, X, Code2, Sun, Moon } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTheme } from "../context/ThemeContext";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
@@ -12,6 +13,7 @@ function Navbar() {
   { name: "Languages", path: "#languages" },
   { name: "Careers", path: "#careers" },
   { name: "Salary", path: "#salary" },
+  { name: "Portfolio", path: "/portfolio-builder", isRoute: true },
 ];
   return (
     <motion.nav
@@ -89,33 +91,58 @@ overflow-hidden
         <div className="hidden md:flex items-center gap-8">
 
 
-          {navItems.map((item) => (
-            <a
-              key={item.name}
-              href={item.path}
-              className="
-              relative
-              text-gray-700 dark:text-gray-200
-              font-medium
-              group
-              "
-            >
+          {navItems.map((item) =>
+  item.isRoute ? (
+    <Link
+      key={item.name}
+      to={item.path}
+      className="
+      relative
+      text-gray-700 dark:text-gray-200
+      font-medium
+      group
+      "
+    >
+      {item.name}
 
-              {item.name}
+      <span
+        className="
+        absolute left-0 -bottom-1
+        w-0 h-[2px]
+        bg-cyan-400
+        transition-all
+        duration-300
+        group-hover:w-full
+        "
+      />
+    </Link>
+  ) : (
+    <a
+      key={item.name}
+      href={item.path}
+      className="
+      relative
+      text-gray-700 dark:text-gray-200
+      font-medium
+      group
+      "
+    >
+      {item.name}
 
-              <span
-                className="
-                absolute left-0 -bottom-1
-                w-0 h-[2px]
-                bg-cyan-400
-                transition-all
-                duration-300
-                group-hover:w-full
-                "
-              />
-
-            </a>
-          ))}
+      <span
+        className="
+        absolute left-0 -bottom-1
+        w-0 h-[2px]
+        bg-cyan-400
+        transition-all
+        duration-300
+        group-hover:w-full
+        "
+      />
+    </a>
+  )
+)}
+          
 
 
 
@@ -182,36 +209,41 @@ overflow-hidden
         >
 
 
-          {navItems.map((item) => (
-
-           <motion.a
-  key={item.name}
-  href={item.path}
-
-  whileHover={{
-    y:-3,
-    scale:1.05
-  }}
-
-  transition={{
-    duration:0.2
-  }}
-
-  className="
-  relative
-  text-gray-700 dark:text-gray-200
-  font-medium
-  group
-  "
->
-
-              {item.name}
-
-            </motion.a>
-
-          ))}
-
-
+          {navItems.map((item) =>
+  item.isRoute ? (
+    <motion.div
+      key={item.name}
+      whileHover={{ y: -3, scale: 1.05 }}
+      transition={{ duration: 0.2 }}
+    >
+      <Link
+        to={item.path}
+        onClick={() => setOpen(false)}
+        className="
+        relative
+        text-gray-700 dark:text-gray-200
+        font-medium
+        "
+      >
+        {item.name}
+      </Link>
+    </motion.div>
+  ) : (
+    <motion.a
+      key={item.name}
+      href={item.path}
+      whileHover={{ y: -3, scale: 1.05 }}
+      transition={{ duration: 0.2 }}
+      className="
+      relative
+      text-gray-700 dark:text-gray-200
+      font-medium
+      "
+    >
+      {item.name}
+    </motion.a>
+  )
+)}
 
           <button
   onClick={toggleTheme}

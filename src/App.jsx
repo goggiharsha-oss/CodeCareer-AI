@@ -6,7 +6,7 @@ import LoadingScreen from "./components/LoadingScreen";
 import Roadmap from "./pages/Roadmap";
 import { useTheme } from "./context/ThemeContext";
 import { useState, useEffect } from "react";
-
+import PortfolioBuilder from "./pages/PortfolioBuilder";
 
 import Home from "./pages/Home";
 import Python from "./pages/Python";
@@ -171,6 +171,11 @@ function App() {
 <Route
   path="/career-quiz"
   element={<CareerQuiz />}
+/>
+
+<Route
+  path="/portfolio-builder"
+  element={<PortfolioBuilder />}
 />
 
           <Route
