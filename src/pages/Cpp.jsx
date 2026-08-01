@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 function CppProgramming() {
-
-
+const [selectedProject,setSelectedProject] = useState(null);
+const [activeQuestion,setActiveQuestion] = useState(null);
   const skills = [
     "C++ Basics",
     "Object-Oriented Programming",
@@ -17,7 +18,28 @@ function CppProgramming() {
     "Problem Solving",
   ];
 
-
+const skillProgress = [
+  {
+    name:"C++ Basics",
+    level:95
+  },
+  {
+    name:"OOP Concepts",
+    level:90
+  },
+  {
+    name:"STL",
+    level:80
+  },
+  {
+    name:"Pointers & Memory",
+    level:70
+  },
+  {
+    name:"Data Structures",
+    level:65
+  }
+];
 
   const roadmap = [
     "Learn C++ Fundamentals",
@@ -55,12 +77,73 @@ function CppProgramming() {
 
 
   const projects = [
-    "Bank Management System",
-    "Game Development Project",
-    "Student Management System",
-    "File Management System",
-    "Inventory Management System",
-  ];
+
+{
+name:"Bank Management System",
+category:"Management System",
+difficulty:"Advanced",
+skills:[
+"C++",
+"OOP",
+"File Handling"
+],
+desc:"Create banking software using C++ classes and object oriented programming.",
+icon:"🏦"
+},
+
+{
+name:"Game Development Project",
+category:"Game Development",
+difficulty:"Advanced",
+skills:[
+"C++",
+"Graphics",
+"OOP"
+],
+desc:"Build games using C++ programming concepts.",
+icon:"🎮"
+},
+
+{
+name:"Student Management System",
+category:"Console Application",
+difficulty:"Intermediate",
+skills:[
+"C++",
+"Classes",
+"File Handling"
+],
+desc:"Manage student records using C++.",
+icon:"🎓"
+},
+
+{
+name:"File Management System",
+category:"System Project",
+difficulty:"Advanced",
+skills:[
+"C++",
+"Pointers",
+"Files"
+],
+desc:"Practice file operations and memory management.",
+icon:"📁"
+},
+
+{
+name:"Inventory Management System",
+category:"Business Application",
+difficulty:"Intermediate",
+skills:[
+"C++",
+"OOP",
+"Data Structures"
+],
+desc:"Create inventory tracking application.",
+icon:"📦"
+}
+
+];
 
 
 
@@ -101,7 +184,33 @@ function CppProgramming() {
   ];
 
 
+const interviewQuestions = [
 
+{
+question:"What is OOP in C++?",
+answer:"OOP is a programming approach based on classes and objects. Main concepts are inheritance, polymorphism and encapsulation.",
+level:"Beginner"
+},
+
+{
+question:"Difference between C and C++?",
+answer:"C is procedural language while C++ supports object oriented programming.",
+level:"Beginner"
+},
+
+{
+question:"What is inheritance?",
+answer:"Inheritance allows one class to acquire properties and functions of another class.",
+level:"Intermediate"
+},
+
+{
+question:"What is STL in C++?",
+answer:"STL (Standard Template Library) provides ready-made containers and algorithms.",
+level:"Advanced"
+}
+
+];
 
 
   return (
@@ -439,7 +548,116 @@ function CppProgramming() {
 
 
 
+{/* SKILL PROGRESS TRACKER */}
 
+
+<motion.div
+
+initial={{
+opacity:0,
+y:50
+}}
+
+whileInView={{
+opacity:1,
+y:0
+}}
+
+className="
+bg-slate-900
+rounded-3xl
+p-8
+mt-8
+"
+
+>
+
+
+<h2 className="text-3xl font-bold text-cyan-400 mb-8">
+
+🎯 C++ Skill Progress
+
+</h2>
+
+
+<div className="space-y-6">
+
+
+{
+skillProgress.map((skill,index)=>(
+
+
+<div key={index}>
+
+
+<div className="flex justify-between mb-2">
+
+
+<h3 className="font-semibold">
+{skill.name}
+</h3>
+
+
+<span className="text-cyan-400">
+{skill.level}%
+</span>
+
+
+</div>
+
+
+
+<div className="
+w-full
+h-4
+bg-slate-700
+rounded-full
+overflow-hidden
+">
+
+
+<motion.div
+
+initial={{
+width:0
+}}
+
+whileInView={{
+width:`${skill.level}%`
+}}
+
+transition={{
+duration:1,
+delay:index*0.2
+}}
+
+className="
+h-full
+bg-gradient-to-r
+from-cyan-400
+to-blue-500
+rounded-full
+"
+
+>
+
+</motion.div>
+
+
+</div>
+
+
+</div>
+
+
+))
+}
+
+
+</div>
+
+
+</motion.div>
 
 
 
@@ -570,25 +788,50 @@ function CppProgramming() {
                   }}
 
                   className="
-                  bg-slate-800
-                  rounded-2xl
-                  p-6
-                  border
-                  border-slate-700
-                  "
+bg-slate-800
+rounded-2xl
+p-6
+border
+border-slate-700
+hover:border-cyan-400
+hover:shadow-xl
+hover:shadow-cyan-400/20
+transition
+"
 
                 >
 
 
                   <h3 className="font-bold text-lg">
-                    ⚡ {project}
+                     {project.icon} {project.name}
                   </h3>
 
 
                   <p className="text-gray-400 mt-3">
-                    Build this project to improve practical C++ skills.
+                    {project.desc}
                   </p>
+<button
 
+onClick={()=>setSelectedProject(project)}
+
+className="
+mt-5
+px-5
+py-2
+rounded-xl
+bg-cyan-500
+text-black
+font-bold
+hover:shadow-lg
+hover:shadow-cyan-400/50
+transition
+"
+
+>
+
+View Details →
+
+</button>
 
                 </motion.div>
 
@@ -604,17 +847,275 @@ function CppProgramming() {
 
 
 
+{/* CAREER CTA */}
+
+
+<motion.div
+
+initial={{
+opacity:0,
+y:50
+}}
+
+whileInView={{
+opacity:1,
+y:0
+}}
+
+className="
+bg-gradient-to-r
+from-blue-900
+to-purple-900
+rounded-3xl
+p-10
+mt-8
+text-center
+"
+
+>
+
+
+<h2 className="text-3xl font-bold">
+
+🚀 Ready to Become a C++ Developer?
+
+</h2>
+
+
+<p className="text-gray-300 mt-4">
+
+Follow the roadmap, build projects and prepare for C++ interviews.
+
+</p>
 
 
 
+<div className="flex justify-center gap-5 mt-8 flex-wrap">
 
+
+<button
+
+onClick={() =>
+document.getElementById("roadmap")
+.scrollIntoView({
+behavior:"smooth"
+})
+}
+
+className="
+px-6
+py-3
+rounded-xl
+bg-cyan-500
+text-black
+font-bold
+hover:scale-105
+transition
+"
+
+>
+
+🛣 Start Roadmap
+
+</button>
+
+
+
+<button
+
+onClick={() =>
+document.getElementById("interview")
+.scrollIntoView({
+behavior:"smooth"
+})
+}
+
+className="
+px-6
+py-3
+rounded-xl
+bg-white
+text-black
+font-bold
+hover:scale-105
+transition
+"
+
+>
+
+🎤 Practice Interview
+
+</button>
+
+
+</div>
+
+
+</motion.div>
+
+
+
+{/* PROJECT DETAILS POPUP */}
+
+
+{
+selectedProject && (
+
+<motion.div
+
+initial={{
+opacity:0
+}}
+
+animate={{
+opacity:1
+}}
+
+className="
+fixed
+inset-0
+bg-black/70
+flex
+items-center
+justify-center
+z-50
+"
+
+>
+
+
+<motion.div
+
+initial={{
+scale:0.7
+}}
+
+animate={{
+scale:1
+}}
+
+className="
+bg-slate-900
+rounded-3xl
+p-8
+max-w-lg
+w-full
+border
+border-cyan-400
+"
+
+>
+
+
+<h2 className="text-3xl font-bold text-cyan-400">
+
+{selectedProject.icon} {selectedProject.name}
+
+</h2>
+
+
+
+<p className="text-purple-400 mt-3">
+
+{selectedProject.category}
+
+</p>
+
+
+
+<p className="text-gray-300 mt-4">
+
+{selectedProject.desc}
+
+</p>
+
+
+
+<h3 className="mt-5 font-bold">
+
+Required Skills
+
+</h3>
+
+
+<div className="flex flex-wrap gap-2 mt-3">
+
+
+{
+selectedProject.skills.map((skill,index)=>(
+
+
+<span
+
+key={index}
+
+className="
+px-3
+py-1
+rounded-full
+bg-cyan-500/20
+text-cyan-300
+"
+
+>
+
+{skill}
+
+</span>
+
+
+))
+}
+
+
+</div>
+
+
+
+<p className="text-green-400 mt-5">
+
+Difficulty: {selectedProject.difficulty}
+
+</p>
+
+
+
+<button
+
+onClick={()=>setSelectedProject(null)}
+
+className="
+mt-6
+px-5
+py-2
+rounded-xl
+bg-cyan-500
+text-black
+font-bold
+"
+
+>
+
+Close
+
+</button>
+
+
+
+</motion.div>
+
+
+</motion.div>
+
+)
+}
 
         {/* ROADMAP SECTION */
 
 
 
         <motion.div
-
+id="roadmap"
           initial={{
             opacity:0,
             y:50
@@ -718,8 +1219,189 @@ function CppProgramming() {
 
           }
 
+{/* INTERVIEW PREPARATION */}
 
 
+<motion.div
+
+id="interview"
+
+initial={{
+opacity:0,
+y:50
+}}
+
+whileInView={{
+opacity:1,
+y:0
+}}
+
+className="
+bg-slate-900
+rounded-3xl
+p-8
+mt-8
+"
+
+>
+
+
+<h2 className="text-3xl font-bold text-cyan-400 mb-8">
+
+🎤 C++ Interview Preparation
+
+</h2>
+
+
+
+<div className="grid md:grid-cols-2 gap-6">
+
+
+{
+interviewQuestions.map((item,index)=>(
+
+
+<motion.div
+
+key={index}
+
+whileHover={{
+scale:1.05,
+y:-8
+}}
+
+className="
+bg-slate-800
+rounded-2xl
+p-6
+border
+border-slate-700
+hover:border-cyan-400
+hover:shadow-xl
+hover:shadow-cyan-400/20
+transition
+"
+
+>
+
+
+<div className="flex justify-between items-center">
+
+
+<h3 className="font-bold">
+
+Question {index+1}
+
+</h3>
+
+
+
+<span
+
+className="
+bg-cyan-500
+text-black
+px-3
+py-1
+rounded-full
+text-sm
+"
+
+>
+
+{item.level}
+
+</span>
+
+
+</div>
+
+
+
+<p className="text-gray-300 mt-4">
+
+{item.question}
+
+</p>
+
+
+
+<button
+
+onClick={()=> 
+setActiveQuestion(
+activeQuestion === index ? null : index
+)
+}
+
+className="
+mt-5
+px-4
+py-2
+rounded-xl
+bg-cyan-500
+text-black
+font-bold
+"
+
+>
+
+{
+activeQuestion === index
+?
+"Hide Answer"
+:
+"Show Answer"
+}
+
+</button>
+
+
+
+
+{
+activeQuestion === index && (
+
+<motion.p
+
+initial={{
+opacity:0,
+y:-10
+}}
+
+animate={{
+opacity:1,
+y:0
+}}
+
+className="
+mt-5
+text-green-400
+"
+
+>
+
+💡 {item.answer}
+
+</motion.p>
+
+)
+
+}
+
+
+
+</motion.div>
+
+
+))
+}
+
+
+</div>
+
+
+</motion.div>
 
 
 
