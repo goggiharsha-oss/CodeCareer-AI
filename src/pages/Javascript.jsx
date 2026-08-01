@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-
+import { useState } from "react";
 function JavaScript() {
-
-
+const [selectedProject,setSelectedProject] = useState(null);
+const [activeQuestion,setActiveQuestion] = useState(null);
+const [completedTopics, setCompletedTopics] = useState([]);
   const skills = [
     "JavaScript Basics",
     "Variables & Data Types",
@@ -17,7 +18,28 @@ function JavaScript() {
     "Problem Solving",
   ];
 
-
+const skillProgress = [
+  {
+    name: "JavaScript Basics",
+    level: 95,
+  },
+  {
+    name: "Variables & Data Types",
+    level: 90,
+  },
+  {
+    name: "Functions",
+    level: 85,
+  },
+  {
+    name: "DOM Manipulation",
+    level: 75,
+  },
+  {
+    name: "Async JavaScript",
+    level: 65,
+  },
+];
 
   const roadmap = [
     "Learn JavaScript Fundamentals",
@@ -55,12 +77,73 @@ function JavaScript() {
 
 
   const projects = [
-    "Weather Application",
-    "To Do List App",
-    "Portfolio Website",
-    "Chat Application",
-    "E-Commerce Website",
-  ];
+
+{
+name:"Weather Application",
+category:"Web Application",
+difficulty:"Intermediate",
+skills:[
+"JavaScript",
+"API",
+"DOM"
+],
+desc:"Create weather app using API integration and JavaScript.",
+icon:"🌦️"
+},
+
+{
+name:"To Do List App",
+category:"Productivity App",
+difficulty:"Beginner",
+skills:[
+"JavaScript",
+"Local Storage",
+"DOM"
+],
+desc:"Build task management application.",
+icon:"✅"
+},
+
+{
+name:"Portfolio Website",
+category:"Frontend Project",
+difficulty:"Intermediate",
+skills:[
+"JavaScript",
+"HTML",
+"CSS"
+],
+desc:"Create personal developer portfolio website.",
+icon:"💼"
+},
+
+{
+name:"Chat Application",
+category:"Real Time App",
+difficulty:"Advanced",
+skills:[
+"JavaScript",
+"Node.js",
+"WebSocket"
+],
+desc:"Build real time chat application.",
+icon:"💬"
+},
+
+{
+name:"E-Commerce Website",
+category:"Full Stack Project",
+difficulty:"Advanced",
+skills:[
+"JavaScript",
+"React",
+"APIs"
+],
+desc:"Develop complete online shopping platform.",
+icon:"🛒"
+}
+
+];
 
 
 
@@ -100,7 +183,33 @@ function JavaScript() {
     }
   ];
 
+const interviewQuestions = [
 
+{
+question:"What is JavaScript?",
+answer:"JavaScript is a programming language used to create interactive and dynamic web applications.",
+level:"Beginner"
+},
+
+{
+question:"Difference between let, var and const?",
+answer:"var is function scoped, while let and const are block scoped. const cannot be reassigned.",
+level:"Beginner"
+},
+
+{
+question:"What is DOM?",
+answer:"DOM allows JavaScript to access and modify HTML elements dynamically.",
+level:"Intermediate"
+},
+
+{
+question:"What are Promises in JavaScript?",
+answer:"Promises handle asynchronous operations and represent future completion or failure of a task.",
+level:"Advanced"
+}
+
+];
 
 
 
@@ -443,8 +552,105 @@ function JavaScript() {
 
 
           }
+{/* SKILL PROGRESS TRACKER */}
 
+<motion.div
 
+initial={{
+opacity:0,
+y:50
+}}
+
+whileInView={{
+opacity:1,
+y:0
+}}
+
+className="
+bg-slate-900
+rounded-3xl
+p-8
+mt-8
+"
+
+>
+
+<h2 className="text-3xl font-bold text-cyan-400 mb-8">
+
+🎯 JavaScript Skill Progress
+
+</h2>
+
+<div className="space-y-6">
+
+{
+skillProgress.map((skill,index)=>(
+
+<div key={index}>
+
+<div className="flex justify-between mb-2">
+
+<h3 className="font-semibold">
+
+{skill.name}
+
+</h3>
+
+<span className="text-cyan-400">
+
+{skill.level}%
+
+</span>
+
+</div>
+
+<div
+className="
+w-full
+h-4
+bg-slate-700
+rounded-full
+overflow-hidden
+"
+>
+
+<motion.div
+
+initial={{
+width:0
+}}
+
+whileInView={{
+width:`${skill.level}%`
+}}
+
+transition={{
+duration:1,
+delay:index*0.2
+}}
+
+className="
+h-full
+bg-gradient-to-r
+from-cyan-400
+to-blue-500
+rounded-full
+"
+
+>
+
+</motion.div>
+
+</div>
+
+</div>
+
+))
+}
+
+</div>
+
+</motion.div>
         {/* TOOLS SECTION */}
 
 
@@ -576,21 +782,46 @@ function JavaScript() {
                   rounded-2xl
                   p-6
                   border
-                  border-slate-700
-                  "
+border-slate-700
+hover:border-cyan-400
+hover:shadow-xl
+hover:shadow-cyan-400/20
+transition
+"
 
                 >
 
 
                   <h3 className="font-bold text-lg">
-                    🟨 {project}
+                   {project.icon} {project.name}
                   </h3>
 
 
                   <p className="text-gray-400 mt-3">
-                    Build this project to improve practical JavaScript skills.
+                    {project.desc}
                   </p>
+<button
 
+onClick={()=>setSelectedProject(project)}
+
+className="
+mt-5
+px-5
+py-2
+rounded-xl
+bg-cyan-500
+text-black
+font-bold
+hover:shadow-lg
+hover:shadow-cyan-400/50
+transition
+"
+
+>
+
+View Details →
+
+</button>
 
                 </motion.div>
 
@@ -607,7 +838,108 @@ function JavaScript() {
 
 
 
+{/* CAREER CTA */}
 
+<motion.div
+
+initial={{
+opacity:0,
+y:50
+}}
+
+whileInView={{
+opacity:1,
+y:0
+}}
+
+className="
+bg-gradient-to-r
+from-yellow-900
+to-orange-900
+rounded-3xl
+p-10
+mt-8
+text-center
+"
+
+>
+
+<h2 className="text-3xl font-bold">
+
+🚀 Ready to Become a JavaScript Developer?
+
+</h2>
+
+
+<p className="text-gray-300 mt-4">
+
+Follow the roadmap, build projects and prepare for JavaScript interviews.
+
+</p>
+
+
+<div className="flex justify-center gap-5 mt-8 flex-wrap">
+
+
+<button
+
+onClick={() =>
+document.getElementById("roadmap")
+.scrollIntoView({
+behavior:"smooth"
+})
+}
+
+className="
+px-6
+py-3
+rounded-xl
+bg-cyan-500
+text-black
+font-bold
+hover:scale-105
+transition
+"
+
+>
+
+🛣 Start Roadmap
+
+</button>
+
+
+
+<button
+
+onClick={() =>
+document.getElementById("interview")
+.scrollIntoView({
+behavior:"smooth"
+})
+}
+
+className="
+px-6
+py-3
+rounded-xl
+bg-white
+text-black
+font-bold
+hover:scale-105
+transition
+"
+
+>
+
+🎤 Practice Interview
+
+</button>
+
+
+</div>
+
+
+</motion.div>
 
 
 
@@ -616,7 +948,7 @@ function JavaScript() {
 
 
         <motion.div
-
+id="roadmap"
           initial={{
             opacity:0,
             y:50
@@ -723,7 +1055,189 @@ function JavaScript() {
           
 
 
+{/* INTERVIEW PREPARATION */}
 
+
+<motion.div
+
+id="interview"
+
+initial={{
+opacity:0,
+y:50
+}}
+
+whileInView={{
+opacity:1,
+y:0
+}}
+
+className="
+bg-slate-900
+rounded-3xl
+p-8
+mt-8
+"
+
+>
+
+
+<h2 className="text-3xl font-bold text-cyan-400 mb-8">
+
+🎤 JavaScript Interview Preparation
+
+</h2>
+
+
+
+<div className="grid md:grid-cols-2 gap-6">
+
+
+{
+interviewQuestions.map((item,index)=>(
+
+
+<motion.div
+
+key={index}
+
+whileHover={{
+scale:1.05,
+y:-8
+}}
+
+className="
+bg-slate-800
+rounded-2xl
+p-6
+border
+border-slate-700
+hover:border-cyan-400
+hover:shadow-xl
+hover:shadow-cyan-400/20
+transition
+"
+
+>
+
+
+<div className="flex justify-between items-center">
+
+
+<h3 className="font-bold">
+
+Question {index+1}
+
+</h3>
+
+
+
+<span
+
+className="
+bg-cyan-500
+text-black
+px-3
+py-1
+rounded-full
+text-sm
+"
+
+>
+
+{item.level}
+
+</span>
+
+
+</div>
+
+
+
+<p className="text-gray-300 mt-4">
+
+{item.question}
+
+</p>
+
+
+
+<button
+
+onClick={()=> 
+setActiveQuestion(
+activeQuestion === index ? null : index
+)
+}
+
+className="
+mt-5
+px-4
+py-2
+rounded-xl
+bg-cyan-500
+text-black
+font-bold
+"
+
+>
+
+{
+activeQuestion === index
+?
+"Hide Answer"
+:
+"Show Answer"
+}
+
+</button>
+
+
+
+
+{
+activeQuestion === index && (
+
+<motion.p
+
+initial={{
+opacity:0,
+y:-10
+}}
+
+animate={{
+opacity:1,
+y:0
+}}
+
+className="
+mt-5
+text-green-400
+"
+
+>
+
+💡 {item.answer}
+
+</motion.p>
+
+)
+
+}
+
+
+
+</motion.div>
+
+
+))
+}
+
+
+</div>
+
+
+</motion.div>
 
         {/* CERTIFICATIONS */}
 
@@ -976,7 +1490,131 @@ function JavaScript() {
 
         </motion.div>
 
+{
+selectedProject && (
 
+<motion.div
+
+initial={{
+opacity:0
+}}
+
+animate={{
+opacity:1
+}}
+
+className="
+fixed
+inset-0
+bg-black/70
+flex
+items-center
+justify-center
+z-50
+"
+
+>
+
+<div
+
+className="
+bg-slate-900
+rounded-3xl
+p-8
+max-w-md
+w-full
+border
+border-cyan-400
+"
+
+>
+
+<h2 className="text-3xl font-bold text-cyan-400">
+
+{selectedProject.icon} {selectedProject.name}
+
+</h2>
+
+
+<p className="text-gray-300 mt-4">
+
+{selectedProject.desc}
+
+</p>
+
+
+<p className="mt-4">
+
+🔥 Difficulty:
+<span className="text-green-400">
+{" "}{selectedProject.difficulty}
+</span>
+
+</p>
+
+
+<div className="mt-4">
+
+Skills:
+
+<div className="flex flex-wrap gap-2 mt-3">
+
+{
+selectedProject.skills.map((skill,index)=>(
+
+<span
+
+key={index}
+
+className="
+bg-slate-800
+px-3
+py-1
+rounded-full
+"
+
+>
+
+{skill}
+
+</span>
+
+))
+}
+
+</div>
+
+</div>
+
+
+<button
+
+onClick={()=>setSelectedProject(null)}
+
+className="
+mt-6
+px-5
+py-2
+rounded-xl
+bg-red-500
+text-white
+font-bold
+"
+
+>
+
+Close
+
+</button>
+
+
+</div>
+
+
+</motion.div>
+
+)
+}
       </div>
 
     </div>
