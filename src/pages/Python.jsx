@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 
 function Python() {
-
+const [activeQuestion, setActiveQuestion] = useState(null);
 
   const [selectedProject, setSelectedProject] = useState(null);
 
@@ -66,27 +66,32 @@ function Python() {
 
 
   const interviewQuestions = [
-    {
-      question: "What is Python and why is it popular?",
-      level: "Beginner",
-    },
-    {
-      question: "Difference between list and tuple?",
-      level: "Intermediate",
-    },
-    {
-      question: "Explain Object-Oriented Programming in Python.",
-      level: "Intermediate",
-    },
-    {
-      question: "What are Python decorators?",
-      level: "Advanced",
-    },
-    {
-      question: "How does memory management work in Python?",
-      level: "Advanced",
-    },
-  ];
+  {
+    question: "What is Python and why is it popular?",
+    level: "Beginner",
+    answer: "Python is a high-level, interpreted programming language. It is popular because it is easy to learn and widely used in web development, AI, automation and data science."
+  },
+  {
+    question: "Difference between list and tuple?",
+    level: "Intermediate",
+    answer: "List is mutable, meaning we can change its values. Tuple is immutable, meaning values cannot be changed after creation."
+  },
+  {
+    question: "Explain Object-Oriented Programming in Python.",
+    level: "Intermediate",
+    answer: "OOP is a programming approach based on classes and objects. Python supports concepts like inheritance, encapsulation and polymorphism."
+  },
+  {
+    question: "What are Python decorators?",
+    level: "Advanced",
+    answer: "Decorators are functions that modify or extend the behavior of another function without changing its code."
+  },
+  {
+    question: "How does memory management work in Python?",
+    level: "Advanced",
+    answer: "Python uses automatic memory management with garbage collection to allocate and free memory."
+  },
+];
 
 
 
@@ -1307,21 +1312,64 @@ function Python() {
 
                 <button
 
-                  className="
-                  mt-5
-                  px-4
-                  py-2
-                  rounded-xl
-                  bg-cyan-500
-                  text-black
-                  font-bold
-                  "
+onClick={() =>
+setActiveQuestion(
+activeQuestion === index ? null : index
+)
+}
 
-                >
+className="
+mt-5
+px-4
+py-2
+rounded-xl
+bg-cyan-500
+text-black
+font-bold
+"
 
-                  Practice →
+>
 
-                </button>
+{
+activeQuestion === index
+?
+"Hide Answer"
+:
+"Show Answer"
+}
+
+</button>
+{
+activeQuestion === index && (
+
+<motion.p
+
+initial={{
+opacity:0,
+y:-10
+}}
+
+animate={{
+opacity:1,
+y:0
+}}
+
+className="
+mt-4
+bg-slate-950
+p-4
+rounded-xl
+text-green-400
+"
+
+>
+
+💡 {item.answer}
+
+</motion.p>
+
+)
+}
 
 
 
