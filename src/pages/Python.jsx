@@ -17,7 +17,28 @@ function Python() {
     "Problem Solving",
   ];
 
-
+const skillProgress = [
+  {
+    name: "Python Basics",
+    level: 95,
+  },
+  {
+    name: "Object-Oriented Programming",
+    level: 85,
+  },
+  {
+    name: "Data Structures",
+    level: 75,
+  },
+  {
+    name: "Django / Flask",
+    level: 60,
+  },
+  {
+    name: "Machine Learning",
+    level: 40,
+  },
+];
 
   const roadmap = [
     "Learn Python Fundamentals",
@@ -32,7 +53,28 @@ function Python() {
     "Apply for Python Jobs",
   ];
 
-
+const interviewQuestions = [
+  {
+    question: "What is Python and why is it popular?",
+    level: "Beginner",
+  },
+  {
+    question: "Difference between list and tuple?",
+    level: "Intermediate",
+  },
+  {
+    question: "Explain Object-Oriented Programming in Python.",
+    level: "Intermediate",
+  },
+  {
+    question: "What are Python decorators?",
+    level: "Advanced",
+  },
+  {
+    question: "How does memory management work in Python?",
+    level: "Advanced",
+  },
+];
 
   const certifications = [
     "Python Institute PCAP Certification",
@@ -438,7 +480,110 @@ function Python() {
 
 
 
+{/* SKILL PROGRESS TRACKER */}
 
+<motion.div
+
+initial={{
+ opacity:0,
+ y:50
+}}
+
+whileInView={{
+ opacity:1,
+ y:0
+}}
+
+className="
+bg-slate-900
+rounded-3xl
+p-8
+mt-8
+"
+
+>
+
+
+<h2 className="text-3xl font-bold text-cyan-400 mb-8">
+🎯 Python Skill Progress
+</h2>
+
+
+<div className="space-y-6">
+
+
+{
+skillProgress.map((skill,index)=>(
+
+
+<div key={index}>
+
+
+<div className="flex justify-between mb-2">
+
+<h3 className="font-semibold">
+{skill.name}
+</h3>
+
+<span className="text-cyan-400">
+{skill.level}%
+</span>
+
+</div>
+
+
+
+<div className="
+w-full
+h-4
+bg-slate-700
+rounded-full
+overflow-hidden
+">
+
+
+<motion.div
+
+initial={{
+width:0
+}}
+
+whileInView={{
+width:`${skill.level}%`
+}}
+
+transition={{
+duration:1,
+delay:index*0.2
+}}
+
+className="
+h-full
+bg-gradient-to-r
+from-cyan-400
+to-green-400
+rounded-full
+"
+
+>
+
+</motion.div>
+
+
+</div>
+
+
+</div>
+
+
+))
+}
+
+
+</div>
+
+
+</motion.div>
 
 
         {/* TOOLS SECTION */}
@@ -605,116 +750,258 @@ function Python() {
 
 
 
-        {/* ROADMAP SECTION */}
+       {/* ROADMAP SECTION */}
+
+<motion.div
+
+  initial={{
+    opacity:0,
+    y:50
+  }}
+
+  whileInView={{
+    opacity:1,
+    y:0
+  }}
+
+  className="
+  bg-slate-900
+  rounded-3xl
+  p-8
+  mt-8
+  "
+
+>
+
+<h2 className="text-3xl font-bold text-cyan-400 mb-10">
+  🛣️ Python Learning Journey
+</h2>
+
+
+<div className="relative border-l-4 border-cyan-500 ml-5">
+
+
+{
+roadmap.map((step,index)=>(
+
+
+<motion.div
+
+key={index}
+
+initial={{
+ opacity:0,
+ x:-40
+}}
+
+whileInView={{
+ opacity:1,
+ x:0
+}}
+
+transition={{
+ delay:index*0.15
+}}
+
+className="
+relative
+mb-10
+ml-8
+"
+
+
+>
+
+
+{/* Timeline Circle */}
+
+<div
+className="
+absolute
+-left-[45px]
+top-2
+w-10
+h-10
+rounded-full
+bg-cyan-500
+text-black
+font-bold
+flex
+items-center
+justify-center
+shadow-lg
+shadow-cyan-500/50
+"
+>
+
+{index+1}
+
+</div>
 
 
 
-        <motion.div
+{/* Step Card */}
 
-          initial={{
-            opacity:0,
-            y:50
-          }}
+<div
+className="
+bg-slate-800
+rounded-2xl
+p-6
+border
+border-slate-700
+hover:border-cyan-400
+transition
+"
 
-          whileInView={{
-            opacity:1,
-            y:0
-          }}
+>
 
-          className="
-          bg-slate-900
-          rounded-3xl
-          p-8
-          mt-8
-          "
-
-        >
+<h3 className="text-xl font-bold">
+Step {index+1}
+</h3>
 
 
-          <h2 className="text-3xl font-bold text-cyan-400 mb-8">
-            🗺 Python Learning Roadmap
-          </h2>
+<p className="text-gray-300 mt-2">
+{step}
+</p>
 
 
-
-          <div className="space-y-5">
-
-
-            {
-              roadmap.map((step,index)=>(
+</div>
 
 
-                <motion.div
-
-                  key={index}
-
-                  initial={{
-                    opacity:0,
-                    x:-40
-                  }}
-
-                  whileInView={{
-                    opacity:1,
-                    x:0
-                  }}
-
-                  transition={{
-                    delay:index*0.1
-                  }}
-
-                  className="
-                  flex
-                  items-center
-                  gap-5
-                  bg-slate-800
-                  rounded-2xl
-                  p-5
-                  border
-                  border-slate-700
-                  "
-
-                >
+</motion.div>
 
 
-                  <div
-                    className="
-                    w-12
-                    h-12
-                    rounded-full
-                    bg-cyan-500
-                    flex
-                    items-center
-                    justify-center
-                    font-bold
-                    text-black
-                    "
-                  >
-
-                    {index+1}
-
-                  </div>
+))
+}
 
 
-                  <p className="text-lg">
-                    {step}
-                  </p>
+</div>
 
 
-                </motion.div>
-
-
-              ))
-            }
-
-
-          </div>
-
-
-        </motion.div>
+</motion.div>
 
 
 
+{/* INTERVIEW PREPARATION */}
 
+
+<motion.div
+
+initial={{
+ opacity:0,
+ y:50
+}}
+
+whileInView={{
+ opacity:1,
+ y:0
+}}
+
+className="
+bg-slate-900
+rounded-3xl
+p-8
+mt-8
+"
+
+>
+
+
+<h2 className="text-3xl font-bold text-cyan-400 mb-8">
+🎤 Python Interview Preparation
+</h2>
+
+
+
+<div className="grid md:grid-cols-2 gap-6">
+
+
+{
+interviewQuestions.map((item,index)=>(
+
+
+<motion.div
+
+key={index}
+
+whileHover={{
+scale:1.05,
+y:-8
+}}
+
+className="
+bg-slate-800
+rounded-2xl
+p-6
+border
+border-slate-700
+hover:border-cyan-400
+transition
+"
+
+>
+
+
+<div className="flex justify-between items-center">
+
+
+<h3 className="font-bold text-lg">
+Question {index+1}
+</h3>
+
+
+<span
+className="
+text-sm
+bg-cyan-500
+text-black
+px-3
+py-1
+rounded-full
+"
+>
+{item.level}
+</span>
+
+
+</div>
+
+
+
+<p className="text-gray-300 mt-4">
+{item.question}
+</p>
+
+
+
+<button
+className="
+mt-5
+px-4
+py-2
+rounded-xl
+bg-cyan-500
+text-black
+font-semibold
+hover:bg-cyan-400
+transition
+"
+>
+Practice →
+</button>
+
+
+</motion.div>
+
+
+))
+}
+
+
+</div>
+
+
+</motion.div>
 
 
 
