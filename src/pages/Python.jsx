@@ -1129,88 +1129,62 @@ const [activeQuestion, setActiveQuestion] = useState(null);
 
 
 
-          <div className="relative border-l-4 border-cyan-500 ml-5">
+          <div className="space-y-5">
 
+  {
+    roadmap.map((step,index)=>(
 
-          {
-            roadmap.map((step,index)=>(
+      <motion.div
+        key={index}
+        initial={{
+          opacity:0,
+          x:-40
+        }}
+        whileInView={{
+          opacity:1,
+          x:0
+        }}
+        transition={{
+          delay:index*0.1
+        }}
+        className="
+        flex
+        items-center
+        gap-5
+        bg-slate-800
+        rounded-2xl
+        p-5
+        border
+        border-slate-700
+        "
+      >
 
+        <div
+          className="
+          w-12
+          h-12
+          rounded-full
+          bg-cyan-500
+          flex
+          items-center
+          justify-center
+          font-bold
+          text-black
+          "
+        >
+          {index+1}
+        </div>
 
-              <motion.div
+        <p className="text-lg">
+          {step}
+        </p>
 
-                key={index}
+      </motion.div>
 
-                initial={{
-                  opacity:0,
-                  x:-40
-                }}
+    ))
+  }
 
-                whileInView={{
-                  opacity:1,
-                  x:0
-                }}
-
-                transition={{
-                  delay:index*0.15
-                }}
-
-                className="
-                relative
-                mb-10
-                ml-8
-                "
-
-              >
-
-
-                <div
-                  className="
-                  absolute
-                  -left-[45px]
-                  top-2
-                  w-10
-                  h-10
-                  rounded-full
-                  bg-cyan-500
-                  text-black
-                  font-bold
-                  flex
-                  items-center
-                  justify-center
-                  "
-                >
-
-                  {index+1}
-
-                </div>
-
-
-
-                <div
-                  className="
-                  bg-slate-800
-                  rounded-2xl
-                  p-6
-                  border
-                  border-slate-700
-                  "
-
-                >
-
-                  {step}
-
-                </div>
-
-
-              </motion.div>
-
-
-            ))
-          }
-
-
-          </div>
-
+</div>
 
         </motion.div>
         
