@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-
+import { useState } from "react";
 function WebDevelopment() {
-
+const [selectedProject, setSelectedProject] = useState(null);
+const [activeQuestion, setActiveQuestion] = useState(null);
 
   const skills = [
     "HTML",
@@ -17,7 +18,28 @@ function WebDevelopment() {
     "Responsive Design",
   ];
 
-
+const skillProgress = [
+  {
+    name: "HTML",
+    level: 95,
+  },
+  {
+    name: "CSS",
+    level: 90,
+  },
+  {
+    name: "JavaScript",
+    level: 85,
+  },
+  {
+    name: "React.js",
+    level: 75,
+  },
+  {
+    name: "Node.js",
+    level: 65,
+  },
+];
 
   const roadmap = [
     "Learn HTML Fundamentals",
@@ -55,12 +77,47 @@ function WebDevelopment() {
 
 
   const projects = [
-    "Portfolio Website",
-    "E-Commerce Website",
-    "Blog Application",
-    "Social Media App",
-    "Full Stack Web Application",
-  ];
+  {
+    name: "Portfolio Website",
+    category: "Frontend",
+    difficulty: "Beginner",
+    skills: ["HTML", "CSS", "JavaScript"],
+    desc: "Create your personal portfolio website with responsive design.",
+    icon: "🌐",
+  },
+  {
+    name: "E-Commerce Website",
+    category: "Full Stack",
+    difficulty: "Advanced",
+    skills: ["React", "Node.js", "MongoDB"],
+    desc: "Build a complete online shopping website with authentication.",
+    icon: "🛒",
+  },
+  {
+    name: "Blog Application",
+    category: "CRUD App",
+    difficulty: "Intermediate",
+    skills: ["React", "Express", "MongoDB"],
+    desc: "Develop a blogging platform with create, edit and delete features.",
+    icon: "📝",
+  },
+  {
+    name: "Social Media App",
+    category: "Full Stack",
+    difficulty: "Advanced",
+    skills: ["React", "Node.js", "REST API"],
+    desc: "Build a social networking application with posts and profiles.",
+    icon: "📱",
+  },
+  {
+    name: "Full Stack Web Application",
+    category: "Enterprise",
+    difficulty: "Advanced",
+    skills: ["MERN Stack", "JWT", "MongoDB"],
+    desc: "Create a complete production-ready MERN stack application.",
+    icon: "💻",
+  },
+];
 
 
 
@@ -101,7 +158,28 @@ function WebDevelopment() {
   ];
 
 
-
+const interviewQuestions = [
+  {
+    question: "What is the difference between HTML and HTML5?",
+    answer: "HTML5 introduces semantic elements, multimedia support, local storage, canvas, and improved APIs.",
+    level: "Beginner",
+  },
+  {
+    question: "What is React Virtual DOM?",
+    answer: "Virtual DOM is a lightweight copy of the real DOM that improves rendering performance.",
+    level: "Intermediate",
+  },
+  {
+    question: "What is REST API?",
+    answer: "REST API is an architectural style that allows communication between client and server using HTTP methods.",
+    level: "Intermediate",
+  },
+  {
+    question: "Explain JWT Authentication.",
+    answer: "JWT is a token-based authentication mechanism used to securely identify users in web applications.",
+    level: "Advanced",
+  },
+];
 
 
   return (
@@ -439,7 +517,74 @@ function WebDevelopment() {
 
 
 
+{/* SKILL PROGRESS TRACKER */}
 
+<motion.div
+  initial={{
+    opacity: 0,
+    y: 50,
+  }}
+  whileInView={{
+    opacity: 1,
+    y: 0,
+  }}
+  className="
+  bg-slate-900
+  rounded-3xl
+  p-8
+  mt-8
+  "
+>
+  <h2 className="text-3xl font-bold text-cyan-400 mb-8">
+    🎯 Web Development Skill Progress
+  </h2>
+
+  <div className="space-y-6">
+    {skillProgress.map((skill, index) => (
+      <div key={index}>
+        <div className="flex justify-between mb-2">
+          <h3 className="font-semibold">
+            {skill.name}
+          </h3>
+
+          <span className="text-cyan-400">
+            {skill.level}%
+          </span>
+        </div>
+
+        <div
+          className="
+          w-full
+          h-4
+          bg-slate-700
+          rounded-full
+          overflow-hidden
+          "
+        >
+          <motion.div
+            initial={{
+              width: 0,
+            }}
+            whileInView={{
+              width: `${skill.level}%`,
+            }}
+            transition={{
+              duration: 1,
+              delay: index * 0.2,
+            }}
+            className="
+            h-full
+            bg-gradient-to-r
+            from-cyan-400
+            to-blue-500
+            rounded-full
+            "
+          />
+        </div>
+      </div>
+    ))}
+  </div>
+</motion.div>
 
 
 
@@ -555,57 +700,217 @@ function WebDevelopment() {
           <div className="grid md:grid-cols-3 gap-6">
 
 
-            {
-              projects.map((project,index)=>(
+            
+             {projects.map((project, index) => (
+  <motion.div
+    key={index}
+    whileHover={{
+      scale: 1.05,
+      y: -10,
+    }}
+    className="
+    bg-slate-800
+    rounded-2xl
+    p-6
+    border
+    border-slate-700
+    hover:border-cyan-400
+    transition-all
+    duration-300
+    "
+  >
+    <div className="text-5xl">
+      {project.icon}
+    </div>
 
+    <h3 className="font-bold text-xl mt-4">
+      {project.name}
+    </h3>
 
-                <motion.div
+    <div className="flex gap-2 mt-3 flex-wrap">
+      <span className="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-sm">
+        {project.category}
+      </span>
 
-                  key={index}
+      <span className="bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full text-sm">
+        {project.difficulty}
+      </span>
+    </div>
 
-                  whileHover={{
-                    scale:1.08,
-                    y:-8
-                  }}
+    <p className="text-gray-400 mt-4">
+      {project.desc}
+    </p>
 
-                  className="
-                  bg-slate-800
-                  rounded-2xl
-                  p-6
-                  border
-                  border-slate-700
-                  "
-
-                >
-
-
-                  <h3 className="font-bold text-lg">
-                    💻 {project}
-                  </h3>
-
-
-                  <p className="text-gray-400 mt-3">
-                    Build this project to improve practical web development skills.
-                  </p>
-
-
-                </motion.div>
-
-
-              ))
-            }
-
+    <button
+      onClick={() => setSelectedProject(project)}
+      className="
+      mt-5
+      w-full
+      bg-cyan-500
+      hover:bg-cyan-400
+      text-black
+      font-semibold
+      py-2
+      rounded-xl
+      transition
+      "
+    >
+      View Details
+    </button>
+  </motion.div>
+))}
 
           </div>
 
 
         </motion.div>
 
+{selectedProject && (
+  <div
+    className="
+    fixed
+    inset-0
+    bg-black/70
+    flex
+    items-center
+    justify-center
+    z-50
+    px-4
+    "
+  >
+    <motion.div
+      initial={{ scale: 0.8, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      className="
+      bg-slate-900
+      rounded-3xl
+      p-8
+      max-w-lg
+      w-full
+      border
+      border-cyan-500
+      "
+    >
+      <div className="text-6xl text-center">
+        {selectedProject.icon}
+      </div>
+
+      <h2 className="text-3xl font-bold text-cyan-400 mt-4">
+        {selectedProject.name}
+      </h2>
+
+      <p className="text-gray-300 mt-4">
+        {selectedProject.desc}
+      </p>
+
+      <h3 className="font-bold mt-6 mb-3">
+        Skills Required
+      </h3>
+
+      <div className="flex flex-wrap gap-2">
+        {selectedProject.skills.map((skill, i) => (
+          <span
+            key={i}
+            className="
+            bg-cyan-500/20
+            text-cyan-400
+            px-3
+            py-1
+            rounded-full
+            "
+          >
+            {skill}
+          </span>
+        ))}
+      </div>
+
+      <button
+        onClick={() => setSelectedProject(null)}
+        className="
+        mt-8
+        w-full
+        bg-red-500
+        hover:bg-red-600
+        py-3
+        rounded-xl
+        font-bold
+        "
+      >
+        Close
+      </button>
+    </motion.div>
+  </div>
+)}
 
 
 
+{/* CTA SECTION */}
 
+<motion.div
+  initial={{ opacity: 0, y: 50 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  className="
+  mt-10
+  rounded-3xl
+  p-10
+  text-center
+  bg-gradient-to-r
+  from-cyan-600
+  via-blue-600
+  to-indigo-700
+  shadow-2xl
+  "
+>
+  <h2 className="text-4xl font-bold">
+    🚀 Ready to Become a Web Developer?
+  </h2>
 
+  <p className="mt-4 text-lg text-white/90 max-w-2xl mx-auto">
+    Start your journey today by following the complete roadmap,
+    building real-world projects, and mastering modern web technologies.
+  </p>
+
+  <div className="flex flex-wrap justify-center gap-4 mt-8">
+    <a
+      href="#roadmap"
+      className="
+      px-8
+      py-3
+      rounded-xl
+      bg-white
+      text-blue-700
+      font-bold
+      hover:scale-105
+      transition
+      "
+    >
+      🛣️ Start Roadmap
+    </a>
+
+    <button
+onClick={() =>
+document.getElementById("interview")
+.scrollIntoView({
+behavior:"smooth"
+})
+}
+className="
+px-8
+py-3
+rounded-xl
+border-2
+border-white
+text-white
+font-bold
+hover:bg-white
+hover:text-blue-700
+transition
+"
+>
+🎤 Practice Interview
+</button>
+  </div>
+</motion.div>
 
 
         {/* WEB ROADMAP */}
@@ -613,7 +918,7 @@ function WebDevelopment() {
 
 
         <motion.div
-
+ id="roadmap"
           initial={{
             opacity:0,
             y:50
@@ -720,10 +1025,126 @@ function WebDevelopment() {
 
 
 
+{/* INTERVIEW PREPARATION */}
+
+<motion.div
+  id="interview"
+  initial={{ opacity: 0, y: 50 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  className="
+  bg-slate-900
+  rounded-3xl
+  p-8
+  mt-8
+  "
+>
+  <h2 className="text-3xl font-bold text-cyan-400 mb-8">
+    🎤 Web Development Interview Preparation
+  </h2>
+
+  <div className="grid md:grid-cols-2 gap-6">
+
+    {interviewQuestions.map((item, index) => (
+
+      <motion.div
+        key={index}
+        whileHover={{
+          scale: 1.05,
+          y: -8,
+        }}
+        className="
+        bg-slate-800
+        rounded-2xl
+        p-6
+        border
+        border-slate-700
+        "
+      >
+
+        <div className="flex justify-between items-center">
+
+          <h3 className="font-bold">
+            Question {index + 1}
+          </h3>
 
 
+          <span
+            className="
+            bg-cyan-500
+            text-black
+            px-3
+            py-1
+            rounded-full
+            text-sm
+            "
+          >
+            {item.level}
+          </span>
+
+        </div>
 
 
+        <p className="text-gray-300 mt-4">
+          {item.question}
+        </p>
+
+
+        <button
+          onClick={() =>
+            setActiveQuestion(
+              activeQuestion === index ? null : index
+            )
+          }
+
+          className="
+          mt-5
+          px-4
+          py-2
+          rounded-xl
+          bg-cyan-500
+          text-black
+          font-bold
+          "
+        >
+
+          {activeQuestion === index
+            ? "Hide Answer"
+            : "Show Answer"}
+
+        </button>
+
+
+        {activeQuestion === index && (
+
+          <motion.p
+            initial={{
+              opacity:0,
+              y:-10
+            }}
+
+            animate={{
+              opacity:1,
+              y:0
+            }}
+
+            className="
+            mt-5
+            text-green-400
+            "
+          >
+            💡 {item.answer}
+          </motion.p>
+
+        )}
+
+
+      </motion.div>
+
+    ))}
+
+  </div>
+
+</motion.div>
 
         {/* CERTIFICATIONS */}
 
