@@ -7,7 +7,7 @@ import Roadmap from "./pages/Roadmap";
 import { useTheme } from "./context/ThemeContext";
 import { useState, useEffect } from "react";
 import PortfolioBuilder from "./pages/PortfolioBuilder";
-
+import PortfolioPreview from "./pages/PortfolioPreview";
 import Home from "./pages/Home";
 import Python from "./pages/Python";
 import Java from "./pages/Java";
@@ -15,7 +15,7 @@ import C from "./pages/C";
 import Cpp from "./pages/Cpp";
 import CSharp from "./pages/CSharp";
 import Javascript from "./pages/Javascript";
-
+import PortfolioForm from "./pages/PortfolioForm";
 import WebDevelopment from "./pages/WebDevelopment";
 import CyberSecurity from "./pages/CyberSecurity";
 import ArtificialIntelligence from "./pages/ArtificialIntelligence";
@@ -176,6 +176,17 @@ function App() {
 <Route
   path="/portfolio-builder"
   element={<PortfolioBuilder />}
+/>
+
+<Route
+          path="/portfolio-form"
+          element={<PortfolioForm />}
+        />
+
+
+<Route
+  path="/portfolio-preview"
+  element={<PortfolioPreview />}
 />
 
           <Route
