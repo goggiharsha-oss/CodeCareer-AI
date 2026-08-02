@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-
+import TemplateSelector from "../components/TemplateSelector";
 function PortfolioForm() {
   const navigate = useNavigate();
-
+const [selectedTemplate, setSelectedTemplate] = useState("frontend");
+const template = selectedTemplate;
   const [formData, setFormData] = useState({
     fullName: "",
     title: "",
@@ -78,18 +79,41 @@ function PortfolioForm() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    localStorage.setItem(
-      "portfolioData",
-      JSON.stringify(formData)
-    );
-
-    navigate("/portfolio-preview");
+  const portfolioData = {
+    ...formData,
+    template: selectedTemplate,
   };
 
-  return (
-    <div className="min-h-screen bg-slate-950 text-white py-20 px-6">
+  localStorage.setItem(
+    "portfolioData",
+    JSON.stringify(portfolioData)
+  );
+
+  navigate("/portfolio-preview");
+};
+    navigate("/portfolio-preview");
+  
+
+ return (
+  <div
+    className={`
+      min-h-screen
+      text-white
+      ${
+        template === "cyber"
+          ? "bg-black"
+          : template === "ai"
+          ? "bg-gradient-to-br from-purple-950 to-slate-950"
+          : template === "frontend"
+          ? "bg-gradient-to-br from-cyan-950 to-slate-950"
+          : template === "fullstack"
+          ? "bg-gradient-to-br from-blue-950 to-slate-950"
+          : "bg-slate-950"
+      }
+    `}
+  >
 
       <div className="max-w-5xl mx-auto">
 
@@ -118,7 +142,22 @@ function PortfolioForm() {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="bg-slate-900 rounded-3xl p-8 border border-slate-800"
+           className={`
+  rounded-3xl
+  p-8
+  border
+  ${
+    template === "cyber"
+      ? "bg-slate-950 border-green-500"
+      : template === "ai"
+      ? "bg-purple-950/40 border-purple-500"
+      : template === "frontend"
+      ? "bg-cyan-950/40 border-cyan-500"
+      : template === "fullstack"
+      ? "bg-blue-950/40 border-blue-500"
+      : "bg-slate-900 border-slate-700"
+  }
+`}
           >
             <h2 className="text-3xl font-bold text-cyan-400 mb-8">
               👤 Personal Information
@@ -300,18 +339,40 @@ function PortfolioForm() {
                   className="w-full bg-slate-800 rounded-xl p-4 border border-slate-700"
                 />
 
+
+
               </div>
 
             </div>
 
           </motion.div>
+
+          <TemplateSelector
+  selectedTemplate={selectedTemplate}
+  setSelectedTemplate={setSelectedTemplate}
+/>
                     {/* ================= SKILLS / EDUCATION ================= */}
 
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="bg-slate-900 rounded-3xl p-8 border border-slate-800"
+            className={`
+  rounded-3xl
+  p-8
+  border
+  ${
+    template === "cyber"
+      ? "bg-green-950/30 border-green-500"
+      : template === "ai"
+      ? "bg-purple-950/30 border-purple-500"
+      : template === "frontend"
+      ? "bg-cyan-950/30 border-cyan-500"
+      : template === "fullstack"
+      ? "bg-blue-950/30 border-blue-500"
+      : "bg-slate-900 border-slate-800"
+  }
+`}
           >
 
             <h2 className="text-3xl font-bold text-cyan-400 mb-8">
@@ -401,7 +462,22 @@ function PortfolioForm() {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="bg-slate-900 rounded-3xl p-8 border border-slate-800"
+            className={`
+  rounded-3xl
+  p-8
+  border
+  ${
+    template === "cyber"
+      ? "bg-green-950/30 border-green-500"
+      : template === "ai"
+      ? "bg-purple-950/30 border-purple-500"
+      : template === "frontend"
+      ? "bg-cyan-950/30 border-cyan-500"
+      : template === "fullstack"
+      ? "bg-blue-950/30 border-blue-500"
+      : "bg-slate-900 border-slate-800"
+  }
+`}
           >
 
             <div className="flex justify-between items-center mb-8">
