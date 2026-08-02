@@ -6,7 +6,6 @@ function PortfolioPreview() {
   const navigate = useNavigate();
 
   const [data, setData] = useState(null);
-
   useEffect(() => {
     const saved = localStorage.getItem("portfolioData");
 
@@ -25,9 +24,40 @@ function PortfolioPreview() {
       </div>
     );
   }
+  if (!data) {
+  return (
+    <div className="min-h-screen bg-slate-950 flex items-center justify-center text-white">
+      Loading...
+    </div>
+  );
+}
+
+const template = data.template || "frontend";
+const accentColor =
+  template === "cyber"
+    ? "text-green-400"
+    : template === "ai"
+    ? "text-purple-400"
+    : template === "fullstack"
+    ? "text-blue-400"
+    : "text-cyan-400";
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
+    <div
+  className={`
+    min-h-screen
+    text-white
+    ${
+      template === "cyber"
+        ? "bg-black"
+        : template === "ai"
+        ? "bg-gradient-to-br from-purple-950 to-slate-950"
+        : template === "fullstack"
+        ? "bg-gradient-to-br from-blue-950 to-slate-950"
+        : "bg-gradient-to-br from-cyan-950 to-slate-950"
+    }
+  `}
+>
 
       {/* Background */}
 
@@ -62,31 +92,45 @@ function PortfolioPreview() {
           initial={{ opacity: 0, y: -40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          className="
-          bg-slate-900
-          rounded-[35px]
-          border
-          border-slate-800
-          p-10
-          "
+         className={`
+  rounded-[35px]
+  border
+  p-10
+  ${
+    template === "cyber"
+      ? "bg-green-950/30 border-green-500"
+      : template === "ai"
+      ? "bg-purple-950/30 border-purple-500"
+      : template === "fullstack"
+      ? "bg-blue-950/30 border-blue-500"
+      : "bg-cyan-950/30 border-cyan-500"
+  }
+`}
         >
 
           <div className="flex flex-col lg:flex-row items-center gap-10">
 
             {/* Profile */}
 
-            <div
-              className="
-              w-44
-              h-44
-              rounded-full
-              overflow-hidden
-              border-4
-              border-cyan-500
-              shadow-2xl
-              shadow-cyan-500/30
-              "
-            >
+           <div
+  className={`
+    w-44
+    h-44
+    rounded-full
+    overflow-hidden
+    border-4
+    shadow-2xl
+    ${
+      template === "cyber"
+        ? "border-green-500 shadow-green-500/30"
+        : template === "ai"
+        ? "border-purple-500 shadow-purple-500/30"
+        : template === "fullstack"
+        ? "border-blue-500 shadow-blue-500/30"
+        : "border-cyan-500 shadow-cyan-500/30"
+    }
+  `}
+>
               {data.profileImage ? (
                 <img
                   src={URL.createObjectURL(data.profileImage)}
@@ -142,9 +186,24 @@ function PortfolioPreview() {
           className="grid lg:grid-cols-2 gap-8 mt-10"
         >
 
-          <div className="bg-slate-900 rounded-3xl border border-slate-800 p-8">
+          <div
+  className={`
+    rounded-3xl
+    border
+    p-8
+    ${
+      template === "cyber"
+        ? "bg-green-950/30 border-green-500"
+        : template === "ai"
+        ? "bg-purple-950/30 border-purple-500"
+        : template === "fullstack"
+        ? "bg-blue-950/30 border-blue-500"
+        : "bg-cyan-950/30 border-cyan-500"
+    }
+  `}
+>
 
-            <h2 className="text-3xl font-bold text-cyan-400 mb-6">
+            <h2 className={`text-3xl font-bold ${accentColor} mb-6`}>
               💻 Skills
             </h2>
 
@@ -176,9 +235,24 @@ function PortfolioPreview() {
 
           {/* ================= EDUCATION ================= */}
 
-          <div className="bg-slate-900 rounded-3xl border border-slate-800 p-8">
+         <div
+  className={`
+    rounded-3xl
+    border
+    p-8
+    ${
+      template === "cyber"
+        ? "bg-green-950/30 border-green-500"
+        : template === "ai"
+        ? "bg-purple-950/30 border-purple-500"
+        : template === "fullstack"
+        ? "bg-blue-950/30 border-blue-500"
+        : "bg-cyan-950/30 border-cyan-500"
+    }
+  `}
+>
 
-            <h2 className="text-3xl font-bold text-cyan-400 mb-6">
+            <h2 className={`text-3xl font-bold ${accentColor} mb-6`}>
               🎓 Education
             </h2>
 
@@ -196,17 +270,24 @@ function PortfolioPreview() {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="
-          mt-10
-          bg-slate-900
-          rounded-3xl
-          border
-          border-slate-800
-          p-8
-          "
+          className={`
+  mt-10
+  rounded-3xl
+  border
+  p-8
+  ${
+    template === "cyber"
+      ? "bg-green-950/30 border-green-500"
+      : template === "ai"
+      ? "bg-purple-950/30 border-purple-500"
+      : template === "fullstack"
+      ? "bg-blue-950/30 border-blue-500"
+      : "bg-cyan-950/30 border-cyan-500"
+  }
+`}
         >
 
-          <h2 className="text-3xl font-bold text-cyan-400 mb-6">
+         <h2 className={`text-3xl font-bold ${accentColor} mb-6`}>
             💼 Experience
           </h2>
 
@@ -222,17 +303,24 @@ function PortfolioPreview() {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="
-          mt-10
-          bg-slate-900
-          rounded-3xl
-          border
-          border-slate-800
-          p-8
-          "
+          className={`
+  mt-10
+  rounded-3xl
+  border
+  p-8
+  ${
+    template === "cyber"
+      ? "bg-green-950/30 border-green-500"
+      : template === "ai"
+      ? "bg-purple-950/30 border-purple-500"
+      : template === "fullstack"
+      ? "bg-blue-950/30 border-blue-500"
+      : "bg-cyan-950/30 border-cyan-500"
+  }
+`}
         >
 
-          <h2 className="text-3xl font-bold text-cyan-400 mb-6">
+          <h2 className={`text-3xl font-bold ${accentColor} mb-6`}>
             🏆 Certifications
           </h2>
 
@@ -264,17 +352,23 @@ function PortfolioPreview() {
                   y: -8,
                   scale: 1.02,
                 }}
-                className="
-                bg-slate-900
-                rounded-3xl
-                border
-                border-slate-800
-                p-8
-                shadow-xl
-                hover:border-cyan-500
-                transition-all
-                duration-300
-                "
+                cclassName={`
+  rounded-3xl
+  border
+  p-8
+  shadow-xl
+  transition-all
+  duration-300
+  ${
+    template === "cyber"
+      ? "bg-green-950/30 border-green-500 hover:border-green-400"
+      : template === "ai"
+      ? "bg-purple-950/30 border-purple-500 hover:border-purple-400"
+      : template === "fullstack"
+      ? "bg-blue-950/30 border-blue-500 hover:border-blue-400"
+      : "bg-cyan-950/30 border-cyan-500 hover:border-cyan-400"
+  }
+`}
               >
 
                 <div className="flex items-center justify-between">
@@ -284,8 +378,16 @@ function PortfolioPreview() {
                   </h3>
 
                   <span className="text-3xl">
-                    💻
-                  </span>
+  {
+    template === "cyber"
+      ? "🛡️"
+      : template === "ai"
+      ? "🤖"
+      : template === "fullstack"
+      ? "🚀"
+      : "💻"
+  }
+</span>
 
                 </div>
 
@@ -387,14 +489,21 @@ function PortfolioPreview() {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="
-          mt-10
-          bg-slate-900
-          rounded-3xl
-          border
-          border-slate-800
-          p-8
-          "
+          className={`
+  mt-10
+  rounded-3xl
+  border
+  p-8
+  ${
+    template === "cyber"
+      ? "bg-green-950/30 border-green-500"
+      : template === "ai"
+      ? "bg-purple-950/30 border-purple-500"
+      : template === "fullstack"
+      ? "bg-blue-950/30 border-blue-500"
+      : "bg-cyan-950/30 border-cyan-500"
+  }
+`}
         >
 
           <h2 className="text-3xl font-bold text-cyan-400 mb-8">
@@ -405,19 +514,26 @@ function PortfolioPreview() {
 
             {data.github && (
               <a
-                href={data.github}
-                target="_blank"
-                rel="noreferrer"
-                className="
-                rounded-2xl
-                bg-slate-800
-                p-6
-                text-center
-                hover:bg-cyan-500
-                hover:text-black
-                transition
-                "
-              >
+  href={data.github}
+  target="_blank"
+  rel="noreferrer"
+  className={`
+    rounded-2xl
+    p-6
+    text-center
+    transition
+    hover:text-black
+    ${
+      template === "cyber"
+        ? "bg-green-900 hover:bg-green-500"
+        : template === "ai"
+        ? "bg-purple-900 hover:bg-purple-500"
+        : template === "fullstack"
+        ? "bg-blue-900 hover:bg-blue-500"
+        : "bg-slate-800 hover:bg-cyan-500"
+    }
+  `}
+>
                 <div className="text-5xl">🐙</div>
                 <h3 className="mt-4 font-bold">GitHub</h3>
               </a>
@@ -477,17 +593,23 @@ function PortfolioPreview() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => window.print()}
-            className="
-            px-10
-            py-4
-            rounded-2xl
-            bg-gradient-to-r
-            from-cyan-500
-            to-blue-600
-            text-black
-            font-bold
-            shadow-xl
-            "
+            className={`
+  px-10
+  py-4
+  rounded-2xl
+  text-black
+  font-bold
+  shadow-xl
+  ${
+    template === "cyber"
+      ? "bg-gradient-to-r from-green-400 to-emerald-600"
+      : template === "ai"
+      ? "bg-gradient-to-r from-purple-400 to-pink-600"
+      : template === "fullstack"
+      ? "bg-gradient-to-r from-blue-400 to-indigo-600"
+      : "bg-gradient-to-r from-cyan-400 to-blue-600"
+  }
+`}
           >
             🖨 Download Portfolio
           </motion.button>
@@ -496,17 +618,22 @@ function PortfolioPreview() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => navigate("/portfolio-form")}
-            className="
-            px-10
-            py-4
-            rounded-2xl
-            border
-            border-cyan-500
-            text-cyan-400
-            hover:bg-cyan-500
-            hover:text-black
-            transition
-            "
+           className={`
+  px-10
+  py-4
+  rounded-2xl
+  border
+  transition
+  ${
+    template === "cyber"
+      ? "border-green-500 text-green-400 hover:bg-green-500"
+      : template === "ai"
+      ? "border-purple-500 text-purple-400 hover:bg-purple-500"
+      : template === "fullstack"
+      ? "border-blue-500 text-blue-400 hover:bg-blue-500"
+      : "border-cyan-500 text-cyan-400 hover:bg-cyan-500"
+  }
+`}
           >
             ✏️ Edit Portfolio
           </motion.button>
@@ -528,9 +655,9 @@ function PortfolioPreview() {
           "
         >
 
-          <h2 className="text-3xl font-black text-cyan-400">
-            CodeCareer AI
-          </h2>
+          <h2 className={`text-3xl font-black ${accentColor}`}>
+  CodeCareer AI
+</h2>
 
           <p className="text-gray-400 mt-4">
             Professional Portfolio Builder
