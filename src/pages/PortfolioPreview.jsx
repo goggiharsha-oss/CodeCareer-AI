@@ -352,7 +352,7 @@ const accentColor =
                   y: -8,
                   scale: 1.02,
                 }}
-                cclassName={`
+                className={`
   rounded-3xl
   border
   p-8

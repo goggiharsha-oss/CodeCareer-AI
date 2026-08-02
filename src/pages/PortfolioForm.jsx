@@ -90,10 +90,46 @@ const template = selectedTemplate;
     "portfolioData",
     JSON.stringify(portfolioData)
   );
-
-  navigate("/portfolio-preview");
+const dataToSave = {
+  ...formData,
+  template: selectedTemplate,
 };
-    navigate("/portfolio-preview");
+
+localStorage.setItem(
+  "portfolioData",
+  JSON.stringify(dataToSave)
+);
+
+setFormData({
+  fullName: "",
+  title: "",
+  email: "",
+  phone: "",
+  location: "",
+  about: "",
+  github: "",
+  linkedin: "",
+  website: "",
+  skills: "",
+  education: "",
+  experience: "",
+  certifications: "",
+  profileImage: null,
+  resume: null,
+  projects: [
+    {
+      name: "",
+      description: "",
+      tech: "",
+      github: "",
+      live: "",
+    },
+  ],
+});
+
+navigate("/portfolio-preview");
+};
+  
   
 
  return (
@@ -161,9 +197,14 @@ const template = selectedTemplate;
 
 </motion.div>
         <form
-          onSubmit={handleSubmit}
-          className="space-y-10"
-        >
+  onSubmit={handleSubmit}
+  onKeyDown={(e) => {
+    if (e.key === "Enter" && e.target.tagName !== "TEXTAREA") {
+      e.preventDefault();
+    }
+  }}
+  className="space-y-10"
+>
                   {/* ================= PERSONAL INFORMATION ================= */}
 
           <motion.div
@@ -203,7 +244,7 @@ const template = selectedTemplate;
                   name="fullName"
                   value={formData.fullName}
                   onChange={handleChange}
-                  placeholder="Harsha"
+                 
                   required
                   className="w-full rounded-xl bg-slate-800 border border-slate-700 p-4 outline-none focus:border-cyan-500"
                 />
@@ -219,7 +260,7 @@ const template = selectedTemplate;
                   name="title"
                   value={formData.title}
                   onChange={handleChange}
-                  placeholder="Full Stack Developer"
+                  
                   required
                   className="w-full rounded-xl bg-slate-800 border border-slate-700 p-4 outline-none focus:border-cyan-500"
                 />
@@ -251,7 +292,7 @@ const template = selectedTemplate;
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  placeholder="+91 9876543210"
+                 
                   className="w-full rounded-xl bg-slate-800 border border-slate-700 p-4 outline-none focus:border-cyan-500"
                 />
               </div>
