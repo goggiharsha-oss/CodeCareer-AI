@@ -581,6 +581,39 @@ const accentColor =
 
         </motion.div>
 
+        {/* ================= BACK HOME ================= */}
+
+<motion.div
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  className="flex justify-center mt-10"
+>
+  <motion.button
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+    onClick={() => navigate("/portfolio-builder")}
+    className={`
+      px-10
+      py-4
+      rounded-2xl
+      border
+      font-bold
+      transition
+      ${
+        template === "cyber"
+          ? "border-green-500 text-green-400 hover:bg-green-500 hover:text-black"
+          : template === "ai"
+          ? "border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-black"
+          : template === "fullstack"
+          ? "border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-black"
+          : "border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-black"
+      }
+    `}
+  >
+    🏠 Back to Home
+  </motion.button>
+</motion.div>
+
         {/* ================= ACTION BUTTONS ================= */}
 
         <motion.div

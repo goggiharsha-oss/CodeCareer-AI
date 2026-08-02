@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-
+import Cropper from "react-easy-crop";
+import getCroppedImg from "../utils/cropImage";
 const templates = [
   {
     id: 1,
@@ -49,12 +50,108 @@ const templates = [
 
 function PortfolioBuilder() {
   const navigate = useNavigate();
-
+  const [image, setImage] = useState(null);
+const [crop, setCrop] = useState({ x: 0, y: 0 });
+const [zoom, setZoom] = useState(1);
+const [showCrop, setShowCrop] = useState(false);
+const [previewImage, setPreviewImage] = useState(null);
+const [previewName, setPreviewName] = useState("Your Name");
+const [editingName, setEditingName] = useState(false);
   const [selectedTemplate, setSelectedTemplate] = useState(null);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+const handleImageChange = (e) => {
+  const file = e.target.files[0];
 
+  if (file) {
+    const imageUrl = URL.createObjectURL(file);
+
+    setImage(imageUrl);      // Cropper kosam image
+    setShowCrop(true);       // Crop popup open cheyyadaniki
+  }
+};
+
+const handleNameChange = (e) => {
+  setPreviewName(e.target.value);
+};
+const onCropComplete = (croppedArea, croppedPixels) => {
+  setCroppedAreaPixels(croppedPixels);
+};
+
+const handleCropSave = async () => {
+  try {
+    const croppedImage = await getCroppedImg(
+      image,
+      croppedAreaPixels
+    );
+
+    setPreviewImage(croppedImage);
+    setShowCrop(false);
+
+  } catch (err) {
+    console.log(err);
+  }
+};
   return (
     <div className="min-h-screen bg-slate-950 text-white overflow-hidden">
+{showCrop && (
+  <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center">
 
+    <div className="bg-slate-900 rounded-3xl p-6 w-[420px]">
+
+      <div className="relative w-full h-[320px] bg-black rounded-2xl overflow-hidden">
+
+        <Cropper
+  image={image}
+  crop={crop}
+  zoom={zoom}
+  aspect={1}
+  cropShape="round"
+  showGrid={false}
+  onCropChange={setCrop}
+  onZoomChange={setZoom}
+  onCropComplete={onCropComplete}
+/>
+      </div>
+
+      <div className="mt-6">
+
+        <p className="text-center mb-2">
+          Zoom
+        </p>
+
+        <input
+          type="range"
+          min={1}
+          max={3}
+          step={0.1}
+          value={zoom}
+          onChange={(e) => setZoom(Number(e.target.value))}
+          className="w-full"
+        />
+
+      </div>
+
+      <div className="flex gap-4 mt-6">
+
+        <button
+          onClick={() => setShowCrop(false)}
+          className="flex-1 py-3 rounded-xl bg-slate-700"
+        >
+          Cancel
+        </button>
+
+        <button
+  onClick={handleCropSave}
+  className="flex-1 py-3 rounded-xl bg-cyan-500 text-black font-bold"
+>
+  Save
+</button>
+      </div>
+
+    </div>
+
+  </div>
+)}
       {/* Animated Background */}
 
       <motion.div
@@ -85,14 +182,35 @@ function PortfolioBuilder() {
 
   <div className="grid lg:grid-cols-2 gap-20 items-center">
 
+
+
     {/* LEFT SIDE */}
+
     <motion.div id="templates"
   initial={{ opacity: 0, x: -80 }}
   animate={{ opacity: 1, x: 0 }}
   transition={{ duration: 0.8 }}
 >
 
-
+<motion.button
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+  onClick={() => navigate("/")}
+  className="
+    px-8
+    py-3
+    rounded-2xl
+    border
+    border-cyan-500
+    text-cyan-400
+    font-bold
+    hover:bg-cyan-500
+    hover:text-black
+    transition
+  "
+>
+  🏠 Back to Home
+</motion.button>
   <span
     className="
     px-5
@@ -105,6 +223,8 @@ function PortfolioBuilder() {
   >
     🚀 Professional Portfolio Builder
   </span>
+
+
 
   <h1
     className="
@@ -136,6 +256,8 @@ function PortfolioBuilder() {
     skills, certifications, resume and modern animations.
     No coding required.
   </p>
+
+
 
   {/* BUTTONS */}
 
@@ -325,21 +447,96 @@ function PortfolioBuilder() {
     "
   >
 
-    <div
+    <div className="flex justify-center">
+
+  <label className="cursor-pointer">
+
+    <input
+      type="file"
+      accept="image/*"
+      onChange={handleImageChange}
+      className="hidden"
+    />
+
+    {previewImage ? (
+
+      <img
+        src={previewImage}
+        alt=""
+        className="
+        w-32
+        h-32
+        rounded-full
+        object-cover
+        border-4
+        border-cyan-500
+        "
+      />
+
+    ) : (
+
+      <div
+        className="
+        w-32
+        h-32
+        rounded-full
+        bg-gradient-to-r
+        from-cyan-400
+        to-blue-600
+        "
+      />
+
+    )}
+
+  </label>
+
+</div>
+
+    <div className="text-center mt-6">
+
+  {editingName ? (
+
+    <input
+      autoFocus
+      value={previewName}
+      onChange={handleNameChange}
+      onBlur={() => setEditingName(false)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          setEditingName(false);
+        }
+      }}
       className="
-      w-28
-      h-28
-      rounded-full
-      mx-auto
-      bg-gradient-to-r
-      from-cyan-400
-      to-blue-600
+      bg-transparent
+      border-b-2
+      border-cyan-500
+      text-center
+      text-3xl
+      font-bold
+      outline-none
+      w-full
       "
     />
 
-    <h2 className="text-3xl font-bold text-center mt-6">
-      Your Name
+  ) : (
+
+    <h2
+      onClick={() => setEditingName(true)}
+      className="
+      text-3xl
+      font-bold
+      cursor-text
+      hover:text-cyan-400
+      transition
+      "
+      title="Click to edit"
+    >
+      {previewName}
     </h2>
+
+  )}
+
+</div>
 
     <p className="text-center text-cyan-400 mt-2">
       Full Stack Developer

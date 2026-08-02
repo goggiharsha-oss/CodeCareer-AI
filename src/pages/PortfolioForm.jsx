@@ -118,20 +118,48 @@ const template = selectedTemplate;
       <div className="max-w-5xl mx-auto">
 
         <motion.div
-          initial={{ opacity: 0, y: -40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-14"
-        >
-          <h1 className="text-5xl font-black">
-            🚀 Portfolio Builder
-          </h1>
+  initial={{ opacity: 0, y: -40 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.7 }}
+  className="mb-14"
+>
 
-          <p className="text-gray-400 mt-5 text-lg">
-            Fill your details and generate your professional portfolio.
-          </p>
-        </motion.div>
+  <div className="flex justify-start mb-8">
+    <motion.button
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      onClick={() => navigate("/portfolio-builder")}
+      className="
+        px-8
+        py-3
+        rounded-2xl
+        border
+        border-cyan-500
+        text-cyan-400
+        font-bold
+        hover:bg-cyan-500
+        hover:text-black
+        transition
+      "
+    >
+      🏠 Back to Home
+    </motion.button>
+  </div>
 
+
+  <div className="text-center">
+
+    <h1 className="text-5xl font-black">
+      🚀 Portfolio Builder
+    </h1>
+
+    <p className="text-gray-400 mt-5 text-lg">
+      Fill your details and generate your professional portfolio.
+    </p>
+
+  </div>
+
+</motion.div>
         <form
           onSubmit={handleSubmit}
           className="space-y-10"
