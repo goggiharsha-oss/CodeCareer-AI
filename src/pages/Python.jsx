@@ -2,13 +2,10 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
-
 function Python() {
-const [activeQuestion, setActiveQuestion] = useState(null);
+  const [activeQuestion, setActiveQuestion] = useState(null);
 
   const [selectedProject, setSelectedProject] = useState(null);
-
-
 
   const skills = [
     "Python Basics",
@@ -22,8 +19,6 @@ const [activeQuestion, setActiveQuestion] = useState(null);
     "Testing",
     "Problem Solving",
   ];
-
-
 
   const skillProgress = [
     {
@@ -48,8 +43,6 @@ const [activeQuestion, setActiveQuestion] = useState(null);
     },
   ];
 
-
-
   const roadmap = [
     "Learn Python Fundamentals",
     "Understand Variables & Data Types",
@@ -63,37 +56,38 @@ const [activeQuestion, setActiveQuestion] = useState(null);
     "Apply for Python Jobs",
   ];
 
-
-
   const interviewQuestions = [
-  {
-    question: "What is Python and why is it popular?",
-    level: "Beginner",
-    answer: "Python is a high-level, interpreted programming language. It is popular because it is easy to learn and widely used in web development, AI, automation and data science."
-  },
-  {
-    question: "Difference between list and tuple?",
-    level: "Intermediate",
-    answer: "List is mutable, meaning we can change its values. Tuple is immutable, meaning values cannot be changed after creation."
-  },
-  {
-    question: "Explain Object-Oriented Programming in Python.",
-    level: "Intermediate",
-    answer: "OOP is a programming approach based on classes and objects. Python supports concepts like inheritance, encapsulation and polymorphism."
-  },
-  {
-    question: "What are Python decorators?",
-    level: "Advanced",
-    answer: "Decorators are functions that modify or extend the behavior of another function without changing its code."
-  },
-  {
-    question: "How does memory management work in Python?",
-    level: "Advanced",
-    answer: "Python uses automatic memory management with garbage collection to allocate and free memory."
-  },
-];
-
-
+    {
+      question: "What is Python and why is it popular?",
+      level: "Beginner",
+      answer:
+        "Python is a high-level, interpreted programming language. It is popular because it is easy to learn and widely used in web development, AI, automation and data science.",
+    },
+    {
+      question: "Difference between list and tuple?",
+      level: "Intermediate",
+      answer:
+        "List is mutable, meaning we can change its values. Tuple is immutable, meaning values cannot be changed after creation.",
+    },
+    {
+      question: "Explain Object-Oriented Programming in Python.",
+      level: "Intermediate",
+      answer:
+        "OOP is a programming approach based on classes and objects. Python supports concepts like inheritance, encapsulation and polymorphism.",
+    },
+    {
+      question: "What are Python decorators?",
+      level: "Advanced",
+      answer:
+        "Decorators are functions that modify or extend the behavior of another function without changing its code.",
+    },
+    {
+      question: "How does memory management work in Python?",
+      level: "Advanced",
+      answer:
+        "Python uses automatic memory management with garbage collection to allocate and free memory.",
+    },
+  ];
 
   const certifications = [
     "Python Institute PCAP Certification",
@@ -101,8 +95,6 @@ const [activeQuestion, setActiveQuestion] = useState(null);
     "Microsoft Python Certification",
     "Udemy Python Masterclass",
   ];
-
-
 
   const tools = [
     "Python",
@@ -112,8 +104,6 @@ const [activeQuestion, setActiveQuestion] = useState(null);
     "Django",
     "Flask",
   ];
-
-
 
   const projects = [
     {
@@ -161,17 +151,13 @@ const [activeQuestion, setActiveQuestion] = useState(null);
       icon: "🚀",
     },
   ];
-    return (
-
+  return (
     <div className="min-h-screen bg-slate-950 text-white">
-
-
       {/* HERO SECTION */}
-
 
       <div
         className="
-        bg-gradient-to-br
+        bg-linear-to-br
         from-slate-900
         via-green-950
         to-slate-950
@@ -179,97 +165,60 @@ const [activeQuestion, setActiveQuestion] = useState(null);
         border-slate-800
         "
       >
-
         <div className="max-w-7xl mx-auto px-6 py-16">
-
-
-          <Link
-            to="/"
-            className="text-cyan-400 hover:text-cyan-300"
-          >
+          <Link to="/" className="text-cyan-400 hover:text-cyan-300">
             ← Back to Home
           </Link>
 
-
-
           <div className="grid md:grid-cols-2 gap-10 items-center mt-10">
-
-
             <div>
-
-
               <motion.h1
-
                 initial={{
-                  opacity:0,
-                  x:-50
+                  opacity: 0,
+                  x: -50,
                 }}
-
                 animate={{
-                  opacity:1,
-                  x:0
+                  opacity: 1,
+                  x: 0,
                 }}
-
                 transition={{
-                  duration:0.7
+                  duration: 0.7,
                 }}
-
                 className="text-5xl font-bold"
-
               >
-
                 🐍 Python Programming
-
               </motion.h1>
 
-
-
               <motion.p
-
                 initial={{
-                  opacity:0
+                  opacity: 0,
                 }}
-
                 animate={{
-                  opacity:1
+                  opacity: 1,
                 }}
-
                 transition={{
-                  delay:0.4
+                  delay: 0.4,
                 }}
-
                 className="text-gray-400 text-lg mt-6"
-
               >
-
                 Learn Python programming language used in web development,
                 automation, artificial intelligence and data science.
-
               </motion.p>
-
-
             </div>
 
-
-
-
             <motion.div
-
               animate={{
-                y:[0,-20,0],
-                rotate:[0,8,-8,0]
+                y: [0, -20, 0],
+                rotate: [0, 8, -8, 0],
               }}
-
               transition={{
-                duration:4,
-                repeat:Infinity
+                duration: 4,
+                repeat: Infinity,
               }}
-
-
               className="
               h-72
               rounded-3xl
-              bg-gradient-to-br
+              bg-linear-to-br
               from-green-500
               to-cyan-600
               flex
@@ -279,83 +228,48 @@ const [activeQuestion, setActiveQuestion] = useState(null);
               shadow-2xl
               shadow-green-500/30
               "
-
             >
-
               🐍
-
             </motion.div>
-
-
-
           </div>
-
-
         </div>
-
       </div>
 
-
-
-
-
-
       <div className="max-w-7xl mx-auto px-6 py-12">
-
-
-
         {/* SALARY SECTION */}
 
-
         <motion.div
-
           initial={{
-            opacity:0,
-            y:50
+            opacity: 0,
+            y: 50,
           }}
-
           whileInView={{
-            opacity:1,
-            y:0
+            opacity: 1,
+            y: 0,
           }}
-
           className="
           bg-slate-900
           rounded-3xl
           p-8
           "
-
         >
-
-
           <h2 className="text-3xl font-bold text-cyan-400">
             💰 Python Developer Salary
           </h2>
 
-
-
-
           <div className="grid md:grid-cols-3 gap-6 mt-8">
-
-
-          {
-            [
-              ["Fresher","₹4–8 LPA"],
-              ["Experienced","₹10–18 LPA"],
-              ["Senior","₹25+ LPA"]
-            ].map((item,index)=>(
-
-
+            {[
+              ["Fresher", "₹4–8 LPA"],
+              ["Experienced", "₹10–18 LPA"],
+              ["Senior", "₹25+ LPA"],
+            ].map((item, index) => (
               <motion.div
-
                 key={index}
-
                 whileHover={{
-                  scale:1.08,
-                  rotateX:10,
-                  rotateY:10
+                  scale: 1.08,
+                  rotateX: 10,
+                  rotateY: 10,
                 }}
-
                 className="
                 bg-slate-800
                 rounded-2xl
@@ -364,86 +278,45 @@ const [activeQuestion, setActiveQuestion] = useState(null);
                 border
                 border-slate-700
                 "
-
               >
+                <h3 className="font-bold text-xl">{item[0]}</h3>
 
-
-                <h3 className="font-bold text-xl">
-                  {item[0]}
-                </h3>
-
-
-                <p className="text-4xl text-cyan-400 mt-4">
-                  {item[1]}
-                </p>
-
-
+                <p className="text-4xl text-cyan-400 mt-4">{item[1]}</p>
               </motion.div>
-
-
-            ))
-          }
-
-
+            ))}
           </div>
-
-
         </motion.div>
-
-
-
-
-
 
         {/* SKILLS SECTION */}
 
-
-
         <motion.div
-
           initial={{
-            opacity:0,
-            y:50
+            opacity: 0,
+            y: 50,
           }}
-
           whileInView={{
-            opacity:1,
-            y:0
+            opacity: 1,
+            y: 0,
           }}
-
           className="
           bg-slate-900
           rounded-3xl
           p-8
           mt-8
           "
-
         >
-
-
           <h2 className="text-3xl font-bold text-cyan-400 mb-8">
             🛠 Python Skills Required
           </h2>
 
-
-
-
           <div className="grid md:grid-cols-3 gap-6">
-
-
-          {
-            skills.map((skill,index)=>(
-
-
+            {skills.map((skill, index) => (
               <motion.div
-
                 key={index}
-
                 whileHover={{
-                  scale:1.08,
-                  y:-10
+                  scale: 1.08,
+                  y: -10,
                 }}
-
                 className="
                 bg-slate-800
                 rounded-2xl
@@ -453,89 +326,45 @@ const [activeQuestion, setActiveQuestion] = useState(null);
                 hover:border-cyan-400
                 transition
                 "
-
               >
+                <div className="text-3xl">🐍</div>
 
-
-                <div className="text-3xl">
-                  🐍
-                </div>
-
-
-
-                <h3 className="font-semibold text-lg mt-4">
-                  {skill}
-                </h3>
-
-
+                <h3 className="font-semibold text-lg mt-4">{skill}</h3>
               </motion.div>
-
-
-            ))
-          }
-
-
+            ))}
           </div>
-
-
         </motion.div>
-        
+
         {/* SKILL PROGRESS TRACKER */}
 
-
         <motion.div
-
           initial={{
-            opacity:0,
-            y:50
+            opacity: 0,
+            y: 50,
           }}
-
           whileInView={{
-            opacity:1,
-            y:0
+            opacity: 1,
+            y: 0,
           }}
-
           className="
           bg-slate-900
           rounded-3xl
           p-8
           mt-8
           "
-
         >
-
-
           <h2 className="text-3xl font-bold text-cyan-400 mb-8">
             🎯 Python Skill Progress
           </h2>
 
-
-
           <div className="space-y-6">
-
-
-          {
-            skillProgress.map((skill,index)=>(
-
-
+            {skillProgress.map((skill, index) => (
               <div key={index}>
-
-
                 <div className="flex justify-between mb-2">
+                  <h3 className="font-semibold">{skill.name}</h3>
 
-                  <h3 className="font-semibold">
-                    {skill.name}
-                  </h3>
-
-
-                  <span className="text-cyan-400">
-                    {skill.level}%
-                  </span>
-
-
+                  <span className="text-cyan-400">{skill.level}%</span>
                 </div>
-
-
 
                 <div
                   className="
@@ -546,107 +375,63 @@ const [activeQuestion, setActiveQuestion] = useState(null);
                   overflow-hidden
                   "
                 >
-
-
                   <motion.div
-
                     initial={{
-                      width:0
+                      width: 0,
                     }}
-
                     whileInView={{
-                      width:`${skill.level}%`
+                      width: `${skill.level}%`,
                     }}
-
                     transition={{
-                      duration:1,
-                      delay:index*0.2
+                      duration: 1,
+                      delay: index * 0.2,
                     }}
-
                     className="
                     h-full
-                    bg-gradient-to-r
+                    bg-linear-to-r
                     from-cyan-400
                     to-green-400
                     rounded-full
                     "
-
-                  >
-
-                  </motion.div>
-
-
+                  ></motion.div>
                 </div>
-
-
               </div>
-
-
-            ))
-          }
-
-
+            ))}
           </div>
-
-
         </motion.div>
-
-
-
-
-
-
 
         {/* TOOLS SECTION */}
 
-
-
         <motion.div
-
           initial={{
-            opacity:0,
-            y:50
+            opacity: 0,
+            y: 50,
           }}
-
           whileInView={{
-            opacity:1,
-            y:0
+            opacity: 1,
+            y: 0,
           }}
-
           className="
           bg-slate-900
           rounded-3xl
           p-8
           mt-8
           "
-
         >
-
-
           <h2 className="text-3xl font-bold text-cyan-400 mb-8">
             ⚙️ Python Tools & Technologies
           </h2>
 
-
-
           <div className="grid md:grid-cols-3 gap-5">
-
-
-          {
-            tools.map((tool,index)=>(
-
-
+            {tools.map((tool, index) => (
               <motion.div
-
                 key={index}
-
                 whileHover={{
-                  scale:1.1,
-                  rotateY:10
+                  scale: 1.1,
+                  rotateY: 10,
                 }}
-
                 className="
-                bg-gradient-to-br
+                bg-linear-to-br
                 from-slate-800
                 to-slate-700
                 rounded-xl
@@ -656,80 +441,43 @@ const [activeQuestion, setActiveQuestion] = useState(null);
                 border
                 border-slate-700
                 "
-
               >
-
                 🚀 {tool}
-
-
               </motion.div>
-
-
-            ))
-          }
-
-
+            ))}
           </div>
-
-
         </motion.div>
-
-
-
-
-
-
-
 
         {/* PROJECTS SECTION */}
 
-
-
         <motion.div
-
           initial={{
-            opacity:0,
-            y:50
+            opacity: 0,
+            y: 50,
           }}
-
           whileInView={{
-            opacity:1,
-            y:0
+            opacity: 1,
+            y: 0,
           }}
-
           className="
           bg-slate-900
           rounded-3xl
           p-8
           mt-8
           "
-
         >
-
-
           <h2 className="text-3xl font-bold text-cyan-400 mb-8">
             🚀 Python Projects Portfolio
           </h2>
 
-
-
-
           <div className="grid md:grid-cols-3 gap-6">
-
-
-          {
-            projects.map((project,index)=>(
-
-
+            {projects.map((project, index) => (
               <motion.div
-
                 key={index}
-
                 whileHover={{
-                  scale:1.05,
-                  y:-10
+                  scale: 1.05,
+                  y: -10,
                 }}
-
                 className="
                 bg-slate-800
                 rounded-2xl
@@ -739,22 +487,12 @@ const [activeQuestion, setActiveQuestion] = useState(null);
                 hover:border-cyan-400
                 transition
                 "
-
               >
-
-
-
                 <h3 className="text-xl font-bold">
                   {project.icon} {project.name}
                 </h3>
 
-
-
-                <p className="text-cyan-400 mt-2">
-                  {project.category}
-                </p>
-
-
+                <p className="text-cyan-400 mt-2">{project.category}</p>
 
                 <span
                   className="
@@ -769,30 +507,15 @@ const [activeQuestion, setActiveQuestion] = useState(null);
                   font-semibold
                   "
                 >
-
                   {project.difficulty}
-
                 </span>
 
-
-
-                <p className="text-gray-300 mt-4">
-                  {project.desc}
-                </p>
-
-
+                <p className="text-gray-300 mt-4">{project.desc}</p>
 
                 <div className="flex flex-wrap gap-2 mt-4">
-
-
-                {
-                  project.skills.map((skill,index)=>(
-
-
+                  {project.skills.map((skill, index) => (
                     <span
-
                       key={index}
-
                       className="
                       px-3
                       py-1
@@ -801,26 +524,14 @@ const [activeQuestion, setActiveQuestion] = useState(null);
                       text-cyan-300
                       text-sm
                       "
-
                     >
-
                       {skill}
-
                     </span>
-
-
-                  ))
-                }
-
-
+                  ))}
                 </div>
 
-
-
                 <button
-
                   onClick={() => setSelectedProject(project)}
-
                   className="
                   mt-5
                   px-5
@@ -830,49 +541,25 @@ const [activeQuestion, setActiveQuestion] = useState(null);
                   text-black
                   font-bold
                   "
-
                 >
-
                   View Details →
-
                 </button>
-
-
-
               </motion.div>
-
-
-            ))
-          }
-
-
+            ))}
           </div>
-
-
         </motion.div>
-        
-
-
-
 
         {/* PROJECT POPUP */}
 
-
-        {
-          selectedProject && (
-
-
-            <motion.div
-
-              initial={{
-                opacity:0
-              }}
-
-              animate={{
-                opacity:1
-              }}
-
-              className="
+        {selectedProject && (
+          <motion.div
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            className="
               fixed
               inset-0
               bg-black/70
@@ -881,21 +568,15 @@ const [activeQuestion, setActiveQuestion] = useState(null);
               justify-center
               z-50
               "
-
-            >
-
-
-              <motion.div
-
-                initial={{
-                  scale:0.7
-                }}
-
-                animate={{
-                  scale:1
-                }}
-
-                className="
+          >
+            <motion.div
+              initial={{
+                scale: 0.7,
+              }}
+              animate={{
+                scale: 1,
+              }}
+              className="
                 bg-slate-900
                 rounded-3xl
                 p-8
@@ -904,55 +585,35 @@ const [activeQuestion, setActiveQuestion] = useState(null);
                 border
                 border-cyan-400
                 "
+            >
+              <h2 className="text-3xl font-bold text-cyan-400">
+                {selectedProject.icon} {selectedProject.name}
+              </h2>
 
-              >
+              <p className="text-cyan-400 mt-3">{selectedProject.category}</p>
 
+              <p className="text-gray-300 mt-4">{selectedProject.desc}</p>
 
-                <h2 className="text-3xl font-bold text-cyan-400">
-                  {selectedProject.icon} {selectedProject.name}
-                </h2>
-
-
-                <p className="text-cyan-400 mt-3">
-                  {selectedProject.category}
-                </p>
-
-
-                <p className="text-gray-300 mt-4">
-                  {selectedProject.desc}
-                </p>
-
-
-                <div className="flex flex-wrap gap-2 mt-4">
-
-                {
-                  selectedProject.skills.map((skill,index)=>(
-
-                    <span
-                      key={index}
-                      className="
+              <div className="flex flex-wrap gap-2 mt-4">
+                {selectedProject.skills.map((skill, index) => (
+                  <span
+                    key={index}
+                    className="
                       px-3
                       py-1
                       bg-cyan-500/20
                       rounded-full
                       text-cyan-300
                       "
-                    >
-                      {skill}
-                    </span>
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
 
-                  ))
-                }
-
-                </div>
-
-
-
-                <button
-
-                  onClick={() => setSelectedProject(null)}
-
-                  className="
+              <button
+                onClick={() => setSelectedProject(null)}
+                className="
                   mt-6
                   px-5
                   py-2
@@ -961,49 +622,26 @@ const [activeQuestion, setActiveQuestion] = useState(null);
                   rounded-xl
                   font-bold
                   "
-
-                >
-
-                  Close
-
-                </button>
-
-
-
-              </motion.div>
-
-
+              >
+                Close
+              </button>
             </motion.div>
-
-
-          )
-        }
-
-
-
-
-
-
-
+          </motion.div>
+        )}
 
         {/* CAREER CTA */}
 
-
-
         <motion.div
-
           initial={{
-            opacity:0,
-            y:50
+            opacity: 0,
+            y: 50,
           }}
-
           whileInView={{
-            opacity:1,
-            y:0
+            opacity: 1,
+            y: 0,
           }}
-
           className="
-          bg-gradient-to-r
+          bg-linear-to-r
           from-cyan-900
           to-green-900
           rounded-3xl
@@ -1011,33 +649,22 @@ const [activeQuestion, setActiveQuestion] = useState(null);
           mt-8
           text-center
           "
-
         >
-
-
           <h2 className="text-3xl font-bold">
             🚀 Ready to Become a Python Developer?
           </h2>
-
 
           <p className="text-gray-300 mt-4">
             Follow the roadmap, build projects and prepare for your dream job.
           </p>
 
-
-
           <div className="flex justify-center gap-5 mt-8 flex-wrap">
-
-
             <button
-
               onClick={() =>
-                document.getElementById("roadmap")
-                .scrollIntoView({
-                  behavior:"smooth"
+                document.getElementById("roadmap").scrollIntoView({
+                  behavior: "smooth",
                 })
               }
-
               className="
               px-6
               py-3
@@ -1046,25 +673,16 @@ const [activeQuestion, setActiveQuestion] = useState(null);
               text-black
               font-bold
               "
-
             >
-
               🛣 Start Roadmap
-
             </button>
 
-
-
-
             <button
-
               onClick={() =>
-                document.getElementById("interview")
-                .scrollIntoView({
-                  behavior:"smooth"
+                document.getElementById("interview").scrollIntoView({
+                  behavior: "smooth",
                 })
               }
-
               className="
               px-6
               py-3
@@ -1073,81 +691,51 @@ const [activeQuestion, setActiveQuestion] = useState(null);
               text-black
               font-bold
               "
-
             >
-
               🎤 Practice Interview
-
             </button>
-
-
-
           </div>
-
-
         </motion.div>
-
-
-
-
-
-
-
-
 
         {/* ROADMAP SECTION */}
 
-
-
         <motion.div
-
           id="roadmap"
-
           initial={{
-            opacity:0,
-            y:50
+            opacity: 0,
+            y: 50,
           }}
-
           whileInView={{
-            opacity:1,
-            y:0
+            opacity: 1,
+            y: 0,
           }}
-
           className="
           bg-slate-900
           rounded-3xl
           p-8
           mt-8
           "
-
         >
-
-
           <h2 className="text-3xl font-bold text-cyan-400 mb-10">
             🛣️ Python Learning Journey
           </h2>
 
-
-
           <div className="space-y-5">
-
-  {
-    roadmap.map((step,index)=>(
-
-      <motion.div
-        key={index}
-        initial={{
-          opacity:0,
-          x:-40
-        }}
-        whileInView={{
-          opacity:1,
-          x:0
-        }}
-        transition={{
-          delay:index*0.1
-        }}
-        className="
+            {roadmap.map((step, index) => (
+              <motion.div
+                key={index}
+                initial={{
+                  opacity: 0,
+                  x: -40,
+                }}
+                whileInView={{
+                  opacity: 1,
+                  x: 0,
+                }}
+                transition={{
+                  delay: index * 0.1,
+                }}
+                className="
         flex
         items-center
         gap-5
@@ -1157,10 +745,9 @@ const [activeQuestion, setActiveQuestion] = useState(null);
         border
         border-slate-700
         "
-      >
-
-        <div
-          className="
+              >
+                <div
+                  className="
           w-12
           h-12
           rounded-full
@@ -1171,73 +758,47 @@ const [activeQuestion, setActiveQuestion] = useState(null);
           font-bold
           text-black
           "
-        >
-          {index+1}
-        </div>
+                >
+                  {index + 1}
+                </div>
 
-        <p className="text-lg">
-          {step}
-        </p>
-
-      </motion.div>
-
-    ))
-  }
-
-</div>
-
+                <p className="text-lg">{step}</p>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
-        
 
         {/* INTERVIEW PREPARATION */}
 
-
         <motion.div
-
           id="interview"
-
           initial={{
-            opacity:0,
-            y:50
+            opacity: 0,
+            y: 50,
           }}
-
           whileInView={{
-            opacity:1,
-            y:0
+            opacity: 1,
+            y: 0,
           }}
-
           className="
           bg-slate-900
           rounded-3xl
           p-8
           mt-8
           "
-
         >
-
-
           <h2 className="text-3xl font-bold text-cyan-400 mb-8">
             🎤 Python Interview Preparation
           </h2>
 
-
-
           <div className="grid md:grid-cols-2 gap-6">
-
-
-          {
-            interviewQuestions.map((item,index)=>(
-
-
+            {interviewQuestions.map((item, index) => (
               <motion.div
-
                 key={index}
-
                 whileHover={{
-                  scale:1.05,
-                  y:-8
+                  scale: 1.05,
+                  y: -8,
                 }}
-
                 className="
                 bg-slate-800
                 rounded-2xl
@@ -1246,17 +807,9 @@ const [activeQuestion, setActiveQuestion] = useState(null);
                 border-slate-700
                 hover:border-cyan-400
                 "
-
               >
-
-
                 <div className="flex justify-between items-center">
-
-
-                  <h3 className="font-bold">
-                    Question {index+1}
-                  </h3>
-
+                  <h3 className="font-bold">Question {index + 1}</h3>
 
                   <span
                     className="
@@ -1268,31 +821,17 @@ const [activeQuestion, setActiveQuestion] = useState(null);
                     text-sm
                     "
                   >
-
                     {item.level}
-
                   </span>
-
-
                 </div>
 
-
-
-                <p className="text-gray-300 mt-4">
-                  {item.question}
-                </p>
-
-
+                <p className="text-gray-300 mt-4">{item.question}</p>
 
                 <button
-
-onClick={() =>
-setActiveQuestion(
-activeQuestion === index ? null : index
-)
-}
-
-className="
+                  onClick={() =>
+                    setActiveQuestion(activeQuestion === index ? null : index)
+                  }
+                  className="
 mt-5
 px-4
 py-2
@@ -1301,120 +840,65 @@ bg-cyan-500
 text-black
 font-bold
 "
-
->
-
-{
-activeQuestion === index
-?
-"Hide Answer"
-:
-"Show Answer"
-}
-
-</button>
-{
-activeQuestion === index && (
-
-<motion.p
-
-initial={{
-opacity:0,
-y:-10
-}}
-
-animate={{
-opacity:1,
-y:0
-}}
-
-className="
+                >
+                  {activeQuestion === index ? "Hide Answer" : "Show Answer"}
+                </button>
+                {activeQuestion === index && (
+                  <motion.p
+                    initial={{
+                      opacity: 0,
+                      y: -10,
+                    }}
+                    animate={{
+                      opacity: 1,
+                      y: 0,
+                    }}
+                    className="
 mt-4
 bg-slate-950
 p-4
 rounded-xl
 text-green-400
 "
-
->
-
-💡 {item.answer}
-
-</motion.p>
-
-)
-}
-
-
-
+                  >
+                    💡 {item.answer}
+                  </motion.p>
+                )}
               </motion.div>
-
-
-            ))
-          }
-
-
+            ))}
           </div>
-
-
         </motion.div>
-
-
-
-
-
-
-
-
 
         {/* CERTIFICATIONS */}
 
-
-
         <motion.div
-
           initial={{
-            opacity:0,
-            y:50
+            opacity: 0,
+            y: 50,
           }}
-
           whileInView={{
-            opacity:1,
-            y:0
+            opacity: 1,
+            y: 0,
           }}
-
           className="
           bg-slate-900
           rounded-3xl
           p-8
           mt-8
           "
-
         >
-
-
           <h2 className="text-3xl font-bold text-cyan-400 mb-8">
             🎓 Python Certifications
           </h2>
 
-
-
           <div className="grid md:grid-cols-2 gap-6">
-
-
-          {
-            certifications.map((cert,index)=>(
-
-
+            {certifications.map((cert, index) => (
               <motion.div
-
                 key={index}
-
                 whileHover={{
-                  scale:1.05,
-                  y:-8
+                  scale: 1.05,
+                  y: -8,
                 }}
-
                 className="
                 bg-slate-800
                 rounded-2xl
@@ -1422,99 +906,63 @@ text-green-400
                 border
                 border-slate-700
                 "
-
               >
-
                 🏆 {cert}
-
-
               </motion.div>
-
-
-            ))
-          }
-
-
+            ))}
           </div>
-
-
         </motion.div>
-
-
-
-
-
-
-
 
         {/* CAREER OPPORTUNITIES */}
 
-
-
         <motion.div
-
           initial={{
-            opacity:0,
-            y:50
+            opacity: 0,
+            y: 50,
           }}
-
           whileInView={{
-            opacity:1,
-            y:0
+            opacity: 1,
+            y: 0,
           }}
-
           className="
           bg-slate-900
           rounded-3xl
           p-8
           mt-8
           "
-
         >
-
-
           <h2 className="text-3xl font-bold text-cyan-400 mb-8">
             💼 Python Career Opportunities
           </h2>
 
-
-
           <div className="grid md:grid-cols-2 gap-6">
-
-
-          {
-            [
+            {[
               {
-                role:"Python Developer",
-                salary:"₹4–12 LPA",
-                desc:"Develop applications and backend systems using Python."
+                role: "Python Developer",
+                salary: "₹4–12 LPA",
+                desc: "Develop applications and backend systems using Python.",
               },
               {
-                role:"Backend Developer",
-                salary:"₹6–15 LPA",
-                desc:"Build APIs and server-side applications."
+                role: "Backend Developer",
+                salary: "₹6–15 LPA",
+                desc: "Build APIs and server-side applications.",
               },
               {
-                role:"Data Analyst",
-                salary:"₹5–12 LPA",
-                desc:"Analyze data using Python libraries."
+                role: "Data Analyst",
+                salary: "₹5–12 LPA",
+                desc: "Analyze data using Python libraries.",
               },
               {
-                role:"Machine Learning Engineer",
-                salary:"₹8–20 LPA",
-                desc:"Create machine learning solutions using Python."
-              }
-            ].map((job,index)=>(
-
-
+                role: "Machine Learning Engineer",
+                salary: "₹8–20 LPA",
+                desc: "Create machine learning solutions using Python.",
+              },
+            ].map((job, index) => (
               <motion.div
-
                 key={index}
-
                 whileHover={{
-                  scale:1.05
+                  scale: 1.05,
                 }}
-
                 className="
                 bg-slate-800
                 rounded-2xl
@@ -1522,75 +970,41 @@ text-green-400
                 border
                 border-slate-700
                 "
-
               >
+                <h3 className="text-xl font-bold">🚀 {job.role}</h3>
 
+                <p className="text-gray-400 mt-3">{job.desc}</p>
 
-                <h3 className="text-xl font-bold">
-                  🚀 {job.role}
-                </h3>
-
-
-                <p className="text-gray-400 mt-3">
-                  {job.desc}
-                </p>
-
-
-                <p className="text-green-400 font-bold mt-4">
-                  {job.salary}
-                </p>
-
-
+                <p className="text-green-400 font-bold mt-4">{job.salary}</p>
               </motion.div>
-
-
-            ))
-          }
-
-
+            ))}
           </div>
-
-
         </motion.div>
-        
 
         {/* TOP COMPANIES */}
 
-
-
         <motion.div
-
           initial={{
-            opacity:0,
-            y:50
+            opacity: 0,
+            y: 50,
           }}
-
           whileInView={{
-            opacity:1,
-            y:0
+            opacity: 1,
+            y: 0,
           }}
-
           className="
           bg-slate-900
           rounded-3xl
           p-8
           mt-8
           "
-
         >
-
-
           <h2 className="text-3xl font-bold text-cyan-400 mb-8">
             🏢 Top Python Companies
           </h2>
 
-
-
           <div className="grid md:grid-cols-4 gap-5">
-
-
-          {
-            [
+            {[
               "Google",
               "Microsoft",
               "Amazon",
@@ -1599,18 +1013,13 @@ text-green-400
               "Infosys",
               "TCS",
               "Accenture",
-            ].map((company,index)=>(
-
-
+            ].map((company, index) => (
               <motion.div
-
                 key={index}
-
                 whileHover={{
-                  scale:1.1,
-                  rotateY:10
+                  scale: 1.1,
+                  rotateY: 10,
                 }}
-
                 className="
                 bg-slate-800
                 rounded-xl
@@ -1623,35 +1032,15 @@ text-green-400
                 hover:border-cyan-400
                 transition
                 "
-
               >
-
                 {company}
-
-
               </motion.div>
-
-
-            ))
-          }
-
-
+            ))}
           </div>
-
-
         </motion.div>
-
-
-
       </div>
-
-
     </div>
-
-
   );
-
 }
-
 
 export default Python;
