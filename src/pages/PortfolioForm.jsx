@@ -33,15 +33,6 @@ function PortfolioForm() {
     ],
   });
 
-  const handleChange = (e) => {
-    const { name, value, files } = e.target;
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: files ? files[0] : value,
-    }));
-  };
-
   const handleProjectChange = (index, field, value) => {
     const updatedProjects = [...formData.projects];
     updatedProjects[index][field] = value;
@@ -87,41 +78,30 @@ function PortfolioForm() {
     };
 
     localStorage.setItem("portfolioData", JSON.stringify(portfolioData));
-    const dataToSave = {
-      ...formData,
-      template: selectedTemplate,
-    };
-
-    localStorage.setItem("portfolioData", JSON.stringify(dataToSave));
-
-    setFormData({
-      fullName: "",
-      title: "",
-      email: "",
-      phone: "",
-      location: "",
-      about: "",
-      github: "",
-      linkedin: "",
-      website: "",
-      skills: "",
-      education: "",
-      experience: "",
-      certifications: "",
-      profileImage: null,
-      resume: null,
-      projects: [
-        {
-          name: "",
-          description: "",
-          tech: "",
-          github: "",
-          live: "",
-        },
-      ],
-    });
 
     navigate("/portfolio-preview");
+  };
+
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+
+    if (files && files[0]) {
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        setFormData((prev) => ({
+          ...prev,
+          [name]: reader.result,
+        }));
+      };
+
+      reader.readAsDataURL(files[0]);
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   };
 
   return (

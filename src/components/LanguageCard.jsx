@@ -16,17 +16,11 @@ function LanguageCard({ search = "" }) {
     const name = lang.name.toLowerCase();
 
     if (name === "javascript") {
-      return (
-        name.includes(searchText) ||
-        "js".includes(searchText)
-      );
+      return name.includes(searchText) || "js".includes(searchText);
     }
 
     if (name === "c++") {
-      return (
-        name.includes(searchText) ||
-        "cpp".includes(searchText)
-      );
+      return name.includes(searchText) || "cpp".includes(searchText);
     }
 
     if (name === "c#") {
@@ -38,10 +32,7 @@ function LanguageCard({ search = "" }) {
     }
 
     if (name === "python") {
-      return (
-        name.includes(searchText) ||
-        "py".includes(searchText)
-      );
+      return name.includes(searchText) || "py".includes(searchText);
     }
 
     if (name === "java") {
@@ -63,7 +54,6 @@ function LanguageCard({ search = "" }) {
       }`}
     >
       <div className="max-w-7xl mx-auto">
-
         <h2
           className={`text-4xl font-bold text-center mb-12 ${
             darkMode ? "text-white" : "text-slate-900"
@@ -73,9 +63,7 @@ function LanguageCard({ search = "" }) {
         </h2>
 
         {filteredLanguages.length === 0 ? (
-
           <div className="text-center py-20">
-
             <h3
               className={`text-3xl font-bold ${
                 darkMode ? "text-white" : "text-slate-900"
@@ -85,19 +73,13 @@ function LanguageCard({ search = "" }) {
             </h3>
 
             <p
-              className={`mt-3 ${
-                darkMode ? "text-gray-400" : "text-gray-600"
-              }`}
+              className={`mt-3 ${darkMode ? "text-gray-400" : "text-gray-600"}`}
             >
               Try Python, Java, JavaScript, C++, C#
             </p>
-
           </div>
-
         ) : (
-
           <div className="grid md:grid-cols-3 gap-8">
-
             {filteredLanguages.map((lang) => (
               <div
                 key={lang.id}
@@ -107,25 +89,21 @@ function LanguageCard({ search = "" }) {
                     : "bg-white/90 border border-cyan-200 backdrop-blur-xl"
                 }`}
               >
-
                 {/* Hover Glow */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-cyan-500/10 via-blue-500/5 to-purple-500/10"></div>
-{/* Floating Background Logo */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-linear-to-br from-cyan-500/10 via-blue-500/5 to-purple-500/10"></div>
+                {/* Floating Background Logo */}
 
-<motion.div
-
-  animate={{
-    y:[0,-25,0],
-    rotate:[0,15,-15,0]
-  }}
-
-  transition={{
-    duration:6,
-    repeat:Infinity,
-    ease:"easeInOut"
-  }}
-
-  className="
+                <motion.div
+                  animate={{
+                    y: [0, -25, 0],
+                    rotate: [0, 15, -15, 0],
+                  }}
+                  transition={{
+                    duration: 6,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  className="
   absolute
   -right-5
   -top-5
@@ -133,11 +111,9 @@ function LanguageCard({ search = "" }) {
   opacity-10
   pointer-events-none
   "
->
-
-  {lang.icon}
-
-</motion.div>
+                >
+                  {lang.icon}
+                </motion.div>
                 {/* Icon */}
                 <div
                   className={`relative z-10 w-14 h-14 rounded-xl ${lang.color} flex items-center justify-center text-white font-bold text-xl transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6`}
@@ -156,7 +132,6 @@ function LanguageCard({ search = "" }) {
 
                 {/* Salary Card */}
                 <div className="relative z-10 mt-5 rounded-2xl border border-cyan-500/20 bg-cyan-500/10 p-4 transition-all duration-500 group-hover:bg-cyan-500 group-hover:shadow-lg group-hover:shadow-cyan-500/40">
-
                   <p
                     className={`text-sm transition-colors duration-300 ${
                       darkMode ? "text-gray-300" : "text-gray-700"
@@ -168,7 +143,6 @@ function LanguageCard({ search = "" }) {
                   <p className="mt-2 text-2xl font-bold text-cyan-400 transition-all duration-300 group-hover:text-white">
                     {lang.salary}
                   </p>
-
                 </div>
 
                 {/* Jobs */}
@@ -208,16 +182,11 @@ function LanguageCard({ search = "" }) {
                 >
                   Explore Career →
                 </button>
-
               </div>
-                          ))}
-
+            ))}
           </div>
-
         )}
-
       </div>
-
     </section>
   );
 }
