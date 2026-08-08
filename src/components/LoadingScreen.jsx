@@ -3,11 +3,12 @@ import { motion } from "framer-motion";
 import { useTheme } from "../context/ThemeContext";
 
 const loadingMessages = [
-  "Preparing your programming career...",
-  "Loading programming languages...",
-  "Fetching career roadmaps...",
-  "Analyzing salary insights...",
-  "Almost ready...",
+  "Initializing AI Engine...",
+  "Loading Career Roadmaps...",
+  "Preparing Portfolio Builder...",
+  "Analyzing Skill Paths...",
+  "Optimizing Experience...",
+  "Almost Ready...",
 ];
 
 function LoadingScreen() {
@@ -23,73 +24,100 @@ function LoadingScreen() {
           clearInterval(progressTimer);
           return 100;
         }
-        return prev + 2;
+        return prev + 1;
       });
-    }, 40);
+    }, 25);
 
     const messageTimer = setInterval(() => {
       setMessageIndex((prev) => (prev + 1) % loadingMessages.length);
-    }, 1200);
+    }, 1000);
 
     return () => {
       clearInterval(progressTimer);
       clearInterval(messageTimer);
     };
   }, []);
-
   return (
     <div
-      className={`fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden ${
+      className={`fixed inset-0 overflow-hidden flex items-center justify-center ${
         darkMode
           ? "bg-slate-950"
-          : "bg-gradient-to-br from-cyan-50 via-white to-slate-100"
+          : "bg-linear-to-br from-cyan-50 via-white to-slate-100"
       }`}
     >
-      {/* Background Glow */}
+      {/* Animated Background Glow */}
+
       <motion.div
         animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.3, 0.6, 0.3],
+          scale: [1, 1.3, 1],
+          opacity: [0.25, 0.55, 0.25],
         }}
         transition={{
-          duration: 5,
+          duration: 6,
           repeat: Infinity,
         }}
-        className="absolute w-[450px] h-[450px] rounded-full bg-cyan-500/20 blur-3xl"
+        className="
+        absolute
+        w-[175]
+        h-[175]
+        rounded-full
+        bg-cyan-500/20
+        blur-[180px]
+      "
       />
 
-      {/* Floating Icons */}
-      {[
-        { icon: "🐍", top: "18%", left: "18%" },
-        { icon: "☕", top: "22%", right: "18%" },
-        { icon: "⚛️", bottom: "22%", left: "20%" },
-        { icon: "🟨", bottom: "18%", right: "18%" },
-        { icon: "⚙️", top: "50%", left: "10%" },
-        { icon: "🤖", top: "50%", right: "10%" },
-      ].map((item, index) => (
+      <motion.div
+        animate={{
+          scale: [1.2, 1, 1.2],
+          opacity: [0.15, 0.4, 0.15],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+        }}
+        className="
+        absolute
+        top-0
+        right-0
+        w-[125]
+        h-[125]
+        rounded-full
+        bg-blue-500/20
+        blur-[150px]
+      "
+      />
+
+      {/* Floating Particles */}
+
+      {Array.from({ length: 18 }).map((_, i) => (
         <motion.div
-          key={index}
+          key={i}
           animate={{
-            y: [0, -18, 0],
-            rotate: [0, 6, -6, 0],
+            y: [0, -40, 0],
+            opacity: [0.2, 1, 0.2],
+            scale: [1, 1.5, 1],
           }}
           transition={{
-            duration: 3 + index * 0.3,
+            duration: 3 + Math.random() * 3,
             repeat: Infinity,
+            delay: i * 0.2,
           }}
-          className="absolute text-3xl opacity-30 select-none"
+          className="
+          absolute
+          w-2
+          h-2
+          rounded-full
+          bg-cyan-400
+        "
           style={{
-            top: item.top,
-            left: item.left,
-            right: item.right,
-            bottom: item.bottom,
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
           }}
-        >
-          {item.icon}
-        </motion.div>
+        />
       ))}
 
-      {/* Main Content */}
+      {/* Glass Card */}
+
       <motion.div
         initial={{
           opacity: 0,
@@ -99,24 +127,102 @@ function LoadingScreen() {
           opacity: 1,
           scale: 1,
         }}
-        className="relative z-10 text-center px-6"
+        transition={{
+          duration: 0.6,
+        }}
+        className="
+        relative
+        z-10
+        w-[92%]
+        max-w-md
+        rounded-[35px]
+        border
+        border-cyan-400/20
+        bg-white/5
+        backdrop-blur-2xl
+        shadow-[0_0_70px_rgba(6,182,212,0.25)]
+        px-10
+        py-12
+        text-center
+      "
       >
-        {/* Robot */}
+        {/* Animated Border */}
+
         <motion.div
           animate={{
-            rotate: [0, 10, -10, 0],
-            scale: [1, 1.1, 1],
+            opacity: [0.3, 0.8, 0.3],
+            scale: [1, 1.02, 1],
           }}
           transition={{
-            duration: 2,
+            duration: 3,
             repeat: Infinity,
           }}
-          className="text-7xl"
-        >
-          🤖
-        </motion.div>
+          className="
+          absolute
+          inset-0
+          rounded-[35px]
+          border
+          border-cyan-400/30
+          pointer-events-none
+        "
+        />
+        {/* Dual Ring Loader */}
+
+        <div className="relative flex justify-center items-center">
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+            className="
+            w-28
+            h-28
+            rounded-full
+            border-[5px]
+            border-cyan-500
+            border-t-transparent
+          "
+          />
+
+          <motion.div
+            animate={{ rotate: -360 }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+            className="
+            absolute
+            w-20
+            h-20
+            rounded-full
+            border-[5px]
+            border-blue-400
+            border-b-transparent
+          "
+          />
+
+          <motion.div
+            animate={{
+              scale: [1, 1.15, 1],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+            }}
+            className="
+            absolute
+            text-4xl
+          "
+          >
+            🤖
+          </motion.div>
+        </div>
 
         {/* Title */}
+
         <motion.h1
           animate={{
             opacity: [0.6, 1, 0.6],
@@ -125,40 +231,48 @@ function LoadingScreen() {
             duration: 2,
             repeat: Infinity,
           }}
-          className={`mt-6 text-5xl font-extrabold ${
-            darkMode ? "text-white" : "text-slate-900"
-          }`}
+          className={`
+          mt-8
+          text-4xl
+          font-black
+          ${darkMode ? "text-white" : "text-slate-900"}
+        `}
         >
           CodeCareer AI
         </motion.h1>
 
-        {/* Message */}
+        {/* Loading Message */}
+
         <motion.p
           key={messageIndex}
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0 }}
-          className={`mt-4 text-lg ${
-            darkMode ? "text-gray-400" : "text-slate-600"
-          }`}
+          transition={{ duration: 0.4 }}
+          className="mt-5 text-cyan-400 font-medium"
         >
           {loadingMessages[messageIndex]}
         </motion.p>
 
-        {/* Spinner */}
-        <div className="mt-8 flex justify-center">
-          <div className="h-14 w-14 rounded-full border-4 border-cyan-500 border-t-transparent animate-spin"></div>
-        </div>
+        {/* Progress */}
 
-        {/* Progress Bar */}
-        <div className="mt-8 w-72 mx-auto">
+        <div className="mt-8">
           <div
-            className={`h-2 rounded-full overflow-hidden ${
-              darkMode ? "bg-slate-800" : "bg-gray-200"
-            }`}
+            className={`
+            h-3
+            rounded-full
+            overflow-hidden
+            ${darkMode ? "bg-slate-800" : "bg-slate-300"}
+          `}
           >
             <motion.div
-              className="h-full rounded-full bg-gradient-to-r from-cyan-400 to-blue-500"
+              className="
+              h-full
+              rounded-full
+              bg-linear-to-r
+              from-cyan-400
+              via-blue-500
+              to-cyan-400
+            "
               animate={{
                 width: `${progress}%`,
               }}
@@ -168,12 +282,11 @@ function LoadingScreen() {
             />
           </div>
 
-          <p className="mt-3 text-cyan-400 font-semibold">
-            {progress}%
-          </p>
+          <p className="mt-4 text-cyan-400 font-bold text-lg">{progress}%</p>
         </div>
 
-        {/* Loading Text */}
+        {/* Footer */}
+
         <motion.p
           animate={{
             opacity: [0.4, 1, 0.4],
@@ -182,19 +295,12 @@ function LoadingScreen() {
             duration: 1.5,
             repeat: Infinity,
           }}
-          className="mt-5 text-sm text-cyan-400"
+          className="mt-6 text-sm text-slate-400"
         >
-          Please wait while we prepare your experience...
+          Building your future...
         </motion.p>
 
-        {/* Version */}
-        <p
-          className={`mt-8 text-xs ${
-            darkMode ? "text-gray-600" : "text-gray-400"
-          }`}
-        >
-          Version 1.0.0
-        </p>
+        <p className="mt-8 text-xs text-slate-500">Version 2.0.0</p>
       </motion.div>
     </div>
   );

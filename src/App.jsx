@@ -25,194 +25,80 @@ import MobileDevelopment from "./pages/MobileDevelopment";
 
 import NotFound from "./pages/NotFound";
 
-
 function App() {
-
-
   const [loading, setLoading] = useState(true);
 
   const { darkMode } = useTheme();
 
-
-
   useEffect(() => {
-
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
-
+    }, 2600);
   }, []);
 
-
-
-
   if (loading) {
-
     return <LoadingScreen />;
-
   }
 
-
-
-
   return (
-
     <div
       className={`
         min-h-screen
         transition-colors
         duration-500
-        ${
-          darkMode
-            ? "bg-slate-950 text-white"
-            : "bg-white text-slate-900"
-        }
+        ${darkMode ? "bg-slate-950 text-white" : "bg-white text-slate-900"}
       `}
     >
-
-
       <BrowserRouter>
-
-
         <ScrollToTop />
 
-
-
         <Routes>
+          <Route path="/" element={<Home />} />
 
+          <Route path="/roadmap/:career" element={<Roadmap />} />
 
-          <Route
-            path="/"
-            element={<Home />}
-          />
+          <Route path="/python" element={<Python />} />
 
-<Route 
-  path="/roadmap/:career" 
-  element={<Roadmap />} 
-/>
+          <Route path="/java" element={<Java />} />
 
-          <Route
-            path="/python"
-            element={<Python />}
-          />
+          <Route path="/c" element={<C />} />
 
+          <Route path="/cpp" element={<Cpp />} />
 
-          <Route
-            path="/java"
-            element={<Java />}
-          />
+          <Route path="/csharp" element={<CSharp />} />
 
+          <Route path="/javascript" element={<Javascript />} />
 
-          <Route
-            path="/c"
-            element={<C />}
-          />
+          <Route path="/web-development" element={<WebDevelopment />} />
 
-
-          <Route
-            path="/cpp"
-            element={<Cpp />}
-          />
-
-
-          <Route
-            path="/csharp"
-            element={<CSharp />}
-          />
-
-
-          <Route
-            path="/javascript"
-            element={<Javascript />}
-          />
-
-
-
-          <Route
-            path="/web-development"
-            element={<WebDevelopment />}
-          />
-
-
-
-          <Route
-            path="/cyber-security"
-            element={<CyberSecurity />}
-          />
-
-
+          <Route path="/cyber-security" element={<CyberSecurity />} />
 
           <Route
             path="/artificial-intelligence"
             element={<ArtificialIntelligence />}
           />
 
+          <Route path="/data-science" element={<DataScience />} />
 
+          <Route path="/cloud-computing" element={<CloudComputing />} />
 
-          <Route
-            path="/data-science"
-            element={<DataScience />}
-          />
+          <Route path="/mobile-development" element={<MobileDevelopment />} />
 
+          <Route path="/career-quiz" element={<CareerQuiz />} />
 
+          <Route path="/portfolio-builder" element={<PortfolioBuilder />} />
 
-          <Route
-            path="/cloud-computing"
-            element={<CloudComputing />}
-          />
+          <Route path="/portfolio-form" element={<PortfolioForm />} />
 
+          <Route path="/portfolio-preview" element={<PortfolioPreview />} />
 
-
-          <Route
-            path="/mobile-development"
-            element={<MobileDevelopment />}
-          />
-
-<Route
-  path="/career-quiz"
-  element={<CareerQuiz />}
-/>
-
-<Route
-  path="/portfolio-builder"
-  element={<PortfolioBuilder />}
-/>
-
-<Route
-          path="/portfolio-form"
-          element={<PortfolioForm />}
-        />
-
-
-<Route
-  path="/portfolio-preview"
-  element={<PortfolioPreview />}
-/>
-
-          <Route
-            path="*"
-            element={<NotFound />}
-          />
-
-
+          <Route path="*" element={<NotFound />} />
         </Routes>
 
-
-
-
         <BackToTop />
-
-
-
       </BrowserRouter>
-
-
     </div>
-
   );
-
 }
-
-
 
 export default App;
