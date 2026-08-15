@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
-import TemplateSelector from "../components/TemplateSelector";
+import { useNavigate, useLocation } from "react-router-dom";
 function PortfolioForm() {
   const navigate = useNavigate();
-  const [selectedTemplate, setSelectedTemplate] = useState("frontend");
+  const location = useLocation();
+
+  const [selectedTemplate, setSelectedTemplate] = useState(
+    location.state?.template || "frontend",
+  );
   const template = selectedTemplate;
   const [formData, setFormData] = useState({
     fullName: "",
@@ -151,13 +154,26 @@ function PortfolioForm() {
             </motion.button>
           </div>
 
-          <div className="text-center">
-            <h1 className="text-5xl font-black">🚀 Portfolio Builder</h1>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="text-center"
+          >
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-sm font-semibold">
+              ✨ Let's build your career profile
+            </div>
 
-            <p className="text-gray-400 mt-5 text-lg">
-              Fill your details and generate your professional portfolio.
+            <h1 className="text-5xl md:text-6xl font-black mt-6">
+              Create Your
+              <span className="block text-cyan-400">Professional Profile</span>
+            </h1>
+
+            <p className="text-gray-400 mt-5 text-lg max-w-2xl mx-auto">
+              Enter your details once and we'll transform them into a beautiful
+              portfolio and professional resume.
             </p>
-          </div>
+          </motion.div>
         </motion.div>
         <form
           onSubmit={handleSubmit}
@@ -191,13 +207,30 @@ function PortfolioForm() {
   }
 `}
           >
-            <h2 className="text-3xl font-bold text-cyan-400 mb-8">
-              👤 Personal Information
-            </h2>
+            <div className="flex items-center gap-5 mb-10">
+              <motion.div
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                transition={{ duration: 0.5 }}
+                className="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-2xl"
+              >
+                👤
+              </motion.div>
+
+              <div>
+                <h2 className="text-3xl font-bold">Personal Information</h2>
+
+                <p className="text-gray-400 mt-1">
+                  Tell us a little about yourself
+                </p>
+              </div>
+            </div>
 
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <label className="block mb-2 font-semibold">Full Name</label>
+                <label className="block mb-3 text-sm font-semibold text-gray-300">
+                  Full Name
+                </label>
 
                 <input
                   type="text"
@@ -205,12 +238,14 @@ function PortfolioForm() {
                   value={formData.fullName}
                   onChange={handleChange}
                   required
-                  className="w-full rounded-xl bg-slate-800 border border-slate-700 p-4 outline-none focus:border-cyan-500"
+                  className="w-full rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-4 text-white placeholder-gray-500 outline-none transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:bg-cyan-500/5 hover:border-cyan-500/40"
                 />
               </div>
 
               <div>
-                <label className="block mb-2 font-semibold">Job Title</label>
+                <label className="block mb-3 text-sm font-semibold text-gray-300">
+                  Job Title
+                </label>
 
                 <input
                   type="text"
@@ -218,12 +253,14 @@ function PortfolioForm() {
                   value={formData.title}
                   onChange={handleChange}
                   required
-                  className="w-full rounded-xl bg-slate-800 border border-slate-700 p-4 outline-none focus:border-cyan-500"
+                  className="w-full rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-4 text-white placeholder-gray-500 outline-none transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:bg-cyan-500/5 hover:border-cyan-500/40"
                 />
               </div>
 
               <div>
-                <label className="block mb-2 font-semibold">Email</label>
+                <label className="block mb-3 text-sm font-semibold text-gray-300">
+                  Email
+                </label>
 
                 <input
                   type="email"
@@ -232,24 +269,28 @@ function PortfolioForm() {
                   onChange={handleChange}
                   placeholder="example@gmail.com"
                   required
-                  className="w-full rounded-xl bg-slate-800 border border-slate-700 p-4 outline-none focus:border-cyan-500"
+                  className="w-full rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-4 text-white placeholder-gray-500 outline-none transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:bg-cyan-500/5 hover:border-cyan-500/40"
                 />
               </div>
 
               <div>
-                <label className="block mb-2 font-semibold">Phone Number</label>
+                <label className="block mb-3 text-sm font-semibold text-gray-300">
+                  Phone Number
+                </label>
 
                 <input
                   type="text"
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full rounded-xl bg-slate-800 border border-slate-700 p-4 outline-none focus:border-cyan-500"
+                  className="w-full rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-4 text-white placeholder-gray-500 outline-none transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:bg-cyan-500/5 hover:border-cyan-500/40"
                 />
               </div>
 
               <div>
-                <label className="block mb-2 font-semibold">Location</label>
+                <label className="block mb-3 text-sm font-semibold text-gray-300">
+                  Location
+                </label>
 
                 <input
                   type="text"
@@ -257,12 +298,12 @@ function PortfolioForm() {
                   value={formData.location}
                   onChange={handleChange}
                   placeholder="Hyderabad, India"
-                  className="w-full rounded-xl bg-slate-800 border border-slate-700 p-4 outline-none focus:border-cyan-500"
+                  className="w-full rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-4 text-white placeholder-gray-500 outline-none transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:bg-cyan-500/5 hover:border-cyan-500/40"
                 />
               </div>
 
               <div>
-                <label className="block mb-2 font-semibold">
+                <label className="block mb-3 text-sm font-semibold text-gray-300">
                   Personal Website
                 </label>
 
@@ -272,12 +313,14 @@ function PortfolioForm() {
                   value={formData.website}
                   onChange={handleChange}
                   placeholder="https://yourwebsite.com"
-                  className="w-full rounded-xl bg-slate-800 border border-slate-700 p-4 outline-none focus:border-cyan-500"
+                  className="w-full rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-4 text-white placeholder-gray-500 outline-none transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:bg-cyan-500/5 hover:border-cyan-500/40"
                 />
               </div>
 
               <div>
-                <label className="block mb-2 font-semibold">GitHub</label>
+                <label className="block mb-3 text-sm font-semibold text-gray-300">
+                  GitHub
+                </label>
 
                 <input
                   type="text"
@@ -285,12 +328,14 @@ function PortfolioForm() {
                   value={formData.github}
                   onChange={handleChange}
                   placeholder="https://github.com/username"
-                  className="w-full rounded-xl bg-slate-800 border border-slate-700 p-4 outline-none focus:border-cyan-500"
+                  className="w-full rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-4 text-white placeholder-gray-500 outline-none transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:bg-cyan-500/5 hover:border-cyan-500/40"
                 />
               </div>
 
               <div>
-                <label className="block mb-2 font-semibold">LinkedIn</label>
+                <label className="block mb-3 text-sm font-semibold text-gray-300">
+                  LinkedIn
+                </label>
 
                 <input
                   type="text"
@@ -298,13 +343,15 @@ function PortfolioForm() {
                   value={formData.linkedin}
                   onChange={handleChange}
                   placeholder="https://linkedin.com/in/username"
-                  className="w-full rounded-xl bg-slate-800 border border-slate-700 p-4 outline-none focus:border-cyan-500"
+                  className="w-full rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-4 text-white placeholder-gray-500 outline-none transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:bg-cyan-500/5 hover:border-cyan-500/40"
                 />
               </div>
             </div>
 
             <div className="mt-8">
-              <label className="block mb-2 font-semibold">About Me</label>
+              <label className="block mb-3 text-sm font-semibold text-gray-300">
+                About Me
+              </label>
 
               <textarea
                 rows={6}
@@ -312,13 +359,13 @@ function PortfolioForm() {
                 value={formData.about}
                 onChange={handleChange}
                 placeholder="Write about yourself..."
-                className="w-full rounded-xl bg-slate-800 border border-slate-700 p-4 outline-none resize-none focus:border-cyan-500"
+                className="w-full rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-4 text-white placeholder-gray-500 outline-none transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:bg-cyan-500/5 hover:border-cyan-500/40"
               />
             </div>
 
             <div className="grid md:grid-cols-2 gap-8 mt-8">
               <div>
-                <label className="block mb-3 font-semibold">
+                <label className="block mb-3 text-sm font-semibold text-gray-300">
                   🖼 Profile Image
                 </label>
 
@@ -327,28 +374,26 @@ function PortfolioForm() {
                   name="profileImage"
                   accept="image/*"
                   onChange={handleChange}
-                  className="w-full bg-slate-800 rounded-xl p-4 border border-slate-700"
+                  className="w-full rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-4 text-white placeholder-gray-500 outline-none transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:bg-cyan-500/5 hover:border-cyan-500/40"
                 />
               </div>
 
               <div>
-                <label className="block mb-3 font-semibold">📄 Resume</label>
+                <label className="block mb-3 text-sm font-semibold text-gray-300">
+                  📄 Resume
+                </label>
 
                 <input
                   type="file"
                   name="resume"
                   accept=".pdf,.doc,.docx"
                   onChange={handleChange}
-                  className="w-full bg-slate-800 rounded-xl p-4 border border-slate-700"
+                  className="w-full rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-4 text-white placeholder-gray-500 outline-none transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:bg-cyan-500/5 hover:border-cyan-500/40"
                 />
               </div>
             </div>
           </motion.div>
 
-          <TemplateSelector
-            selectedTemplate={selectedTemplate}
-            setSelectedTemplate={setSelectedTemplate}
-          />
           {/* ================= SKILLS / EDUCATION ================= */}
 
           <motion.div
@@ -372,14 +417,31 @@ function PortfolioForm() {
   }
 `}
           >
-            <h2 className="text-3xl font-bold text-cyan-400 mb-8">
-              🎓 Education & Skills
-            </h2>
+            <div className="flex items-center gap-5 mb-10">
+              <motion.div
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                transition={{ duration: 0.5 }}
+                className="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-2xl"
+              >
+                🎓
+              </motion.div>
+
+              <div>
+                <h2 className="text-3xl font-bold">Education & Skills</h2>
+
+                <p className="text-gray-400 mt-1">
+                  Showcase your technical skills and educational background
+                </p>
+              </div>
+            </div>
 
             {/* Skills */}
 
             <div className="mb-8">
-              <label className="block mb-2 font-semibold">Skills</label>
+              <label className="block mb-3 text-sm font-semibold text-gray-300">
+                Skills
+              </label>
 
               <textarea
                 rows={4}
@@ -387,14 +449,16 @@ function PortfolioForm() {
                 value={formData.skills}
                 onChange={handleChange}
                 placeholder="HTML, CSS, JavaScript, React, Node.js, Tailwind CSS..."
-                className="w-full rounded-xl bg-slate-800 border border-slate-700 p-4 outline-none resize-none focus:border-cyan-500"
+                className="w-full rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-5 text-white placeholder-gray-500 outline-none resize-none transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:bg-cyan-500/5 hover:border-cyan-500/40"
               />
             </div>
 
             {/* Education */}
 
             <div className="mb-8">
-              <label className="block mb-2 font-semibold">Education</label>
+              <label className="block mb-3 text-sm font-semibold text-gray-300">
+                Education
+              </label>
 
               <textarea
                 rows={5}
@@ -402,14 +466,16 @@ function PortfolioForm() {
                 value={formData.education}
                 onChange={handleChange}
                 placeholder="Diploma in Computer Engineering..."
-                className="w-full rounded-xl bg-slate-800 border border-slate-700 p-4 outline-none resize-none focus:border-cyan-500"
+                className="w-full rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-5 text-white placeholder-gray-500 outline-none resize-none transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:bg-cyan-500/5 hover:border-cyan-500/40"
               />
             </div>
 
             {/* Experience */}
 
             <div className="mb-8">
-              <label className="block mb-2 font-semibold">Experience</label>
+              <label className="block mb-3 text-sm font-semibold text-gray-300">
+                Experience
+              </label>
 
               <textarea
                 rows={5}
@@ -417,14 +483,16 @@ function PortfolioForm() {
                 value={formData.experience}
                 onChange={handleChange}
                 placeholder="Frontend Developer Intern..."
-                className="w-full rounded-xl bg-slate-800 border border-slate-700 p-4 outline-none resize-none focus:border-cyan-500"
+                className="w-full rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-5 text-white placeholder-gray-500 outline-none resize-none transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:bg-cyan-500/5 hover:border-cyan-500/40"
               />
             </div>
 
             {/* Certifications */}
 
             <div>
-              <label className="block mb-2 font-semibold">Certifications</label>
+              <label className="block mb-3 text-sm font-semibold text-gray-300">
+                Certifications
+              </label>
 
               <textarea
                 rows={4}
@@ -432,7 +500,7 @@ function PortfolioForm() {
                 value={formData.certifications}
                 onChange={handleChange}
                 placeholder="AWS Cloud Practitioner, Google Cybersecurity..."
-                className="w-full rounded-xl bg-slate-800 border border-slate-700 p-4 outline-none resize-none focus:border-cyan-500"
+                className="w-full rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-5 text-white placeholder-gray-500 outline-none resize-none transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:bg-cyan-500/5 hover:border-cyan-500/40"
               />
             </div>
           </motion.div>
@@ -460,12 +528,29 @@ function PortfolioForm() {
 `}
           >
             <div className="flex justify-between items-center mb-8">
-              <h2 className="text-3xl font-bold text-cyan-400">🚀 Projects</h2>
+              <div className="flex items-center gap-5">
+                <motion.div
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-2xl"
+                >
+                  🚀
+                </motion.div>
+
+                <div>
+                  <h2 className="text-3xl font-bold">Projects</h2>
+
+                  <p className="text-gray-400 mt-1">
+                    Showcase your best work and achievements
+                  </p>
+                </div>
+              </div>
 
               <button
                 type="button"
                 onClick={addProject}
-                className="px-5 py-3 rounded-xl bg-cyan-500 text-black font-bold hover:scale-105 transition"
+                className="px-6 py-3 rounded-2xl bg-linear-to-r from-cyan-500 to-blue-600 text-black font-bold shadow-lg shadow-cyan-500/20 hover:scale-105 hover:shadow-cyan-500/40 transition-all duration-300"
               >
                 + Add Project
               </button>
@@ -476,16 +561,18 @@ function PortfolioForm() {
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                className="mb-10 rounded-2xl bg-slate-800 p-6 border border-slate-700"
+                className="mb-10 rounded-3xl bg-white/300 backdrop-blur-xl p-7 border border-white/10 hover:border-cyan-500/40 transition-all duration-300 shadow-xl"
               >
                 <div className="flex justify-between items-center mb-6">
-                  <h3 className="text-xl font-bold">Project {index + 1}</h3>
+                  <h3 className="text-xl font-bold text-white">
+                    Project {index + 1}
+                  </h3>
 
                   {formData.projects.length > 1 && (
                     <button
                       type="button"
                       onClick={() => removeProject(index)}
-                      className="px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700"
+                      className="px-4 py-2 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 hover:bg-red-500 hover:text-white transition-all duration-300"
                     >
                       Remove
                     </button>
@@ -494,7 +581,7 @@ function PortfolioForm() {
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block mb-2 font-semibold">
+                    <label className="block mb-3 text-sm font-semibold text-gray-300">
                       Project Name
                     </label>
 
@@ -505,12 +592,12 @@ function PortfolioForm() {
                         handleProjectChange(index, "name", e.target.value)
                       }
                       placeholder="Portfolio Website"
-                      className="w-full rounded-xl bg-slate-900 border border-slate-700 p-4 outline-none focus:border-cyan-500"
+                      className="w-full rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-4 text-white placeholder-gray-500 outline-none transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:bg-cyan-500/5 hover:border-cyan-500/40"
                     />
                   </div>
 
                   <div>
-                    <label className="block mb-2 font-semibold">
+                    <label className="block mb-3 text-sm font-semibold text-gray-300">
                       Technologies
                     </label>
 
@@ -521,13 +608,13 @@ function PortfolioForm() {
                         handleProjectChange(index, "tech", e.target.value)
                       }
                       placeholder="React, Tailwind, Node.js"
-                      className="w-full rounded-xl bg-slate-900 border border-slate-700 p-4 outline-none focus:border-cyan-500"
+                      className="w-full rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-4 text-white placeholder-gray-500 outline-none transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:bg-cyan-500/5 hover:border-cyan-500/40"
                     />
                   </div>
                 </div>
 
                 <div className="mt-6">
-                  <label className="block mb-2 font-semibold">
+                  <label className="block mb-3 text-sm font-semibold text-gray-300">
                     Description
                   </label>
 
@@ -538,13 +625,13 @@ function PortfolioForm() {
                       handleProjectChange(index, "description", e.target.value)
                     }
                     placeholder="Describe your project..."
-                    className="w-full rounded-xl bg-slate-900 border border-slate-700 p-4 resize-none outline-none focus:border-cyan-500"
+                    className="w-full rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-5 text-white placeholder-gray-500 outline-none resize-none transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:bg-cyan-500/5 hover:border-cyan-500/40"
                   />
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6 mt-6">
                   <div>
-                    <label className="block mb-2 font-semibold">
+                    <label className="block mb-3 text-sm font-semibold text-gray-300">
                       GitHub Link
                     </label>
 
@@ -555,12 +642,12 @@ function PortfolioForm() {
                         handleProjectChange(index, "github", e.target.value)
                       }
                       placeholder="https://github.com/..."
-                      className="w-full rounded-xl bg-slate-900 border border-slate-700 p-4 outline-none focus:border-cyan-500"
+                      className="w-full rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-4 text-white placeholder-gray-500 outline-none transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:bg-cyan-500/5 hover:border-cyan-500/40"
                     />
                   </div>
 
                   <div>
-                    <label className="block mb-2 font-semibold">
+                    <label className="block mb-3 text-sm font-semibold text-gray-300">
                       Live Demo
                     </label>
 
@@ -571,7 +658,7 @@ function PortfolioForm() {
                         handleProjectChange(index, "live", e.target.value)
                       }
                       placeholder="https://..."
-                      className="w-full rounded-xl bg-slate-900 border border-slate-700 p-4 outline-none focus:border-cyan-500"
+                      className="w-full rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-4 text-white placeholder-gray-500 outline-none transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:bg-cyan-500/5 hover:border-cyan-500/40"
                     />
                   </div>
                 </div>
@@ -586,12 +673,28 @@ function PortfolioForm() {
             transition={{ duration: 0.6 }}
             className="bg-slate-900 rounded-3xl p-8 border border-slate-800"
           >
-            <h2 className="text-3xl font-bold text-cyan-400 mb-8">
-              🎨 Portfolio Theme
-            </h2>
+            <div className="flex items-center gap-5 mb-10">
+              <motion.div
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                transition={{ duration: 0.5 }}
+                className="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-2xl"
+              >
+                🎨
+              </motion.div>
+
+              <div>
+                <h2 className="text-3xl font-bold">Portfolio Theme</h2>
+
+                <p className="text-gray-400 mt-1">
+                  Choose the visual style for your portfolio
+                </p>
+              </div>
+            </div>
 
             <div className="grid md:grid-cols-3 gap-6">
-              <label className="cursor-pointer">
+              {/* BLUE THEME */}
+              <label className="cursor-pointer group">
                 <input
                   type="radio"
                   name="theme"
@@ -600,12 +703,17 @@ function PortfolioForm() {
                   className="hidden"
                 />
 
-                <div className="rounded-2xl p-6 bg-linear-to-r from-cyan-500 to-blue-600 text-center font-bold hover:scale-105 transition">
-                  💙 Blue Theme
+                <div className="rounded-2xl p-6 bg-linear-to-br from-cyan-500 to-blue-600 text-center font-bold border-2 border-transparent group-hover:border-cyan-300 group-hover:scale-105 transition-all duration-300 shadow-lg shadow-cyan-500/20">
+                  <div className="text-3xl mb-3">💙</div>
+
+                  <div className="text-lg">Blue Theme</div>
+
+                  <p className="text-sm text-white/70 mt-2">Clean & Modern</p>
                 </div>
               </label>
 
-              <label className="cursor-pointer">
+              {/* PURPLE THEME */}
+              <label className="cursor-pointer group">
                 <input
                   type="radio"
                   name="theme"
@@ -613,12 +721,19 @@ function PortfolioForm() {
                   className="hidden"
                 />
 
-                <div className="rounded-2xl p-6 bg-linear-to-r from-purple-500 to-pink-600 text-center font-bold hover:scale-105 transition">
-                  💜 Purple Theme
+                <div className="rounded-2xl p-6 bg-linear-to-br from-purple-500 to-pink-600 text-center font-bold border-2 border-transparent group-hover:border-purple-300 group-hover:scale-105 transition-all duration-300 shadow-lg shadow-purple-500/20">
+                  <div className="text-3xl mb-3">💜</div>
+
+                  <div className="text-lg">Purple Theme</div>
+
+                  <p className="text-sm text-white/70 mt-2">
+                    Creative & Elegant
+                  </p>
                 </div>
               </label>
 
-              <label className="cursor-pointer">
+              {/* GREEN THEME */}
+              <label className="cursor-pointer group">
                 <input
                   type="radio"
                   name="theme"
@@ -626,8 +741,14 @@ function PortfolioForm() {
                   className="hidden"
                 />
 
-                <div className="rounded-2xl p-6 bg-linear-to-r from-green-500 to-emerald-600 text-center font-bold hover:scale-105 transition">
-                  💚 Green Theme
+                <div className="rounded-2xl p-6 bg-linear-to-br from-green-500 to-emerald-600 text-center font-bold border-2 border-transparent group-hover:border-green-300 group-hover:scale-105 transition-all duration-300 shadow-lg shadow-green-500/20">
+                  <div className="text-3xl mb-3">💚</div>
+
+                  <div className="text-lg">Green Theme</div>
+
+                  <p className="text-sm text-white/70 mt-2">
+                    Fresh & Professional
+                  </p>
                 </div>
               </label>
             </div>
@@ -644,25 +765,41 @@ function PortfolioForm() {
               type="submit"
               whileHover={{
                 scale: 1.05,
+                boxShadow: "0 0 40px rgba(34,211,238,0.45)",
               }}
               whileTap={{
-                scale: 0.95,
+                scale: 0.96,
               }}
               className="
-                px-12
-                py-5
-                rounded-2xl
-                bg-linear-to-r
-                from-cyan-500
-                to-blue-600
-                text-black
-                font-black
-                text-xl
-                shadow-xl
-                shadow-cyan-500/30
-              "
+    relative
+    overflow-hidden
+    px-12
+    py-5
+    rounded-2xl
+    bg-linear-to-r
+    from-cyan-400
+    via-blue-500
+    to-purple-600
+    text-white
+    font-black
+    text-xl
+    shadow-2xl
+    shadow-cyan-500/30
+    transition-all
+    duration-300
+  "
             >
-              🚀 Generate Portfolio
+              <motion.span
+                className="absolute inset-0 bg-white/20"
+                initial={{ x: "-100%" }}
+                whileHover={{ x: "100%" }}
+                transition={{ duration: 0.7 }}
+              />
+
+              <span className="relative z-10 flex items-center gap-3">
+                🚀 Generate My Portfolio
+                <span className="text-2xl">→</span>
+              </span>
             </motion.button>
           </motion.div>
         </form>
