@@ -3,7 +3,6 @@ import { useTheme } from "../context/ThemeContext";
 import { playClick } from "../utils/playClick";
 import { motion } from "framer-motion";
 
-
 const pills = [
   {
     text: "🐍 Python",
@@ -89,248 +88,233 @@ const suggestions = [
   },
 ];
 
-
 export default function Hero({ search, setSearch }) {
-
   const { darkMode } = useTheme();
 
-
   const filteredSuggestions = suggestions.filter((item) =>
-    item.name
-      .toLowerCase()
-      .includes(search.toLowerCase())
+    item.name.toLowerCase().includes(search.toLowerCase()),
   );
 
-
   return (
-   <section
- 
-      className={`relative overflow-hidden py-24 px-6 transition-all duration-500 ${
-        darkMode
-          ? "bg-slate-950 text-white"
-          : "bg-white text-slate-900"
+    <section
+      className={`relative overflow-hidden py-28 px-6 transition-all duration-500 ${
+        darkMode ? "bg-[#020617] text-white" : "bg-white text-slate-900"
       }`}
     >
-{floatingShapes.map((shape, index) => (
-  <motion.div
-    key={index}
-    animate={{
-      y: [0, -25, 0],
-      x: [0, 15, 0],
-      rotate: [0, 10, 0],
-    }}
-    transition={{
-      duration: shape.duration,
-      repeat: Infinity,
-      ease: "easeInOut",
-    }}
-    className={`absolute ${shape.position} ${shape.size} ${shape.color} rounded-full blur-3xl`}
-  />
-))}
-
-      <motion.div
-  animate={{
-    scale: [1, 1.15, 1],
-    opacity: [0.5, 0.8, 0.5],
-  }}
-  transition={{
-    duration: 6,
-    repeat: Infinity,
-    ease: "easeInOut",
-  }}
-  className={`absolute -top-40 left-1/2 -translate-x-1/2 h-[500px] w-[500px] rounded-full blur-3xl ${
-    darkMode
-      ? "bg-cyan-500/20"
-      : "bg-cyan-300/30"
-  }`}
-/>
-      <div
-  className={`absolute inset-0 opacity-30 ${
-    darkMode
-      ? "bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)]"
-      : "bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)]"
-  } bg-[size:40px_40px]`}
-/>
-
-
-     <motion.div
-  animate={{
-    scale: [1, 1.2, 1],
-    opacity: [0.4, 0.7, 0.4],
-  }}
-  transition={{
-    duration: 7,
-    repeat: Infinity,
-    ease: "easeInOut",
-  }}
-  className={`absolute bottom-0 right-0 h-80 w-80 rounded-full blur-3xl ${
-    darkMode
-      ? "bg-purple-500/20"
-      : "bg-purple-300/30"
-  }`}
-/>
-
-{floatingIcons.map((item, index) => (
-  <motion.div
-    key={index}
-    animate={{
-      y: [0, -20, 0],
-      rotate: [0, 10, -10, 0],
-      opacity: [0.08, 0.18, 0.08],
-    }}
-    transition={{
-      duration: 6,
-      repeat: Infinity,
-      delay: item.delay,
-    }}
-    style={{
-      top: item.top,
-      bottom: item.bottom,
-      left: item.left,
-      right: item.right,
-    }}
-    className="absolute hidden lg:block text-7xl pointer-events-none select-none"
-  >
-    {item.icon}
-  </motion.div>
-))}
-      {pills.map((pill,index)=>(
+      {floatingShapes.map((shape, index) => (
         <motion.div
           key={index}
           animate={{
-            y:[0,-12,0]
+            y: [0, -25, 0],
+            x: [0, 15, 0],
+            rotate: [0, 10, 0],
           }}
           transition={{
-            duration:3+index*0.3,
-            repeat:Infinity,
-            ease:"easeInOut"
+            duration: shape.duration,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className={`absolute ${shape.position} ${shape.size} ${shape.color} rounded-full blur-3xl`}
+        />
+      ))}
+
+      <motion.div
+        animate={{
+          scale: [1, 1.15, 1],
+          opacity: [0.5, 0.8, 0.5],
+        }}
+        transition={{
+          duration: 6,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className={`absolute -top-48 left-1/2 -translate-x-1/2 h-[560px] w-[560px] rounded-full blur-[110px] ${
+          darkMode ? "bg-cyan-500/15" : "bg-cyan-300/25"
+        }`}
+      />
+
+      <div
+        className={`absolute inset-0 opacity-30 ${
+          darkMode
+            ? "bg-[linear-gradient(to_right,#172033_1px,transparent_1px),linear-gradient(to_bottom,#172033_1px,transparent_1px)]"
+            : "bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)]"
+        } bg-[size:42px_42px]`}
+      />
+
+      <motion.div
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.4, 0.7, 0.4],
+        }}
+        transition={{
+          duration: 7,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className={`absolute bottom-0 right-0 h-80 w-80 rounded-full blur-3xl ${
+          darkMode ? "bg-purple-500/20" : "bg-purple-300/30"
+        }`}
+      />
+
+      {floatingIcons.map((item, index) => (
+        <motion.div
+          key={index}
+          animate={{
+            y: [0, -20, 0],
+            rotate: [0, 10, -10, 0],
+            opacity: [0.08, 0.18, 0.08],
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            delay: item.delay,
+          }}
+          style={{
+            top: item.top,
+            bottom: item.bottom,
+            left: item.left,
+            right: item.right,
+          }}
+          className="absolute hidden lg:block text-7xl pointer-events-none select-none"
+        >
+          {item.icon}
+        </motion.div>
+      ))}
+      {pills.map((pill, index) => (
+        <motion.div
+          key={index}
+          animate={{
+            y: [0, -12, 0],
+          }}
+          transition={{
+            duration: 3 + index * 0.3,
+            repeat: Infinity,
+            ease: "easeInOut",
           }}
           className={`absolute hidden md:block rounded-full px-5 py-2 backdrop-blur-xl shadow-xl transition-all duration-300 hover:scale-110 ${
-  darkMode
-    ? "bg-slate-800/70 border border-cyan-500/20 shadow-cyan-500/20"
-    : "bg-white/80 border border-cyan-100 shadow-cyan-200/40"
-} ${pill.className}`}
+            darkMode
+              ? "bg-slate-800/70 border border-cyan-500/20 shadow-cyan-500/20"
+              : "bg-white/80 border border-cyan-100 shadow-cyan-200/40"
+          } ${pill.className}`}
         >
           {pill.text}
         </motion.div>
       ))}
 
-
-
       <motion.div
-     
         initial={{
-          opacity:0,
-          y:40
+          opacity: 0,
+          y: 40,
         }}
         animate={{
-          opacity:1,
-          y:0
+          opacity: 1,
+          y: 0,
         }}
         transition={{
-          duration:0.8
+          duration: 0.8,
         }}
         className="relative z-10 mx-auto max-w-5xl text-center"
       >
+        <span
+          className="
+    inline-flex
+    items-center
+    rounded-full
+    bg-cyan-500/10
+    px-6
+    py-2.5
+    text-sm
+    font-medium
+    text-cyan-300
+    border
+    border-cyan-400/30
+    backdrop-blur-xl
+    shadow-[0_0_25px_rgba(34,211,238,0.15)]
+  "
+        >
+          🤖 AI Powered Career Discovery Platform
+        </span>
 
-
-        <span className="rounded-full bg-cyan-500/20 px-5 py-2 text-sm text-cyan-400 border border-cyan-400/30 shadow-lg shadow-cyan-500/20">
-  🤖 AI Powered Career Discovery Platform
-</span>
-
-       <h1 className="mt-8 text-5xl font-extrabold leading-tight md:text-7xl">
-
-  Discover Your{" "}
-
-  <motion.span
-    animate={{
-      backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-    }}
-    transition={{
-      duration: 5,
-      repeat: Infinity,
-      ease: "linear",
-    }}
-    className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-[length:200%_200%] bg-clip-text text-transparent"
-  >
-    Dream Tech Career
-  </motion.span>
-
-</h1>
-
+        <h1 className="mt-9 text-5xl font-black leading-[1.08] tracking-tight md:text-7xl">
+          Discover Your{" "}
+          <motion.span
+            animate={{
+              backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+            className="
+  bg-gradient-to-r
+  from-cyan-400
+  via-blue-500
+  to-violet-500
+  bg-[length:200%_200%]
+  bg-clip-text
+  text-transparent
+  drop-shadow-[0_0_25px_rgba(59,130,246,0.15)]
+"
+          >
+            Dream Tech Career
+          </motion.span>
+        </h1>
 
         <p
           className={`mx-auto mt-6 max-w-3xl text-lg md:text-xl ${
-            darkMode
-              ? "text-gray-400"
-              : "text-gray-600"
+            darkMode ? "text-gray-400" : "text-gray-600"
           }`}
         >
-          Discover the right programming path with AI-powered
-career insights, technology roadmaps, salary trends,
-and skills required for top software careers.
+          Discover the right programming path with AI-powered career insights,
+          technology roadmaps, salary trends, and skills required for top
+          software careers.
         </p>
-
-
 
         {/* Search Box */}
 
         <div className="mx-auto mt-10 max-w-2xl">
-
-         <div
-  className={`flex items-center rounded-2xl px-5 py-4 shadow-xl transition-all duration-300 hover:shadow-cyan-500/40 ${
-    darkMode
-      ? "bg-slate-800/80 border border-cyan-500/30"
-      : "bg-white border border-cyan-200"
-  }`}
->
-
+          <div
+            className={`flex items-center rounded-2xl px-5 py-4 transition-all duration-300 ${
+              darkMode
+                ? "bg-slate-900/70 border border-cyan-400/30 backdrop-blur-xl shadow-[0_0_25px_rgba(34,211,238,0.08)] hover:border-cyan-400/60 hover:shadow-[0_0_35px_rgba(34,211,238,0.18)]"
+                : "bg-white/80 border border-cyan-200 backdrop-blur-xl shadow-xl"
+            }`}
+          >
             <Search
               size={22}
-              className={
-                darkMode
-                  ? "text-gray-400"
-                  : "text-gray-500"
-              }
+              className={darkMode ? "text-gray-400" : "text-gray-500"}
             />
 
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  const result = filteredSuggestions[0];
 
-           <input
-  type="text"
-  value={search}
-  onChange={(e)=>setSearch(e.target.value)}
-  onKeyDown={(e) => {
-    if (e.key === "Enter") {
-      const result = filteredSuggestions[0];
-
-      if (result) {
-        window.location.href = result.path;
-      }
-    }
-  }}
-  placeholder="Search Programming Language..."
-  className={`ml-3 w-full bg-transparent outline-none ${
-    darkMode
-      ? "text-white placeholder:text-gray-500"
-      : "text-slate-900 placeholder:text-gray-400"
-  }`}
-/>
-
+                  if (result) {
+                    window.location.href = result.path;
+                  }
+                }
+              }}
+              placeholder="Search Programming Language..."
+              className={`ml-3 w-full bg-transparent outline-none ${
+                darkMode
+                  ? "text-white placeholder:text-gray-500"
+                  : "text-slate-900 placeholder:text-gray-400"
+              }`}
+            />
           </div>
 
-
           {search && filteredSuggestions.length > 0 && (
-
             <div
               className={`mt-2 rounded-xl shadow-lg overflow-hidden text-left ${
-                darkMode
-                  ? "bg-slate-800 text-white"
-                  : "bg-white text-slate-900"
+                darkMode ? "bg-slate-800 text-white" : "bg-white text-slate-900"
               }`}
             >
-
-              {filteredSuggestions.map((item,index)=>(
-
+              {filteredSuggestions.map((item, index) => (
                 <a
                   key={index}
                   href={item.path}
@@ -338,59 +322,74 @@ and skills required for top software careers.
                 >
                   {item.icon} {item.name}
                 </a>
-
               ))}
-
             </div>
-
           )}
-
         </div>
-
-
 
         {/* Buttons */}
 
         <div className="mt-10 flex flex-wrap justify-center gap-5">
-
           <motion.a
-  href="#languages"
-  onClick={playClick}
-            whileHover={{scale:1.05}}
-            whileTap={{scale:0.95}}
-            className="rounded-xl bg-cyan-500 px-7 py-3 font-semibold text-white shadow-lg shadow-cyan-500/30 transition-all duration-300 hover:scale-105 hover:bg-cyan-600 hover:shadow-cyan-500/60"
+            href="#languages"
+            onClick={playClick}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="
+  rounded-2xl
+  bg-gradient-to-r
+  from-cyan-400
+  to-blue-500
+  px-8
+  py-3.5
+  font-bold
+  text-white
+  shadow-[0_0_25px_rgba(34,211,238,0.25)]
+  transition-all
+  duration-300
+  hover:shadow-[0_0_35px_rgba(34,211,238,0.5)]
+"
           >
             Explore Languages
           </motion.a>
 
-
           <motion.a
-  href="#salary"
-  onClick={playClick}
-            whileHover={{scale:1.05}}
-            whileTap={{scale:0.95}}
-           className={`rounded-xl border px-7 py-3 font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg ${
-  darkMode
-    ? "border-cyan-500 text-cyan-400 hover:shadow-cyan-500/40"
-    : "border-cyan-500 text-cyan-600 hover:shadow-cyan-300/50"
-}`}
+            href="#salary"
+            onClick={playClick}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className={`rounded-2xl border px-8 py-3.5 font-bold transition-all duration-300 ${
+              darkMode
+                ? "border-cyan-400/70 text-cyan-300 hover:bg-cyan-400/10 hover:shadow-[0_0_30px_rgba(34,211,238,0.2)]"
+                : "border-cyan-500 text-cyan-600 hover:bg-cyan-50"
+            }`}
           >
             Compare Salaries
           </motion.a>
-<motion.a
-  href="/career-quiz"
-  onClick={playClick}
-  whileHover={{ scale: 1.05 }}
-  whileTap={{ scale: 0.95 }}
-  className="rounded-xl bg-gradient-to-r from-violet-500 to-fuchsia-600 px-7 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105"
->
-  🤖 Find My Career
-</motion.a>
+          <motion.a
+            href="/career-quiz"
+            onClick={playClick}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="
+  rounded-2xl
+  bg-gradient-to-r
+  from-violet-500
+  to-fuchsia-600
+  px-8
+  py-3.5
+  font-bold
+  text-white
+  shadow-[0_0_25px_rgba(168,85,247,0.25)]
+  transition-all
+  duration-300
+  hover:shadow-[0_0_35px_rgba(168,85,247,0.45)]
+"
+          >
+            🤖 Find My Career
+          </motion.a>
         </div>
-
-
       </motion.div>
-
     </section>
   );
 }

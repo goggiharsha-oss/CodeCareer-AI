@@ -49,13 +49,13 @@ function LanguageCard({ search = "" }) {
   return (
     <section
       id="languages"
-      className={`py-20 px-6 transition-colors duration-500 ${
-        darkMode ? "bg-slate-900" : "bg-gray-50"
+      className={`relative py-24 px-6 overflow-hidden transition-colors duration-500 ${
+        darkMode ? "bg-slate-950" : "bg-slate-50"
       }`}
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="relative z-10 max-w-7xl mx-auto">
         <h2
-          className={`text-4xl font-bold text-center mb-12 ${
+          className={`text-4xl md:text-5xl font-black text-center mb-14 tracking-tight ${
             darkMode ? "text-white" : "text-slate-900"
           }`}
         >
@@ -79,15 +79,20 @@ function LanguageCard({ search = "" }) {
             </p>
           </div>
         ) : (
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
             {filteredLanguages.map((lang) => (
               <div
                 key={lang.id}
-                className={`group relative overflow-hidden rounded-3xl p-6 transition-all duration-500 hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_0_40px_rgba(34,211,238,0.35)] ${
-                  darkMode
-                    ? "bg-slate-800/80 border border-cyan-500/20 backdrop-blur-xl"
-                    : "bg-white/90 border border-cyan-200 backdrop-blur-xl"
-                }`}
+                className={`group relative overflow-hidden rounded-[28px] p-7
+  border backdrop-blur-2xl
+  transition-all duration-500
+  hover:-translate-y-3
+  hover:shadow-[0_20px_60px_rgba(34,211,238,0.18)]
+  ${
+    darkMode
+      ? "bg-slate-900/80 border-white/10 hover:border-cyan-400/40"
+      : "bg-white/80 border-slate-200/70 hover:border-cyan-300"
+  }`}
               >
                 {/* Hover Glow */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-linear-to-br from-cyan-500/10 via-blue-500/5 to-purple-500/10"></div>
@@ -116,14 +121,21 @@ function LanguageCard({ search = "" }) {
                 </motion.div>
                 {/* Icon */}
                 <div
-                  className={`relative z-10 w-14 h-14 rounded-xl ${lang.color} flex items-center justify-center text-white font-bold text-xl transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6`}
+                  className={`relative z-10 w-16 h-16 rounded-2xl ${lang.color}
+  flex items-center justify-center
+  text-white font-bold text-xl
+  shadow-lg
+  transition-all duration-500
+  group-hover:scale-110
+  group-hover:rotate-6
+  group-hover:shadow-cyan-500/30`}
                 >
                   {lang.icon}
                 </div>
 
                 {/* Language Name */}
                 <h3
-                  className={`relative z-10 mt-5 text-2xl font-bold ${
+                  className={`relative z-10 mt-6 text-2xl font-black tracking-tight ${
                     darkMode ? "text-white" : "text-slate-900"
                   }`}
                 >
@@ -131,7 +143,17 @@ function LanguageCard({ search = "" }) {
                 </h3>
 
                 {/* Salary Card */}
-                <div className="relative z-10 mt-5 rounded-2xl border border-cyan-500/20 bg-cyan-500/10 p-4 transition-all duration-500 group-hover:bg-cyan-500 group-hover:shadow-lg group-hover:shadow-cyan-500/40">
+                <div
+                  className="relative z-10 mt-6 rounded-2xl
+  border border-cyan-400/20
+  bg-cyan-400/5
+  p-5
+  backdrop-blur-xl
+  transition-all duration-500
+  group-hover:bg-cyan-500
+  group-hover:border-cyan-400
+  group-hover:shadow-[0_10px_35px_rgba(34,211,238,0.25)]"
+                >
                   <p
                     className={`text-sm transition-colors duration-300 ${
                       darkMode ? "text-gray-300" : "text-gray-700"
@@ -178,7 +200,17 @@ function LanguageCard({ search = "" }) {
                     playClick();
                     navigate(lang.route);
                   }}
-                  className="relative z-10 mt-6 w-full rounded-xl bg-cyan-500 py-3 font-semibold text-white transition-all duration-300 hover:bg-cyan-600 hover:scale-105"
+                  className="relative z-10 mt-7 w-full
+  rounded-2xl
+  bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600
+  py-3.5
+  font-bold
+  text-white
+  shadow-lg shadow-cyan-500/20
+  transition-all duration-300
+  hover:scale-[1.03]
+  hover:shadow-cyan-500/40
+  active:scale-[0.98]"
                 >
                   Explore Career →
                 </button>

@@ -24,23 +24,39 @@ function PortfolioPreview() {
       </div>
     );
   }
-  if (!data) {
-    return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center text-white">
-        Loading...
-      </div>
-    );
-  }
 
   const template = data.template || "frontend";
-  const accentColor =
-    template === "cyber"
-      ? "text-green-400"
-      : template === "ai"
-        ? "text-purple-400"
-        : template === "fullstack"
-          ? "text-blue-400"
-          : "text-cyan-400";
+  const theme = {
+    cyber: {
+      accent: "text-green-400",
+      border: "border-green-500",
+      card: "bg-green-950/30",
+      hover: "hover:border-green-400",
+    },
+
+    ai: {
+      accent: "text-purple-400",
+      border: "border-purple-500",
+      card: "bg-purple-950/30",
+      hover: "hover:border-purple-400",
+    },
+
+    fullstack: {
+      accent: "text-blue-400",
+      border: "border-blue-500",
+      card: "bg-blue-950/30",
+      hover: "hover:border-blue-400",
+    },
+
+    frontend: {
+      accent: "text-cyan-400",
+      border: "border-cyan-500",
+      card: "bg-cyan-950/30",
+      hover: "hover:border-cyan-400",
+    },
+  };
+
+  const currentTheme = theme[template] || theme.frontend;
 
   return (
     <div
@@ -143,12 +159,41 @@ function PortfolioPreview() {
             {/* Details */}
 
             <div className="flex-1">
-              <h1 className="text-5xl font-black">{data.fullName}</h1>
+              <div>
+                <h1
+                  className={`text-5xl md:text-6xl font-black tracking-tight ${currentTheme.accent}`}
+                >
+                  {data.fullName || "Your Name"}
+                </h1>
 
-              <h2 className="text-2xl text-cyan-400 mt-3">{data.title}</h2>
+                <h2 className="text-2xl md:text-3xl font-semibold text-white mt-3">
+                  {data.title || "Your Professional Title"}
+                </h2>
 
-              <p className="text-gray-400 mt-6 leading-8">{data.about}</p>
+                <p className="text-gray-300 mt-6 leading-8 max-w-3xl">
+                  {data.about || "Write something about yourself..."}
+                </p>
 
+                <div className="flex flex-wrap gap-3 mt-6">
+                  {data.github && (
+                    <span className="px-4 py-2 rounded-full bg-slate-800 text-gray-300">
+                      🐙 GitHub
+                    </span>
+                  )}
+
+                  {data.linkedin && (
+                    <span className="px-4 py-2 rounded-full bg-slate-800 text-gray-300">
+                      💼 LinkedIn
+                    </span>
+                  )}
+
+                  {data.website && (
+                    <span className="px-4 py-2 rounded-full bg-slate-800 text-gray-300">
+                      🌐 Website
+                    </span>
+                  )}
+                </div>
+              </div>
               <div className="grid md:grid-cols-2 gap-4 mt-8">
                 <div>📧 {data.email}</div>
 
@@ -185,7 +230,7 @@ function PortfolioPreview() {
     }
   `}
           >
-            <h2 className={`text-3xl font-bold ${accentColor} mb-6`}>
+            <h2 className={`text-3xl font-bold ${currentTheme.accent} mb-6`}>
               💻 Skills
             </h2>
 
@@ -193,14 +238,18 @@ function PortfolioPreview() {
               {data.skills?.split(",").map((skill, index) => (
                 <span
                   key={index}
-                  className="
-                    px-5
-                    py-3
-                    rounded-full
-                    bg-cyan-500/20
-                    text-cyan-400
-                    font-semibold
-                    "
+                  className={`
+    px-5
+    py-3
+    rounded-full
+    ${currentTheme.card}
+    ${currentTheme.accent}
+    border
+    ${currentTheme.border}
+    font-semibold
+    transition
+    hover:scale-105
+  `}
                 >
                   {skill.trim()}
                 </span>
@@ -226,7 +275,7 @@ function PortfolioPreview() {
     }
   `}
           >
-            <h2 className={`text-3xl font-bold ${accentColor} mb-6`}>
+            <h2 className={`text-3xl font-bold ${currentTheme.accent} mb-6`}>
               🎓 Education
             </h2>
 
@@ -258,7 +307,7 @@ function PortfolioPreview() {
   }
 `}
         >
-          <h2 className={`text-3xl font-bold ${accentColor} mb-6`}>
+          <h2 className={`text-3xl font-bold ${currentTheme.accent} mb-6`}>
             💼 Experience
           </h2>
 
@@ -289,7 +338,7 @@ function PortfolioPreview() {
   }
 `}
         >
-          <h2 className={`text-3xl font-bold ${accentColor} mb-6`}>
+          <h2 className={`text-3xl font-bold ${currentTheme.accent} mb-6`}>
             🏆 Certifications
           </h2>
 
@@ -623,7 +672,7 @@ function PortfolioPreview() {
           text-center
           "
         >
-          <h2 className={`text-3xl font-black ${accentColor}`}>
+          <h2 className={`text-3xl font-black ${currentTheme.accent}`}>
             CodeCareer AI
           </h2>
 

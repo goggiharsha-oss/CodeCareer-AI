@@ -152,18 +152,21 @@ function Python() {
     },
   ];
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
+    <div className="min-h-screen bg-[#020617] text-white overflow-hidden">
       {/* HERO SECTION */}
 
       <div
         className="
-        bg-linear-to-br
-        from-slate-900
-        via-green-950
-        to-slate-950
-        border-b
-        border-slate-800
-        "
+relative
+overflow-hidden
+bg-gradient-to-br
+from-slate-950
+via-green-950/60
+to-slate-950
+border-b
+border-cyan-500/10
+shadow-[0_10px_60px_rgba(34,197,94,0.08)]
+"
       >
         <div className="max-w-7xl mx-auto px-6 py-16">
           <Link to="/" className="text-cyan-400 hover:text-cyan-300">
@@ -216,18 +219,21 @@ function Python() {
                 repeat: Infinity,
               }}
               className="
-              h-72
-              rounded-3xl
-              bg-linear-to-br
-              from-green-500
-              to-cyan-600
-              flex
-              items-center
-              justify-center
-              text-8xl
-              shadow-2xl
-              shadow-green-500/30
-              "
+relative
+h-72
+rounded-3xl
+bg-gradient-to-br
+from-green-500
+via-emerald-500
+to-cyan-600
+flex
+items-center
+justify-center
+text-8xl
+shadow-[0_0_60px_rgba(34,197,94,0.25)]
+border
+border-green-400/20
+"
             >
               🐍
             </motion.div>
@@ -248,10 +254,22 @@ function Python() {
             y: 0,
           }}
           className="
-          bg-slate-900
-          rounded-3xl
-          p-8
-          "
+group
+relative
+overflow-hidden
+bg-slate-900/80
+rounded-3xl
+p-8
+mt-8
+border
+border-cyan-500/20
+backdrop-blur-xl
+shadow-[0_0_30px_rgba(34,211,238,0.08)]
+transition-all
+duration-500
+hover:border-cyan-400/40
+hover:shadow-[0_0_40px_rgba(34,211,238,0.15)]
+"
         >
           <h2 className="text-3xl font-bold text-cyan-400">
             💰 Python Developer Salary
@@ -299,11 +317,22 @@ function Python() {
             y: 0,
           }}
           className="
-          bg-slate-900
-          rounded-3xl
-          p-8
-          mt-8
-          "
+group
+relative
+overflow-hidden
+bg-slate-900/80
+rounded-3xl
+p-8
+mt-8
+border
+border-cyan-500/20
+backdrop-blur-xl
+shadow-[0_0_30px_rgba(34,211,238,0.08)]
+transition-all
+duration-500
+hover:border-cyan-400/40
+hover:shadow-[0_0_40px_rgba(34,211,238,0.15)]
+"
         >
           <h2 className="text-3xl font-bold text-cyan-400 mb-8">
             🛠 Python Skills Required
@@ -347,11 +376,22 @@ function Python() {
             y: 0,
           }}
           className="
-          bg-slate-900
-          rounded-3xl
-          p-8
-          mt-8
-          "
+group
+relative
+overflow-hidden
+bg-slate-900/80
+rounded-3xl
+p-8
+mt-8
+border
+border-cyan-500/20
+backdrop-blur-xl
+shadow-[0_0_30px_rgba(34,211,238,0.08)]
+transition-all
+duration-500
+hover:border-cyan-400/40
+hover:shadow-[0_0_40px_rgba(34,211,238,0.15)]
+"
         >
           <h2 className="text-3xl font-bold text-cyan-400 mb-8">
             🎯 Python Skill Progress
@@ -412,11 +452,22 @@ function Python() {
             y: 0,
           }}
           className="
-          bg-slate-900
-          rounded-3xl
-          p-8
-          mt-8
-          "
+group
+relative
+overflow-hidden
+bg-slate-900/80
+rounded-3xl
+p-8
+mt-8
+border
+border-cyan-500/20
+backdrop-blur-xl
+shadow-[0_0_30px_rgba(34,211,238,0.08)]
+transition-all
+duration-500
+hover:border-cyan-400/40
+hover:shadow-[0_0_40px_rgba(34,211,238,0.15)]
+"
         >
           <h2 className="text-3xl font-bold text-cyan-400 mb-8">
             ⚙️ Python Tools & Technologies
@@ -460,11 +511,22 @@ function Python() {
             y: 0,
           }}
           className="
-          bg-slate-900
-          rounded-3xl
-          p-8
-          mt-8
-          "
+group
+relative
+overflow-hidden
+bg-slate-900/80
+rounded-3xl
+p-8
+mt-8
+border
+border-cyan-500/20
+backdrop-blur-xl
+shadow-[0_0_30px_rgba(34,211,238,0.08)]
+transition-all
+duration-500
+hover:border-cyan-400/40
+hover:shadow-[0_0_40px_rgba(34,211,238,0.15)]
+"
         >
           <h2 className="text-3xl font-bold text-cyan-400 mb-8">
             🚀 Python Projects Portfolio
@@ -710,11 +772,22 @@ function Python() {
             y: 0,
           }}
           className="
-          bg-slate-900
-          rounded-3xl
-          p-8
-          mt-8
-          "
+group
+relative
+overflow-hidden
+bg-slate-900/80
+rounded-3xl
+p-8
+mt-8
+border
+border-cyan-500/20
+backdrop-blur-xl
+shadow-[0_0_30px_rgba(34,211,238,0.08)]
+transition-all
+duration-500
+hover:border-cyan-400/40
+hover:shadow-[0_0_40px_rgba(34,211,238,0.15)]
+"
         >
           <h2 className="text-3xl font-bold text-cyan-400 mb-10">
             🛣️ Python Learning Journey
@@ -781,11 +854,22 @@ function Python() {
             y: 0,
           }}
           className="
-          bg-slate-900
-          rounded-3xl
-          p-8
-          mt-8
-          "
+group
+relative
+overflow-hidden
+bg-slate-900/80
+rounded-3xl
+p-8
+mt-8
+border
+border-cyan-500/20
+backdrop-blur-xl
+shadow-[0_0_30px_rgba(34,211,238,0.08)]
+transition-all
+duration-500
+hover:border-cyan-400/40
+hover:shadow-[0_0_40px_rgba(34,211,238,0.15)]
+"
         >
           <h2 className="text-3xl font-bold text-cyan-400 mb-8">
             🎤 Python Interview Preparation
@@ -881,11 +965,22 @@ text-green-400
             y: 0,
           }}
           className="
-          bg-slate-900
-          rounded-3xl
-          p-8
-          mt-8
-          "
+group
+relative
+overflow-hidden
+bg-slate-900/80
+rounded-3xl
+p-8
+mt-8
+border
+border-cyan-500/20
+backdrop-blur-xl
+shadow-[0_0_30px_rgba(34,211,238,0.08)]
+transition-all
+duration-500
+hover:border-cyan-400/40
+hover:shadow-[0_0_40px_rgba(34,211,238,0.15)]
+"
         >
           <h2 className="text-3xl font-bold text-cyan-400 mb-8">
             🎓 Python Certifications
@@ -925,11 +1020,22 @@ text-green-400
             y: 0,
           }}
           className="
-          bg-slate-900
-          rounded-3xl
-          p-8
-          mt-8
-          "
+group
+relative
+overflow-hidden
+bg-slate-900/80
+rounded-3xl
+p-8
+mt-8
+border
+border-cyan-500/20
+backdrop-blur-xl
+shadow-[0_0_30px_rgba(34,211,238,0.08)]
+transition-all
+duration-500
+hover:border-cyan-400/40
+hover:shadow-[0_0_40px_rgba(34,211,238,0.15)]
+"
         >
           <h2 className="text-3xl font-bold text-cyan-400 mb-8">
             💼 Python Career Opportunities
@@ -993,11 +1099,22 @@ text-green-400
             y: 0,
           }}
           className="
-          bg-slate-900
-          rounded-3xl
-          p-8
-          mt-8
-          "
+group
+relative
+overflow-hidden
+bg-slate-900/80
+rounded-3xl
+p-8
+mt-8
+border
+border-cyan-500/20
+backdrop-blur-xl
+shadow-[0_0_30px_rgba(34,211,238,0.08)]
+transition-all
+duration-500
+hover:border-cyan-400/40
+hover:shadow-[0_0_40px_rgba(34,211,238,0.15)]
+"
         >
           <h2 className="text-3xl font-bold text-cyan-400 mb-8">
             🏢 Top Python Companies

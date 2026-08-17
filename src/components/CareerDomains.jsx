@@ -4,355 +4,269 @@ import { motion } from "framer-motion";
 import { playClick } from "../utils/playClick";
 import { ArrowRight } from "lucide-react";
 
-
 function CareerDomains({ search = "" }) {
-
   const navigate = useNavigate();
   const { darkMode } = useTheme();
 
-
   const domains = [
-
     {
-      icon:"🌐",
-      name:"Web Development",
-      skills:"HTML, CSS, JavaScript, React, Node.js",
-      route:"/web-development",
+      icon: "🌐",
+      name: "Web Development",
+      skills: "HTML, CSS, JavaScript, React, Node.js",
+      route: "/web-development",
     },
 
     {
-      icon:"🔐",
-      name:"Cyber Security",
-      skills:"Networking, Linux, Ethical Hacking, Security",
-      route:"/cyber-security",
+      icon: "🔐",
+      name: "Cyber Security",
+      skills: "Networking, Linux, Ethical Hacking, Security",
+      route: "/cyber-security",
     },
 
     {
-      icon:"🤖",
-      name:"Artificial Intelligence",
-      skills:"Python, Machine Learning, Deep Learning",
-      route:"/artificial-intelligence",
+      icon: "🤖",
+      name: "Artificial Intelligence",
+      skills: "Python, Machine Learning, Deep Learning",
+      route: "/artificial-intelligence",
     },
 
     {
-      icon:"📊",
-      name:"Data Science",
-      skills:"Python, SQL, Statistics, Analytics",
-      route:"/data-science",
+      icon: "📊",
+      name: "Data Science",
+      skills: "Python, SQL, Statistics, Analytics",
+      route: "/data-science",
     },
 
     {
-      icon:"☁️",
-      name:"Cloud Computing",
-      skills:"AWS, Azure, DevOps, Docker",
-      route:"/cloud-computing",
+      icon: "☁️",
+      name: "Cloud Computing",
+      skills: "AWS, Azure, DevOps, Docker",
+      route: "/cloud-computing",
     },
 
     {
-      icon:"📱",
-      name:"Mobile Development",
-      skills:"Android, Flutter, React Native",
-      route:"/mobile-development",
+      icon: "📱",
+      name: "Mobile Development",
+      skills: "Android, Flutter, React Native",
+      route: "/mobile-development",
     },
-
   ];
 
-
-
   const filteredDomains = domains.filter(
-    (domain)=>
+    (domain) =>
       domain.name.toLowerCase().includes(search.toLowerCase()) ||
       domain.skills.toLowerCase().includes(search.toLowerCase()) ||
-      (
-        search.toLowerCase()==="ai" &&
-        domain.name==="Artificial Intelligence"
-      )
+      (search.toLowerCase() === "ai" &&
+        domain.name === "Artificial Intelligence"),
   );
 
-
-
   return (
-
     <section
       id="careers"
       className={`
-      py-24 px-6 transition-all duration-500
+      relative overflow-hidden
+      py-24 px-6
+      transition-all duration-500
 
       ${
         darkMode
-        ?
-        "bg-slate-950"
-        :
-        "bg-gradient-to-b from-white via-cyan-50 to-slate-100"
+          ? "bg-slate-950"
+          : "bg-gradient-to-b from-white via-cyan-50/70 to-slate-100"
       }
       `}
     >
-
-
-      <div className="max-w-7xl mx-auto">
-
-
+      <div className="relative z-10 max-w-7xl mx-auto">
         <motion.h2
-
           initial={{
-            opacity:0,
-            y:-30
+            opacity: 0,
+            y: -30,
           }}
-
           whileInView={{
-            opacity:1,
-            y:0
+            opacity: 1,
+            y: 0,
           }}
-
           viewport={{
-            once:true
+            once: true,
           }}
-
           className={`
-          text-4xl font-bold text-center mb-14
+          text-4xl md:text-5xl
+          font-black
+          tracking-tight
+          text-center
+          mb-16
 
-          ${
-            darkMode
-            ?
-            "text-white"
-            :
-            "text-slate-900"
-          }
+          ${darkMode ? "text-white" : "text-slate-900"}
           `}
         >
           🚀 Trending Career Paths
         </motion.h2>
 
-
-
-
-
-        <div className="
-        grid md:grid-cols-3 gap-8
-        ">
-
-
-
-        {
-          filteredDomains.map((domain,index)=>(
-
-
+        <div
+          className="
+        grid md:grid-cols-2 lg:grid-cols-3
+        gap-7
+        "
+        >
+          {filteredDomains.map((domain, index) => (
             <motion.div
-
               key={domain.name}
-
               initial={{
-                opacity:0,
-                y:40
+                opacity: 0,
+                y: 40,
               }}
-
               whileInView={{
-                opacity:1,
-                y:0
+                opacity: 1,
+                y: 0,
               }}
-
               viewport={{
-                once:true
+                once: true,
               }}
-
               transition={{
-                delay:index*0.12
+                delay: index * 0.12,
               }}
-
               whileHover={{
-                y:-10,
-                scale:1.03
+                y: -10,
+                scale: 1.03,
               }}
-
-
               className={`
+              group
               relative overflow-hidden
-              rounded-3xl p-7
+              rounded-[28px]
+              p-7
               border
-              backdrop-blur-xl
-              transition-all
-
+              backdrop-blur-2xl
+              transition-all duration-500
+              hover:border-cyan-400/40
+              hover:shadow-[0_20px_60px_rgba(34,211,238,0.18)]
 
               ${
                 darkMode
-                ?
-                "bg-white/5 border-white/10 hover:shadow-cyan-500/30"
-                :
-                "bg-white/80 border-cyan-100 shadow-xl hover:shadow-cyan-200"
+                  ? "bg-white/[0.04] border-white/10"
+                  : "bg-white/75 border-slate-200/70 shadow-lg"
               }
 
               `}
             >
+              {/* Floating Background Icon */}
 
-{/* Floating Background Icon */}
-
-<motion.div
-
-  animate={{
-    y:[0,-25,0],
-    rotate:[0,15,-15,0]
-  }}
-
-  transition={{
-    duration:6,
-    repeat:Infinity,
-    ease:"easeInOut"
-  }}
-
-  className="
+              <motion.div
+                animate={{
+                  y: [0, -25, 0],
+                  rotate: [0, 15, -15, 0],
+                }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="
   absolute
-  -right-6
-  -top-8
-  text-[140px]
-  opacity-10
+  -right-7
+  -top-9
+  text-[150px]
+  opacity-[0.07]
   pointer-events-none
+  select-none
+  transition-all duration-700
+  group-hover:scale-110
+  group-hover:opacity-[0.12]
   "
->
-
-  {domain.icon}
-
-</motion.div>
+              >
+                {domain.icon}
+              </motion.div>
 
               {/* Icon */}
 
               <motion.div
-
                 whileHover={{
-                  rotate:10,
-                  scale:1.1
+                  rotate: 10,
+                  scale: 1.1,
                 }}
-
                 className="
                 w-16 h-16
                 rounded-2xl
                 flex items-center justify-center
                 text-4xl
 
-                bg-gradient-to-r
+                bg-gradient-to-br
                 from-cyan-400
-                to-blue-600
+                via-blue-500
+                to-purple-600
 
-                shadow-lg
+                border border-white/20
+                shadow-[0_10px_30px_rgba(34,211,238,0.25)]
+
+                transition-all duration-500
+                group-hover:shadow-[0_15px_40px_rgba(34,211,238,0.4)]
                 "
-
               >
                 {domain.icon}
-
               </motion.div>
-
-
-
-
-
 
               <h3
                 className={`
-                text-2xl font-bold mt-6
+                text-2xl
+                font-black
+                tracking-tight
+                mt-6
 
-                ${
-                  darkMode
-                  ?
-                  "text-white"
-                  :
-                  "text-slate-900"
-                }
+                ${darkMode ? "text-white" : "text-slate-900"}
                 `}
               >
-
                 {domain.name}
-
               </h3>
-
-
-
-
-
 
               <p
                 className={`
-                mt-4 leading-relaxed
+                mt-4
+                leading-relaxed
+                text-[15px]
 
-                ${
-                  darkMode
-                  ?
-                  "text-gray-400"
-                  :
-                  "text-gray-600"
-                }
+                ${darkMode ? "text-gray-400" : "text-gray-600"}
                 `}
               >
-
                 {domain.skills}
-
               </p>
 
-
-
-
-
-
-
               <button
-
-                onClick={()=>{
-
+                onClick={() => {
                   playClick();
                   navigate(domain.route);
-
                 }}
-
                 className="
-                mt-7 w-full
+                mt-8 w-full
 
                 flex items-center justify-center gap-2
 
-                rounded-xl
+                rounded-2xl
+                py-3.5
 
-                py-3
-
-                font-semibold
+                font-bold
                 text-white
 
                 bg-gradient-to-r
-                from-cyan-500
-                to-blue-600
+                from-cyan-400
+                via-blue-500
+                to-purple-600
 
-                hover:scale-105
+                shadow-lg
+                shadow-cyan-500/20
 
-                transition
+                transition-all duration-300
+                hover:scale-[1.03]
+                hover:shadow-cyan-500/40
+                active:scale-[0.98]
                 "
-
               >
-
                 Explore Career
-
-                <ArrowRight size={18}/>
-
-
+                <ArrowRight size={18} />
               </button>
-
-
-
-
             </motion.div>
-
-
-          ))
-        }
-
-
-
+          ))}
         </div>
-
-
       </div>
-
-
     </section>
-
   );
-
 }
-
 
 export default CareerDomains;
