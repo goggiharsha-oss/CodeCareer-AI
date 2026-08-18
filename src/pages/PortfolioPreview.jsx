@@ -3,6 +3,33 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
 function PortfolioPreview() {
+  useEffect(() => {
+    const style = document.createElement("style");
+
+    style.innerHTML = `
+    @media print {
+      body {
+        background: white !important;
+      }
+
+      button,
+      a {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+    }
+  `;
+
+    document.head.appendChild(style);
+
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
   const navigate = useNavigate();
 
   const [data, setData] = useState(null);
@@ -90,8 +117,8 @@ function PortfolioPreview() {
         top-0
         left-1/2
         -translate-x-1/2
-        w-[175]
-        h-[175]
+        w-[175px]
+        h-[175px]
         rounded-full
         bg-cyan-500/20
         blur-[180px]
@@ -354,7 +381,7 @@ function PortfolioPreview() {
           transition={{ duration: 0.6 }}
           className="mt-10"
         >
-          <h2 className="text-4xl font-black text-cyan-400 mb-8">
+          <h2 className={`text-4xl font-black ${currentTheme.accent} mb-8`}>
             🚀 Projects
           </h2>
 
@@ -405,7 +432,7 @@ function PortfolioPreview() {
                 </p>
 
                 <div className="mt-6">
-                  <h4 className="font-semibold text-cyan-400 mb-3">
+                  <h4 className={`font-semibold ${currentTheme.accent} mb-3`}>
                     Technologies
                   </h4>
 
@@ -413,14 +440,16 @@ function PortfolioPreview() {
                     {project.tech?.split(",").map((tech, i) => (
                       <span
                         key={i}
-                        className="
-                          px-4
-                          py-2
-                          rounded-full
-                          bg-cyan-500/20
-                          text-cyan-300
-                          text-sm
-                          "
+                        className={`
+  px-4
+  py-2
+  rounded-full
+  ${currentTheme.card}
+  ${currentTheme.accent}
+  border
+  ${currentTheme.border}
+  text-sm
+`}
                       >
                         {tech.trim()}
                       </span>
@@ -573,12 +602,12 @@ function PortfolioPreview() {
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          className="flex justify-center mt-10"
+          className="no-print flex justify-center mt-10"
         >
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => navigate("/portfolio-builder")}
+            onClick={() => navigate("/portfolio-form")}
             className={`
       px-10
       py-4
@@ -606,7 +635,7 @@ function PortfolioPreview() {
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          className="flex flex-wrap justify-center gap-6 mt-14"
+          className="no-print flex flex-wrap justify-center gap-6 mt-14"
         >
           <motion.button
             whileHover={{ scale: 1.05 }}

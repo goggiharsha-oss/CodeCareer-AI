@@ -21,38 +21,40 @@ function Navbar() {
       initial={{ y: -80 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
-      className="
-        fixed top-0 left-0 w-full z-50
-        bg-[#020817]/90
+      className={`fixed top-0 left-0 w-full z-50
         backdrop-blur-2xl
-        border-b border-cyan-400/10
-        shadow-[0_8px_35px_rgba(0,0,0,0.35)]
+        border-b
         overflow-hidden
-      "
+        transition-all duration-500
+        ${
+          darkMode
+            ? "bg-[#020817]/90 border-cyan-400/10 shadow-[0_8px_35px_rgba(0,0,0,0.35)]"
+            : "bg-white/90 border-slate-200 shadow-[0_8px_35px_rgba(0,0,0,0.08)]"
+        }
+      `}
     >
       {/* ================= NAVBAR GLOW ================= */}
 
       <motion.div
         animate={{
           x: [-180, 180, -180],
-          opacity: [0.08, 0.18, 0.08],
+          opacity: darkMode ? [0.08, 0.18, 0.08] : [0.04, 0.1, 0.04],
         }}
         transition={{
           duration: 10,
           repeat: Infinity,
         }}
-        className="
-          absolute
+        className={`absolute
           -top-32
           left-1/2
           -translate-x-1/2
           w-96
           h-64
-          bg-cyan-400
           blur-[100px]
           rounded-full
           pointer-events-none
-        "
+          ${darkMode ? "bg-cyan-400" : "bg-cyan-300"}
+        `}
       />
 
       {/* ================= NAVBAR CONTENT ================= */}
@@ -121,19 +123,20 @@ function Navbar() {
               <Link
                 key={item.name}
                 to={item.path}
-                className="
-                  relative
-                  text-gray-300
+                className={`relative
                   font-semibold
                   text-[15px]
                   tracking-wide
                   py-2
                   transition-all
                   duration-300
-                  hover:text-cyan-400
-                  hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.4)]
                   group
-                "
+                  ${
+                    darkMode
+                      ? "text-gray-300 hover:text-cyan-400"
+                      : "text-slate-700 hover:text-cyan-600"
+                  }
+                `}
               >
                 {item.name}
 
@@ -160,19 +163,20 @@ function Navbar() {
               <a
                 key={item.name}
                 href={item.path}
-                className="
-                  relative
-                  text-gray-300
+                className={`relative
                   font-semibold
                   text-[15px]
                   tracking-wide
                   py-2
                   transition-all
                   duration-300
-                  hover:text-cyan-400
-                  hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.4)]
                   group
-                "
+                  ${
+                    darkMode
+                      ? "text-gray-300 hover:text-cyan-400"
+                      : "text-slate-700 hover:text-cyan-600"
+                  }
+                `}
               >
                 {item.name}
 
@@ -209,24 +213,22 @@ function Navbar() {
             whileTap={{
               scale: 0.9,
             }}
-            className="
-              ml-2
+            className={`ml-2
               w-11
               h-11
               rounded-full
               flex
               items-center
               justify-center
-              bg-white/10
-              border
-              border-white/10
               backdrop-blur-xl
-              shadow-[0_0_18px_rgba(255,255,255,0.06)]
-              hover:border-cyan-400/40
-              hover:bg-cyan-400/10
               transition-all
               duration-300
-            "
+              ${
+                darkMode
+                  ? "bg-white/10 border border-white/10 shadow-[0_0_18px_rgba(255,255,255,0.06)]"
+                  : "bg-slate-100 border border-slate-200 shadow-[0_0_18px_rgba(0,0,0,0.08)]"
+              }
+            `}
           >
             {darkMode ? (
               <Sun
@@ -237,7 +239,7 @@ function Navbar() {
                 "
               />
             ) : (
-              <Moon size={20} className="text-cyan-300" />
+              <Moon size={20} className="text-cyan-600" />
             )}
           </motion.button>
         </div>
@@ -246,22 +248,20 @@ function Navbar() {
 
         <motion.button
           whileTap={{ scale: 0.9 }}
-          className="
-            md:hidden
+          className={`md:hidden
             w-11
             h-11
             rounded-xl
             flex
             items-center
             justify-center
-            bg-white/5
-            border
-            border-white/10
-            text-cyan-300
-            hover:bg-cyan-400/10
-            hover:border-cyan-400/30
             transition-all
-          "
+            ${
+              darkMode
+                ? "bg-white/5 border border-white/10 text-cyan-300 hover:bg-cyan-400/10"
+                : "bg-slate-100 border border-slate-200 text-cyan-600 hover:bg-cyan-50"
+            }
+          `}
           onClick={() => setOpen(!open)}
         >
           {open ? <X size={26} /> : <Menu size={26} />}
@@ -280,8 +280,7 @@ function Navbar() {
             opacity: 1,
             height: "auto",
           }}
-          className="
-            md:hidden
+          className={`md:hidden
             relative
             px-6
             pb-6
@@ -289,11 +288,14 @@ function Navbar() {
             flex
             flex-col
             gap-2
-            bg-[#020817]/95
             backdrop-blur-2xl
             border-t
-            border-cyan-400/10
-          "
+            ${
+              darkMode
+                ? "bg-[#020817]/95 border-cyan-400/10"
+                : "bg-white/95 border-slate-200"
+            }
+          `}
         >
           {navItems.map((item) =>
             item.isRoute ? (
@@ -306,17 +308,18 @@ function Navbar() {
                 <Link
                   to={item.path}
                   onClick={() => setOpen(false)}
-                  className="
-                    block
+                  className={`block
                     px-4
                     py-3
                     rounded-xl
-                    text-gray-300
                     font-semibold
-                    hover:text-cyan-400
-                    hover:bg-cyan-400/5
                     transition-all
-                  "
+                    ${
+                      darkMode
+                        ? "text-gray-300 hover:text-cyan-400 hover:bg-cyan-400/5"
+                        : "text-slate-700 hover:text-cyan-600 hover:bg-cyan-50"
+                    }
+                  `}
                 >
                   {item.name}
                 </Link>
@@ -329,46 +332,48 @@ function Navbar() {
                   x: 5,
                 }}
                 onClick={() => setOpen(false)}
-                className="
-                  block
+                className={`block
                   px-4
                   py-3
                   rounded-xl
-                  text-gray-300
                   font-semibold
-                  hover:text-cyan-400
-                  hover:bg-cyan-400/5
                   transition-all
-                "
+                  ${
+                    darkMode
+                      ? "text-gray-300 hover:text-cyan-400 hover:bg-cyan-400/5"
+                      : "text-slate-700 hover:text-cyan-600 hover:bg-cyan-50"
+                  }
+                `}
               >
                 {item.name}
               </motion.a>
             ),
           )}
 
-          {/* MOBILE THEME */}
+          {/* ================= MOBILE THEME ================= */}
 
           <button
             onClick={toggleTheme}
-            className="
-              mt-2
+            className={`mt-2
               flex
               items-center
               gap-3
               px-4
               py-3
               rounded-xl
-              text-gray-300
               font-semibold
-              hover:text-cyan-400
-              hover:bg-cyan-400/5
               transition-all
-            "
+              ${
+                darkMode
+                  ? "text-gray-300 hover:text-cyan-400 hover:bg-cyan-400/5"
+                  : "text-slate-700 hover:text-cyan-600 hover:bg-cyan-50"
+              }
+            `}
           >
             {darkMode ? (
               <Sun className="text-yellow-400" size={20} />
             ) : (
-              <Moon className="text-cyan-300" size={20} />
+              <Moon className="text-cyan-600" size={20} />
             )}
             Theme
           </button>

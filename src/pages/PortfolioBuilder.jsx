@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Cropper from "react-easy-crop";
 import getCroppedImg from "../utils/cropImage";
+
 const templates = [
   {
     id: "frontend",
@@ -50,49 +51,351 @@ const templates = [
 
 function PortfolioBuilder() {
   const navigate = useNavigate();
+
+  // ================= PROFILE IMAGE =================
+
   const [image, setImage] = useState(null);
-  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [previewImage, setPreviewImage] = useState(null);
+
+  // ================= IMAGE CROP =================
+
+  const [crop, setCrop] = useState({
+    x: 0,
+    y: 0,
+  });
+
   const [zoom, setZoom] = useState(1);
   const [showCrop, setShowCrop] = useState(false);
-  const [previewImage, setPreviewImage] = useState(null);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+
+  // ================= NAME =================
+
   const [previewName, setPreviewName] = useState("Your Name");
   const [editingName, setEditingName] = useState(false);
-  const [selectedTemplate, setSelectedTemplate] = useState(null);
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
 
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
+  // ================= IMAGE SELECT =================
 
-      setImage(imageUrl); // Cropper kosam image
-      setShowCrop(true); // Crop popup open cheyyadaniki
+  const handleImageChange = (event) => {
+    const file = event.target.files?.[0];
+
+    if (!file) {
+      return;
     }
+
+    const imageUrl = URL.createObjectURL(file);
+
+    setImage(imageUrl);
+    setShowCrop(true);
   };
 
-  const handleNameChange = (e) => {
-    setPreviewName(e.target.value);
+  // ================= NAME CHANGE =================
+
+  const handleNameChange = (event) => {
+    setPreviewName(event.target.value);
   };
+
+  // ================= CROP COMPLETE =================
+
   const onCropComplete = (croppedArea, croppedPixels) => {
     setCroppedAreaPixels(croppedPixels);
   };
 
+  // ================= SAVE CROPPED IMAGE =================
+
   const handleCropSave = async () => {
+    if (!image || !croppedAreaPixels) {
+      return;
+    }
+
     try {
       const croppedImage = await getCroppedImg(image, croppedAreaPixels);
 
       setPreviewImage(croppedImage);
       setShowCrop(false);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.error("Image crop failed:", error);
     }
   };
+
   return (
-    <div className="min-h-screen bg-slate-950 text-white overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden bg-slate-950 text-white">
+      {/* ================= PREMIUM BACKGROUND ================= */}
+
+      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+        {/* Cyan Aurora */}
+
+        <motion.div
+          animate={{
+            x: ["-10%", "12%", "-10%"],
+            y: ["-5%", "10%", "-5%"],
+            scale: [1, 1.15, 1],
+          }}
+          transition={{
+            duration: 14,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="
+      absolute
+      -left-40
+      -top-40
+      h-[600px]
+      w-[600px]
+      rounded-full
+      bg-cyan-500/15
+      blur-[140px]
+    "
+        />
+
+        {/* Violet Aurora */}
+
+        <motion.div
+          animate={{
+            x: ["10%", "-15%", "10%"],
+            y: ["5%", "-10%", "5%"],
+            scale: [1.1, 0.9, 1.1],
+          }}
+          transition={{
+            duration: 17,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="
+      absolute
+      right-[-190px]
+      top-[25%]
+      h-[650px]
+      w-[650px]
+      rounded-full
+      bg-violet-600/10
+      blur-[150px]
+    "
+        />
+
+        {/* Bottom Blue Glow */}
+
+        <motion.div
+          animate={{
+            x: ["-20%", "20%", "-20%"],
+            opacity: [0.08, 0.18, 0.08],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="
+      absolute
+      bottom-[-250px]
+      left-[20%]
+      h-[500px]
+      w-[700px]
+      rounded-full
+      bg-blue-600/10
+      blur-[160px]
+    "
+        />
+
+        {/* Moving Grid */}
+
+        <motion.div
+          animate={{
+            backgroundPosition: ["0px 0px", "45px 45px"],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+          className="
+      absolute
+      inset-0
+      opacity-[0.08]
+    "
+          style={{
+            backgroundImage: `
+        linear-gradient(
+          rgba(34, 211, 238, 0.25) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(34, 211, 238, 0.25) 1px,
+          transparent 1px
+        )
+      `,
+            backgroundSize: "45px 45px",
+          }}
+        />
+
+        {/* ================= ANIMATED RINGS ================= */}
+
+        {/* RING 1 */}
+
+        <motion.div
+          animate={{
+            rotate: [0, 360],
+          }}
+          transition={{
+            duration: 22,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+          className="
+    absolute
+    top-[10%]
+    right-[8%]
+    h-64
+    w-64
+    rounded-full
+    border
+    border-cyan-400/20
+  "
+        >
+          <motion.div
+            animate={{
+              scale: [1, 1.15, 1],
+              opacity: [0.3, 0.7, 0.3],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="
+      absolute
+      -left-2
+      top-1/2
+      h-4
+      w-4
+      -translate-y-1/2
+      rounded-full
+      bg-cyan-400
+      shadow-[0_0_25px_rgba(34,211,238,0.9)]
+    "
+          />
+        </motion.div>
+
+        {/* RING 2 */}
+
+        <motion.div
+          animate={{
+            rotate: [360, 0],
+          }}
+          transition={{
+            duration: 30,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+          className="
+    absolute
+    bottom-[8%]
+    left-[6%]
+    h-80
+    w-80
+    rounded-full
+    border
+    border-violet-500/15
+  "
+        >
+          <motion.div
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.2, 0.6, 0.2],
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="
+      absolute
+      right-0
+      top-1/2
+      h-4
+      w-4
+      -translate-y-1/2
+      rounded-full
+      bg-violet-400
+      shadow-[0_0_25px_rgba(168,85,247,0.9)]
+    "
+          />
+        </motion.div>
+
+        {/* RING 3 — LARGE CENTER ORBIT */}
+
+        <motion.div
+          animate={{
+            rotate: [0, -360],
+          }}
+          transition={{
+            duration: 40,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+          className="
+    pointer-events-none
+    absolute
+    left-1/2
+    top-1/2
+    h-[700px]
+    w-[700px]
+    -translate-x-1/2
+    -translate-y-1/2
+    rounded-full
+    border
+    border-cyan-400/[0.06]
+  "
+        >
+          <div
+            className="
+      absolute
+      left-1/2
+      top-0
+      h-2
+      w-2
+      -translate-x-1/2
+      rounded-full
+      bg-cyan-300
+      shadow-[0_0_20px_rgba(34,211,238,0.8)]
+    "
+          />
+        </motion.div>
+
+        {/* RING 4 — SOFT INNER RING */}
+
+        <motion.div
+          animate={{
+            scale: [1, 1.08, 1],
+            rotate: [0, 180, 360],
+          }}
+          transition={{
+            duration: 18,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="
+    pointer-events-none
+    absolute
+    left-1/2
+    top-1/2
+    h-[420px]
+    w-[420px]
+    -translate-x-1/2
+    -translate-y-1/2
+    rounded-full
+    border
+    border-blue-500/[0.07]
+  "
+        />
+      </div>
+
+      {/* ================= CROP POPUP ================= */}
+
       {showCrop && (
-        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center">
-          <div className="bg-slate-900 rounded-3xl p-6 w-[105]">
-            <div className="relative w-full h-[80] bg-black rounded-2xl overflow-hidden">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4">
+          <div className="w-full max-w-xl rounded-3xl border border-white/10 bg-slate-900 p-6 shadow-2xl">
+            <div className="relative h-[400px] w-full overflow-hidden rounded-2xl bg-black">
               <Cropper
                 image={image}
                 crop={crop}
@@ -107,30 +410,55 @@ function PortfolioBuilder() {
             </div>
 
             <div className="mt-6">
-              <p className="text-center mb-2">Zoom</p>
+              <p className="mb-3 text-center font-medium text-gray-300">Zoom</p>
 
               <input
                 type="range"
-                min={1}
-                max={3}
-                step={0.1}
+                min="1"
+                max="3"
+                step="0.1"
                 value={zoom}
-                onChange={(e) => setZoom(Number(e.target.value))}
-                className="w-full"
+                onChange={(event) => {
+                  setZoom(Number(event.target.value));
+                }}
+                className="w-full accent-cyan-400"
               />
             </div>
 
-            <div className="flex gap-4 mt-6">
+            <div className="mt-6 flex gap-4">
               <button
-                onClick={() => setShowCrop(false)}
-                className="flex-1 py-3 rounded-xl bg-slate-700"
+                type="button"
+                onClick={() => {
+                  setShowCrop(false);
+                }}
+                className="
+            flex-1
+            rounded-xl
+            bg-slate-700
+            py-3
+            font-semibold
+            transition
+            hover:bg-slate-600
+          "
               >
                 Cancel
               </button>
 
               <button
+                type="button"
                 onClick={handleCropSave}
-                className="flex-1 py-3 rounded-xl bg-cyan-500 text-black font-bold"
+                className="
+            flex-1
+            rounded-xl
+            bg-gradient-to-r
+            from-cyan-400
+            to-blue-500
+            py-3
+            font-bold
+            text-black
+            transition
+            hover:scale-[1.02]
+          "
               >
                 Save
               </button>
@@ -138,217 +466,36 @@ function PortfolioBuilder() {
           </div>
         </div>
       )}
-      {/* Animated Background */}
+      {/* ================= PORTFOLIO HERO ================= */}
 
-      <motion.div
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.2, 0.35, 0.2],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-        }}
+      <section
+        id="portfolio-hero"
         className="
-        absolute
-        top-0
-        left-1/2
-        -translate-x-1/2
-        w-[150]
-        h-[150]
-        rounded-full
-        bg-cyan-500/20
-        blur-[140px]
-        "
-      />
-
-      {/* HERO SECTION */}
-
-      <section className="relative max-w-7xl mx-auto px-6 py-24">
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
-          {/* LEFT SIDE */}
-
-          <motion.div
-            id="templates"
-            initial={{ opacity: 0, x: -80 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => navigate("/")}
-              className="
-    px-8
-    py-3
-    rounded-2xl
-    border
-    border-cyan-500
-    text-cyan-400
-    font-bold
-    hover:bg-cyan-500
-    hover:text-black
-    transition
+    relative
+    z-10
+    mx-auto
+    max-w-7xl
+    px-6
+    py-20
+    lg:px-10
+    lg:py-28
   "
-            >
-              🏠 Back to Home
-            </motion.button>
-            <span
-              className="
-    px-5
-    py-2
-    rounded-full
-    bg-cyan-500/20
-    text-cyan-400
-    font-semibold
+      >
+        <div
+          className="
+      grid
+      items-center
+      gap-16
+      lg:grid-cols-[1.05fr_0.95fr]
+      lg:gap-20
     "
-            >
-              🚀 Professional Portfolio Builder
-            </span>
-
-            <h1
-              className="
-    text-6xl
-    lg:text-7xl
-    font-black
-    leading-tight
-    mt-8
-    "
-            >
-              Build Your
-              <span className="block text-cyan-400">Dream Portfolio</span>
-            </h1>
-
-            <p
-              className="
-    text-xl
-    text-gray-400
-    mt-8
-    max-w-xl
-    leading-8
-    "
-            >
-              Create a beautiful developer portfolio with projects, skills,
-              certifications, resume and modern animations. No coding required.
-            </p>
-
-            {/* BUTTONS */}
-
-            <div className="flex flex-wrap gap-5 mt-10">
-              <motion.button
-                whileHover={{
-                  scale: 1.05,
-                }}
-                whileTap={{
-                  scale: 0.95,
-                }}
-                onClick={() =>
-                  navigate("/portfolio-form", {
-                    state: { template: template.id },
-                  })
-                }
-                className="
-      px-8
-      py-4
-      rounded-2xl
-      bg-cyan-500
-      text-black
-      font-bold
-      shadow-xl
-      shadow-cyan-500/30
-      "
-              >
-                🚀 Start Building
-              </motion.button>
-
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                onClick={() => {
-                  document.getElementById("templates")?.scrollIntoView({
-                    behavior: "smooth",
-                  });
-                }}
-                className="
-    px-8
-    py-4
-    rounded-2xl
-    border
-    border-cyan-500
-    text-cyan-400
-    hover:bg-cyan-500
-    hover:text-black
-    transition
-  "
-              >
-                👀 Preview Templates
-              </motion.button>
-            </div>
-
-            {/* STATS */}
-
-            <div className="grid grid-cols-3 gap-5 mt-14">
-              <motion.div
-                whileHover={{
-                  y: -8,
-                }}
-                className="
-      bg-slate-900
-      rounded-2xl
-      p-5
-      border
-      border-slate-800
-      text-center
-      "
-              >
-                <h3 className="text-3xl font-bold text-cyan-400">25+</h3>
-
-                <p className="text-gray-400 mt-2">Templates</p>
-              </motion.div>
-
-              <motion.div
-                whileHover={{
-                  y: -8,
-                }}
-                className="
-      bg-slate-900
-      rounded-2xl
-      p-5
-      border
-      border-slate-800
-      text-center
-      "
-              >
-                <h3 className="text-3xl font-bold text-cyan-400">100%</h3>
-
-                <p className="text-gray-400 mt-2">Responsive</p>
-              </motion.div>
-
-              <motion.div
-                whileHover={{
-                  y: -8,
-                }}
-                className="
-      bg-slate-900
-      rounded-2xl
-      p-5
-      border
-      border-slate-800
-      text-center
-      "
-              >
-                <h3 className="text-3xl font-bold text-cyan-400">Free</h3>
-
-                <p className="text-gray-400 mt-2">Forever</p>
-              </motion.div>
-            </div>
-          </motion.div>
-
-          {/* RIGHT SIDE */}
+        >
+          {/* ================= LEFT SIDE ================= */}
 
           <motion.div
             initial={{
               opacity: 0,
-              x: 80,
+              x: -60,
             }}
             animate={{
               opacity: 1,
@@ -357,141 +504,587 @@ function PortfolioBuilder() {
             transition={{
               duration: 0.8,
             }}
-            className="flex justify-center"
+            className="text-center lg:text-left"
           >
+            {/* BACK HOME */}
+
+            <motion.button
+              type="button"
+              whileHover={{
+                scale: 1.05,
+              }}
+              whileTap={{
+                scale: 0.95,
+              }}
+              onClick={() => {
+                navigate("/");
+              }}
+              className="
+          mb-7
+          rounded-2xl
+          border
+          border-cyan-400/40
+          bg-cyan-400/[0.04]
+          px-7
+          py-3
+          font-bold
+          text-cyan-300
+          backdrop-blur-xl
+          transition
+          hover:border-cyan-400
+          hover:bg-cyan-400/10
+          hover:shadow-[0_0_30px_rgba(34,211,238,0.15)]
+        "
+            >
+              🏠 Back to Home
+            </motion.button>
+
+            {/* BADGE */}
+
+            <motion.div
+              initial={{
+                opacity: 0,
+                y: 20,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              transition={{
+                delay: 0.15,
+              }}
+              className="
+          inline-flex
+          items-center
+          rounded-full
+          border
+          border-cyan-400/30
+          bg-cyan-400/[0.07]
+          px-5
+          py-2.5
+          text-sm
+          font-semibold
+          text-cyan-300
+          shadow-[0_0_25px_rgba(34,211,238,0.12)]
+          backdrop-blur-xl
+          lg:ml-8
+        "
+            >
+              🚀 Professional Portfolio Builder
+            </motion.div>
+
+            {/* HEADING */}
+
+            <h1
+              className="
+          mt-8
+          text-5xl
+          font-black
+          leading-[1.04]
+          tracking-tight
+          sm:text-6xl
+          lg:text-7xl
+        "
+            >
+              Build Your
+              <motion.span
+                animate={{
+                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+                className="
+            block
+            bg-gradient-to-r
+            from-cyan-400
+            via-blue-500
+            to-violet-500
+            bg-[length:200%_200%]
+            bg-clip-text
+            text-transparent
+          "
+              >
+                Dream Portfolio
+              </motion.span>
+            </h1>
+
+            {/* DESCRIPTION */}
+
+            <p
+              className="
+          mx-auto
+          mt-7
+          max-w-xl
+          text-base
+          leading-7
+          text-gray-400
+          md:text-lg
+          lg:mx-0
+          lg:text-xl
+        "
+            >
+              Create a beautiful developer portfolio with projects, skills,
+              certifications, resume and modern animations. No coding required.
+            </p>
+
+            {/* BUTTONS */}
+
+            <div
+              className="
+          mt-9
+          flex
+          flex-wrap
+          justify-center
+          gap-4
+          lg:justify-start
+        "
+            >
+              {/* START BUILDING */}
+
+              <motion.button
+                type="button"
+                whileHover={{
+                  scale: 1.05,
+                }}
+                whileTap={{
+                  scale: 0.95,
+                }}
+                onClick={() => {
+                  navigate("/portfolio-form");
+                }}
+                className="
+            rounded-2xl
+            bg-gradient-to-r
+            from-cyan-400
+            to-blue-500
+            px-8
+            py-4
+            font-bold
+            text-white
+            shadow-[0_0_30px_rgba(34,211,238,0.2)]
+            transition-all
+            hover:shadow-[0_0_40px_rgba(34,211,238,0.4)]
+          "
+              >
+                🚀 Start Building
+              </motion.button>
+
+              {/* PREVIEW TEMPLATES */}
+
+              <motion.button
+                type="button"
+                whileHover={{
+                  scale: 1.05,
+                }}
+                whileTap={{
+                  scale: 0.95,
+                }}
+                onClick={() => {
+                  document.getElementById("templates")?.scrollIntoView({
+                    behavior: "smooth",
+                  });
+                }}
+                className="
+            rounded-2xl
+            border
+            border-cyan-400/50
+            bg-white/[0.03]
+            px-8
+            py-4
+            font-bold
+            text-cyan-300
+            backdrop-blur-xl
+            transition-all
+            hover:bg-cyan-400/10
+            hover:shadow-[0_0_30px_rgba(34,211,238,0.15)]
+          "
+              >
+                👀 Preview Templates
+              </motion.button>
+            </div>
+
+            {/* STATS */}
+
+            <div className="mt-12 grid max-w-xl grid-cols-3 gap-3 md:gap-5">
+              {/* TEMPLATES */}
+
+              <motion.div
+                whileHover={{
+                  y: -8,
+                  scale: 1.03,
+                }}
+                className="
+            rounded-2xl
+            border
+            border-white/10
+            bg-white/[0.04]
+            p-4
+            text-center
+            backdrop-blur-xl
+          "
+              >
+                <h3 className="text-2xl font-black text-cyan-400 md:text-3xl">
+                  25+
+                </h3>
+
+                <p className="mt-2 text-xs text-gray-400 md:text-sm">
+                  Templates
+                </p>
+              </motion.div>
+
+              {/* RESPONSIVE */}
+
+              <motion.div
+                whileHover={{
+                  y: -8,
+                  scale: 1.03,
+                }}
+                className="
+            rounded-2xl
+            border
+            border-white/10
+            bg-white/[0.04]
+            p-4
+            text-center
+            backdrop-blur-xl
+          "
+              >
+                <h3 className="text-2xl font-black text-cyan-400 md:text-3xl">
+                  100%
+                </h3>
+
+                <p className="mt-2 text-xs text-gray-400 md:text-sm">
+                  Responsive
+                </p>
+              </motion.div>
+
+              {/* FREE */}
+
+              <motion.div
+                whileHover={{
+                  y: -8,
+                  scale: 1.03,
+                }}
+                className="
+            rounded-2xl
+            border
+            border-white/10
+            bg-white/[0.04]
+            p-4
+            text-center
+            backdrop-blur-xl
+          "
+              >
+                <h3 className="text-2xl font-black text-cyan-400 md:text-3xl">
+                  Free
+                </h3>
+
+                <p className="mt-2 text-xs text-gray-400 md:text-sm">Forever</p>
+              </motion.div>
+            </div>
+          </motion.div>
+
+          {/* ================= RIGHT SIDE ================= */}
+
+          <motion.div
+            initial={{
+              opacity: 0,
+              x: 60,
+              scale: 0.95,
+            }}
+            animate={{
+              opacity: 1,
+              x: 0,
+              scale: 1,
+            }}
+            transition={{
+              duration: 0.9,
+              delay: 0.15,
+            }}
+            className="
+        relative
+        mx-auto
+        flex
+        w-full
+        max-w-[520px]
+        items-center
+        justify-center
+      "
+          >
+            {/* AMBIENT GLOW */}
+
             <motion.div
               animate={{
-                y: [0, -15, 0],
+                scale: [1, 1.08, 1],
+                opacity: [0.25, 0.45, 0.25],
+              }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="
+          absolute
+          h-[420px]
+          w-[420px]
+          rounded-full
+          bg-cyan-500/10
+          blur-[100px]
+          md:h-[520px]
+          md:w-[520px]
+        "
+            />
+
+            {/* FLOATING GLASS FRAME */}
+
+            <motion.div
+              animate={{
+                rotate: [0, 4, 0, -4, 0],
+                scale: [1, 1.02, 1],
+              }}
+              transition={{
+                duration: 12,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="
+          absolute
+          h-[400px]
+          w-[400px]
+          rounded-[70px]
+          border
+          border-cyan-400/10
+          bg-cyan-400/[0.015]
+          md:h-[500px]
+          md:w-[500px]
+        "
+            />
+
+            {/* PROFILE CARD */}
+
+            <motion.div
+              animate={{
+                y: [0, -10, 0],
               }}
               transition={{
                 duration: 4,
                 repeat: Infinity,
+                ease: "easeInOut",
               }}
               className="
-    w-[97.5]
-    rounded-[35px]
-    bg-slate-900
-    border
-    border-cyan-500
-    p-8
-    shadow-2xl
-    shadow-cyan-500/20
-    "
+          relative
+          z-10
+          w-full
+          max-w-[390px]
+          overflow-hidden
+          rounded-[38px]
+          border
+          border-white/10
+          bg-slate-900/80
+          p-7
+          shadow-[0_0_70px_rgba(34,211,238,0.12)]
+          backdrop-blur-2xl
+          md:p-9
+        "
             >
-              <div className="flex justify-center">
-                <label className="cursor-pointer">
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageChange}
-                    className="hidden"
-                  />
+              {/* CARD GLOW */}
 
-                  {previewImage ? (
-                    <img
-                      src={previewImage}
-                      alt=""
-                      className="
-        w-32
-        h-32
-        rounded-full
-        object-cover
-        border-4
-        border-cyan-500
-        "
+              <motion.div
+                animate={{
+                  opacity: [0.35, 0.65, 0.35],
+                  scale: [1, 1.15, 1],
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="
+            absolute
+            left-1/2
+            top-[-100px]
+            h-[260px]
+            w-[260px]
+            -translate-x-1/2
+            rounded-full
+            bg-cyan-500/15
+            blur-[70px]
+          "
+              />
+
+              {/* PROFILE IMAGE */}
+
+              <div className="relative z-10 flex justify-center">
+                <motion.div
+                  animate={{
+                    boxShadow: [
+                      "0 0 20px rgba(34,211,238,0.15)",
+                      "0 0 45px rgba(34,211,238,0.35)",
+                      "0 0 20px rgba(34,211,238,0.15)",
+                    ],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                  }}
+                  className="rounded-full"
+                >
+                  <label className="relative block cursor-pointer">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageChange}
+                      className="hidden"
                     />
-                  ) : (
-                    <div
+
+                    {previewImage ? (
+                      <img
+                        src={previewImage}
+                        alt="Profile"
+                        className="
+                    h-32
+                    w-32
+                    rounded-full
+                    border-4
+                    border-cyan-400
+                    object-cover
+                    md:h-36
+                    md:w-36
+                  "
+                      />
+                    ) : (
+                      <div
+                        className="
+                    h-32
+                    w-32
+                    rounded-full
+                    bg-gradient-to-r
+                    from-cyan-400
+                    via-blue-500
+                    to-violet-500
+                    md:h-36
+                    md:w-36
+                  "
+                      />
+                    )}
+
+                    {/* ONLINE DOT */}
+
+                    <motion.span
+                      animate={{
+                        scale: [1, 1.15, 1],
+                        opacity: [0.8, 1, 0.8],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                      }}
                       className="
-        w-32
-        h-32
-        rounded-full
-        bg-linear-to-r
-        from-cyan-400
-        to-blue-600
-        "
+                  absolute
+                  bottom-2
+                  right-2
+                  h-5
+                  w-5
+                  rounded-full
+                  border-4
+                  border-slate-900
+                  bg-cyan-400
+                "
                     />
-                  )}
-                </label>
+                  </label>
+                </motion.div>
               </div>
 
-              <div className="text-center mt-6">
+              {/* NAME */}
+
+              <div className="relative z-10 mt-6 text-center">
                 {editingName ? (
                   <input
                     autoFocus
                     value={previewName}
                     onChange={handleNameChange}
-                    onBlur={() => setEditingName(false)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
+                    onBlur={() => {
+                      setEditingName(false);
+                    }}
+                    onKeyDown={(event) => {
+                      if (event.key === "Enter") {
                         setEditingName(false);
                       }
                     }}
                     className="
-      bg-transparent
-      border-b-2
-      border-cyan-500
-      text-center
-      text-3xl
-      font-bold
-      outline-none
-      w-full
-      "
+                w-full
+                border-b-2
+                border-cyan-500
+                bg-transparent
+                text-center
+                text-3xl
+                font-bold
+                text-white
+                outline-none
+              "
                   />
                 ) : (
                   <h2
-                    onClick={() => setEditingName(true)}
+                    onClick={() => {
+                      setEditingName(true);
+                    }}
                     className="
-      text-3xl
-      font-bold
-      cursor-text
-      hover:text-cyan-400
-      transition
-      "
-                    title="Click to edit"
+                cursor-text
+                text-3xl
+                font-black
+                transition
+                hover:text-cyan-400
+              "
                   >
                     {previewName}
                   </h2>
                 )}
+
+                <p className="mt-2 text-cyan-400">Full Stack Developer</p>
               </div>
 
-              <p className="text-center text-cyan-400 mt-2">
-                Full Stack Developer
-              </p>
+              {/* SKILLS */}
 
-              <div className="space-y-5 mt-10">
+              <div className="relative z-10 mt-8 space-y-4">
                 {[
                   ["HTML", 95],
                   ["React", 90],
                   ["Node.js", 85],
                   ["UI Design", 80],
-                ].map((item, index) => (
-                  <div key={index}>
-                    <div className="flex justify-between">
-                      <span>{item[0]}</span>
+                ].map(([skill, percentage], index) => (
+                  <div key={skill}>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-300">{skill}</span>
 
-                      <span>{item[1]}%</span>
+                      <span className="text-gray-400">{percentage}%</span>
                     </div>
 
-                    <div className="w-full h-3 bg-slate-700 rounded-full mt-2">
+                    <div className="mt-2 h-2.5 w-full overflow-hidden rounded-full bg-slate-700">
                       <motion.div
                         initial={{
                           width: 0,
                         }}
                         whileInView={{
-                          width: `${item[1]}%`,
+                          width: `${percentage}%`,
+                        }}
+                        viewport={{
+                          once: true,
                         }}
                         transition={{
                           duration: 1,
                           delay: index * 0.2,
                         }}
                         className="
-              h-full
-              rounded-full
-              bg-linear-to-r
-              from-cyan-500
-              to-blue-500
-              "
+                    h-full
+                    rounded-full
+                    bg-gradient-to-r
+                    from-cyan-400
+                    via-blue-500
+                    to-violet-500
+                  "
                       />
                     </div>
                   </div>
@@ -501,31 +1094,50 @@ function PortfolioBuilder() {
           </motion.div>
         </div>
       </section>
-      {/* ================= TEMPLATE GALLERY ================= */}
 
-      <section id="templates" className="max-w-7xl mx-auto px-6 py-24">
+      {/* ================= PORTFOLIO TEMPLATES ================= */}
+
+      <section
+        id="templates"
+        className="relative mx-auto max-w-7xl overflow-hidden px-6 py-28"
+      >
+        {/* HEADING */}
+
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center"
+          initial={{
+            opacity: 0,
+            y: 40,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+          }}
+          transition={{
+            duration: 0.8,
+          }}
+          className="relative z-10 text-center"
         >
-          <span className="text-cyan-400 font-semibold">
-            PROFESSIONAL TEMPLATES
+          <span className="font-semibold tracking-widest text-cyan-400">
+            PORTFOLIO TEMPLATES
           </span>
 
-          <h2 className="text-5xl font-black mt-4">
+          <h2 className="mt-4 text-4xl font-black md:text-5xl">
             Choose Your
-            <span className="text-cyan-400"> Portfolio</span>
+            <span className="text-cyan-400"> Perfect Template</span>
           </h2>
 
-          <p className="text-gray-400 mt-5 text-lg">
-            Pick a beautiful template and customize it in minutes.
+          <p className="mx-auto mt-5 max-w-2xl text-lg text-gray-400">
+            Select a professional design and start building your portfolio.
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8 mt-20">
-          {templates.map((template) => (
+        {/* TEMPLATE GRID */}
+
+        <div className="relative z-10 mt-16 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+          {templates.map((template, index) => (
             <motion.div
               key={template.id}
               initial={{
@@ -536,253 +1148,249 @@ function PortfolioBuilder() {
                 opacity: 1,
                 y: 0,
               }}
-              whileHover={{
-                y: -12,
-                scale: 1.03,
+              viewport={{
+                once: true,
+                amount: 0.2,
               }}
               transition={{
-                duration: 0.5,
+                duration: 0.6,
+                delay: index * 0.1,
+              }}
+              whileHover={{
+                y: -10,
               }}
               className="
-        overflow-hidden
-        rounded-3xl
-        bg-slate-900
-        border
-        border-slate-800
-        hover:border-cyan-500
-        transition-all
-        duration-300
-        shadow-xl
+          group
+          overflow-hidden
+          rounded-[28px]
+          border
+          border-white/10
+          bg-white/[0.035]
+          backdrop-blur-2xl
+          transition-all
+          duration-500
+          hover:border-cyan-400/30
+          hover:shadow-[0_20px_60px_rgba(34,211,238,0.12)]
         "
             >
               {/* IMAGE */}
 
-              <div className="relative h-72 overflow-hidden">
+              <div className="relative h-56 overflow-hidden">
                 <img
                   src={template.image}
                   alt={template.title}
                   className="
-            w-full
-            h-full
-            object-cover
-            transition
-            duration-500
-            hover:scale-110
+              h-full
+              w-full
+              object-cover
+              transition-transform
+              duration-700
+              group-hover:scale-110
             "
                 />
 
+                {/* IMAGE OVERLAY */}
+
                 <div
-                  className={`
-            absolute
-            inset-0
-            bg-linear-to-t
-            ${template.color}
-            opacity-60
-            `}
+                  className="
+              absolute
+              inset-0
+              bg-gradient-to-t
+              from-slate-950
+              via-slate-950/20
+              to-transparent
+            "
                 />
 
-                <div className="absolute top-5 right-5 text-5xl">
+                {/* ICON */}
+
+                <div
+                  className={`
+              absolute
+              left-5
+              top-5
+              flex
+              h-12
+              w-12
+              items-center
+              justify-center
+              rounded-2xl
+              bg-gradient-to-r
+              ${template.color}
+              text-2xl
+              shadow-lg
+            `}
+                >
                   {template.icon}
-                </div>
-
-                <div className="absolute bottom-6 left-6">
-                  <h3 className="text-3xl font-bold">{template.title}</h3>
-
-                  <p className="text-white/80 mt-2">
-                    Modern Responsive Portfolio
-                  </p>
                 </div>
               </div>
 
               {/* CONTENT */}
 
               <div className="p-6">
-                <div className="flex gap-2 flex-wrap">
-                  <span className="px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-400 text-sm">
-                    Responsive
-                  </span>
+                <h3 className="text-xl font-bold text-white">
+                  {template.title}
+                </h3>
 
-                  <span className="px-3 py-1 rounded-full bg-green-500/20 text-green-400 text-sm">
-                    Modern
-                  </span>
+                <p className="mt-2 text-sm leading-6 text-gray-400">
+                  Create a modern and professional portfolio with this template.
+                </p>
 
-                  <span className="px-3 py-1 rounded-full bg-purple-500/20 text-purple-400 text-sm">
-                    Animated
-                  </span>
-                </div>
+                {/* BUTTON */}
 
-                <button
-                  onClick={() => navigate("/portfolio-form")}
+                <motion.button
+                  type="button"
+                  whileHover={{
+                    scale: 1.03,
+                  }}
+                  whileTap={{
+                    scale: 0.97,
+                  }}
+                  onClick={() => {
+                    navigate("/portfolio-form");
+                  }}
                   className="
-            mt-6
-            w-full
-            py-4
-            rounded-2xl
-            bg-linear-to-r
-            from-cyan-500
-            to-blue-600
-            text-black
-            font-bold
-            hover:scale-105
-            transition
+              mt-6
+              w-full
+              rounded-xl
+              bg-gradient-to-r
+              from-cyan-400
+              to-blue-500
+              px-5
+              py-3
+              font-bold
+              text-white
+              transition
+              hover:shadow-[0_0_25px_rgba(34,211,238,0.25)]
             "
                 >
-                  🚀 Use Template
-                </button>
+                  Use This Template
+                </motion.button>
               </div>
             </motion.div>
           ))}
         </div>
       </section>
-      {/* ================= WHY CHOOSE US ================= */}
 
-      <section className="max-w-7xl mx-auto px-6 py-24">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center"
-        >
-          <span className="text-cyan-400 font-semibold">WHY CHOOSE US</span>
-
-          <h2 className="text-5xl font-black mt-4">
-            Everything You Need
-            <span className="text-cyan-400"> In One Place</span>
-          </h2>
-
-          <p className="text-gray-400 mt-5 text-lg max-w-3xl mx-auto">
-            Create a modern developer portfolio with beautiful animations,
-            responsive layouts and professional designs.
-          </p>
-        </motion.div>
-
-        <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-8 mt-20">
-          {[
-            {
-              icon: "⚡",
-              title: "Fast Builder",
-              desc: "Create your portfolio in just a few minutes.",
-              color: "from-cyan-500 to-blue-600",
-            },
-            {
-              icon: "🎨",
-              title: "Modern Design",
-              desc: "Professional UI inspired by top developer portfolios.",
-              color: "from-pink-500 to-purple-600",
-            },
-            {
-              icon: "📱",
-              title: "Responsive",
-              desc: "Looks perfect on desktop, tablet and mobile.",
-              color: "from-green-500 to-cyan-600",
-            },
-            {
-              icon: "🚀",
-              title: "Easy Deploy",
-              desc: "Deploy instantly using GitHub, Vercel or Netlify.",
-              color: "from-orange-500 to-red-600",
-            },
-          ].map((item, index) => (
-            <motion.div
-              key={index}
-              initial={{
-                opacity: 0,
-                y: 60,
-              }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-              }}
-              transition={{
-                delay: index * 0.15,
-              }}
-              whileHover={{
-                y: -12,
-                scale: 1.05,
-              }}
-              className="
-        relative
-        overflow-hidden
-        rounded-3xl
-        bg-slate-900
-        border
-        border-slate-800
-        p-8
-        group
-        "
-            >
-              <div
-                className={`
-          absolute
-          inset-0
-          bg-linear-to-br
-          ${item.color}
-          opacity-0
-          group-hover:opacity-10
-          transition
-          duration-500
-          `}
-              />
-
-              <div
-                className="
-          w-20
-          h-20
-          rounded-2xl
-          bg-slate-800
-          flex
-          items-center
-          justify-center
-          text-5xl
-          "
-              >
-                {item.icon}
-              </div>
-
-              <h3 className="text-2xl font-bold mt-8">{item.title}</h3>
-
-              <p className="text-gray-400 mt-5 leading-7">{item.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
       {/* ================= HOW IT WORKS ================= */}
 
-      <section className="max-w-7xl mx-auto px-6 py-24">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center"
-        >
-          <span className="text-cyan-400 font-semibold">HOW IT WORKS</span>
+      <section className="relative mx-auto max-w-7xl overflow-hidden px-6 py-28">
+        {/* BACKGROUND GLOW */}
 
-          <h2 className="text-5xl font-black mt-4">
+        <motion.div
+          animate={{
+            x: [0, 80, 0],
+            y: [0, -40, 0],
+            opacity: [0.08, 0.16, 0.08],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="
+      pointer-events-none
+      absolute
+      -right-32
+      -top-20
+      h-[420px]
+      w-[420px]
+      rounded-full
+      bg-cyan-500/20
+      blur-[120px]
+    "
+        />
+
+        <motion.div
+          animate={{
+            x: [0, -70, 0],
+            y: [0, 50, 0],
+            opacity: [0.06, 0.14, 0.06],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="
+      pointer-events-none
+      absolute
+      -bottom-32
+      -left-32
+      h-[380px]
+      w-[380px]
+      rounded-full
+      bg-purple-600/20
+      blur-[120px]
+    "
+        />
+
+        {/* HEADING */}
+
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: 40,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+          }}
+          transition={{
+            duration: 0.8,
+          }}
+          className="relative z-10 text-center"
+        >
+          <span className="font-semibold tracking-widest text-cyan-400">
+            HOW IT WORKS
+          </span>
+
+          <h2 className="mt-4 text-4xl font-black md:text-5xl">
             Build Portfolio In
             <span className="text-cyan-400"> 4 Easy Steps</span>
           </h2>
 
-          <p className="text-gray-400 text-lg mt-5">
-            From template selection to deployment in just a few minutes.
+          <p className="mx-auto mt-5 max-w-2xl text-lg text-gray-400">
+            Create your professional portfolio quickly with a simple
+            step-by-step process.
           </p>
         </motion.div>
 
-        <div className="relative mt-24">
-          {/* Vertical Line */}
+        {/* STEPS */}
 
-          <div
+        <div className="relative z-10 mt-20">
+          {/* CONNECTING LINE */}
+
+          <motion.div
+            initial={{
+              scaleY: 0,
+            }}
+            whileInView={{
+              scaleY: 1,
+            }}
+            viewport={{
+              once: true,
+            }}
+            transition={{
+              duration: 1.5,
+              ease: "easeInOut",
+            }}
             className="
-      absolute
-      left-8
-      top-0
-      bottom-0
-      w-1
-      bg-linear-to-b
-      from-cyan-500
-      via-blue-500
-      to-purple-500
-      hidden
-      md:block
+        absolute
+        bottom-8
+        left-[31px]
+        top-8
+        hidden
+        w-[2px]
+        origin-top
+        bg-gradient-to-b
+        from-cyan-400
+        via-blue-500
+        to-purple-600
+        md:block
       "
           />
 
@@ -803,354 +1411,787 @@ function PortfolioBuilder() {
               number: "03",
               title: "Customize Design",
               icon: "⚙️",
-              desc: "Change colors, fonts, layouts and personalize your portfolio.",
+              desc: "Personalize your portfolio with your own information and design.",
             },
             {
               number: "04",
               title: "Download & Publish",
               icon: "🚀",
-              desc: "Export your portfolio and deploy it using Vercel or Netlify.",
+              desc: "Export your portfolio and make it ready to share with recruiters.",
             },
           ].map((step, index) => (
             <motion.div
-              key={index}
+              key={step.number}
               initial={{
                 opacity: 0,
-                x: -80,
+                x: -60,
               }}
               whileInView={{
                 opacity: 1,
                 x: 0,
               }}
+              viewport={{
+                once: true,
+                amount: 0.2,
+              }}
               transition={{
                 duration: 0.6,
-                delay: index * 0.2,
-              }}
-              whileHover={{
-                scale: 1.02,
+                delay: index * 0.15,
               }}
               className="
-        relative
-        flex
-        gap-8
-        items-start
-        mb-12
+          relative
+          mb-8
+          flex
+          items-start
+          gap-6
+          last:mb-0
+          md:gap-8
         "
             >
-              {/* Number */}
+              {/* NUMBER */}
 
-              <div
+              <motion.div
+                whileHover={{
+                  scale: 1.12,
+                  rotate: 5,
+                }}
                 className="
-          relative
-          z-10
-          w-16
-          h-16
-          rounded-full
-          bg-linear-to-r
-          from-cyan-500
-          to-blue-600
-          flex
-          items-center
-          justify-center
-          font-bold
-          text-black
-          text-xl
-          shadow-xl
+            relative
+            z-10
+            flex
+            h-16
+            w-16
+            shrink-0
+            items-center
+            justify-center
+            rounded-2xl
+            border
+            border-white/20
+            bg-gradient-to-br
+            from-cyan-400
+            via-blue-500
+            to-purple-600
+            text-lg
+            font-black
+            text-white
+            shadow-[0_10px_35px_rgba(34,211,238,0.25)]
           "
               >
                 {step.number}
-              </div>
+              </motion.div>
 
-              {/* Card */}
+              {/* CONTENT CARD */}
 
-              <div
+              <motion.div
+                whileHover={{
+                  x: 8,
+                }}
                 className="
-          flex-1
-          bg-slate-900
-          rounded-3xl
-          border
-          border-slate-800
-          p-8
-          hover:border-cyan-500
-          transition-all
-          duration-300
+            flex-1
+            rounded-[28px]
+            border
+            border-white/10
+            bg-white/[0.035]
+            p-6
+            backdrop-blur-2xl
+            transition-all
+            duration-500
+            hover:border-cyan-400/30
+            hover:bg-white/[0.055]
+            hover:shadow-[0_15px_50px_rgba(34,211,238,0.08)]
+            md:p-8
           "
               >
-                <div className="flex items-center gap-5">
-                  <div className="text-5xl">{step.icon}</div>
+                <div className="flex items-start gap-5">
+                  {/* ICON */}
+
+                  <motion.div
+                    whileHover={{
+                      scale: 1.12,
+                      rotate: -6,
+                    }}
+                    className="
+                flex
+                h-14
+                w-14
+                shrink-0
+                items-center
+                justify-center
+                rounded-2xl
+                border
+                border-white/10
+                bg-slate-800/80
+                text-3xl
+              "
+                  >
+                    {step.icon}
+                  </motion.div>
+
+                  {/* TEXT */}
 
                   <div>
-                    <h3 className="text-2xl font-bold">{step.title}</h3>
+                    <h3 className="text-xl font-bold md:text-2xl">
+                      {step.title}
+                    </h3>
 
-                    <p className="text-gray-400 mt-2">{step.desc}</p>
+                    <p className="mt-2 leading-7 text-gray-400">{step.desc}</p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
           ))}
         </div>
       </section>
       {/* ================= FAQ SECTION ================= */}
 
-      <section className="max-w-7xl mx-auto px-6 py-24">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center"
-        >
-          <span className="text-cyan-400 font-semibold">FAQ</span>
+      <section className="relative mx-auto max-w-6xl overflow-hidden px-6 py-28">
+        {/* BACKGROUND GLOW */}
 
-          <h2 className="text-5xl font-black mt-4">
+        <motion.div
+          animate={{
+            x: [0, 100, 0],
+            y: [0, -60, 0],
+            scale: [1, 1.15, 1],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="
+      pointer-events-none
+      absolute
+      -right-40
+      -top-32
+      h-[450px]
+      w-[450px]
+      rounded-full
+      bg-cyan-500/10
+      blur-[130px]
+    "
+        />
+
+        <motion.div
+          animate={{
+            x: [0, -80, 0],
+            y: [0, 50, 0],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 14,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="
+      pointer-events-none
+      absolute
+      -bottom-40
+      -left-40
+      h-[420px]
+      w-[420px]
+      rounded-full
+      bg-purple-600/10
+      blur-[130px]
+    "
+        />
+
+        {/* HEADING */}
+
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: 40,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+          }}
+          transition={{
+            duration: 0.8,
+          }}
+          className="relative z-10 text-center"
+        >
+          <span className="font-semibold tracking-widest text-cyan-400">
+            FAQ
+          </span>
+
+          <h2 className="mt-4 text-4xl font-black md:text-5xl">
             Frequently Asked
             <span className="text-cyan-400"> Questions</span>
           </h2>
 
-          <p className="text-gray-400 mt-5 text-lg">
-            Everything you need to know before creating your portfolio.
+          <p className="mx-auto mt-5 max-w-2xl text-lg text-gray-400">
+            Everything you need to know about creating your professional
+            portfolio.
           </p>
         </motion.div>
 
-        <div className="max-w-5xl mx-auto mt-20 space-y-6">
+        {/* FAQ LIST */}
+
+        <div className="relative z-10 mt-16 space-y-5">
           {[
             {
-              q: "Is Portfolio Builder free?",
-              a: "Yes. You can create beautiful portfolios for free.",
+              question: "Is Portfolio Builder free?",
+              answer:
+                "Yes. You can create and customize your portfolio without any coding experience.",
             },
             {
-              q: "Can I upload my resume?",
-              a: "Yes. You can upload your resume and showcase it.",
+              question: "Can I upload my resume?",
+              answer:
+                "Yes. You can upload your resume and showcase it as part of your portfolio.",
             },
             {
-              q: "Can I add GitHub projects?",
-              a: "Yes. Add unlimited GitHub repositories.",
+              question: "Can I add GitHub projects?",
+              answer:
+                "Yes. You can add your projects and provide links to your GitHub repositories.",
             },
             {
-              q: "Can I edit later?",
-              a: "Yes. Update your portfolio anytime.",
+              question: "Can I edit my portfolio later?",
+              answer:
+                "Yes. You can update your portfolio information whenever you want.",
             },
           ].map((item, index) => (
-            <motion.div
-              key={index}
+            <motion.details
+              key={item.question}
               initial={{
                 opacity: 0,
-                y: 40,
+                y: 30,
               }}
               whileInView={{
                 opacity: 1,
                 y: 0,
               }}
-              whileHover={{
-                scale: 1.02,
+              viewport={{
+                once: true,
+              }}
+              transition={{
+                delay: index * 0.12,
+                duration: 0.5,
               }}
               className="
-        bg-slate-900
-        border
-        border-slate-800
-        rounded-3xl
-        p-8
-        hover:border-cyan-500
-        transition
+          group
+          relative
+          overflow-hidden
+          rounded-[24px]
+          border
+          border-white/10
+          bg-white/[0.035]
+          backdrop-blur-2xl
+          transition-all
+          duration-500
+          hover:border-cyan-400/30
+          hover:bg-white/[0.055]
+          open:border-cyan-400/40
+          open:shadow-[0_15px_50px_rgba(34,211,238,0.08)]
         "
             >
-              <h3 className="text-2xl font-bold text-cyan-400">{item.q}</h3>
+              {/* QUESTION */}
 
-              <p className="text-gray-400 mt-4 leading-7">{item.a}</p>
-            </motion.div>
+              <summary
+                className="
+            relative
+            z-10
+            flex
+            cursor-pointer
+            list-none
+            items-center
+            justify-between
+            gap-5
+            px-6
+            py-6
+            md:px-8
+            md:py-7
+          "
+              >
+                <div className="flex items-center gap-4">
+                  {/* NUMBER */}
+
+                  <span
+                    className="
+                flex
+                h-10
+                w-10
+                shrink-0
+                items-center
+                justify-center
+                rounded-xl
+                border
+                border-cyan-400/20
+                bg-cyan-400/10
+                text-sm
+                font-bold
+                text-cyan-400
+              "
+                  >
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+
+                  <h3 className="text-base font-bold text-white md:text-lg">
+                    {item.question}
+                  </h3>
+                </div>
+
+                {/* PLUS */}
+
+                <span
+                  className="
+              shrink-0
+              text-2xl
+              text-cyan-400
+              transition-transform
+              duration-300
+              group-open:rotate-45
+            "
+                >
+                  +
+                </span>
+              </summary>
+
+              {/* ANSWER */}
+
+              <div
+                className="
+            relative
+            z-10
+            border-t
+            border-white/10
+            px-6
+            pb-6
+            pt-5
+            md:px-8
+            md:pb-7
+          "
+              >
+                <p className="max-w-4xl leading-7 text-gray-400 md:pl-14">
+                  {item.answer}
+                </p>
+              </div>
+            </motion.details>
           ))}
         </div>
       </section>
-
       {/* ================= FINAL CTA ================= */}
 
-      <section className="max-w-7xl mx-auto px-6 pb-24">
+      <section className="relative mx-auto max-w-7xl overflow-hidden px-6 pb-24 pt-10">
         <motion.div
           initial={{
             opacity: 0,
-            scale: 0.9,
+            y: 50,
+            scale: 0.96,
           }}
           whileInView={{
             opacity: 1,
+            y: 0,
             scale: 1,
+          }}
+          viewport={{
+            once: true,
           }}
           transition={{
             duration: 0.8,
           }}
           className="
-    rounded-[40px]
-    overflow-hidden
-    relative
-    bg-linear-to-r
-    from-cyan-600
-    via-blue-600
-    to-purple-700
-    p-16
-    text-center
+      relative
+      overflow-hidden
+      rounded-[40px]
+      border
+      border-cyan-400/20
+      bg-gradient-to-br
+      from-cyan-600
+      via-blue-600
+      to-purple-700
+      px-6
+      py-20
+      text-center
+      shadow-[0_25px_80px_rgba(34,211,238,0.15)]
+      md:px-16
     "
         >
+          {/* DECORATIVE CIRCLE 1 */}
+
           <motion.div
             animate={{
-              rotate: [0, 360],
+              x: [0, 100, 0],
+              y: [0, -60, 0],
+              rotate: [0, 90, 180],
             }}
             transition={{
-              duration: 30,
+              duration: 18,
               repeat: Infinity,
               ease: "linear",
             }}
             className="
-      absolute
-      -top-32
-      -right-32
-      w-72
-      h-72
-      rounded-full
-      bg-white/10
+        absolute
+        -right-32
+        -top-40
+        h-80
+        w-80
+        rounded-full
+        border
+        border-white/10
+        bg-white/[0.06]
       "
           />
 
+          {/* DECORATIVE CIRCLE 2 */}
+
           <motion.div
             animate={{
-              rotate: [360, 0],
+              x: [0, -80, 0],
+              y: [0, 50, 0],
+              rotate: [360, 180, 0],
             }}
             transition={{
-              duration: 25,
+              duration: 20,
               repeat: Infinity,
               ease: "linear",
             }}
             className="
-      absolute
-      -bottom-32
-      -left-32
-      w-80
-      h-80
-      rounded-full
-      bg-black/10
+        absolute
+        -bottom-44
+        -left-32
+        h-96
+        w-96
+        rounded-full
+        border
+        border-white/10
+        bg-black/[0.06]
       "
           />
 
-          <h2 className="text-5xl font-black relative z-10">
-            🚀 Ready To Build Your Portfolio?
-          </h2>
+          {/* SMALL DOT */}
 
-          <p className="text-xl mt-8 text-white/90 max-w-3xl mx-auto relative z-10">
-            Showcase your skills, projects, education, certificates and resume
-            with a beautiful portfolio that helps you get hired.
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-6 mt-12 relative z-10">
-            <motion.button
-              whileHover={{
-                scale: 1.08,
-              }}
-              whileTap={{
-                scale: 0.95,
-              }}
-              onClick={() => navigate("/portfolio-form")}
-              className="
-        px-10
-        py-4
-        rounded-2xl
+          <motion.div
+            animate={{
+              scale: [1, 1.3, 1],
+              opacity: [0.2, 0.45, 0.2],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="
+        absolute
+        left-[15%]
+        top-[20%]
+        h-3
+        w-3
+        rounded-full
         bg-white
-        text-cyan-600
-        font-bold
-        "
-            >
-              🚀 Start Building
-            </motion.button>
+      "
+          />
 
-            <motion.button
-              whileHover={{
-                scale: 1.08,
+          {/* SMALL DOT 2 */}
+
+          <motion.div
+            animate={{
+              scale: [1, 1.4, 1],
+              opacity: [0.15, 0.4, 0.15],
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1,
+            }}
+            className="
+        absolute
+        bottom-[25%]
+        right-[18%]
+        h-4
+        w-4
+        rounded-full
+        bg-white
+      "
+          />
+
+          {/* CONTENT */}
+
+          <div className="relative z-10">
+            {/* ICON */}
+
+            <motion.div
+              animate={{
+                y: [0, -8, 0],
               }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="mb-7 text-5xl"
+            >
+              🚀
+            </motion.div>
+
+            {/* HEADING */}
+
+            <h2 className="text-4xl font-black md:text-5xl lg:text-6xl">
+              Ready To Build Your
+              <span className="mt-2 block text-cyan-100">Dream Portfolio?</span>
+            </h2>
+
+            {/* DESCRIPTION */}
+
+            <p
               className="
-        px-10
-        py-4
-        rounded-2xl
-        border-2
-        border-white
-        text-white
-        hover:bg-white
-        hover:text-cyan-600
-        transition
+          mx-auto
+          mt-7
+          max-w-3xl
+          text-base
+          leading-7
+          text-white/80
+          md:text-lg
         "
             >
-              👀 View Templates
-            </motion.button>
+              Showcase your skills, projects, education, certificates and resume
+              with a beautiful professional portfolio.
+            </p>
+
+            {/* BUTTONS */}
+
+            <div
+              className="
+          mt-10
+          flex
+          flex-wrap
+          justify-center
+          gap-5
+        "
+            >
+              {/* START BUILDING */}
+
+              <motion.button
+                type="button"
+                whileHover={{
+                  scale: 1.07,
+                  y: -3,
+                }}
+                whileTap={{
+                  scale: 0.96,
+                }}
+                onClick={() => {
+                  navigate("/portfolio-form");
+                }}
+                className="
+            rounded-2xl
+            bg-white
+            px-9
+            py-4
+            font-black
+            text-cyan-600
+            shadow-xl
+            transition-all
+            hover:shadow-2xl
+          "
+              >
+                🚀 Start Building
+              </motion.button>
+
+              {/* VIEW TEMPLATES */}
+
+              <motion.button
+                type="button"
+                whileHover={{
+                  scale: 1.07,
+                  y: -3,
+                }}
+                whileTap={{
+                  scale: 0.96,
+                }}
+                onClick={() => {
+                  document.getElementById("templates")?.scrollIntoView({
+                    behavior: "smooth",
+                  });
+                }}
+                className="
+            rounded-2xl
+            border-2
+            border-white/70
+            bg-white/5
+            px-9
+            py-4
+            font-black
+            text-white
+            backdrop-blur-xl
+            transition-all
+            hover:bg-white
+            hover:text-cyan-600
+          "
+              >
+                👀 View Templates
+              </motion.button>
+            </div>
           </div>
         </motion.div>
       </section>
       {/* ================= FOOTER ================= */}
 
-      <footer className="border-t border-slate-800">
-        <div className="max-w-7xl mx-auto px-6 py-16">
-          <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-10">
-            {/* Logo */}
+      <footer className="border-t border-slate-800 bg-slate-950">
+        <div className="mx-auto max-w-7xl px-6 py-16">
+          <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+            {/* BRAND */}
 
             <div>
-              <h2 className="text-3xl font-black text-cyan-400">
+              <motion.h2
+                whileHover={{
+                  x: 5,
+                }}
+                className="
+            cursor-default
+            text-3xl
+            font-black
+            text-cyan-400
+          "
+              >
                 CodeCareer AI
-              </h2>
+              </motion.h2>
 
-              <p className="text-gray-400 mt-5 leading-7">
+              <p
+                className="
+            mt-5
+            max-w-sm
+            leading-7
+            text-gray-400
+          "
+              >
                 Build modern developer portfolios with beautiful templates,
                 projects, skills, resume and professional animations.
               </p>
             </div>
 
-            {/* Quick Links */}
+            {/* QUICK LINKS */}
 
             <div>
-              <h3 className="text-xl font-bold mb-5">Quick Links</h3>
+              <h3 className="text-lg font-bold text-white">Quick Links</h3>
 
-              <ul className="space-y-3 text-gray-400">
-                <li className="hover:text-cyan-400 cursor-pointer transition">
+              <ul className="mt-5 space-y-3 text-gray-400">
+                <li
+                  onClick={() => {
+                    navigate("/");
+                  }}
+                  className="
+              cursor-pointer
+              transition
+              hover:translate-x-1
+              hover:text-cyan-400
+            "
+                >
                   Home
                 </li>
 
-                <li className="hover:text-cyan-400 cursor-pointer transition">
+                <li
+                  onClick={() => {
+                    document.getElementById("templates")?.scrollIntoView({
+                      behavior: "smooth",
+                    });
+                  }}
+                  className="
+              cursor-pointer
+              transition
+              hover:translate-x-1
+              hover:text-cyan-400
+            "
+                >
                   Portfolio Templates
                 </li>
 
-                <li className="hover:text-cyan-400 cursor-pointer transition">
+                <li
+                  onClick={() => {
+                    document.getElementById("portfolio-hero")?.scrollIntoView({
+                      behavior: "smooth",
+                    });
+                  }}
+                  className="
+              cursor-pointer
+              transition
+              hover:translate-x-1
+              hover:text-cyan-400
+            "
+                >
                   Features
                 </li>
 
-                <li className="hover:text-cyan-400 cursor-pointer transition">
+                <li
+                  onClick={() => {
+                    window.scrollTo({
+                      top: document.body.scrollHeight,
+                      behavior: "smooth",
+                    });
+                  }}
+                  className="
+              cursor-pointer
+              transition
+              hover:translate-x-1
+              hover:text-cyan-400
+            "
+                >
                   FAQ
                 </li>
               </ul>
             </div>
 
-            {/* Resources */}
+            {/* RESOURCES */}
 
             <div>
-              <h3 className="text-xl font-bold mb-5">Resources</h3>
+              <h3 className="text-lg font-bold text-white">Resources</h3>
 
-              <ul className="space-y-3 text-gray-400">
-                <li className="hover:text-cyan-400 cursor-pointer transition">
+              <ul className="mt-5 space-y-3 text-gray-400">
+                <li
+                  className="
+              cursor-pointer
+              transition
+              hover:text-cyan-400
+            "
+                >
                   Resume Builder
                 </li>
 
-                <li className="hover:text-cyan-400 cursor-pointer transition">
+                <li
+                  onClick={() => {
+                    navigate("/portfolio-form");
+                  }}
+                  className="
+              cursor-pointer
+              transition
+              hover:text-cyan-400
+            "
+                >
                   Portfolio Builder
                 </li>
 
-                <li className="hover:text-cyan-400 cursor-pointer transition">
+                <li
+                  className="
+              cursor-pointer
+              transition
+              hover:text-cyan-400
+            "
+                >
                   Career Roadmaps
                 </li>
 
-                <li className="hover:text-cyan-400 cursor-pointer transition">
+                <li
+                  className="
+              cursor-pointer
+              transition
+              hover:text-cyan-400
+            "
+                >
                   Interview Preparation
                 </li>
               </ul>
             </div>
 
-            {/* Contact */}
+            {/* CONTACT */}
 
             <div>
-              <h3 className="text-xl font-bold mb-5">Contact</h3>
+              <h3 className="text-lg font-bold text-white">Contact</h3>
 
-              <div className="space-y-3 text-gray-400">
+              <div className="mt-5 space-y-4 text-gray-400">
                 <p>📧 support@codecareerai.com</p>
 
                 <p>🌐 www.codecareerai.com</p>
@@ -1160,11 +2201,25 @@ function PortfolioBuilder() {
             </div>
           </div>
 
-          <div className="border-t border-slate-800 mt-12 pt-8 text-center text-gray-500">
+          {/* BOTTOM */}
+
+          <div
+            className="
+        mt-12
+        border-t
+        border-slate-800
+        pt-8
+        text-center
+        text-sm
+        text-gray-500
+      "
+          >
             © 2026 CodeCareer AI. All Rights Reserved.
           </div>
         </div>
       </footer>
+
+      {/* ================= CLOSE MAIN CONTAINER ================= */}
     </div>
   );
 }

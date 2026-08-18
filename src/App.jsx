@@ -42,12 +42,9 @@ function App() {
 
   return (
     <div
-      className={`
-        min-h-screen
-        transition-colors
-        duration-500
-        ${darkMode ? "bg-slate-950 text-white" : "bg-white text-slate-900"}
-      `}
+      className={`min-h-screen transition-colors duration-500 ${
+        darkMode ? "bg-[#020617] text-white" : "bg-slate-50 text-slate-900"
+      }`}
     >
       <BrowserRouter>
         <ScrollToTop />
