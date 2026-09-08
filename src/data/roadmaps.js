@@ -1,5 +1,5 @@
 import { careerDomainsKnowledge } from "../utils/aiEngine";
-import { languages } from "./Languages";
+import { languages } from "./languages";
 
 /* =========================================================
    CAREER PATH ROADMAPS

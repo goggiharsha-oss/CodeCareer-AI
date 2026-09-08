@@ -1,4 +1,4 @@
-import { languages } from "../data/Languages";
+import { languages } from "../data/languages";
 
 /* =========================================================
    CAREER DOMAINS KNOWLEDGE BASE

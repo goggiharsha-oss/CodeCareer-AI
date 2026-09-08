@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { languages } from "../data/Languages";
+import { languages } from "../data/languages";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
 import { playClick } from "../utils/playClick";
