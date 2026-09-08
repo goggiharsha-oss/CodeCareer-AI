@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Cropper from "react-easy-crop";
 import getCroppedImg from "../utils/cropImage";
+import FAQSection from "../components/FAQSection";
 
 const templates = [
   {
@@ -1247,22 +1248,24 @@ function PortfolioBuilder() {
                     scale: 0.97,
                   }}
                   onClick={() => {
-                    navigate("/portfolio-form");
+                    navigate("/portfolio-form", {
+                      state: { template: template.id },
+                    });
                   }}
-                  className="
+                  className={`
               mt-6
               w-full
               rounded-xl
               bg-gradient-to-r
-              from-cyan-400
-              to-blue-500
+              ${template.color}
               px-5
               py-3
               font-bold
               text-white
               transition
-              hover:shadow-[0_0_25px_rgba(34,211,238,0.25)]
-            "
+              hover:brightness-110
+              hover:shadow-lg
+            `}
                 >
                   Use This Template
                 </motion.button>
@@ -1542,237 +1545,8 @@ function PortfolioBuilder() {
           ))}
         </div>
       </section>
-      {/* ================= FAQ SECTION ================= */}
+      <FAQSection />
 
-      <section className="relative mx-auto max-w-6xl overflow-hidden px-6 py-28">
-        {/* BACKGROUND GLOW */}
-
-        <motion.div
-          animate={{
-            x: [0, 100, 0],
-            y: [0, -60, 0],
-            scale: [1, 1.15, 1],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="
-      pointer-events-none
-      absolute
-      -right-40
-      -top-32
-      h-[450px]
-      w-[450px]
-      rounded-full
-      bg-cyan-500/10
-      blur-[130px]
-    "
-        />
-
-        <motion.div
-          animate={{
-            x: [0, -80, 0],
-            y: [0, 50, 0],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 14,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="
-      pointer-events-none
-      absolute
-      -bottom-40
-      -left-40
-      h-[420px]
-      w-[420px]
-      rounded-full
-      bg-purple-600/10
-      blur-[130px]
-    "
-        />
-
-        {/* HEADING */}
-
-        <motion.div
-          initial={{
-            opacity: 0,
-            y: 40,
-          }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
-          viewport={{
-            once: true,
-          }}
-          transition={{
-            duration: 0.8,
-          }}
-          className="relative z-10 text-center"
-        >
-          <span className="font-semibold tracking-widest text-cyan-400">
-            FAQ
-          </span>
-
-          <h2 className="mt-4 text-4xl font-black md:text-5xl">
-            Frequently Asked
-            <span className="text-cyan-400"> Questions</span>
-          </h2>
-
-          <p className="mx-auto mt-5 max-w-2xl text-lg text-gray-400">
-            Everything you need to know about creating your professional
-            portfolio.
-          </p>
-        </motion.div>
-
-        {/* FAQ LIST */}
-
-        <div className="relative z-10 mt-16 space-y-5">
-          {[
-            {
-              question: "Is Portfolio Builder free?",
-              answer:
-                "Yes. You can create and customize your portfolio without any coding experience.",
-            },
-            {
-              question: "Can I upload my resume?",
-              answer:
-                "Yes. You can upload your resume and showcase it as part of your portfolio.",
-            },
-            {
-              question: "Can I add GitHub projects?",
-              answer:
-                "Yes. You can add your projects and provide links to your GitHub repositories.",
-            },
-            {
-              question: "Can I edit my portfolio later?",
-              answer:
-                "Yes. You can update your portfolio information whenever you want.",
-            },
-          ].map((item, index) => (
-            <motion.details
-              key={item.question}
-              initial={{
-                opacity: 0,
-                y: 30,
-              }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-              }}
-              viewport={{
-                once: true,
-              }}
-              transition={{
-                delay: index * 0.12,
-                duration: 0.5,
-              }}
-              className="
-          group
-          relative
-          overflow-hidden
-          rounded-[24px]
-          border
-          border-white/10
-          bg-white/[0.035]
-          backdrop-blur-2xl
-          transition-all
-          duration-500
-          hover:border-cyan-400/30
-          hover:bg-white/[0.055]
-          open:border-cyan-400/40
-          open:shadow-[0_15px_50px_rgba(34,211,238,0.08)]
-        "
-            >
-              {/* QUESTION */}
-
-              <summary
-                className="
-            relative
-            z-10
-            flex
-            cursor-pointer
-            list-none
-            items-center
-            justify-between
-            gap-5
-            px-6
-            py-6
-            md:px-8
-            md:py-7
-          "
-              >
-                <div className="flex items-center gap-4">
-                  {/* NUMBER */}
-
-                  <span
-                    className="
-                flex
-                h-10
-                w-10
-                shrink-0
-                items-center
-                justify-center
-                rounded-xl
-                border
-                border-cyan-400/20
-                bg-cyan-400/10
-                text-sm
-                font-bold
-                text-cyan-400
-              "
-                  >
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-
-                  <h3 className="text-base font-bold text-white md:text-lg">
-                    {item.question}
-                  </h3>
-                </div>
-
-                {/* PLUS */}
-
-                <span
-                  className="
-              shrink-0
-              text-2xl
-              text-cyan-400
-              transition-transform
-              duration-300
-              group-open:rotate-45
-            "
-                >
-                  +
-                </span>
-              </summary>
-
-              {/* ANSWER */}
-
-              <div
-                className="
-            relative
-            z-10
-            border-t
-            border-white/10
-            px-6
-            pb-6
-            pt-5
-            md:px-8
-            md:pb-7
-          "
-              >
-                <p className="max-w-4xl leading-7 text-gray-400 md:pl-14">
-                  {item.answer}
-                </p>
-              </div>
-            </motion.details>
-          ))}
-        </div>
-      </section>
       {/* ================= FINAL CTA ================= */}
 
       <section className="relative mx-auto max-w-7xl overflow-hidden px-6 pb-24 pt-10">
@@ -2118,8 +1892,7 @@ function PortfolioBuilder() {
 
                 <li
                   onClick={() => {
-                    window.scrollTo({
-                      top: document.body.scrollHeight,
+                    document.getElementById("faq")?.scrollIntoView({
                       behavior: "smooth",
                     });
                   }}

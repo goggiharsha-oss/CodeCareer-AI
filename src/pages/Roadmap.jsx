@@ -57,6 +57,32 @@ const roadmapData = {
       "Real Data Projects",
     ],
   },
+
+  "Cloud Computing": {
+    language: "Python",
+    link: "https://docs.aws.amazon.com/",
+    steps: [
+      "Cloud Fundamentals",
+      "Linux & Networking",
+      "AWS / Azure Basics",
+      "Docker & Containers",
+      "Kubernetes",
+      "CI/CD Pipelines",
+    ],
+  },
+
+  "Mobile Development": {
+    language: "Kotlin",
+    link: "https://developer.android.com/docs",
+    steps: [
+      "Programming Basics",
+      "UI/UX for Mobile",
+      "Android (Kotlin) / Flutter",
+      "APIs & Databases",
+      "App Testing",
+      "Publish to Play Store",
+    ],
+  },
 };
 
 

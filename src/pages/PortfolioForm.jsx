@@ -17,6 +17,7 @@ function PortfolioForm() {
   // ================= FORM DATA =================
 
   const [formData, setFormData] = useState({
+    theme: "cyan",
     fullName: "",
     title: "",
     email: "",
@@ -169,6 +170,14 @@ function PortfolioForm() {
       return "bg-gradient-to-br from-cyan-950 to-slate-950";
     }
 
+    if (template === "cloud") {
+      return "bg-gradient-to-br from-indigo-950 to-slate-950";
+    }
+
+    if (template === "mobile") {
+      return "bg-gradient-to-br from-emerald-950 to-slate-950";
+    }
+
     return "bg-slate-950";
   };
 
@@ -187,22 +196,146 @@ function PortfolioForm() {
       return "border-blue-500";
     }
 
+    if (template === "cloud") {
+      return "border-indigo-500";
+    }
+
+    if (template === "mobile") {
+      return "border-emerald-500";
+    }
+
     return "border-cyan-500";
   };
+
+  // ================= BACKGROUND ANIMATIONS =================
+
+  const getAnimationColor = () => {
+    if (template === "cyber") return "bg-green-500";
+    if (template === "ai") return "bg-purple-500";
+    if (template === "fullstack") return "bg-blue-500";
+    if (template === "cloud") return "bg-indigo-500";
+    if (template === "mobile") return "bg-emerald-500";
+    return "bg-cyan-500";
+  };
+
+  const animationColor = getAnimationColor();
+
+  const floatingParticles = Array.from({ length: 18 });
 
   // ================= PAGE =================
 
   return (
     <div
       className={`
+        relative
         min-h-screen
+        overflow-hidden
         text-white
         ${getBackground()}
       `}
     >
+      {/* ================= ANIMATED BACKGROUND ================= */}
+
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Glow 1 */}
+        <motion.div
+          className={`absolute w-96 h-96 rounded-full blur-3xl opacity-20 ${animationColor}`}
+          animate={{
+            x: ["-10%", "70%", "-10%"],
+            y: ["10%", "60%", "10%"],
+            scale: [1, 1.25, 1],
+          }}
+          transition={{
+            duration: 18,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        {/* Glow 2 */}
+        <motion.div
+          className={`absolute right-0 bottom-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-15 ${animationColor}`}
+          animate={{
+            x: ["10%", "-50%", "10%"],
+            y: ["10%", "-20%", "10%"],
+            scale: [1.2, 0.9, 1.2],
+          }}
+          transition={{
+            duration: 22,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        {/* Rotating Light Ring */}
+        <motion.div
+          className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
+    w-[650px] h-[650px]
+    rounded-full
+    border
+    border-white/5
+  `}
+          animate={{
+            rotate: 360,
+            scale: [1, 1.05, 1],
+          }}
+          transition={{
+            rotate: {
+              duration: 30,
+              repeat: Infinity,
+              ease: "linear",
+            },
+            scale: {
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+            },
+          }}
+        />
+
+        {/* Floating Particles */}
+        {floatingParticles.map((_, index) => (
+          <motion.span
+            key={index}
+            className={`absolute w-1 h-1 rounded-full ${animationColor} opacity-40`}
+            style={{
+              left: `${(index * 37) % 100}%`,
+              top: `${(index * 53) % 100}%`,
+            }}
+            animate={{
+              y: [0, -80, 0],
+              opacity: [0.15, 0.7, 0.15],
+              scale: [1, 1.8, 1],
+            }}
+            transition={{
+              duration: 4 + (index % 4),
+              repeat: Infinity,
+              delay: index * 0.25,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+
+        {/* Animated Grid */}
+        <motion.div
+          className="absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px)",
+            backgroundSize: "80px 80px",
+          }}
+          animate={{
+            backgroundPosition: ["0px 0px", "80px 80px"],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+      </div>
       {/* ================= MAIN CONTAINER ================= */}
 
-      <div className="max-w-5xl mx-auto px-6 py-12">
+      <div className="relative z-10 max-w-5xl mx-auto px-6 py-12">
         {/* ================= TOP HEADER ================= */}
 
         <motion.div
@@ -306,7 +439,11 @@ function PortfolioForm() {
                       ? "bg-cyan-950/40"
                       : template === "fullstack"
                         ? "bg-blue-950/40"
-                        : "bg-slate-900"
+                      : template === "cloud"
+                        ? "bg-indigo-950/40"
+                        : template === "mobile"
+                          ? "bg-emerald-950/40"
+                            : "bg-slate-900"
               }
             `}
           >
@@ -755,7 +892,11 @@ function PortfolioForm() {
                       ? "bg-cyan-950/40"
                       : template === "fullstack"
                         ? "bg-blue-950/40"
-                        : "bg-slate-900"
+                      : template === "cloud"
+                        ? "bg-indigo-950/40"
+                        : template === "mobile"
+                          ? "bg-emerald-950/40"
+                            : "bg-slate-900"
               }
             `}
           >
@@ -961,7 +1102,11 @@ function PortfolioForm() {
                       ? "bg-cyan-950/40"
                       : template === "fullstack"
                         ? "bg-blue-950/40"
-                        : "bg-slate-900"
+                      : template === "cloud"
+                        ? "bg-indigo-950/40"
+                        : template === "mobile"
+                          ? "bg-emerald-950/40"
+                            : "bg-slate-900"
               }
             `}
           >
@@ -1349,7 +1494,8 @@ function PortfolioForm() {
                   type="radio"
                   name="theme"
                   value="cyan"
-                  defaultChecked
+                  checked={formData.theme === "cyan"}
+                  onChange={handleChange}
                   className="hidden peer"
                 />
 
@@ -1388,6 +1534,8 @@ function PortfolioForm() {
                   type="radio"
                   name="theme"
                   value="purple"
+                  checked={formData.theme === "purple"}
+                  onChange={handleChange}
                   className="hidden peer"
                 />
 
@@ -1428,6 +1576,8 @@ function PortfolioForm() {
                   type="radio"
                   name="theme"
                   value="green"
+                  checked={formData.theme === "green"}
+                  onChange={handleChange}
                   className="hidden peer"
                 />
 

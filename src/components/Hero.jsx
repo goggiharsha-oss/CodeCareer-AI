@@ -3,33 +3,10 @@ import { useTheme } from "../context/ThemeContext";
 import { playClick } from "../utils/playClick";
 import { motion } from "framer-motion";
 
-const pills = [
-  {
-    text: "🐍 Python",
-    className: "top-[10%] left-[2%] text-cyan-400",
-  },
-  {
-    text: "☕ Java",
-    className: "top-[18%] right-[2%] text-yellow-400",
-  },
-  {
-    text: "⚛️ React",
-    className: "bottom-[18%] left-[4%] text-sky-400",
-  },
-  {
-    text: "🟨 JavaScript",
-    className: "top-[3%] left-1/2 -translate-x-1/2 text-yellow-300",
-  },
-  {
-    text: "⚙️ C++",
-    className: "bottom-[7%] right-[5%] text-orange-400",
-  },
-];
-
 const floatingIcons = [
-  { icon: "</>", top: "15%", left: "4%", delay: 0 },
+  { icon: "</>", top: "10%", left: "4%", delay: 0 },
   { icon: "{ }", top: "25%", right: "4%", delay: 1 },
-  { icon: "⚛", bottom: "22%", left: "7%", delay: 2 },
+  { icon: "⚛", bottom: "10%", left: "7%", delay: 2 },
   { icon: "🐍", bottom: "10%", right: "12%", delay: 3 },
   { icon: "☕", top: "52%", right: "3%", delay: 4 },
   { icon: "💻", top: "42%", left: "2%", delay: 5 },
@@ -166,27 +143,6 @@ export default function Hero({ search, setSearch }) {
           className="pointer-events-none absolute hidden select-none text-6xl lg:block"
         >
           {item.icon}
-        </motion.div>
-      ))}
-
-      {/* =====================================================
-          TECHNOLOGY PILLS
-      ===================================================== */}
-
-      {pills.map((pill, index) => (
-        <motion.div
-          key={index}
-          animate={{
-            y: [0, -12, 0],
-          }}
-          transition={{
-            duration: 3 + index * 0.3,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className={`absolute hidden rounded-full border border-white/10 bg-white/[0.05] px-5 py-2 text-sm shadow-[0_0_25px_rgba(34,211,238,0.08)] backdrop-blur-xl md:block ${pill.className}`}
-        >
-          {pill.text}
         </motion.div>
       ))}
 

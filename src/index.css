@@ -6,3 +6,36 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+/* =========================================================
+   SHARED "ASK AI" TYPING DOTS
+   Used by LanguageCard & CareerDomains AI answer panels
+========================================================= */
+
+.ai-card-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.85;
+  animation: aiCardDotBounce 1s infinite ease-in-out;
+}
+
+.ai-card-dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.ai-card-dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes aiCardDotBounce {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}

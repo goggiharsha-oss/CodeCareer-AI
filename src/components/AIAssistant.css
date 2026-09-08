@@ -7,37 +7,123 @@
   height: 70px;
 
   border-radius: 50%;
-  border: none;
+  border: 1px solid rgba(103, 232, 249, 0.6);
 
-  background: linear-gradient(
-    135deg,
-    #06b6d4,
-    #2563eb
-  );
+  background: linear-gradient(135deg, #06b6d4, #2563eb);
 
   color: white;
   font-size: 32px;
 
   cursor: pointer;
 
-  box-shadow:
-    0 0 30px rgba(6,182,212,0.5);
-
-  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   z-index: 1000;
+
+  box-shadow: 0 0 25px rgba(6, 182, 212, 0.45);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+
+  overflow: visible;
 }
 
+/* =========================================================
+   MOVING ENERGY SCAN
+========================================================= */
+
+.ai-button::before {
+  content: "";
+
+  position: absolute;
+
+  inset: -5px;
+
+  border-radius: 50%;
+
+  border: 2px solid transparent;
+
+  border-top-color: #67e8f9;
+  border-right-color: rgba(255, 255, 255, 0.4);
+
+  animation: aiScan 2s linear infinite;
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   OUTER ENERGY PULSE
+========================================================= */
+
+.ai-button::after {
+  content: "";
+
+  position: absolute;
+
+  inset: -10px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(34, 211, 238, 0.25);
+
+  animation: aiPulse 2.5s ease-in-out infinite;
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   SCAN ROTATION
+========================================================= */
+
+@keyframes aiScan {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   OUTER PULSE
+========================================================= */
+
+@keyframes aiPulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.2;
+  }
+
+  50% {
+    transform: scale(1.08);
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: scale(0.9);
+    opacity: 0.2;
+  }
+}
+
+/* =========================================================
+   BUTTON HOVER
+========================================================= */
 
 .ai-button:hover {
-  transform: scale(1.12);
+  transform: scale(1.1);
+
+  box-shadow: 0 0 35px rgba(6, 182, 212, 0.7);
 }
 
-
-
+/* =========================================================
+   AI POPUP
+========================================================= */
 
 .ai-popup {
-
   position: fixed;
 
   right: 25px;
@@ -53,332 +139,314 @@
   overflow: hidden;
 
   display: flex;
+  flex-direction: column;
+
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+
+  z-index: 1000;
+}
+
+/* =========================================================
+   AI HEADER
+========================================================= */
+
+.ai-header {
+  height: 65px;
+
+  flex-shrink: 0;
+
+  background: linear-gradient(135deg, #06b6d4, #2563eb);
+
+  color: white;
+
+  padding: 15px 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* =========================================================
+   CLOSE BUTTON
+========================================================= */
+
+.close-btn {
+  background: rgba(255, 255, 255, 0.2);
+
+  border: none;
+
+  color: white;
+
+  width: 32px;
+  height: 32px;
+
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  transition: 0.3s ease;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+
+  transform: scale(1.08);
+}
+
+/* =========================================================
+   AI BODY
+========================================================= */
+
+.ai-body {
+  flex: 1;
+
+  min-height: 0;
+
+  display: flex;
 
   flex-direction: column;
 
-  box-shadow:
-  0 25px 60px rgba(0,0,0,0.3);
+  padding: 15px;
 
-  z-index:1000;
-
+  overflow: hidden;
 }
 
-
-
-
-
-.ai-header {
-
-  height:65px;
-
-  flex-shrink:0;
-
-  background:
-  linear-gradient(
-    135deg,
-    #06b6d4,
-    #2563eb
-  );
-
-  color:white;
-
-  padding:15px 20px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  font-size:20px;
-
-  font-weight:bold;
-
-}
-
-
-
-
-
-.close-btn {
-
-  background:rgba(255,255,255,0.2);
-
-  border:none;
-
-  color:white;
-
-  width:32px;
-
-  height:32px;
-
-  border-radius:50%;
-
-  cursor:pointer;
-
-}
-
-
-
-
-
-.ai-body {
-
-  flex:1;
-
-  min-height:0;
-
-  display:flex;
-
-  flex-direction:column;
-
-  padding:15px;
-
-  overflow:hidden;
-
-}
-
-
-
-
+/* =========================================================
+   MESSAGES
+========================================================= */
 
 .messages {
+  flex: 1;
 
-  flex:1;
+  min-height: 0;
 
-  min-height:0;
+  overflow-y: auto;
+  overflow-x: hidden;
 
-  overflow-y:auto;
+  display: flex;
 
-  overflow-x:hidden;
+  flex-direction: column;
 
-  display:flex;
+  gap: 12px;
 
-  flex-direction:column;
-
-  gap:12px;
-
-  padding-right:8px;
-
+  padding-right: 8px;
 }
 
-
-
-
+/* =========================================================
+   AI MESSAGE
+========================================================= */
 
 .ai-msg {
+  background: #f1f5f9;
 
-  background:#f1f5f9;
+  color: #0f172a;
 
-  color:#0f172a;
+  padding: 12px 15px;
 
-  padding:12px 15px;
+  border-radius: 18px 18px 18px 5px;
 
-  border-radius:18px 18px 18px 5px;
+  max-width: 85%;
 
-  max-width:85%;
+  white-space: pre-line;
 
-  white-space:pre-line;
-
-  font-size:14px;
-
+  font-size: 14px;
 }
 
-
-
-
+/* =========================================================
+   USER MESSAGE
+========================================================= */
 
 .user-msg {
+  background: linear-gradient(135deg, #06b6d4, #2563eb);
 
-  background:
-  linear-gradient(
-    135deg,
-    #06b6d4,
-    #2563eb
-  );
+  color: white;
 
-  color:white;
+  padding: 12px 15px;
 
-  padding:12px 15px;
+  border-radius: 18px 18px 5px 18px;
 
-  border-radius:18px 18px 5px 18px;
+  max-width: 85%;
 
-  max-width:85%;
+  align-self: flex-end;
 
-  align-self:flex-end;
+  white-space: pre-line;
 
-  white-space:pre-line;
-
-  font-size:14px;
-
+  font-size: 14px;
 }
 
-
-
-
+/* =========================================================
+   QUICK QUESTIONS
+========================================================= */
 
 .quick-questions {
+  flex-shrink: 0;
 
-  flex-shrink:0;
+  display: flex;
 
-  display:flex;
+  gap: 8px;
 
-  gap:8px;
+  flex-wrap: wrap;
 
-  flex-wrap:wrap;
+  margin-top: 12px;
 
-  margin-top:12px;
-
-  margin-bottom:12px;
-
+  margin-bottom: 12px;
 }
 
-
-
-
+/* =========================================================
+   QUICK QUESTION BUTTONS
+========================================================= */
 
 .quick-questions button {
+  border: none;
 
-  border:none;
+  background: #cffafe;
 
-  background:#cffafe;
+  color: #0891b2;
 
-  color:#0891b2;
+  padding: 8px 12px;
 
-  padding:8px 12px;
+  border-radius: 20px;
 
-  border-radius:20px;
+  font-size: 13px;
 
-  font-size:13px;
+  font-weight: 600;
 
-  font-weight:600;
+  cursor: pointer;
 
-  cursor:pointer;
-
-  transition:0.3s;
-
+  transition: 0.3s ease;
 }
-
-
 
 .quick-questions button:hover {
+  background: #06b6d4;
 
-  background:#06b6d4;
+  color: white;
 
-  color:white;
-
+  transform: translateY(-2px);
 }
 
-
-
-
+/* =========================================================
+   INPUT AREA
+========================================================= */
 
 .input-area {
+  flex-shrink: 0;
 
-  flex-shrink:0;
+  display: flex;
 
-  display:flex;
-
-  gap:10px;
-
+  gap: 10px;
 }
 
-
-
-
+/* =========================================================
+   INPUT
+========================================================= */
 
 .input-area input {
+  flex: 1;
 
-  flex:1;
+  padding: 12px 15px;
 
-  padding:12px 15px;
+  border-radius: 15px;
 
-  border-radius:15px;
+  border: 1px solid #cbd5e1;
 
-  border:1px solid #cbd5e1;
+  outline: none;
 
-  outline:none;
+  background: white;
 
-  background:white;
+  color: black;
 
-  color:black;
+  font-size: 15px;
 
-  font-size:15px;
-
+  transition: 0.3s ease;
 }
 
+.input-area input:focus {
+  border-color: #06b6d4;
 
-
-
+  box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+}
 
 .input-area input::placeholder {
-
-  color:#64748b;
-
+  color: #64748b;
 }
 
-
-
-
+/* =========================================================
+   SEND BUTTON
+========================================================= */
 
 .input-area button {
+  padding: 12px 18px;
 
-  padding:12px 18px;
+  border: none;
 
-  border:none;
+  border-radius: 15px;
 
-  border-radius:15px;
+  background: linear-gradient(135deg, #06b6d4, #2563eb);
 
-  background:
-  linear-gradient(
-    135deg,
-    #06b6d4,
-    #2563eb
-  );
+  color: white;
 
-  color:white;
+  font-weight: bold;
 
-  font-weight:bold;
+  cursor: pointer;
 
-  cursor:pointer;
-
+  transition: 0.3s ease;
 }
 
+.input-area button:hover {
+  transform: scale(1.05);
 
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.35);
+}
 
-
+/* =========================================================
+   MESSAGE SCROLLBAR
+========================================================= */
 
 .messages::-webkit-scrollbar {
-
-  width:6px;
-
+  width: 6px;
 }
 
+.messages::-webkit-scrollbar-track {
+  background: transparent;
+}
 
 .messages::-webkit-scrollbar-thumb {
+  background: #06b6d4;
 
-  background:#06b6d4;
-
-  border-radius:10px;
-
+  border-radius: 10px;
 }
 
+.messages::-webkit-scrollbar-thumb:hover {
+  background: #0891b2;
+}
 
+/* =========================================================
+   MOBILE
+========================================================= */
 
+@media (max-width: 500px) {
+  .ai-popup {
+    right: 10px;
 
+    left: 10px;
 
-@media(max-width:500px){
+    width: auto;
 
-  .ai-popup{
-
-    right:10px;
-
-    left:10px;
-
-    width:auto;
-
-    height:500px;
-
+    height: 500px;
   }
 
+  .ai-button {
+    right: 18px;
+
+    bottom: 70px;
+
+    width: 62px;
+
+    height: 62px;
+
+    font-size: 28px;
+  }
 }

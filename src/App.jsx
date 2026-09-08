@@ -24,6 +24,8 @@ import CloudComputing from "./pages/CloudComputing";
 import MobileDevelopment from "./pages/MobileDevelopment";
 
 import NotFound from "./pages/NotFound";
+import AIChat from "./pages/AIChat";
+import Login from "./pages/Login";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -84,6 +86,10 @@ function App() {
           <Route path="/career-quiz" element={<CareerQuiz />} />
 
           <Route path="/portfolio-builder" element={<PortfolioBuilder />} />
+
+          <Route path="/ai-chat" element={<AIChat />} />
+
+          <Route path="/login" element={<Login />} />
 
           <Route path="/portfolio-form" element={<PortfolioForm />} />
 

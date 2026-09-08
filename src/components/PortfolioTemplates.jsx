@@ -132,17 +132,18 @@ export default function PortfolioTemplates() {
               </p>
 
               <button
-                className="
+                className={`
                 mt-6
                 w-full
                 py-3
                 rounded-xl
-                bg-cyan-500
-                hover:bg-cyan-400
-                text-black
+                bg-gradient-to-r
+                ${template.color}
+                text-white
                 font-bold
                 transition
-                "
+                hover:brightness-110
+                `}
               >
                 Use Template
               </button>

@@ -1,51 +1,35 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { playClick } from "../utils/playClick";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Bot, Sparkles } from "lucide-react";
+import { careerDomainsKnowledge, getCareerAIReply } from "../utils/aiEngine";
 
 function CareerDomains({ search = "" }) {
   const navigate = useNavigate();
   const { darkMode } = useTheme();
 
-  const domains = [
-    {
-      icon: "🌐",
-      name: "Web Development",
-      skills: "HTML, CSS, JavaScript, React, Node.js",
-      route: "/web-development",
-    },
-    {
-      icon: "🔐",
-      name: "Cyber Security",
-      skills: "Networking, Linux, Ethical Hacking, Security",
-      route: "/cyber-security",
-    },
-    {
-      icon: "🤖",
-      name: "Artificial Intelligence",
-      skills: "Python, Machine Learning, Deep Learning",
-      route: "/artificial-intelligence",
-    },
-    {
-      icon: "📊",
-      name: "Data Science",
-      skills: "Python, SQL, Statistics, Analytics",
-      route: "/data-science",
-    },
-    {
-      icon: "☁️",
-      name: "Cloud Computing",
-      skills: "AWS, Azure, DevOps, Docker",
-      route: "/cloud-computing",
-    },
-    {
-      icon: "📱",
-      name: "Mobile Development",
-      skills: "Android, Flutter, React Native",
-      route: "/mobile-development",
-    },
-  ];
+  const [askingName, setAskingName] = useState(null);
+  const [thinkingName, setThinkingName] = useState(null);
+
+  const domains = careerDomainsKnowledge;
+
+  const handleAskAI = (domain) => {
+    playClick();
+
+    if (askingName === domain.name) {
+      setAskingName(null);
+      return;
+    }
+
+    setAskingName(domain.name);
+    setThinkingName(domain.name);
+
+    setTimeout(() => {
+      setThinkingName(null);
+    }, 550);
+  };
 
   const filteredDomains = domains.filter(
     (domain) =>
@@ -68,7 +52,8 @@ function CareerDomains({ search = "" }) {
           PREMIUM ANIMATED BACKGROUND
       ===================================================== */}
 
-      {/* Large Aurora Glow - Left */}
+      {/* LEFT AURORA */}
+
       <motion.div
         animate={{
           x: [0, 80, -30, 0],
@@ -93,7 +78,8 @@ function CareerDomains({ search = "" }) {
         "
       />
 
-      {/* Large Aurora Glow - Right */}
+      {/* RIGHT AURORA */}
+
       <motion.div
         animate={{
           x: [0, -70, 40, 0],
@@ -118,7 +104,8 @@ function CareerDomains({ search = "" }) {
         "
       />
 
-      {/* Center Blue Atmosphere */}
+      {/* CENTER BLUE ATMOSPHERE */}
+
       <motion.div
         animate={{
           scale: [1, 1.25, 1],
@@ -148,7 +135,6 @@ function CareerDomains({ search = "" }) {
           FLOATING ABSTRACT SHAPES
       ===================================================== */}
 
-      {/* Shape 1 */}
       <motion.div
         animate={{
           rotate: [0, 180, 360],
@@ -170,11 +156,9 @@ function CareerDomains({ search = "" }) {
           border
           border-cyan-400/10
           bg-cyan-400/[0.02]
-          blur-[1px]
         "
       />
 
-      {/* Shape 2 */}
       <motion.div
         animate={{
           rotate: [360, 180, 0],
@@ -199,7 +183,6 @@ function CareerDomains({ search = "" }) {
         "
       />
 
-      {/* Shape 3 */}
       <motion.div
         animate={{
           rotate: [0, -120, -240, -360],
@@ -271,9 +254,7 @@ function CareerDomains({ search = "" }) {
         }}
       />
 
-      {/* =====================================================
-          TOP FADE
-      ===================================================== */}
+      {/* TOP FADE */}
 
       <div
         className="
@@ -294,7 +275,8 @@ function CareerDomains({ search = "" }) {
       ===================================================== */}
 
       <div className="relative z-10 mx-auto max-w-7xl">
-        {/* Heading */}
+        {/* HEADING */}
+
         <motion.div
           initial={{
             opacity: 0,
@@ -422,7 +404,7 @@ function CareerDomains({ search = "" }) {
                 "
               />
 
-              {/* Second Aura */}
+              {/* SECOND AURA */}
 
               <motion.div
                 animate={{
@@ -449,9 +431,19 @@ function CareerDomains({ search = "" }) {
 
               {/* =================================================
                   LARGE BACKGROUND ICON
+                  CARD HOVER -> ROTATE
               ================================================= */}
 
               <motion.div
+                className="
+                  pointer-events-none
+                  absolute
+                  -right-7
+                  -top-9
+                  select-none
+                  text-[150px]
+                  opacity-[0.055]
+                "
                 animate={{
                   y: [0, -15, 0],
                   rotate: [0, 5, -5, 0],
@@ -462,37 +454,16 @@ function CareerDomains({ search = "" }) {
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
-                className="
-                  pointer-events-none
-                  absolute
-                  -right-7
-                  -top-9
-                  select-none
-                  text-[150px]
-                  opacity-[0.055]
-                  transition-all
-                  duration-700
-                  group-hover:scale-125
-                  group-hover:opacity-[0.11]
-                "
               >
                 {domain.icon}
               </motion.div>
 
               {/* =================================================
-                  ICON
+                  MAIN ICON
+                  TOUCH/HOVER ANYWHERE ON CARD -> ROTATE
               ================================================= */}
 
               <motion.div
-                whileHover={{
-                  rotate: 8,
-                  scale: 1.12,
-                  y: -4,
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 300,
-                }}
                 className="
                   relative
                   z-10
@@ -513,6 +484,8 @@ function CareerDomains({ search = "" }) {
                   transition-all
                   duration-500
                   group-hover:shadow-[0_15px_45px_rgba(34,211,238,0.45)]
+                  group-hover:rotate-[360deg]
+                  group-hover:scale-110
                 "
               >
                 {domain.icon}
@@ -550,58 +523,132 @@ function CareerDomains({ search = "" }) {
               </p>
 
               {/* =================================================
-                  BUTTON
+                  ASK AI PANEL
               ================================================= */}
 
-              <motion.button
-                whileHover={{
-                  scale: 1.03,
-                }}
-                whileTap={{
-                  scale: 0.97,
-                }}
-                onClick={() => {
-                  playClick();
-                  navigate(domain.route);
-                }}
-                className="
-                  relative
-                  z-10
-                  mt-8
-                  flex
-                  w-full
-                  items-center
-                  justify-center
-                  gap-2
-                  overflow-hidden
-                  rounded-2xl
-                  bg-gradient-to-r
-                  from-cyan-400
-                  via-blue-500
-                  to-purple-600
-                  py-3.5
-                  font-bold
-                  text-white
-                  shadow-lg
-                  shadow-cyan-500/20
-                  transition-all
-                  duration-300
-                  hover:shadow-[0_10px_35px_rgba(34,211,238,0.4)]
-                "
-              >
-                Explore Career
-                <motion.span
-                  animate={{
-                    x: [0, 4, 0],
+              <AnimatePresence>
+                {askingName === domain.name && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                    animate={{ opacity: 1, height: "auto", marginTop: 16 }}
+                    exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                    transition={{ duration: 0.35, ease: "easeInOut" }}
+                    className={`relative z-10 overflow-hidden rounded-2xl border backdrop-blur-xl ${
+                      darkMode
+                        ? "border-cyan-400/25 bg-cyan-500/[0.06]"
+                        : "border-cyan-300 bg-cyan-50/80"
+                    }`}
+                  >
+                    <div className="flex items-center gap-2 border-b border-white/10 px-4 py-2.5">
+                      <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-cyan-400 to-violet-500 text-white">
+                        <Bot size={13} />
+                      </span>
+                      <span
+                        className={`text-xs font-bold tracking-wide ${
+                          darkMode ? "text-cyan-200" : "text-cyan-700"
+                        }`}
+                      >
+                        CodeCareer AI
+                      </span>
+                    </div>
+
+                    <div className="px-4 py-3.5">
+                      {thinkingName === domain.name ? (
+                        <div className="flex gap-1.5 py-1 text-cyan-400">
+                          <span className="ai-card-dot" />
+                          <span className="ai-card-dot" />
+                          <span className="ai-card-dot" />
+                        </div>
+                      ) : (
+                        <p
+                          className={`whitespace-pre-line text-sm leading-relaxed ${
+                            darkMode ? "text-gray-200" : "text-slate-700"
+                          }`}
+                        >
+                          {getCareerAIReply(domain.name)}
+                        </p>
+                      )}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* =================================================
+                  BUTTONS
+              ================================================= */}
+
+              <div className="relative z-10 mt-8 flex gap-2.5">
+                <motion.button
+                  whileHover={{
+                    scale: 1.03,
                   }}
-                  transition={{
-                    duration: 1.5,
-                    repeat: Infinity,
+                  whileTap={{
+                    scale: 0.97,
                   }}
+                  onClick={() => handleAskAI(domain)}
+                  className={`flex flex-1 items-center justify-center gap-1.5 rounded-2xl border py-3.5 text-sm font-bold transition-all duration-300 ${
+                    askingName === domain.name
+                      ? "border-transparent bg-gradient-to-r from-cyan-400 to-violet-500 text-white shadow-[0_10px_30px_rgba(34,211,238,0.35)]"
+                      : darkMode
+                        ? "border-cyan-400/30 text-cyan-200 hover:bg-cyan-500/10"
+                        : "border-cyan-300 text-cyan-700 hover:bg-cyan-50"
+                  }`}
                 >
-                  <ArrowRight size={18} />
-                </motion.span>
-              </motion.button>
+                  <Bot size={16} />
+                  Ask AI
+                  <Sparkles size={12} className="opacity-70" />
+                </motion.button>
+
+                <motion.button
+                  whileHover={{
+                    scale: 1.03,
+                  }}
+                  whileTap={{
+                    scale: 0.97,
+                  }}
+                  onClick={() => {
+                    playClick();
+                    navigate(domain.route);
+                  }}
+                  className="
+                    relative
+                    z-10
+                    flex
+                    flex-[1.4]
+                    items-center
+                    justify-center
+                    gap-2
+                    overflow-hidden
+                    rounded-2xl
+                    bg-gradient-to-r
+                    from-cyan-400
+                    via-blue-500
+                    to-purple-600
+                    py-3.5
+                    text-sm
+                    font-bold
+                    text-white
+                    shadow-lg
+                    shadow-cyan-500/20
+                    transition-all
+                    duration-300
+                    hover:shadow-[0_10px_35px_rgba(34,211,238,0.4)]
+                  "
+                >
+                  Explore Career
+                  <motion.span
+                    animate={{
+                      x: [0, 4, 0],
+                    }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                    }}
+                  >
+                    <ArrowRight size={18} />
+                  </motion.span>
+                </motion.button>
+              </div>
             </motion.div>
           ))}
         </div>

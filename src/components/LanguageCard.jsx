@@ -1,12 +1,34 @@
+import { useState } from "react";
 import { languages } from "../data/Languages";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
 import { playClick } from "../utils/playClick";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { Bot, Sparkles } from "lucide-react";
+import { getLanguageAIReply } from "../utils/aiEngine";
 
 function LanguageCard({ search = "" }) {
   const navigate = useNavigate();
   const { darkMode } = useTheme();
+
+  const [askingId, setAskingId] = useState(null);
+  const [thinkingId, setThinkingId] = useState(null);
+
+  const handleAskAI = (lang) => {
+    playClick();
+
+    if (askingId === lang.id) {
+      setAskingId(null);
+      return;
+    }
+
+    setAskingId(lang.id);
+    setThinkingId(lang.id);
+
+    setTimeout(() => {
+      setThinkingId(null);
+    }, 550);
+  };
 
   const searchText = search.toLowerCase().trim();
 
@@ -49,15 +71,14 @@ function LanguageCard({ search = "" }) {
   return (
     <section
       id="languages"
-      className={`relative overflow-hidden py-24 px-6 transition-colors duration-700 ${
+      className={`relative overflow-hidden px-6 py-24 transition-colors duration-700 ${
         darkMode ? "bg-[#020617] text-white" : "bg-slate-50 text-slate-900"
       }`}
     >
       {/* =====================================================
-          PREMIUM ANIMATED BACKGROUND
+          BACKGROUND GLOW
       ===================================================== */}
 
-      {/* CYAN LIGHT MASS */}
       <motion.div
         animate={{
           x: [-180, 120, -80, -180],
@@ -83,7 +104,6 @@ function LanguageCard({ search = "" }) {
         "
       />
 
-      {/* VIOLET LIGHT MASS */}
       <motion.div
         animate={{
           x: [100, -100, 80, 100],
@@ -99,7 +119,7 @@ function LanguageCard({ search = "" }) {
         className="
           pointer-events-none
           absolute
-          right-[0%]
+          right-0
           top-[20%]
           h-[480px]
           w-[480px]
@@ -109,7 +129,6 @@ function LanguageCard({ search = "" }) {
         "
       />
 
-      {/* BLUE CENTER LIGHT */}
       <motion.div
         animate={{
           scale: [0.8, 1.25, 0.9, 0.8],
@@ -135,7 +154,6 @@ function LanguageCard({ search = "" }) {
         "
       />
 
-      {/* BOTTOM MAGENTA LIGHT */}
       <motion.div
         animate={{
           x: [-80, 100, -40, -80],
@@ -161,7 +179,7 @@ function LanguageCard({ search = "" }) {
       />
 
       {/* =====================================================
-          MOVING GLASS LIGHT SHAPES
+          MOVING GLASS LIGHT
       ===================================================== */}
 
       <motion.div
@@ -221,47 +239,10 @@ function LanguageCard({ search = "" }) {
       />
 
       {/* =====================================================
-          LIGHT PULSE
+          GRID
       ===================================================== */}
 
-      <motion.div
-        animate={{
-          opacity: [0, 0.35, 0],
-          scale: [0.7, 1.2, 0.7],
-        }}
-        transition={{
-          duration: 5,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="
-          pointer-events-none
-          absolute
-          left-[45%]
-          top-[18%]
-          h-[220px]
-          w-[220px]
-          rounded-full
-          bg-cyan-300/20
-          blur-[80px]
-        "
-      />
-
-      {/* =====================================================
-          PREMIUM GRID
-      ===================================================== */}
-
-      <motion.div
-        animate={{
-          opacity: [0.25, 0.45, 0.25],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="pointer-events-none absolute inset-0"
-      >
+      <div className="pointer-events-none absolute inset-0 opacity-40">
         <div
           className="h-full w-full"
           style={{
@@ -279,9 +260,7 @@ function LanguageCard({ search = "" }) {
             backgroundSize: "60px 60px",
           }}
         />
-      </motion.div>
-
-      {/* DARK GLASS OVERLAY */}
+      </div>
 
       <div
         className="
@@ -346,7 +325,7 @@ function LanguageCard({ search = "" }) {
           </div>
         ) : (
           /* =====================================================
-             LANGUAGE CARDS
+             CARDS
           ===================================================== */
 
           <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-3">
@@ -364,13 +343,11 @@ function LanguageCard({ search = "" }) {
                 viewport={{
                   once: true,
                 }}
+                whileHover="cardHover"
+                whileTap="cardHover"
                 transition={{
                   delay: index * 0.1,
                   duration: 0.6,
-                }}
-                whileHover={{
-                  y: -12,
-                  scale: 1.02,
                 }}
                 className={`group relative overflow-hidden rounded-[28px] border p-7 backdrop-blur-2xl transition-all duration-500 ${
                   darkMode
@@ -383,16 +360,18 @@ function LanguageCard({ search = "" }) {
                 ================================================= */}
 
                 <motion.div
+                  variants={{
+                    cardHover: {
+                      opacity: 1,
+                      scale: 1,
+                    },
+                  }}
                   initial={{
                     opacity: 0,
                     scale: 0.7,
                   }}
-                  whileHover={{
-                    opacity: 1,
-                    scale: 1,
-                  }}
                   transition={{
-                    duration: 0.5,
+                    duration: 0.4,
                   }}
                   className="
                     pointer-events-none
@@ -408,7 +387,7 @@ function LanguageCard({ search = "" }) {
                 />
 
                 {/* =================================================
-                    FLOATING BACKGROUND LOGO
+                    BACKGROUND LOGO
                 ================================================= */}
 
                 <motion.div
@@ -436,21 +415,36 @@ function LanguageCard({ search = "" }) {
                 </motion.div>
 
                 {/* =================================================
-                    ICON
+                    MAIN LOGO
+                    CARD ANYWHERE HOVER/TAP → ROTATE
                 ================================================= */}
 
                 <motion.div
-                  whileHover={{
-                    scale: 1.12,
-                    rotate: -6,
-                    y: -4,
+                  variants={{
+                    cardHover: {
+                      rotate: 360,
+                      scale: 1.12,
+                    },
                   }}
                   transition={{
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 15,
+                    duration: 0.8,
+                    ease: "easeInOut",
                   }}
-                  className={`relative z-10 flex h-16 w-16 items-center justify-center rounded-2xl ${lang.color} text-xl font-bold text-white shadow-lg transition-all duration-500 group-hover:shadow-[0_15px_40px_rgba(34,211,238,0.35)]`}
+                  className={`
+                    relative
+                    z-10
+                    flex
+                    h-16
+                    w-16
+                    items-center
+                    justify-center
+                    rounded-2xl
+                    ${lang.color}
+                    text-xl
+                    font-bold
+                    text-white
+                    shadow-lg
+                  `}
                 >
                   {lang.icon}
                 </motion.div>
@@ -528,43 +522,115 @@ function LanguageCard({ search = "" }) {
                 </p>
 
                 {/* =================================================
-                    BUTTON
+                    ASK AI PANEL
                 ================================================= */}
 
-                <motion.button
-                  whileHover={{
-                    scale: 1.03,
-                  }}
-                  whileTap={{
-                    scale: 0.97,
-                  }}
-                  onClick={() => {
-                    playClick();
-                    navigate(lang.route);
-                  }}
-                  className="
-                    relative
-                    z-10
-                    mt-7
-                    w-full
-                    rounded-2xl
-                    bg-gradient-to-r
-                    from-cyan-400
-                    via-blue-500
-                    to-purple-600
-                    py-3.5
-                    font-bold
-                    text-white
-                    shadow-lg
-                    shadow-cyan-500/20
-                    transition-all
-                    duration-300
-                    hover:shadow-[0_12px_35px_rgba(34,211,238,0.35)]
-                    active:scale-[0.98]
-                  "
-                >
-                  Explore Career →
-                </motion.button>
+                <AnimatePresence>
+                  {askingId === lang.id && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                      animate={{ opacity: 1, height: "auto", marginTop: 18 }}
+                      exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                      transition={{ duration: 0.35, ease: "easeInOut" }}
+                      className={`relative z-10 overflow-hidden rounded-2xl border backdrop-blur-xl ${
+                        darkMode
+                          ? "border-violet-400/25 bg-violet-500/[0.06]"
+                          : "border-violet-300 bg-violet-50/80"
+                      }`}
+                    >
+                      <div className="flex items-center gap-2 border-b border-white/10 px-4 py-2.5">
+                        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-cyan-400 to-violet-500 text-white">
+                          <Bot size={13} />
+                        </span>
+                        <span
+                          className={`text-xs font-bold tracking-wide ${
+                            darkMode ? "text-violet-200" : "text-violet-700"
+                          }`}
+                        >
+                          CodeCareer AI
+                        </span>
+                      </div>
+
+                      <div className="px-4 py-3.5">
+                        {thinkingId === lang.id ? (
+                          <div className="flex gap-1.5 py-1 text-violet-400">
+                            <span className="ai-card-dot" />
+                            <span className="ai-card-dot" />
+                            <span className="ai-card-dot" />
+                          </div>
+                        ) : (
+                          <p
+                            className={`whitespace-pre-line text-sm leading-relaxed ${
+                              darkMode ? "text-gray-200" : "text-slate-700"
+                            }`}
+                          >
+                            {getLanguageAIReply(lang.name)}
+                          </p>
+                        )}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* =================================================
+                    BUTTONS
+                ================================================= */}
+
+                <div className="relative z-10 mt-7 flex gap-2.5">
+                  <motion.button
+                    whileHover={{
+                      scale: 1.03,
+                    }}
+                    whileTap={{
+                      scale: 0.97,
+                    }}
+                    onClick={() => handleAskAI(lang)}
+                    className={`flex flex-1 items-center justify-center gap-1.5 rounded-2xl border py-3.5 text-sm font-bold transition-all duration-300 ${
+                      askingId === lang.id
+                        ? "border-transparent bg-gradient-to-r from-cyan-400 to-violet-500 text-white shadow-[0_10px_30px_rgba(139,92,246,0.35)]"
+                        : darkMode
+                          ? "border-violet-400/30 text-violet-200 hover:bg-violet-500/10"
+                          : "border-violet-300 text-violet-700 hover:bg-violet-50"
+                    }`}
+                  >
+                    <Bot size={16} />
+                    Ask AI
+                    <Sparkles size={12} className="opacity-70" />
+                  </motion.button>
+
+                  <motion.button
+                    whileHover={{
+                      scale: 1.03,
+                    }}
+                    whileTap={{
+                      scale: 0.97,
+                    }}
+                    onClick={() => {
+                      playClick();
+                      navigate(lang.route);
+                    }}
+                    className="
+                      flex-[1.4]
+                      rounded-2xl
+                      bg-gradient-to-r
+                      from-cyan-400
+                      via-blue-500
+                      to-purple-600
+                      py-3.5
+                      text-sm
+                      font-bold
+                      text-white
+                      shadow-lg
+                      shadow-cyan-500/20
+                      transition-all
+                      duration-300
+                      hover:shadow-[0_12px_35px_rgba(34,211,238,0.35)]
+                      active:scale-[0.98]
+                    "
+                  >
+                    Explore Career →
+                  </motion.button>
+                </div>
               </motion.div>
             ))}
           </div>

@@ -1,27 +1,40 @@
 import { useState } from "react";
-import { Menu, X, Code2, Sun, Moon } from "lucide-react";
-import { motion } from "framer-motion";
+import { Menu, X, Code2, Bot, Sparkles, LogIn, LogOut, UserCircle2 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "../context/ThemeContext";
-import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
-  const { darkMode, toggleTheme } = useTheme();
+  const [showLogoutToast, setShowLogoutToast] = useState(false);
+  const { darkMode } = useTheme();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    setOpen(false);
+    setShowLogoutToast(true);
+    setTimeout(() => navigate("/"), 1400);
+  };
 
   const navItems = [
     { name: "Home", path: "#top" },
     { name: "Portfolio", path: "/portfolio-builder", isRoute: true },
+    { name: "AI Assistant", path: "/ai-chat", isRoute: true, isAI: true },
     { name: "Languages", path: "#languages" },
     { name: "Careers", path: "#careers" },
     { name: "Salary", path: "#salary" },
   ];
 
   return (
-    <motion.nav
-      initial={{ y: -80 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6 }}
-      className={`fixed top-0 left-0 w-full z-50
+    <>
+      <motion.nav
+        initial={{ y: -80 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6 }}
+        className={`fixed top-0 left-0 w-full z-50
         backdrop-blur-2xl
         border-b
         overflow-hidden
@@ -32,7 +45,7 @@ function Navbar() {
             : "bg-white/90 border-slate-200 shadow-[0_8px_35px_rgba(0,0,0,0.08)]"
         }
       `}
-    >
+      >
       {/* ================= NAVBAR GLOW ================= */}
 
       <motion.div
@@ -119,7 +132,49 @@ function Navbar() {
 
         <div className="hidden md:flex items-center gap-9">
           {navItems.map((item) =>
-            item.isRoute ? (
+            item.isAI ? (
+              <Link key={item.name} to={item.path} className="relative group">
+                <motion.span
+                  animate={{
+                    boxShadow: darkMode
+                      ? [
+                          "0 0 10px rgba(34,211,238,0.25)",
+                          "0 0 22px rgba(167,139,250,0.45)",
+                          "0 0 10px rgba(34,211,238,0.25)",
+                        ]
+                      : [
+                          "0 0 8px rgba(34,211,238,0.18)",
+                          "0 0 16px rgba(139,92,246,0.28)",
+                          "0 0 8px rgba(34,211,238,0.18)",
+                        ],
+                  }}
+                  transition={{ duration: 2.4, repeat: Infinity }}
+                  whileHover={{ scale: 1.06 }}
+                  className="
+                    relative
+                    flex
+                    items-center
+                    gap-2
+                    rounded-full
+                    px-4
+                    py-2
+                    text-[14px]
+                    font-bold
+                    text-white
+                    bg-gradient-to-r
+                    from-cyan-400
+                    via-blue-500
+                    to-violet-500
+                    border
+                    border-white/20
+                  "
+                >
+                  <Bot size={16} />
+                  {item.name}
+                  <Sparkles size={12} className="text-yellow-200" />
+                </motion.span>
+              </Link>
+            ) : item.isRoute ? (
               <Link
                 key={item.name}
                 to={item.path}
@@ -202,46 +257,103 @@ function Navbar() {
             ),
           )}
 
-          {/* ================= THEME BUTTON ================= */}
+          {/* ================= LOGIN / USER BUTTON ================= */}
 
-          <motion.button
-            onClick={toggleTheme}
-            whileHover={{
-              scale: 1.1,
-              rotate: 8,
-            }}
-            whileTap={{
-              scale: 0.9,
-            }}
-            className={`ml-2
-              w-11
-              h-11
-              rounded-full
-              flex
-              items-center
-              justify-center
-              backdrop-blur-xl
-              transition-all
-              duration-300
-              ${
-                darkMode
-                  ? "bg-white/10 border border-white/10 shadow-[0_0_18px_rgba(255,255,255,0.06)]"
-                  : "bg-slate-100 border border-slate-200 shadow-[0_0_18px_rgba(0,0,0,0.08)]"
-              }
-            `}
-          >
-            {darkMode ? (
-              <Sun
-                size={20}
+          {user ? (
+            <div className="ml-2 flex items-center gap-2.5">
+              <motion.span
+                initial={{ opacity: 0, y: -6 }}
+                animate={{ opacity: 1, y: 0 }}
+                className={`relative flex items-center gap-2 rounded-full pl-2 pr-4 py-1.5 text-[14px] font-semibold border overflow-hidden ${
+                  darkMode
+                    ? "bg-white/5 border-cyan-400/20 text-gray-100"
+                    : "bg-slate-100 border-slate-200 text-slate-700"
+                }`}
+                style={{
+                  boxShadow: "0 0 16px rgba(34,211,238,0.15)",
+                }}
+              >
+                <motion.span
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/10 to-transparent"
+                  animate={{ x: ["-120%", "220%"] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                />
+                <span className="relative flex items-center justify-center w-7 h-7 rounded-full bg-gradient-to-br from-cyan-400 via-blue-500 to-violet-500 text-[12px] font-black text-white shadow-[0_0_10px_rgba(34,211,238,0.5)]">
+                  {user.name?.charAt(0)?.toUpperCase() || (
+                    <UserCircle2 size={16} />
+                  )}
+                  <motion.span
+                    className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-[#0a0e1a]"
+                    animate={{ opacity: [1, 0.4, 1] }}
+                    transition={{ duration: 1.8, repeat: Infinity }}
+                  />
+                </span>
+                <span className="relative">{user.name}</span>
+              </motion.span>
+
+              <motion.button
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0 0 18px rgba(248,113,113,0.4)",
+                }}
+                whileTap={{ scale: 0.94 }}
+                onClick={handleLogout}
+                className={`group flex items-center gap-2 rounded-full px-4 py-2.5 text-[14px] font-bold border transition-colors ${
+                  darkMode
+                    ? "bg-white/5 border-white/10 text-gray-300 hover:border-red-400/40 hover:text-red-300"
+                    : "bg-white border-slate-200 text-slate-700 hover:bg-red-50 hover:text-red-500"
+                }`}
+              >
+                <motion.span
+                  className="inline-flex"
+                  whileHover={{ x: 2, rotate: -8 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <LogOut size={16} />
+                </motion.span>
+                Logout
+              </motion.button>
+            </div>
+          ) : (
+            <Link to="/login">
+              <motion.span
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0 0 24px rgba(34,211,238,0.45)",
+                }}
+                whileTap={{ scale: 0.96 }}
                 className="
-                  text-yellow-400
-                  drop-shadow-[0_0_8px_rgba(250,204,21,0.7)]
+                  relative
+                  ml-2
+                  flex
+                  items-center
+                  gap-2
+                  rounded-full
+                  px-5
+                  py-2.5
+                  text-[14px]
+                  font-bold
+                  text-white
+                  bg-gradient-to-r
+                  from-cyan-400
+                  via-blue-500
+                  to-violet-500
+                  shadow-[0_0_18px_rgba(34,211,238,0.35)]
+                  border
+                  border-white/20
+                  overflow-hidden
                 "
-              />
-            ) : (
-              <Moon size={20} className="text-cyan-600" />
-            )}
-          </motion.button>
+              >
+                <motion.span
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                  animate={{ x: ["-120%", "220%"] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                />
+                <LogIn size={16} />
+                Login
+              </motion.span>
+            </Link>
+          )}
         </div>
 
         {/* ================= MOBILE BUTTON ================= */}
@@ -298,7 +410,39 @@ function Navbar() {
           `}
         >
           {navItems.map((item) =>
-            item.isRoute ? (
+            item.isAI ? (
+              <motion.div key={item.name} whileHover={{ x: 5 }}>
+                <Link
+                  to={item.path}
+                  onClick={() => setOpen(false)}
+                  className="
+                    flex
+                    items-center
+                    justify-between
+                    gap-2
+                    rounded-xl
+                    px-4
+                    py-3
+                    font-bold
+                    text-white
+                    bg-gradient-to-r
+                    from-cyan-400
+                    via-blue-500
+                    to-violet-500
+                    shadow-[0_0_18px_rgba(34,211,238,0.3)]
+                  "
+                >
+                  <span className="flex items-center gap-2">
+                    <Bot size={17} />
+                    {item.name}
+                  </span>
+                  <span className="flex items-center gap-1 rounded-full bg-white/20 px-2 py-0.5 text-[10px] tracking-wide">
+                    <Sparkles size={11} />
+                    NEW
+                  </span>
+                </Link>
+              </motion.div>
+            ) : item.isRoute ? (
               <motion.div
                 key={item.name}
                 whileHover={{
@@ -350,36 +494,109 @@ function Navbar() {
             ),
           )}
 
-          {/* ================= MOBILE THEME ================= */}
+          {/* ================= MOBILE LOGIN / USER ================= */}
 
-          <button
-            onClick={toggleTheme}
-            className={`mt-2
-              flex
-              items-center
-              gap-3
-              px-4
-              py-3
-              rounded-xl
-              font-semibold
-              transition-all
-              ${
-                darkMode
-                  ? "text-gray-300 hover:text-cyan-400 hover:bg-cyan-400/5"
-                  : "text-slate-700 hover:text-cyan-600 hover:bg-cyan-50"
-              }
-            `}
-          >
-            {darkMode ? (
-              <Sun className="text-yellow-400" size={20} />
-            ) : (
-              <Moon className="text-cyan-600" size={20} />
-            )}
-            Theme
-          </button>
+          {user ? (
+            <>
+              <motion.div
+                initial={{ opacity: 0, y: -6 }}
+                animate={{ opacity: 1, y: 0 }}
+                className={`relative flex items-center justify-center gap-2.5 mt-1 rounded-xl px-4 py-3 font-semibold border overflow-hidden ${
+                  darkMode
+                    ? "bg-white/5 border-cyan-400/20 text-gray-100"
+                    : "bg-slate-100 border-slate-200 text-slate-700"
+                }`}
+              >
+                <motion.span
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/10 to-transparent"
+                  animate={{ x: ["-120%", "220%"] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                />
+                <span className="relative flex items-center justify-center w-7 h-7 rounded-full bg-gradient-to-br from-cyan-400 via-blue-500 to-violet-500 text-[12px] font-black text-white shadow-[0_0_10px_rgba(34,211,238,0.5)]">
+                  {user.name?.charAt(0)?.toUpperCase() || (
+                    <UserCircle2 size={16} />
+                  )}
+                  <motion.span
+                    className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-[#0a0e1a]"
+                    animate={{ opacity: [1, 0.4, 1] }}
+                    transition={{ duration: 1.8, repeat: Infinity }}
+                  />
+                </span>
+                <span className="relative">{user.name}</span>
+              </motion.div>
+              <motion.button
+                whileHover={{ x: 5 }}
+                whileTap={{ scale: 0.96 }}
+                onClick={handleLogout}
+                className={`group flex items-center justify-center gap-2 mt-1 rounded-xl px-4 py-3 font-bold border transition-colors ${
+                  darkMode
+                    ? "bg-white/5 border-white/10 text-gray-300 hover:border-red-400/40 hover:text-red-300"
+                    : "bg-white border-slate-200 text-slate-700 hover:bg-red-50 hover:text-red-500"
+                }`}
+              >
+                <motion.span
+                  className="inline-flex"
+                  whileHover={{ x: 2, rotate: -8 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <LogOut size={17} />
+                </motion.span>
+                Logout
+              </motion.button>
+            </>
+          ) : (
+            <motion.div whileHover={{ x: 5 }}>
+              <Link
+                to="/login"
+                onClick={() => setOpen(false)}
+                className="
+                  flex
+                  items-center
+                  justify-center
+                  gap-2
+                  mt-1
+                  rounded-xl
+                  px-4
+                  py-3
+                  font-bold
+                  text-white
+                  bg-gradient-to-r
+                  from-cyan-400
+                  via-blue-500
+                  to-violet-500
+                  shadow-[0_0_18px_rgba(34,211,238,0.3)]
+                "
+              >
+                <LogIn size={17} />
+                Login
+              </Link>
+            </motion.div>
+          )}
         </motion.div>
       )}
     </motion.nav>
+
+    {/* ================= LOGOUT TOAST ================= */}
+
+    <AnimatePresence>
+      {showLogoutToast && (
+        <motion.div
+          initial={{ opacity: 0, y: -30, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -20, scale: 0.9 }}
+          transition={{ type: "spring", stiffness: 260, damping: 22 }}
+          className="fixed top-24 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-3 rounded-2xl px-5 py-3.5 border border-emerald-400/30 bg-[#0a0e1a]/95 backdrop-blur-xl shadow-[0_10px_40px_rgba(16,185,129,0.25)]"
+        >
+          <span className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-400/15">
+            <LogOut size={16} className="text-emerald-400" />
+          </span>
+          <span className="text-[14px] font-semibold text-gray-100">
+            Logged out successfully
+          </span>
+        </motion.div>
+      )}
+    </AnimatePresence>
+    </>
   );
 }
 
